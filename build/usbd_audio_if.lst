@@ -1,4 +1,4 @@
-ARM GAS  /tmp/ccD5GgRy.s 			page 1
+ARM GAS  /tmp/ccKoIgyd.s 			page 1
 
 
    1              		.syntax unified
@@ -58,7 +58,7 @@ ARM GAS  /tmp/ccD5GgRy.s 			page 1
   17:Src/usbd_audio_if.c ****   * this list of conditions and the following disclaimer in the documentation
   18:Src/usbd_audio_if.c ****   * and/or other materials provided with the distribution.
   19:Src/usbd_audio_if.c ****   * 3. Neither the name of STMicroelectronics nor the names of its contributors
-ARM GAS  /tmp/ccD5GgRy.s 			page 2
+ARM GAS  /tmp/ccKoIgyd.s 			page 2
 
 
   20:Src/usbd_audio_if.c ****   * may be used to endorse or promote products derived from this software
@@ -118,7 +118,7 @@ ARM GAS  /tmp/ccD5GgRy.s 			page 1
   74:Src/usbd_audio_if.c **** USBD_HandleTypeDef  *hUsbDevice_0;
   75:Src/usbd_audio_if.c **** 
   76:Src/usbd_audio_if.c **** extern USBD_HandleTypeDef hUsbDeviceFS;
-ARM GAS  /tmp/ccD5GgRy.s 			page 3
+ARM GAS  /tmp/ccKoIgyd.s 			page 3
 
 
   77:Src/usbd_audio_if.c **** 
@@ -178,7 +178,7 @@ ARM GAS  /tmp/ccD5GgRy.s 			page 1
   61 000c 054B     		ldr	r3, .L3
   62 000e 064A     		ldr	r2, .L3+4
   63 0010 1A60     		str	r2, [r3]
-ARM GAS  /tmp/ccD5GgRy.s 			page 4
+ARM GAS  /tmp/ccKoIgyd.s 			page 4
 
 
  112:Src/usbd_audio_if.c ****   /* USER CODE BEGIN 0 */
@@ -238,7 +238,7 @@ ARM GAS  /tmp/ccD5GgRy.s 			page 1
  107              		.cfi_def_cfa_offset 16
  108 0004 00AF     		add	r7, sp, #0
  109              	.LCFI8:
-ARM GAS  /tmp/ccD5GgRy.s 			page 5
+ARM GAS  /tmp/ccKoIgyd.s 			page 5
 
 
  110              		.cfi_def_cfa_register 7
@@ -298,7 +298,7 @@ ARM GAS  /tmp/ccD5GgRy.s 			page 1
  151 0004 00AF     		add	r7, sp, #0
  152              	.LCFI14:
  153              		.cfi_def_cfa_register 7
-ARM GAS  /tmp/ccD5GgRy.s 			page 6
+ARM GAS  /tmp/ccKoIgyd.s 			page 6
 
 
  154 0006 F860     		str	r0, [r7, #12]
@@ -358,7 +358,7 @@ ARM GAS  /tmp/ccD5GgRy.s 			page 1
  153:Src/usbd_audio_if.c **** 
  154:Src/usbd_audio_if.c **** /**
  155:Src/usbd_audio_if.c ****   * @brief  AUDIO_VolumeCtl_FS   
-ARM GAS  /tmp/ccD5GgRy.s 			page 7
+ARM GAS  /tmp/ccKoIgyd.s 			page 7
 
 
  156:Src/usbd_audio_if.c ****   *         Controls AUDIO Volume.
@@ -418,7 +418,7 @@ ARM GAS  /tmp/ccD5GgRy.s 			page 1
  168:Src/usbd_audio_if.c ****   * @brief  AUDIO_MuteCtl_FS
  169:Src/usbd_audio_if.c ****   *         Controls AUDIO Mute.   
  170:Src/usbd_audio_if.c ****   * @param  cmd: command opcode
-ARM GAS  /tmp/ccD5GgRy.s 			page 8
+ARM GAS  /tmp/ccKoIgyd.s 			page 8
 
 
  171:Src/usbd_audio_if.c ****   * @retval Result of the operation: USBD_OK if all operations are OK else USBD_FAIL
@@ -478,7 +478,7 @@ ARM GAS  /tmp/ccD5GgRy.s 			page 1
  183:Src/usbd_audio_if.c ****   * @retval Result of the operation: USBD_OK if all operations are OK else USBD_FAIL
  184:Src/usbd_audio_if.c ****   */
  185:Src/usbd_audio_if.c **** static int8_t AUDIO_PeriodicTC_FS (uint8_t cmd)
-ARM GAS  /tmp/ccD5GgRy.s 			page 9
+ARM GAS  /tmp/ccKoIgyd.s 			page 9
 
 
  186:Src/usbd_audio_if.c **** {
@@ -538,7 +538,7 @@ ARM GAS  /tmp/ccD5GgRy.s 			page 1
  198:Src/usbd_audio_if.c **** static int8_t AUDIO_GetState_FS (void)
  199:Src/usbd_audio_if.c **** {
  328              		.loc 1 199 0
-ARM GAS  /tmp/ccD5GgRy.s 			page 10
+ARM GAS  /tmp/ccKoIgyd.s 			page 10
 
 
  329              		.cfi_startproc
@@ -598,7 +598,7 @@ ARM GAS  /tmp/ccD5GgRy.s 			page 1
  373              		.cfi_offset 14, -4
  374 0002 00AF     		add	r7, sp, #0
  375              	.LCFI41:
-ARM GAS  /tmp/ccD5GgRy.s 			page 11
+ARM GAS  /tmp/ccKoIgyd.s 			page 11
 
 
  376              		.cfi_def_cfa_register 7
@@ -658,7 +658,7 @@ ARM GAS  /tmp/ccD5GgRy.s 			page 1
  418 000c FFF7FEFF 		bl	USBD_AUDIO_Sync
  226:Src/usbd_audio_if.c ****   /* USER CODE END 8 */
  227:Src/usbd_audio_if.c **** }
-ARM GAS  /tmp/ccD5GgRy.s 			page 12
+ARM GAS  /tmp/ccKoIgyd.s 			page 12
 
 
  419              		.loc 1 227 0
@@ -677,35 +677,35 @@ ARM GAS  /tmp/ccD5GgRy.s 			page 1
  433              		.file 4 "Middlewares/ST/STM32_USB_Device_Library/Core/Inc/usbd_def.h"
  434              		.file 5 "Middlewares/ST/STM32_USB_Device_Library/Class/AUDIO/Inc/usbd_audio.h"
  435              		.file 6 "Drivers/CMSIS/Include/core_cm4.h"
-ARM GAS  /tmp/ccD5GgRy.s 			page 13
+ARM GAS  /tmp/ccKoIgyd.s 			page 13
 
 
 DEFINED SYMBOLS
                             *ABS*:0000000000000000 usbd_audio_if.c
                             *COM*:0000000000000004 hUsbDevice_0
-     /tmp/ccD5GgRy.s:26     .data.USBD_AUDIO_fops_FS:0000000000000000 USBD_AUDIO_fops_FS
-     /tmp/ccD5GgRy.s:23     .data.USBD_AUDIO_fops_FS:0000000000000000 $d
-     /tmp/ccD5GgRy.s:39     .text.AUDIO_Init_FS:0000000000000000 AUDIO_Init_FS
-     /tmp/ccD5GgRy.s:94     .text.AUDIO_DeInit_FS:0000000000000000 AUDIO_DeInit_FS
-     /tmp/ccD5GgRy.s:137    .text.AUDIO_AudioCmd_FS:0000000000000000 AUDIO_AudioCmd_FS
-     /tmp/ccD5GgRy.s:194    .text.AUDIO_VolumeCtl_FS:0000000000000000 AUDIO_VolumeCtl_FS
-     /tmp/ccD5GgRy.s:238    .text.AUDIO_MuteCtl_FS:0000000000000000 AUDIO_MuteCtl_FS
-     /tmp/ccD5GgRy.s:282    .text.AUDIO_PeriodicTC_FS:0000000000000000 AUDIO_PeriodicTC_FS
-     /tmp/ccD5GgRy.s:326    .text.AUDIO_GetState_FS:0000000000000000 AUDIO_GetState_FS
-     /tmp/ccD5GgRy.s:35     .text.AUDIO_Init_FS:0000000000000000 $t
-     /tmp/ccD5GgRy.s:84     .text.AUDIO_Init_FS:0000000000000024 $d
-     /tmp/ccD5GgRy.s:90     .text.AUDIO_DeInit_FS:0000000000000000 $t
-     /tmp/ccD5GgRy.s:133    .text.AUDIO_AudioCmd_FS:0000000000000000 $t
-     /tmp/ccD5GgRy.s:190    .text.AUDIO_VolumeCtl_FS:0000000000000000 $t
-     /tmp/ccD5GgRy.s:234    .text.AUDIO_MuteCtl_FS:0000000000000000 $t
-     /tmp/ccD5GgRy.s:278    .text.AUDIO_PeriodicTC_FS:0000000000000000 $t
-     /tmp/ccD5GgRy.s:322    .text.AUDIO_GetState_FS:0000000000000000 $t
-     /tmp/ccD5GgRy.s:358    .text.TransferComplete_CallBack_FS:0000000000000000 $t
-     /tmp/ccD5GgRy.s:363    .text.TransferComplete_CallBack_FS:0000000000000000 TransferComplete_CallBack_FS
-     /tmp/ccD5GgRy.s:389    .text.TransferComplete_CallBack_FS:0000000000000014 $d
-     /tmp/ccD5GgRy.s:394    .text.HalfTransfer_CallBack_FS:0000000000000000 $t
-     /tmp/ccD5GgRy.s:399    .text.HalfTransfer_CallBack_FS:0000000000000000 HalfTransfer_CallBack_FS
-     /tmp/ccD5GgRy.s:425    .text.HalfTransfer_CallBack_FS:0000000000000014 $d
+     /tmp/ccKoIgyd.s:26     .data.USBD_AUDIO_fops_FS:0000000000000000 USBD_AUDIO_fops_FS
+     /tmp/ccKoIgyd.s:23     .data.USBD_AUDIO_fops_FS:0000000000000000 $d
+     /tmp/ccKoIgyd.s:39     .text.AUDIO_Init_FS:0000000000000000 AUDIO_Init_FS
+     /tmp/ccKoIgyd.s:94     .text.AUDIO_DeInit_FS:0000000000000000 AUDIO_DeInit_FS
+     /tmp/ccKoIgyd.s:137    .text.AUDIO_AudioCmd_FS:0000000000000000 AUDIO_AudioCmd_FS
+     /tmp/ccKoIgyd.s:194    .text.AUDIO_VolumeCtl_FS:0000000000000000 AUDIO_VolumeCtl_FS
+     /tmp/ccKoIgyd.s:238    .text.AUDIO_MuteCtl_FS:0000000000000000 AUDIO_MuteCtl_FS
+     /tmp/ccKoIgyd.s:282    .text.AUDIO_PeriodicTC_FS:0000000000000000 AUDIO_PeriodicTC_FS
+     /tmp/ccKoIgyd.s:326    .text.AUDIO_GetState_FS:0000000000000000 AUDIO_GetState_FS
+     /tmp/ccKoIgyd.s:35     .text.AUDIO_Init_FS:0000000000000000 $t
+     /tmp/ccKoIgyd.s:84     .text.AUDIO_Init_FS:0000000000000024 $d
+     /tmp/ccKoIgyd.s:90     .text.AUDIO_DeInit_FS:0000000000000000 $t
+     /tmp/ccKoIgyd.s:133    .text.AUDIO_AudioCmd_FS:0000000000000000 $t
+     /tmp/ccKoIgyd.s:190    .text.AUDIO_VolumeCtl_FS:0000000000000000 $t
+     /tmp/ccKoIgyd.s:234    .text.AUDIO_MuteCtl_FS:0000000000000000 $t
+     /tmp/ccKoIgyd.s:278    .text.AUDIO_PeriodicTC_FS:0000000000000000 $t
+     /tmp/ccKoIgyd.s:322    .text.AUDIO_GetState_FS:0000000000000000 $t
+     /tmp/ccKoIgyd.s:358    .text.TransferComplete_CallBack_FS:0000000000000000 $t
+     /tmp/ccKoIgyd.s:363    .text.TransferComplete_CallBack_FS:0000000000000000 TransferComplete_CallBack_FS
+     /tmp/ccKoIgyd.s:389    .text.TransferComplete_CallBack_FS:0000000000000014 $d
+     /tmp/ccKoIgyd.s:394    .text.HalfTransfer_CallBack_FS:0000000000000000 $t
+     /tmp/ccKoIgyd.s:399    .text.HalfTransfer_CallBack_FS:0000000000000000 HalfTransfer_CallBack_FS
+     /tmp/ccKoIgyd.s:425    .text.HalfTransfer_CallBack_FS:0000000000000014 $d
                      .debug_frame:0000000000000010 $d
 
 UNDEFINED SYMBOLS

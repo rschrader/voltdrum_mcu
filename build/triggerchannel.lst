@@ -1,4 +1,4 @@
-ARM GAS  /tmp/ccv429RI.s 			page 1
+ARM GAS  /tmp/cc1am2lr.s 			page 1
 
 
    1              		.syntax unified
@@ -58,7 +58,7 @@ ARM GAS  /tmp/ccv429RI.s 			page 1
   44 0006 F860     		str	r0, [r7, #12]
   45 0008 B960     		str	r1, [r7, #8]
   46 000a 7A60     		str	r2, [r7, #4]
-ARM GAS  /tmp/ccv429RI.s 			page 2
+ARM GAS  /tmp/cc1am2lr.s 			page 2
 
 
   47 000c 3B60     		str	r3, [r7]
@@ -118,7 +118,7 @@ ARM GAS  /tmp/ccv429RI.s 			page 1
   84              		.loc 1 29 0
   85 0044 FB68     		ldr	r3, [r7, #12]
   86 0046 7A68     		ldr	r2, [r7, #4]
-ARM GAS  /tmp/ccv429RI.s 			page 3
+ARM GAS  /tmp/cc1am2lr.s 			page 3
 
 
   87 0048 5A60     		str	r2, [r3, #4]
@@ -178,7 +178,7 @@ ARM GAS  /tmp/ccv429RI.s 			page 1
  129 008c 0022     		movs	r2, #0
  130 008e 1A60     		str	r2, [r3]
   40:Src/triggerchannel.c **** 		sm->lastProcessedSamples[i] = 0;
-ARM GAS  /tmp/ccv429RI.s 			page 4
+ARM GAS  /tmp/cc1am2lr.s 			page 4
 
 
  131              		.loc 1 40 0 discriminator 3
@@ -238,7 +238,7 @@ ARM GAS  /tmp/ccv429RI.s 			page 1
  182 0006 7860     		str	r0, [r7, #4]
  183 0008 0B46     		mov	r3, r1
  184 000a FB70     		strb	r3, [r7, #3]
-ARM GAS  /tmp/ccv429RI.s 			page 5
+ARM GAS  /tmp/cc1am2lr.s 			page 5
 
 
   46:Src/triggerchannel.c **** 	chan->wiperPosition = wiper;
@@ -298,7 +298,7 @@ ARM GAS  /tmp/ccv429RI.s 			page 1
   52:Src/triggerchannel.c **** 
   53:Src/triggerchannel.c **** 	//get the highest value of the last 4 samples to process
   54:Src/triggerchannel.c **** 	sm->current_value =  *(sm->dma_value_ptr[0]);
-ARM GAS  /tmp/ccv429RI.s 			page 6
+ARM GAS  /tmp/cc1am2lr.s 			page 6
 
 
  235              		.loc 1 54 0
@@ -358,7 +358,7 @@ ARM GAS  /tmp/ccv429RI.s 			page 1
  279 004c FB60     		str	r3, [r7, #12]
  280              	.L11:
   63:Src/triggerchannel.c **** 	}
-ARM GAS  /tmp/ccv429RI.s 			page 7
+ARM GAS  /tmp/cc1am2lr.s 			page 7
 
 
   64:Src/triggerchannel.c **** 
@@ -418,7 +418,7 @@ ARM GAS  /tmp/ccv429RI.s 			page 1
  325 008a 00BF     		.section	.text.triggerchannel_process_triggerevent,"ax",%progbits
  326              		.align	2
  327              		.global	triggerchannel_process_triggerevent
-ARM GAS  /tmp/ccv429RI.s 			page 8
+ARM GAS  /tmp/cc1am2lr.s 			page 8
 
 
  328              		.thumb
@@ -478,7 +478,7 @@ ARM GAS  /tmp/ccv429RI.s 			page 1
   85:Src/triggerchannel.c **** 	}
   86:Src/triggerchannel.c **** 
   87:Src/triggerchannel.c **** }
-ARM GAS  /tmp/ccv429RI.s 			page 9
+ARM GAS  /tmp/cc1am2lr.s 			page 9
 
 
  373              		.loc 1 87 0
@@ -538,7 +538,7 @@ ARM GAS  /tmp/ccv429RI.s 			page 1
  422 0026 7B68     		ldr	r3, [r7, #4]
  423 0028 D3ED0D7A 		vldr.32	s15, [r3, #52]
  424 002c 66EEA77A 		vmul.f32	s15, s13, s15
-ARM GAS  /tmp/ccv429RI.s 			page 10
+ARM GAS  /tmp/cc1am2lr.s 			page 10
 
 
  425 0030 77EE277A 		vadd.f32	s15, s14, s15
@@ -598,7 +598,7 @@ ARM GAS  /tmp/ccv429RI.s 			page 1
  470              		.cfi_startproc
  471              		@ args = 0, pretend = 0, frame = 8
  472              		@ frame_needed = 1, uses_anonymous_args = 0
-ARM GAS  /tmp/ccv429RI.s 			page 11
+ARM GAS  /tmp/cc1am2lr.s 			page 11
 
 
  473 0000 80B5     		push	{r7, lr}
@@ -658,7 +658,7 @@ ARM GAS  /tmp/ccv429RI.s 			page 1
  518              		.thumb
  519              		.thumb_func
  521              	triggerchannel_transition_monitor_triggerevent:
-ARM GAS  /tmp/ccv429RI.s 			page 12
+ARM GAS  /tmp/cc1am2lr.s 			page 12
 
 
  522              	.LFB118:
@@ -718,7 +718,7 @@ ARM GAS  /tmp/ccv429RI.s 			page 1
  572              		.thumb
  573              		.thumb_func
  575              	triggerchannel_addSample:
-ARM GAS  /tmp/ccv429RI.s 			page 13
+ARM GAS  /tmp/cc1am2lr.s 			page 13
 
 
  576              	.LFB119:
@@ -778,7 +778,7 @@ ARM GAS  /tmp/ccv429RI.s 			page 1
  619 0032 02FB01F2 		mul	r2, r2, r1
  620 0036 9A1A     		subs	r2, r3, r2
  621 0038 7B68     		ldr	r3, [r7, #4]
-ARM GAS  /tmp/ccv429RI.s 			page 14
+ARM GAS  /tmp/cc1am2lr.s 			page 14
 
 
  622 003a 5A62     		str	r2, [r3, #36]
@@ -838,7 +838,7 @@ ARM GAS  /tmp/ccv429RI.s 			page 1
  137:Src/triggerchannel.c **** 	return sm->lastProcessedSamples[sm->lastProcessedSamples_head];
  673              		.loc 1 137 0
  674 0008 7B68     		ldr	r3, [r7, #4]
-ARM GAS  /tmp/ccv429RI.s 			page 15
+ARM GAS  /tmp/cc1am2lr.s 			page 15
 
 
  675 000a DA69     		ldr	r2, [r3, #28]
@@ -898,7 +898,7 @@ ARM GAS  /tmp/ccv429RI.s 			page 1
  726 000c 0023     		movs	r3, #0
  727 000e FB60     		str	r3, [r7, #12]
  728 0010 12E0     		b	.L29
-ARM GAS  /tmp/ccv429RI.s 			page 16
+ARM GAS  /tmp/cc1am2lr.s 			page 16
 
 
  729              	.L31:
@@ -958,7 +958,7 @@ ARM GAS  /tmp/ccv429RI.s 			page 1
  776              		.cfi_endproc
  777              	.LFE121:
  779              		.text
-ARM GAS  /tmp/ccv429RI.s 			page 17
+ARM GAS  /tmp/cc1am2lr.s 			page 17
 
 
  780              	.Letext0:
@@ -968,32 +968,32 @@ ARM GAS  /tmp/ccv429RI.s 			page 1
  784              		.file 5 "Src/../Inc/triggerchannel.h"
  785              		.file 6 "<built-in>"
  786              		.file 7 "Drivers/CMSIS/Include/core_cm4.h"
-ARM GAS  /tmp/ccv429RI.s 			page 18
+ARM GAS  /tmp/cc1am2lr.s 			page 18
 
 
 DEFINED SYMBOLS
                             *ABS*:0000000000000000 triggerchannel.c
-     /tmp/ccv429RI.s:21     .text.triggerchannel_init:0000000000000000 $t
-     /tmp/ccv429RI.s:26     .text.triggerchannel_init:0000000000000000 triggerchannel_init
-     /tmp/ccv429RI.s:155    .text.triggerchannel_init:00000000000000a8 $d
-     /tmp/ccv429RI.s:160    .text.triggerchannel_setWiper:0000000000000000 $t
-     /tmp/ccv429RI.s:165    .text.triggerchannel_setWiper:0000000000000000 triggerchannel_setWiper
-     /tmp/ccv429RI.s:212    .text.triggerchannel_process:0000000000000000 $t
-     /tmp/ccv429RI.s:217    .text.triggerchannel_process:0000000000000000 triggerchannel_process
-     /tmp/ccv429RI.s:392    .text.triggerchannel_process_monitor:0000000000000000 triggerchannel_process_monitor
-     /tmp/ccv429RI.s:331    .text.triggerchannel_process_triggerevent:0000000000000000 triggerchannel_process_triggerevent
-     /tmp/ccv429RI.s:575    .text.triggerchannel_addSample:0000000000000000 triggerchannel_addSample
-     /tmp/ccv429RI.s:326    .text.triggerchannel_process_triggerevent:0000000000000000 $t
-     /tmp/ccv429RI.s:467    .text.triggerchannel_transition_triggerevent_monitor:0000000000000000 triggerchannel_transition_triggerevent_monitor
-     /tmp/ccv429RI.s:387    .text.triggerchannel_process_monitor:0000000000000000 $t
-     /tmp/ccv429RI.s:704    .text.triggerchannel_getLastSamplesMax:0000000000000000 triggerchannel_getLastSamplesMax
-     /tmp/ccv429RI.s:521    .text.triggerchannel_transition_monitor_triggerevent:0000000000000000 triggerchannel_transition_monitor_triggerevent
-     /tmp/ccv429RI.s:462    .text.triggerchannel_transition_triggerevent_monitor:0000000000000000 $t
-     /tmp/ccv429RI.s:516    .text.triggerchannel_transition_monitor_triggerevent:0000000000000000 $t
-     /tmp/ccv429RI.s:570    .text.triggerchannel_addSample:0000000000000000 $t
-     /tmp/ccv429RI.s:650    .text.triggerchannel_getLastSample:0000000000000000 $t
-     /tmp/ccv429RI.s:655    .text.triggerchannel_getLastSample:0000000000000000 triggerchannel_getLastSample
-     /tmp/ccv429RI.s:699    .text.triggerchannel_getLastSamplesMax:0000000000000000 $t
+     /tmp/cc1am2lr.s:21     .text.triggerchannel_init:0000000000000000 $t
+     /tmp/cc1am2lr.s:26     .text.triggerchannel_init:0000000000000000 triggerchannel_init
+     /tmp/cc1am2lr.s:155    .text.triggerchannel_init:00000000000000a8 $d
+     /tmp/cc1am2lr.s:160    .text.triggerchannel_setWiper:0000000000000000 $t
+     /tmp/cc1am2lr.s:165    .text.triggerchannel_setWiper:0000000000000000 triggerchannel_setWiper
+     /tmp/cc1am2lr.s:212    .text.triggerchannel_process:0000000000000000 $t
+     /tmp/cc1am2lr.s:217    .text.triggerchannel_process:0000000000000000 triggerchannel_process
+     /tmp/cc1am2lr.s:392    .text.triggerchannel_process_monitor:0000000000000000 triggerchannel_process_monitor
+     /tmp/cc1am2lr.s:331    .text.triggerchannel_process_triggerevent:0000000000000000 triggerchannel_process_triggerevent
+     /tmp/cc1am2lr.s:575    .text.triggerchannel_addSample:0000000000000000 triggerchannel_addSample
+     /tmp/cc1am2lr.s:326    .text.triggerchannel_process_triggerevent:0000000000000000 $t
+     /tmp/cc1am2lr.s:467    .text.triggerchannel_transition_triggerevent_monitor:0000000000000000 triggerchannel_transition_triggerevent_monitor
+     /tmp/cc1am2lr.s:387    .text.triggerchannel_process_monitor:0000000000000000 $t
+     /tmp/cc1am2lr.s:704    .text.triggerchannel_getLastSamplesMax:0000000000000000 triggerchannel_getLastSamplesMax
+     /tmp/cc1am2lr.s:521    .text.triggerchannel_transition_monitor_triggerevent:0000000000000000 triggerchannel_transition_monitor_triggerevent
+     /tmp/cc1am2lr.s:462    .text.triggerchannel_transition_triggerevent_monitor:0000000000000000 $t
+     /tmp/cc1am2lr.s:516    .text.triggerchannel_transition_monitor_triggerevent:0000000000000000 $t
+     /tmp/cc1am2lr.s:570    .text.triggerchannel_addSample:0000000000000000 $t
+     /tmp/cc1am2lr.s:650    .text.triggerchannel_getLastSample:0000000000000000 $t
+     /tmp/cc1am2lr.s:655    .text.triggerchannel_getLastSample:0000000000000000 triggerchannel_getLastSample
+     /tmp/cc1am2lr.s:699    .text.triggerchannel_getLastSamplesMax:0000000000000000 $t
                      .debug_frame:0000000000000010 $d
 
 UNDEFINED SYMBOLS

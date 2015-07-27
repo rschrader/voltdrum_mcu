@@ -1,4 +1,4 @@
-ARM GAS  /tmp/ccPTyFyG.s 			page 1
+ARM GAS  /tmp/ccIGSFeZ.s 			page 1
 
 
    1              		.syntax unified
@@ -58,7 +58,7 @@ ARM GAS  /tmp/ccPTyFyG.s 			page 1
   62              	initHeadChannels:
   63              	.LFB112:
   64              		.file 1 "Src/main.c"
-ARM GAS  /tmp/ccPTyFyG.s 			page 2
+ARM GAS  /tmp/ccIGSFeZ.s 			page 2
 
 
    1:Src/main.c    **** /**
@@ -118,7 +118,7 @@ ARM GAS  /tmp/ccPTyFyG.s 			page 1
   55:Src/main.c    **** 
   56:Src/main.c    **** /* USER CODE BEGIN PV */
   57:Src/main.c    **** 
-ARM GAS  /tmp/ccPTyFyG.s 			page 3
+ARM GAS  /tmp/ccIGSFeZ.s 			page 3
 
 
   58:Src/main.c    **** #define headChannelCount 10
@@ -178,7 +178,7 @@ ARM GAS  /tmp/ccPTyFyG.s 			page 1
   86              	.L3:
   91:Src/main.c    **** 		triggerChannelsHead[i].potiWiperId = MCP4261_WIPER0;
   87              		.loc 1 91 0 discriminator 3
-ARM GAS  /tmp/ccPTyFyG.s 			page 4
+ARM GAS  /tmp/ccIGSFeZ.s 			page 4
 
 
   88 000c 784A     		ldr	r2, .L6
@@ -238,7 +238,7 @@ ARM GAS  /tmp/ccPTyFyG.s 			page 1
  135 0066 624B     		ldr	r3, .L6
  136 0068 634A     		ldr	r2, .L6+8
  137 006a 5A64     		str	r2, [r3, #68]
-ARM GAS  /tmp/ccPTyFyG.s 			page 5
+ARM GAS  /tmp/ccIGSFeZ.s 			page 5
 
 
   97:Src/main.c    **** 	triggerChannelsHead[0].potiCsPin = GPIO_PIN_11;
@@ -298,7 +298,7 @@ ARM GAS  /tmp/ccPTyFyG.s 			page 1
  178              		.loc 1 110 0
  179 00be 4C4B     		ldr	r3, .L6
  180 00c0 2622     		movs	r2, #38
-ARM GAS  /tmp/ccPTyFyG.s 			page 6
+ARM GAS  /tmp/ccIGSFeZ.s 			page 6
 
 
  181 00c2 C3F82421 		str	r2, [r3, #292]
@@ -358,7 +358,7 @@ ARM GAS  /tmp/ccPTyFyG.s 			page 1
  221 0112 C3F85822 		str	r2, [r3, #600]
  125:Src/main.c    **** 	triggerChannelsHead[7].potiCsPin = GPIO_PIN_5;
  222              		.loc 1 125 0
-ARM GAS  /tmp/ccPTyFyG.s 			page 7
+ARM GAS  /tmp/ccIGSFeZ.s 			page 7
 
 
  223 0116 364B     		ldr	r3, .L6
@@ -418,7 +418,7 @@ ARM GAS  /tmp/ccPTyFyG.s 			page 1
  265 0168 4433     		adds	r3, r3, #68
  266 016a 1868     		ldr	r0, [r3]
  267 016c 204A     		ldr	r2, .L6
-ARM GAS  /tmp/ccPTyFyG.s 			page 8
+ARM GAS  /tmp/ccIGSFeZ.s 			page 8
 
 
  268 016e 7B68     		ldr	r3, [r7, #4]
@@ -478,7 +478,7 @@ ARM GAS  /tmp/ccPTyFyG.s 			page 1
  309              		.loc 1 148 0
  310 01be 1E21     		movs	r1, #30
  311 01c0 1348     		ldr	r0, .L6+32
-ARM GAS  /tmp/ccPTyFyG.s 			page 9
+ARM GAS  /tmp/ccIGSFeZ.s 			page 9
 
 
  312 01c2 FFF7FEFF 		bl	triggerchannel_setWiper
@@ -538,7 +538,7 @@ ARM GAS  /tmp/ccPTyFyG.s 			page 1
  361              		.thumb
  362              		.thumb_func
  364              	initRimChannels:
-ARM GAS  /tmp/ccPTyFyG.s 			page 10
+ARM GAS  /tmp/ccIGSFeZ.s 			page 10
 
 
  365              	.LFB113:
@@ -598,7 +598,7 @@ ARM GAS  /tmp/ccPTyFyG.s 			page 1
  412 003a 0733     		adds	r3, r3, #7
  413 003c 9B00     		lsls	r3, r3, #2
  414 003e 7E4A     		ldr	r2, .L15+4
-ARM GAS  /tmp/ccPTyFyG.s 			page 11
+ARM GAS  /tmp/ccIGSFeZ.s 			page 11
 
 
  415 0040 9C18     		adds	r4, r3, r2
@@ -658,7 +658,7 @@ ARM GAS  /tmp/ccPTyFyG.s 			page 1
  467              	.L9:
  159:Src/main.c    **** 		triggerChannelsRim[i].potiWiperId = MCP4261_WIPER1;
  468              		.loc 1 159 0 is_stmt 0 discriminator 1
-ARM GAS  /tmp/ccPTyFyG.s 			page 12
+ARM GAS  /tmp/ccIGSFeZ.s 			page 12
 
 
  469 00a6 7B68     		ldr	r3, [r7, #4]
@@ -718,7 +718,7 @@ ARM GAS  /tmp/ccPTyFyG.s 			page 1
  508              		.loc 1 177 0
  509 00f4 4F4B     		ldr	r3, .L15
  510 00f6 534A     		ldr	r2, .L15+16
-ARM GAS  /tmp/ccPTyFyG.s 			page 13
+ARM GAS  /tmp/ccIGSFeZ.s 			page 13
 
 
  511 00f8 C3F82821 		str	r2, [r3, #296]
@@ -778,7 +778,7 @@ ARM GAS  /tmp/ccPTyFyG.s 			page 1
  191:Src/main.c    **** 	triggerChannelsRim[6].midinote = 38;
  552              		.loc 1 191 0
  553 014c 394B     		ldr	r3, .L15
-ARM GAS  /tmp/ccPTyFyG.s 			page 14
+ARM GAS  /tmp/ccIGSFeZ.s 			page 14
 
 
  554 014e 2622     		movs	r2, #38
@@ -838,7 +838,7 @@ ARM GAS  /tmp/ccPTyFyG.s 			page 1
  593 019c 0023     		movs	r3, #0
  594 019e 7B60     		str	r3, [r7, #4]
  595 01a0 16E0     		b	.L13
-ARM GAS  /tmp/ccPTyFyG.s 			page 15
+ARM GAS  /tmp/ccIGSFeZ.s 			page 15
 
 
  596              	.L14:
@@ -898,7 +898,7 @@ ARM GAS  /tmp/ccPTyFyG.s 			page 1
  638 01f0 FFF7FEFF 		bl	triggerchannel_setWiper
  217:Src/main.c    **** 	triggerchannel_setWiper(&triggerChannelsRim[3], 50);
  639              		.loc 1 217 0
-ARM GAS  /tmp/ccPTyFyG.s 			page 16
+ARM GAS  /tmp/ccIGSFeZ.s 			page 16
 
 
  640 01f4 3221     		movs	r1, #50
@@ -958,7 +958,7 @@ ARM GAS  /tmp/ccPTyFyG.s 			page 1
  686 024c 98000000 		.word	triggerChannelsRim+152
  687 0250 E4000000 		.word	triggerChannelsRim+228
  688 0254 30010000 		.word	triggerChannelsRim+304
-ARM GAS  /tmp/ccPTyFyG.s 			page 17
+ARM GAS  /tmp/ccIGSFeZ.s 			page 17
 
 
  689 0258 7C010000 		.word	triggerChannelsRim+380
@@ -1018,7 +1018,7 @@ ARM GAS  /tmp/ccPTyFyG.s 			page 1
  739              		.cfi_endproc
  740              	.LFE114:
  742              		.global	btnDebounceIRQTimer
-ARM GAS  /tmp/ccPTyFyG.s 			page 18
+ARM GAS  /tmp/ccIGSFeZ.s 			page 18
 
 
  743              		.section	.bss.btnDebounceIRQTimer,"aw",%nobits
@@ -1078,7 +1078,7 @@ ARM GAS  /tmp/ccPTyFyG.s 			page 1
  770              	.LCFI14:
  771              		.cfi_def_cfa_register 7
  772 0006 0346     		mov	r3, r0
-ARM GAS  /tmp/ccPTyFyG.s 			page 19
+ARM GAS  /tmp/ccIGSFeZ.s 			page 19
 
 
  773 0008 FB80     		strh	r3, [r7, #6]	@ movhi
@@ -1138,7 +1138,7 @@ ARM GAS  /tmp/ccPTyFyG.s 			page 1
  824              		.global	HAL_UART_TxCpltCallback
  825              		.thumb
  826              		.thumb_func
-ARM GAS  /tmp/ccPTyFyG.s 			page 20
+ARM GAS  /tmp/ccIGSFeZ.s 			page 20
 
 
  828              	HAL_UART_TxCpltCallback:
@@ -1198,7 +1198,7 @@ ARM GAS  /tmp/ccPTyFyG.s 			page 1
  878              		.cfi_endproc
  879              	.LFE116:
  881              		.section	.text.HAL_UART_ErrorCallback,"ax",%progbits
-ARM GAS  /tmp/ccPTyFyG.s 			page 21
+ARM GAS  /tmp/ccIGSFeZ.s 			page 21
 
 
  882              		.align	2
@@ -1258,7 +1258,7 @@ ARM GAS  /tmp/ccPTyFyG.s 			page 1
  933              	.L36:
  934 002e 00BF     		.align	2
  935              	.L35:
-ARM GAS  /tmp/ccPTyFyG.s 			page 22
+ARM GAS  /tmp/ccIGSFeZ.s 			page 22
 
 
  936 0030 00000000 		.word	midiMessagebuffer
@@ -1318,7 +1318,7 @@ ARM GAS  /tmp/ccPTyFyG.s 			page 1
  977 001e 7B68     		ldr	r3, [r7, #4]
  978 0020 0133     		adds	r3, r3, #1
  979 0022 7B60     		str	r3, [r7, #4]
-ARM GAS  /tmp/ccPTyFyG.s 			page 23
+ARM GAS  /tmp/ccIGSFeZ.s 			page 23
 
 
  980              	.L38:
@@ -1378,7 +1378,7 @@ ARM GAS  /tmp/ccPTyFyG.s 			page 1
  1025              		.section	.text.onTimer2Triggered,"ax",%progbits
  1026              		.align	2
  1027              		.global	onTimer2Triggered
-ARM GAS  /tmp/ccPTyFyG.s 			page 24
+ARM GAS  /tmp/ccIGSFeZ.s 			page 24
 
 
  1028              		.thumb
@@ -1438,7 +1438,7 @@ ARM GAS  /tmp/ccPTyFyG.s 			page 1
  1071 002a EFDD     		ble	.L46
  303:Src/main.c    **** 	}
  304:Src/main.c    **** 
-ARM GAS  /tmp/ccPTyFyG.s 			page 25
+ARM GAS  /tmp/ccIGSFeZ.s 			page 25
 
 
  305:Src/main.c    **** }
@@ -1498,7 +1498,7 @@ ARM GAS  /tmp/ccPTyFyG.s 			page 1
  1121              		.align	2
  1122              		.global	onBtn1Triggered
  1123              		.thumb
-ARM GAS  /tmp/ccPTyFyG.s 			page 26
+ARM GAS  /tmp/ccIGSFeZ.s 			page 26
 
 
  1124              		.thumb_func
@@ -1558,7 +1558,7 @@ ARM GAS  /tmp/ccPTyFyG.s 			page 1
  324:Src/main.c    ****  * Triggered on btn2 click with debounce delay
  325:Src/main.c    ****  */
  326:Src/main.c    **** void onBtn2Triggered(){
-ARM GAS  /tmp/ccPTyFyG.s 			page 27
+ARM GAS  /tmp/ccIGSFeZ.s 			page 27
 
 
  1170              		.loc 1 326 0
@@ -1618,7 +1618,7 @@ ARM GAS  /tmp/ccPTyFyG.s 			page 1
  1214              		.cfi_def_cfa_offset 8
  1215              		.cfi_offset 7, -8
  1216              		.cfi_offset 14, -4
-ARM GAS  /tmp/ccPTyFyG.s 			page 28
+ARM GAS  /tmp/ccIGSFeZ.s 			page 28
 
 
  1217 0002 00AF     		add	r7, sp, #0
@@ -1678,7 +1678,7 @@ ARM GAS  /tmp/ccPTyFyG.s 			page 1
  363:Src/main.c    ****   MX_USART3_UART_Init();
  1246              		.loc 1 363 0
  1247 0038 FFF7FEFF 		bl	MX_USART3_UART_Init
-ARM GAS  /tmp/ccPTyFyG.s 			page 29
+ARM GAS  /tmp/ccIGSFeZ.s 			page 29
 
 
  364:Src/main.c    ****   MX_USB_DEVICE_Init();
@@ -1738,7 +1738,7 @@ ARM GAS  /tmp/ccPTyFyG.s 			page 1
  1279 0074 1B4B     		ldr	r3, .L61+20
  1280 0076 0022     		movs	r2, #0
  1281 0078 1A60     		str	r2, [r3]
-ARM GAS  /tmp/ccPTyFyG.s 			page 30
+ARM GAS  /tmp/ccIGSFeZ.s 			page 30
 
 
  387:Src/main.c    **** 			onTimer1Triggered();
@@ -1798,7 +1798,7 @@ ARM GAS  /tmp/ccPTyFyG.s 			page 1
  1325              		.loc 1 397 0
  1326 00bc 0B4B     		ldr	r3, .L61+28
  1327 00be 9B68     		ldr	r3, [r3, #8]
-ARM GAS  /tmp/ccPTyFyG.s 			page 31
+ARM GAS  /tmp/ccIGSFeZ.s 			page 31
 
 
  1328 00c0 002B     		cmp	r3, #0
@@ -1858,7 +1858,7 @@ ARM GAS  /tmp/ccPTyFyG.s 			page 1
  1371              		.cfi_def_cfa_offset 128
  1372 0004 00AF     		add	r7, sp, #0
  1373              	.LCFI52:
-ARM GAS  /tmp/ccPTyFyG.s 			page 32
+ARM GAS  /tmp/ccIGSFeZ.s 			page 32
 
 
  1374              		.cfi_def_cfa_register 7
@@ -1918,7 +1918,7 @@ ARM GAS  /tmp/ccPTyFyG.s 			page 1
  1410 003e 0023     		movs	r3, #0
  1411 0040 FB64     		str	r3, [r7, #76]
  429:Src/main.c    ****   HAL_RCC_ClockConfig(&RCC_ClkInitStruct, FLASH_LATENCY_2);
-ARM GAS  /tmp/ccPTyFyG.s 			page 33
+ARM GAS  /tmp/ccIGSFeZ.s 			page 33
 
 
  1412              		.loc 1 429 0
@@ -1978,7 +1978,7 @@ ARM GAS  /tmp/ccPTyFyG.s 			page 1
  446:Src/main.c    **** }
  1450              		.loc 1 446 0
  1451 0086 00BF     		nop
-ARM GAS  /tmp/ccPTyFyG.s 			page 34
+ARM GAS  /tmp/ccIGSFeZ.s 			page 34
 
 
  1452 0088 7837     		adds	r7, r7, #120
@@ -2015,20 +2015,20 @@ ARM GAS  /tmp/ccPTyFyG.s 			page 1
  1484              		.file 16 "Inc/tim.h"
  1485              		.file 17 "Inc/usart.h"
  1486              		.file 18 "Inc/midi.h"
-ARM GAS  /tmp/ccPTyFyG.s 			page 35
+ARM GAS  /tmp/ccIGSFeZ.s 			page 35
 
 
 DEFINED SYMBOLS
                             *ABS*:0000000000000000 main.c
                             *COM*:0000000000000004 midiMessagebuffer
-     /tmp/ccPTyFyG.s:26     .bss.irqflag_timer1:0000000000000000 irqflag_timer1
-     /tmp/ccPTyFyG.s:23     .bss.irqflag_timer1:0000000000000000 $d
-     /tmp/ccPTyFyG.s:33     .bss.irqflag_timer2:0000000000000000 irqflag_timer2
-     /tmp/ccPTyFyG.s:30     .bss.irqflag_timer2:0000000000000000 $d
-     /tmp/ccPTyFyG.s:40     .bss.irqflag_timer3:0000000000000000 irqflag_timer3
-     /tmp/ccPTyFyG.s:37     .bss.irqflag_timer3:0000000000000000 $d
-     /tmp/ccPTyFyG.s:47     .bss.irqflag_btns:0000000000000000 irqflag_btns
-     /tmp/ccPTyFyG.s:44     .bss.irqflag_btns:0000000000000000 $d
+     /tmp/ccIGSFeZ.s:26     .bss.irqflag_timer1:0000000000000000 irqflag_timer1
+     /tmp/ccIGSFeZ.s:23     .bss.irqflag_timer1:0000000000000000 $d
+     /tmp/ccIGSFeZ.s:33     .bss.irqflag_timer2:0000000000000000 irqflag_timer2
+     /tmp/ccIGSFeZ.s:30     .bss.irqflag_timer2:0000000000000000 $d
+     /tmp/ccIGSFeZ.s:40     .bss.irqflag_timer3:0000000000000000 irqflag_timer3
+     /tmp/ccIGSFeZ.s:37     .bss.irqflag_timer3:0000000000000000 $d
+     /tmp/ccIGSFeZ.s:47     .bss.irqflag_btns:0000000000000000 irqflag_btns
+     /tmp/ccIGSFeZ.s:44     .bss.irqflag_btns:0000000000000000 $d
                             *COM*:00000000000000a0 adc1Samples
                             *COM*:0000000000000070 adc2Samples
                             *COM*:0000000000000030 adc3Samples
@@ -2036,49 +2036,49 @@ DEFINED SYMBOLS
                             *COM*:00000000000002f8 triggerChannelsHead
                             *COM*:00000000000002f8 triggerChannelsRim
                             *COM*:0000000000000088 hiHatChannels
-     /tmp/ccPTyFyG.s:57     .text.initHeadChannels:0000000000000000 $t
-     /tmp/ccPTyFyG.s:62     .text.initHeadChannels:0000000000000000 initHeadChannels
-     /tmp/ccPTyFyG.s:342    .text.initHeadChannels:00000000000001f0 $d
-     /tmp/ccPTyFyG.s:359    .text.initRimChannels:0000000000000000 $t
-     /tmp/ccPTyFyG.s:364    .text.initRimChannels:0000000000000000 initRimChannels
-     /tmp/ccPTyFyG.s:680    .text.initRimChannels:0000000000000234 $d
-     /tmp/ccPTyFyG.s:698    .text.initHiHatChannels:0000000000000000 $t
-     /tmp/ccPTyFyG.s:703    .text.initHiHatChannels:0000000000000000 initHiHatChannels
-     /tmp/ccPTyFyG.s:733    .text.initHiHatChannels:000000000000001c $d
-     /tmp/ccPTyFyG.s:747    .bss.btnDebounceIRQTimer:0000000000000000 btnDebounceIRQTimer
-     /tmp/ccPTyFyG.s:744    .bss.btnDebounceIRQTimer:0000000000000000 $d
-     /tmp/ccPTyFyG.s:750    .text.HAL_GPIO_EXTI_Callback:0000000000000000 $t
-     /tmp/ccPTyFyG.s:755    .text.HAL_GPIO_EXTI_Callback:0000000000000000 HAL_GPIO_EXTI_Callback
-     /tmp/ccPTyFyG.s:818    .text.HAL_GPIO_EXTI_Callback:0000000000000040 $d
-     /tmp/ccPTyFyG.s:823    .text.HAL_UART_TxCpltCallback:0000000000000000 $t
-     /tmp/ccPTyFyG.s:828    .text.HAL_UART_TxCpltCallback:0000000000000000 HAL_UART_TxCpltCallback
-     /tmp/ccPTyFyG.s:877    .text.HAL_UART_TxCpltCallback:0000000000000030 $d
-     /tmp/ccPTyFyG.s:882    .text.HAL_UART_ErrorCallback:0000000000000000 $t
-     /tmp/ccPTyFyG.s:887    .text.HAL_UART_ErrorCallback:0000000000000000 HAL_UART_ErrorCallback
-     /tmp/ccPTyFyG.s:936    .text.HAL_UART_ErrorCallback:0000000000000030 $d
-     /tmp/ccPTyFyG.s:941    .text.onTimer1Triggered:0000000000000000 $t
-     /tmp/ccPTyFyG.s:946    .text.onTimer1Triggered:0000000000000000 onTimer1Triggered
-     /tmp/ccPTyFyG.s:1020   .text.onTimer1Triggered:0000000000000058 $d
-     /tmp/ccPTyFyG.s:1026   .text.onTimer2Triggered:0000000000000000 $t
-     /tmp/ccPTyFyG.s:1031   .text.onTimer2Triggered:0000000000000000 onTimer2Triggered
-     /tmp/ccPTyFyG.s:1085   .text.onTimer2Triggered:0000000000000034 $d
-     /tmp/ccPTyFyG.s:1090   .text.onBtn0Triggered:0000000000000000 $t
-     /tmp/ccPTyFyG.s:1095   .text.onBtn0Triggered:0000000000000000 onBtn0Triggered
-     /tmp/ccPTyFyG.s:1121   .text.onBtn1Triggered:0000000000000000 $t
-     /tmp/ccPTyFyG.s:1126   .text.onBtn1Triggered:0000000000000000 onBtn1Triggered
-     /tmp/ccPTyFyG.s:1158   .text.onBtn1Triggered:0000000000000014 $d
-     /tmp/ccPTyFyG.s:1163   .text.onBtn2Triggered:0000000000000000 $t
-     /tmp/ccPTyFyG.s:1168   .text.onBtn2Triggered:0000000000000000 onBtn2Triggered
-     /tmp/ccPTyFyG.s:1197   .rodata:0000000000000000 $d
-     /tmp/ccPTyFyG.s:1201   .text.main:0000000000000000 $t
-     /tmp/ccPTyFyG.s:1206   .text.main:0000000000000000 main
-     /tmp/ccPTyFyG.s:1358   .text.SystemClock_Config:0000000000000000 SystemClock_Config
-     /tmp/ccPTyFyG.s:1341   .text.main:00000000000000d0 $d
-     /tmp/ccPTyFyG.s:1353   .text.SystemClock_Config:0000000000000000 $t
-ARM GAS  /tmp/ccPTyFyG.s 			page 36
+     /tmp/ccIGSFeZ.s:57     .text.initHeadChannels:0000000000000000 $t
+     /tmp/ccIGSFeZ.s:62     .text.initHeadChannels:0000000000000000 initHeadChannels
+     /tmp/ccIGSFeZ.s:342    .text.initHeadChannels:00000000000001f0 $d
+     /tmp/ccIGSFeZ.s:359    .text.initRimChannels:0000000000000000 $t
+     /tmp/ccIGSFeZ.s:364    .text.initRimChannels:0000000000000000 initRimChannels
+     /tmp/ccIGSFeZ.s:680    .text.initRimChannels:0000000000000234 $d
+     /tmp/ccIGSFeZ.s:698    .text.initHiHatChannels:0000000000000000 $t
+     /tmp/ccIGSFeZ.s:703    .text.initHiHatChannels:0000000000000000 initHiHatChannels
+     /tmp/ccIGSFeZ.s:733    .text.initHiHatChannels:000000000000001c $d
+     /tmp/ccIGSFeZ.s:747    .bss.btnDebounceIRQTimer:0000000000000000 btnDebounceIRQTimer
+     /tmp/ccIGSFeZ.s:744    .bss.btnDebounceIRQTimer:0000000000000000 $d
+     /tmp/ccIGSFeZ.s:750    .text.HAL_GPIO_EXTI_Callback:0000000000000000 $t
+     /tmp/ccIGSFeZ.s:755    .text.HAL_GPIO_EXTI_Callback:0000000000000000 HAL_GPIO_EXTI_Callback
+     /tmp/ccIGSFeZ.s:818    .text.HAL_GPIO_EXTI_Callback:0000000000000040 $d
+     /tmp/ccIGSFeZ.s:823    .text.HAL_UART_TxCpltCallback:0000000000000000 $t
+     /tmp/ccIGSFeZ.s:828    .text.HAL_UART_TxCpltCallback:0000000000000000 HAL_UART_TxCpltCallback
+     /tmp/ccIGSFeZ.s:877    .text.HAL_UART_TxCpltCallback:0000000000000030 $d
+     /tmp/ccIGSFeZ.s:882    .text.HAL_UART_ErrorCallback:0000000000000000 $t
+     /tmp/ccIGSFeZ.s:887    .text.HAL_UART_ErrorCallback:0000000000000000 HAL_UART_ErrorCallback
+     /tmp/ccIGSFeZ.s:936    .text.HAL_UART_ErrorCallback:0000000000000030 $d
+     /tmp/ccIGSFeZ.s:941    .text.onTimer1Triggered:0000000000000000 $t
+     /tmp/ccIGSFeZ.s:946    .text.onTimer1Triggered:0000000000000000 onTimer1Triggered
+     /tmp/ccIGSFeZ.s:1020   .text.onTimer1Triggered:0000000000000058 $d
+     /tmp/ccIGSFeZ.s:1026   .text.onTimer2Triggered:0000000000000000 $t
+     /tmp/ccIGSFeZ.s:1031   .text.onTimer2Triggered:0000000000000000 onTimer2Triggered
+     /tmp/ccIGSFeZ.s:1085   .text.onTimer2Triggered:0000000000000034 $d
+     /tmp/ccIGSFeZ.s:1090   .text.onBtn0Triggered:0000000000000000 $t
+     /tmp/ccIGSFeZ.s:1095   .text.onBtn0Triggered:0000000000000000 onBtn0Triggered
+     /tmp/ccIGSFeZ.s:1121   .text.onBtn1Triggered:0000000000000000 $t
+     /tmp/ccIGSFeZ.s:1126   .text.onBtn1Triggered:0000000000000000 onBtn1Triggered
+     /tmp/ccIGSFeZ.s:1158   .text.onBtn1Triggered:0000000000000014 $d
+     /tmp/ccIGSFeZ.s:1163   .text.onBtn2Triggered:0000000000000000 $t
+     /tmp/ccIGSFeZ.s:1168   .text.onBtn2Triggered:0000000000000000 onBtn2Triggered
+     /tmp/ccIGSFeZ.s:1197   .rodata:0000000000000000 $d
+     /tmp/ccIGSFeZ.s:1201   .text.main:0000000000000000 $t
+     /tmp/ccIGSFeZ.s:1206   .text.main:0000000000000000 main
+     /tmp/ccIGSFeZ.s:1358   .text.SystemClock_Config:0000000000000000 SystemClock_Config
+     /tmp/ccIGSFeZ.s:1341   .text.main:00000000000000d0 $d
+     /tmp/ccIGSFeZ.s:1353   .text.SystemClock_Config:0000000000000000 $t
+ARM GAS  /tmp/ccIGSFeZ.s 			page 36
 
 
-     /tmp/ccPTyFyG.s:1463   .text.SystemClock_Config:0000000000000090 $d
+     /tmp/ccIGSFeZ.s:1463   .text.SystemClock_Config:0000000000000090 $d
                      .debug_frame:0000000000000010 $d
 
 UNDEFINED SYMBOLS

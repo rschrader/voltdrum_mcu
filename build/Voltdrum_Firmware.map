@@ -336,7 +336,7 @@ Discarded input sections
                 0x0000000000000000       0x90 build/stm32f3xx_hal_flash.o
  .debug_ranges  0x0000000000000000       0x80 build/stm32f3xx_hal_flash.o
  .debug_line    0x0000000000000000      0x33c build/stm32f3xx_hal_flash.o
- .debug_str     0x0000000000000000      0x553 build/stm32f3xx_hal_flash.o
+ .debug_str     0x0000000000000000      0x548 build/stm32f3xx_hal_flash.o
  .comment       0x0000000000000000       0x1e build/stm32f3xx_hal_flash.o
  .debug_frame   0x0000000000000000      0x250 build/stm32f3xx_hal_flash.o
  .ARM.attributes
@@ -380,7 +380,7 @@ Discarded input sections
                 0x0000000000000000       0x88 build/stm32f3xx_hal_flash_ex.o
  .debug_ranges  0x0000000000000000       0x78 build/stm32f3xx_hal_flash_ex.o
  .debug_line    0x0000000000000000      0x374 build/stm32f3xx_hal_flash_ex.o
- .debug_str     0x0000000000000000      0x646 build/stm32f3xx_hal_flash_ex.o
+ .debug_str     0x0000000000000000      0x63b build/stm32f3xx_hal_flash_ex.o
  .comment       0x0000000000000000       0x1e build/stm32f3xx_hal_flash_ex.o
  .debug_frame   0x0000000000000000      0x234 build/stm32f3xx_hal_flash_ex.o
  .ARM.attributes
@@ -472,7 +472,7 @@ Discarded input sections
                 0x0000000000000000       0x58 build/stm32f3xx_hal_pwr.o
  .debug_ranges  0x0000000000000000       0x48 build/stm32f3xx_hal_pwr.o
  .debug_line    0x0000000000000000      0x24d build/stm32f3xx_hal_pwr.o
- .debug_str     0x0000000000000000      0x3b8 build/stm32f3xx_hal_pwr.o
+ .debug_str     0x0000000000000000      0x3ad build/stm32f3xx_hal_pwr.o
  .comment       0x0000000000000000       0x1e build/stm32f3xx_hal_pwr.o
  .debug_frame   0x0000000000000000      0x148 build/stm32f3xx_hal_pwr.o
  .ARM.attributes
@@ -497,7 +497,7 @@ Discarded input sections
                 0x0000000000000000       0x40 build/stm32f3xx_hal_pwr_ex.o
  .debug_ranges  0x0000000000000000       0x30 build/stm32f3xx_hal_pwr_ex.o
  .debug_line    0x0000000000000000      0x1fe build/stm32f3xx_hal_pwr_ex.o
- .debug_str     0x0000000000000000      0x2ec build/stm32f3xx_hal_pwr_ex.o
+ .debug_str     0x0000000000000000      0x2e1 build/stm32f3xx_hal_pwr_ex.o
  .comment       0x0000000000000000       0x1e build/stm32f3xx_hal_pwr_ex.o
  .debug_frame   0x0000000000000000       0xc8 build/stm32f3xx_hal_pwr_ex.o
  .ARM.attributes
@@ -954,7 +954,7 @@ Discarded input sections
                 0x0000000000000000       0x40 build/stm32f3xx_hal_uart_ex.o
  .debug_ranges  0x0000000000000000       0x30 build/stm32f3xx_hal_uart_ex.o
  .debug_line    0x0000000000000000      0x275 build/stm32f3xx_hal_uart_ex.o
- .debug_str     0x0000000000000000      0x808 build/stm32f3xx_hal_uart_ex.o
+ .debug_str     0x0000000000000000      0x7fd build/stm32f3xx_hal_uart_ex.o
  .comment       0x0000000000000000       0x1e build/stm32f3xx_hal_uart_ex.o
  .debug_frame   0x0000000000000000       0xd8 build/stm32f3xx_hal_uart_ex.o
  .ARM.attributes
@@ -1091,7 +1091,7 @@ Discarded input sections
                 0x0000000000000000       0x38 build/performance.o
  .debug_ranges  0x0000000000000000       0x28 build/performance.o
  .debug_line    0x0000000000000000      0x171 build/performance.o
- .debug_str     0x0000000000000000      0x26a build/performance.o
+ .debug_str     0x0000000000000000      0x25f build/performance.o
  .comment       0x0000000000000000       0x1e build/performance.o
  .debug_frame   0x0000000000000000       0x80 build/performance.o
  .ARM.attributes
@@ -2489,7 +2489,7 @@ OUTPUT(build/Voltdrum_Firmware.elf elf32-littlearm)
  .comment       0x000000000000001d       0x1e build/uartmessagebuffer.o
  .comment       0x000000000000001d       0x1e build/midi.o
 
-.debug_info     0x0000000000000000    0x1ad8d
+.debug_info     0x0000000000000000    0x1ad82
  .debug_info    0x0000000000000000      0x40a build/system_stm32f3xx.o
  .debug_info    0x000000000000040a      0x6e1 build/stm32f3xx_hal.o
  .debug_info    0x0000000000000aeb      0xc18 build/stm32f3xx_hal_adc.o
@@ -2527,7 +2527,7 @@ OUTPUT(build/Voltdrum_Firmware.elf elf32-littlearm)
  .debug_info    0x00000000000190e2      0xb96 build/hihatchannel.o
  .debug_info    0x0000000000019c78      0x849 build/uartmessagebuffer.o
  .debug_info    0x000000000001a4c1      0x80c build/midi.o
- .debug_info    0x000000000001accd       0xc0 build/startup_stm32f303xc.o
+ .debug_info    0x000000000001accd       0xb5 build/startup_stm32f303xc.o
 
 .debug_abbrev   0x0000000000000000     0x3bfa
  .debug_abbrev  0x0000000000000000      0x103 build/system_stm32f3xx.o
@@ -2766,81 +2766,81 @@ OUTPUT(build/Voltdrum_Firmware.elf elf32-littlearm)
  .debug_line    0x000000000000a795      0x1b8 build/midi.o
  .debug_line    0x000000000000a94d       0xab build/startup_stm32f303xc.o
 
-.debug_str      0x0000000000000000     0x605a
- .debug_str     0x0000000000000000      0x296 build/system_stm32f3xx.o
-                                        0x2f6 (size before relaxing)
- .debug_str     0x0000000000000296      0x646 build/stm32f3xx_hal.o
-                                        0x833 (size before relaxing)
- .debug_str     0x00000000000008dc      0x716 build/stm32f3xx_hal_adc.o
-                                        0x9b8 (size before relaxing)
- .debug_str     0x0000000000000ff2      0x5ac build/stm32f3xx_hal_adc_ex.o
-                                        0xea9 (size before relaxing)
- .debug_str     0x000000000000159e      0x297 build/stm32f3xx_hal_cortex.o
-                                        0xa00 (size before relaxing)
- .debug_str     0x0000000000001835      0x145 build/stm32f3xx_hal_dma.o
-                                        0x4f3 (size before relaxing)
- .debug_str     0x000000000000197a      0x1dd build/stm32f3xx_hal_gpio.o
-                                        0x446 (size before relaxing)
- .debug_str     0x0000000000001b57      0x547 build/stm32f3xx_hal_pcd.o
-                                        0x7fe (size before relaxing)
- .debug_str     0x000000000000209e       0xbf build/stm32f3xx_hal_pcd_ex.o
-                                        0x533 (size before relaxing)
- .debug_str     0x000000000000215d      0x2b4 build/stm32f3xx_hal_rcc.o
-                                        0x5bf (size before relaxing)
- .debug_str     0x0000000000002411      0x215 build/stm32f3xx_hal_rcc_ex.o
-                                        0x561 (size before relaxing)
- .debug_str     0x0000000000002626      0x635 build/stm32f3xx_hal_spi.o
-                                        0xa3e (size before relaxing)
- .debug_str     0x0000000000002c5b      0xe82 build/stm32f3xx_hal_tim.o
-                                       0x12a6 (size before relaxing)
- .debug_str     0x0000000000003add      0x5d7 build/stm32f3xx_hal_tim_ex.o
-                                        0xd14 (size before relaxing)
- .debug_str     0x00000000000040b4      0x785 build/stm32f3xx_hal_uart.o
-                                        0xc59 (size before relaxing)
- .debug_str     0x0000000000004839      0x65c build/usbd_audio.o
-                                        0x8c6 (size before relaxing)
- .debug_str     0x0000000000004e95      0x1c5 build/usbd_core.o
-                                        0x73d (size before relaxing)
- .debug_str     0x000000000000505a      0x12c build/usbd_ctlreq.o
-                                        0x6c3 (size before relaxing)
- .debug_str     0x0000000000005186       0xc6 build/usbd_ioreq.o
-                                        0x64b (size before relaxing)
- .debug_str     0x000000000000524c       0xb2 build/adc.o
-                                        0x8bc (size before relaxing)
- .debug_str     0x00000000000052fe       0x18 build/gpio.o
-                                        0x6a5 (size before relaxing)
- .debug_str     0x0000000000005316      0x47f build/main.o
-                                       0x105e (size before relaxing)
- .debug_str     0x0000000000005795       0x1d build/spi.o
-                                        0x724 (size before relaxing)
- .debug_str     0x00000000000057b2       0x18 build/stm32f3xx_hal_msp.o
-                                        0x5d6 (size before relaxing)
- .debug_str     0x00000000000057ca       0xd9 build/stm32f3xx_it.o
-                                        0xf1f (size before relaxing)
- .debug_str     0x00000000000058a3       0x3b build/tim.o
-                                        0xada (size before relaxing)
- .debug_str     0x00000000000058de       0x34 build/usart.o
-                                        0xbc3 (size before relaxing)
- .debug_str     0x0000000000005912       0x4c build/usb_device.o
-                                        0x5f0 (size before relaxing)
- .debug_str     0x000000000000595e       0xea build/usbd_audio_if.o
-                                        0x742 (size before relaxing)
- .debug_str     0x0000000000005a48      0x15b build/usbd_conf.o
-                                        0xfd2 (size before relaxing)
- .debug_str     0x0000000000005ba3      0x10b build/usbd_desc.o
-                                        0x3da (size before relaxing)
- .debug_str     0x0000000000005cae       0x45 build/mcp4251.o
-                                        0x6cc (size before relaxing)
- .debug_str     0x0000000000005cf3       0x16 build/dma.o
-                                        0x1f8 (size before relaxing)
- .debug_str     0x0000000000005d09      0x1c8 build/triggerchannel.o
-                                        0x520 (size before relaxing)
- .debug_str     0x0000000000005ed1       0x73 build/hihatchannel.o
-                                        0xa77 (size before relaxing)
- .debug_str     0x0000000000005f44       0xda build/uartmessagebuffer.o
-                                        0x801 (size before relaxing)
- .debug_str     0x000000000000601e       0x3c build/midi.o
-                                        0x7a6 (size before relaxing)
+.debug_str      0x0000000000000000     0x604f
+ .debug_str     0x0000000000000000      0x28b build/system_stm32f3xx.o
+                                        0x2eb (size before relaxing)
+ .debug_str     0x000000000000028b      0x646 build/stm32f3xx_hal.o
+                                        0x828 (size before relaxing)
+ .debug_str     0x00000000000008d1      0x716 build/stm32f3xx_hal_adc.o
+                                        0x9ad (size before relaxing)
+ .debug_str     0x0000000000000fe7      0x5ac build/stm32f3xx_hal_adc_ex.o
+                                        0xe9e (size before relaxing)
+ .debug_str     0x0000000000001593      0x297 build/stm32f3xx_hal_cortex.o
+                                        0x9f5 (size before relaxing)
+ .debug_str     0x000000000000182a      0x145 build/stm32f3xx_hal_dma.o
+                                        0x4e8 (size before relaxing)
+ .debug_str     0x000000000000196f      0x1dd build/stm32f3xx_hal_gpio.o
+                                        0x43b (size before relaxing)
+ .debug_str     0x0000000000001b4c      0x547 build/stm32f3xx_hal_pcd.o
+                                        0x7f3 (size before relaxing)
+ .debug_str     0x0000000000002093       0xbf build/stm32f3xx_hal_pcd_ex.o
+                                        0x528 (size before relaxing)
+ .debug_str     0x0000000000002152      0x2b4 build/stm32f3xx_hal_rcc.o
+                                        0x5b4 (size before relaxing)
+ .debug_str     0x0000000000002406      0x215 build/stm32f3xx_hal_rcc_ex.o
+                                        0x556 (size before relaxing)
+ .debug_str     0x000000000000261b      0x635 build/stm32f3xx_hal_spi.o
+                                        0xa33 (size before relaxing)
+ .debug_str     0x0000000000002c50      0xe82 build/stm32f3xx_hal_tim.o
+                                       0x129b (size before relaxing)
+ .debug_str     0x0000000000003ad2      0x5d7 build/stm32f3xx_hal_tim_ex.o
+                                        0xd09 (size before relaxing)
+ .debug_str     0x00000000000040a9      0x785 build/stm32f3xx_hal_uart.o
+                                        0xc4e (size before relaxing)
+ .debug_str     0x000000000000482e      0x65c build/usbd_audio.o
+                                        0x8bb (size before relaxing)
+ .debug_str     0x0000000000004e8a      0x1c5 build/usbd_core.o
+                                        0x732 (size before relaxing)
+ .debug_str     0x000000000000504f      0x12c build/usbd_ctlreq.o
+                                        0x6b8 (size before relaxing)
+ .debug_str     0x000000000000517b       0xc6 build/usbd_ioreq.o
+                                        0x640 (size before relaxing)
+ .debug_str     0x0000000000005241       0xb2 build/adc.o
+                                        0x8b1 (size before relaxing)
+ .debug_str     0x00000000000052f3       0x18 build/gpio.o
+                                        0x69a (size before relaxing)
+ .debug_str     0x000000000000530b      0x47f build/main.o
+                                       0x1053 (size before relaxing)
+ .debug_str     0x000000000000578a       0x1d build/spi.o
+                                        0x719 (size before relaxing)
+ .debug_str     0x00000000000057a7       0x18 build/stm32f3xx_hal_msp.o
+                                        0x5cb (size before relaxing)
+ .debug_str     0x00000000000057bf       0xd9 build/stm32f3xx_it.o
+                                        0xf14 (size before relaxing)
+ .debug_str     0x0000000000005898       0x3b build/tim.o
+                                        0xacf (size before relaxing)
+ .debug_str     0x00000000000058d3       0x34 build/usart.o
+                                        0xbb8 (size before relaxing)
+ .debug_str     0x0000000000005907       0x4c build/usb_device.o
+                                        0x5e5 (size before relaxing)
+ .debug_str     0x0000000000005953       0xea build/usbd_audio_if.o
+                                        0x737 (size before relaxing)
+ .debug_str     0x0000000000005a3d      0x15b build/usbd_conf.o
+                                        0xfc7 (size before relaxing)
+ .debug_str     0x0000000000005b98      0x10b build/usbd_desc.o
+                                        0x3cf (size before relaxing)
+ .debug_str     0x0000000000005ca3       0x45 build/mcp4251.o
+                                        0x6c1 (size before relaxing)
+ .debug_str     0x0000000000005ce8       0x16 build/dma.o
+                                        0x1ed (size before relaxing)
+ .debug_str     0x0000000000005cfe      0x1c8 build/triggerchannel.o
+                                        0x515 (size before relaxing)
+ .debug_str     0x0000000000005ec6       0x73 build/hihatchannel.o
+                                        0xa6c (size before relaxing)
+ .debug_str     0x0000000000005f39       0xda build/uartmessagebuffer.o
+                                        0x7f6 (size before relaxing)
+ .debug_str     0x0000000000006013       0x3c build/midi.o
+                                        0x79b (size before relaxing)
 
 .debug_frame    0x0000000000000000     0x6038
  .debug_frame   0x0000000000000000       0x5c build/system_stm32f3xx.o

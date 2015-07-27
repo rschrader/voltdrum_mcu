@@ -1,4 +1,4 @@
-ARM GAS  /tmp/ccNHjMHP.s 			page 1
+ARM GAS  /tmp/ccGO2XCE.s 			page 1
 
 
    1              		.syntax unified
@@ -58,7 +58,7 @@ ARM GAS  /tmp/ccNHjMHP.s 			page 1
   59 000e 01       		.byte	1
   60 000f 01       		.byte	1
   61 0010 00       		.byte	0
-ARM GAS  /tmp/ccNHjMHP.s 			page 2
+ARM GAS  /tmp/ccGO2XCE.s 			page 2
 
 
   62 0011 00       		.byte	0
@@ -118,7 +118,7 @@ ARM GAS  /tmp/ccNHjMHP.s 			page 1
  116 0047 01       		.byte	1
  117 0048 02       		.byte	2
  118 0049 00       		.byte	0
-ARM GAS  /tmp/ccNHjMHP.s 			page 3
+ARM GAS  /tmp/ccGO2XCE.s 			page 3
 
 
  119 004a 00       		.byte	0
@@ -178,7 +178,7 @@ ARM GAS  /tmp/ccNHjMHP.s 			page 1
  176              		.file 1 "Middlewares/ST/STM32_USB_Device_Library/Class/AUDIO/Src/usbd_audio.c"
    1:Middlewares/ST/STM32_USB_Device_Library/Class/AUDIO/Src/usbd_audio.c **** /**
    2:Middlewares/ST/STM32_USB_Device_Library/Class/AUDIO/Src/usbd_audio.c ****   ******************************************************************************
-ARM GAS  /tmp/ccNHjMHP.s 			page 4
+ARM GAS  /tmp/ccGO2XCE.s 			page 4
 
 
    3:Middlewares/ST/STM32_USB_Device_Library/Class/AUDIO/Src/usbd_audio.c ****   * @file    usbd_audio.c
@@ -238,7 +238,7 @@ ARM GAS  /tmp/ccNHjMHP.s 			page 1
   57:Middlewares/ST/STM32_USB_Device_Library/Class/AUDIO/Src/usbd_audio.c ****   * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
   58:Middlewares/ST/STM32_USB_Device_Library/Class/AUDIO/Src/usbd_audio.c ****   * See the License for the specific language governing permissions and
   59:Middlewares/ST/STM32_USB_Device_Library/Class/AUDIO/Src/usbd_audio.c ****   * limitations under the License.
-ARM GAS  /tmp/ccNHjMHP.s 			page 5
+ARM GAS  /tmp/ccGO2XCE.s 			page 5
 
 
   60:Middlewares/ST/STM32_USB_Device_Library/Class/AUDIO/Src/usbd_audio.c ****   *
@@ -298,7 +298,7 @@ ARM GAS  /tmp/ccNHjMHP.s 			page 1
  114:Middlewares/ST/STM32_USB_Device_Library/Class/AUDIO/Src/usbd_audio.c ****   */
  115:Middlewares/ST/STM32_USB_Device_Library/Class/AUDIO/Src/usbd_audio.c **** 
  116:Middlewares/ST/STM32_USB_Device_Library/Class/AUDIO/Src/usbd_audio.c **** 
-ARM GAS  /tmp/ccNHjMHP.s 			page 6
+ARM GAS  /tmp/ccGO2XCE.s 			page 6
 
 
  117:Middlewares/ST/STM32_USB_Device_Library/Class/AUDIO/Src/usbd_audio.c **** static uint8_t  USBD_AUDIO_Init (USBD_HandleTypeDef *pdev, 
@@ -358,7 +358,7 @@ ARM GAS  /tmp/ccNHjMHP.s 			page 1
  171:Middlewares/ST/STM32_USB_Device_Library/Class/AUDIO/Src/usbd_audio.c ****   USBD_AUDIO_GetDeviceQualifierDesc,
  172:Middlewares/ST/STM32_USB_Device_Library/Class/AUDIO/Src/usbd_audio.c **** };
  173:Middlewares/ST/STM32_USB_Device_Library/Class/AUDIO/Src/usbd_audio.c **** 
-ARM GAS  /tmp/ccNHjMHP.s 			page 7
+ARM GAS  /tmp/ccGO2XCE.s 			page 7
 
 
  174:Middlewares/ST/STM32_USB_Device_Library/Class/AUDIO/Src/usbd_audio.c **** /* USB AUDIO device Configuration Descriptor */
@@ -418,7 +418,7 @@ ARM GAS  /tmp/ccNHjMHP.s 			page 1
  228:Middlewares/ST/STM32_USB_Device_Library/Class/AUDIO/Src/usbd_audio.c ****   /* USB Speaker Audio Feature Unit Descriptor */
  229:Middlewares/ST/STM32_USB_Device_Library/Class/AUDIO/Src/usbd_audio.c ****   0x09,                                 /* bLength */
  230:Middlewares/ST/STM32_USB_Device_Library/Class/AUDIO/Src/usbd_audio.c ****   AUDIO_INTERFACE_DESCRIPTOR_TYPE,      /* bDescriptorType */
-ARM GAS  /tmp/ccNHjMHP.s 			page 8
+ARM GAS  /tmp/ccGO2XCE.s 			page 8
 
 
  231:Middlewares/ST/STM32_USB_Device_Library/Class/AUDIO/Src/usbd_audio.c ****   AUDIO_CONTROL_FEATURE_UNIT,           /* bDescriptorSubtype */
@@ -478,7 +478,7 @@ ARM GAS  /tmp/ccNHjMHP.s 			page 1
  285:Middlewares/ST/STM32_USB_Device_Library/Class/AUDIO/Src/usbd_audio.c ****   0x00,
  286:Middlewares/ST/STM32_USB_Device_Library/Class/AUDIO/Src/usbd_audio.c ****   /* 07 byte*/
  287:Middlewares/ST/STM32_USB_Device_Library/Class/AUDIO/Src/usbd_audio.c ****   
-ARM GAS  /tmp/ccNHjMHP.s 			page 9
+ARM GAS  /tmp/ccGO2XCE.s 			page 9
 
 
  288:Middlewares/ST/STM32_USB_Device_Library/Class/AUDIO/Src/usbd_audio.c ****   /* USB Speaker Audio Type III Format Interface Descriptor */
@@ -538,7 +538,7 @@ ARM GAS  /tmp/ccNHjMHP.s 			page 1
  342:Middlewares/ST/STM32_USB_Device_Library/Class/AUDIO/Src/usbd_audio.c ****   * @{
  343:Middlewares/ST/STM32_USB_Device_Library/Class/AUDIO/Src/usbd_audio.c ****   */ 
  344:Middlewares/ST/STM32_USB_Device_Library/Class/AUDIO/Src/usbd_audio.c **** 
-ARM GAS  /tmp/ccNHjMHP.s 			page 10
+ARM GAS  /tmp/ccGO2XCE.s 			page 10
 
 
  345:Middlewares/ST/STM32_USB_Device_Library/Class/AUDIO/Src/usbd_audio.c **** /**
@@ -598,7 +598,7 @@ ARM GAS  /tmp/ccNHjMHP.s 			page 1
  209 002a D3F81832 		ldr	r3, [r3, #536]
  210 002e 002B     		cmp	r3, #0
  211 0030 01D1     		bne	.L2
-ARM GAS  /tmp/ccNHjMHP.s 			page 11
+ARM GAS  /tmp/ccGO2XCE.s 			page 11
 
 
  367:Middlewares/ST/STM32_USB_Device_Library/Class/AUDIO/Src/usbd_audio.c ****   {
@@ -658,7 +658,7 @@ ARM GAS  /tmp/ccNHjMHP.s 			page 1
  252 007c 0022     		movs	r2, #0
  253 007e 4621     		movs	r1, #70
  254 0080 45F25460 		movw	r0, #22100
-ARM GAS  /tmp/ccNHjMHP.s 			page 12
+ARM GAS  /tmp/ccGO2XCE.s 			page 12
 
 
  255 0084 9847     		blx	r3
@@ -718,7 +718,7 @@ ARM GAS  /tmp/ccNHjMHP.s 			page 1
  397:Middlewares/ST/STM32_USB_Device_Library/Class/AUDIO/Src/usbd_audio.c ****   * @param  pdev: device instance
  398:Middlewares/ST/STM32_USB_Device_Library/Class/AUDIO/Src/usbd_audio.c ****   * @param  cfgidx: Configuration index
  399:Middlewares/ST/STM32_USB_Device_Library/Class/AUDIO/Src/usbd_audio.c ****   * @retval status
-ARM GAS  /tmp/ccNHjMHP.s 			page 13
+ARM GAS  /tmp/ccGO2XCE.s 			page 13
 
 
  400:Middlewares/ST/STM32_USB_Device_Library/Class/AUDIO/Src/usbd_audio.c ****   */
@@ -778,7 +778,7 @@ ARM GAS  /tmp/ccNHjMHP.s 			page 1
  333 0036 7B68     		ldr	r3, [r7, #4]
  334 0038 0022     		movs	r2, #0
  335 003a C3F81822 		str	r2, [r3, #536]
-ARM GAS  /tmp/ccNHjMHP.s 			page 14
+ARM GAS  /tmp/ccGO2XCE.s 			page 14
 
 
  336              	.L6:
@@ -838,7 +838,7 @@ ARM GAS  /tmp/ccNHjMHP.s 			page 1
  431:Middlewares/ST/STM32_USB_Device_Library/Class/AUDIO/Src/usbd_audio.c ****   uint16_t len;
  432:Middlewares/ST/STM32_USB_Device_Library/Class/AUDIO/Src/usbd_audio.c ****   uint8_t *pbuf;
  433:Middlewares/ST/STM32_USB_Device_Library/Class/AUDIO/Src/usbd_audio.c ****   uint8_t ret = USBD_OK;
-ARM GAS  /tmp/ccNHjMHP.s 			page 15
+ARM GAS  /tmp/ccGO2XCE.s 			page 15
 
 
  376              		.loc 1 433 0
@@ -898,7 +898,7 @@ ARM GAS  /tmp/ccNHjMHP.s 			page 1
  413 0046 3968     		ldr	r1, [r7]
  414 0048 7868     		ldr	r0, [r7, #4]
  415 004a FFF7FEFF 		bl	USBD_CtlError
-ARM GAS  /tmp/ccNHjMHP.s 			page 16
+ARM GAS  /tmp/ccGO2XCE.s 			page 16
 
 
  451:Middlewares/ST/STM32_USB_Device_Library/Class/AUDIO/Src/usbd_audio.c ****       ret = USBD_FAIL; 
@@ -958,7 +958,7 @@ ARM GAS  /tmp/ccNHjMHP.s 			page 1
  455 008a FFF7FEFF 		bl	USBD_CtlSendData
  466:Middlewares/ST/STM32_USB_Device_Library/Class/AUDIO/Src/usbd_audio.c ****                           pbuf,
  467:Middlewares/ST/STM32_USB_Device_Library/Class/AUDIO/Src/usbd_audio.c ****                           len);
-ARM GAS  /tmp/ccNHjMHP.s 			page 17
+ARM GAS  /tmp/ccGO2XCE.s 			page 17
 
 
  468:Middlewares/ST/STM32_USB_Device_Library/Class/AUDIO/Src/usbd_audio.c ****       }
@@ -1018,7 +1018,7 @@ ARM GAS  /tmp/ccNHjMHP.s 			page 1
  488 00ba 7868     		ldr	r0, [r7, #4]
  489 00bc FFF7FEFF 		bl	USBD_CtlError
  490              		.loc 1 487 0
-ARM GAS  /tmp/ccNHjMHP.s 			page 18
+ARM GAS  /tmp/ccGO2XCE.s 			page 18
 
 
  491 00c0 07E0     		b	.L9
@@ -1078,7 +1078,7 @@ ARM GAS  /tmp/ccNHjMHP.s 			page 1
  503:Middlewares/ST/STM32_USB_Device_Library/Class/AUDIO/Src/usbd_audio.c ****   * @retval pointer to descriptor buffer
  504:Middlewares/ST/STM32_USB_Device_Library/Class/AUDIO/Src/usbd_audio.c ****   */
  505:Middlewares/ST/STM32_USB_Device_Library/Class/AUDIO/Src/usbd_audio.c **** static uint8_t  *USBD_AUDIO_GetCfgDesc (uint16_t *length)
-ARM GAS  /tmp/ccNHjMHP.s 			page 19
+ARM GAS  /tmp/ccGO2XCE.s 			page 19
 
 
  506:Middlewares/ST/STM32_USB_Device_Library/Class/AUDIO/Src/usbd_audio.c **** {
@@ -1138,7 +1138,7 @@ ARM GAS  /tmp/ccNHjMHP.s 			page 1
  512:Middlewares/ST/STM32_USB_Device_Library/Class/AUDIO/Src/usbd_audio.c ****   * @brief  USBD_AUDIO_DataIn
  513:Middlewares/ST/STM32_USB_Device_Library/Class/AUDIO/Src/usbd_audio.c ****   *         handle data IN Stage
  514:Middlewares/ST/STM32_USB_Device_Library/Class/AUDIO/Src/usbd_audio.c ****   * @param  pdev: device instance
-ARM GAS  /tmp/ccNHjMHP.s 			page 20
+ARM GAS  /tmp/ccGO2XCE.s 			page 20
 
 
  515:Middlewares/ST/STM32_USB_Device_Library/Class/AUDIO/Src/usbd_audio.c ****   * @param  epnum: endpoint index
@@ -1198,7 +1198,7 @@ ARM GAS  /tmp/ccNHjMHP.s 			page 1
  527:Middlewares/ST/STM32_USB_Device_Library/Class/AUDIO/Src/usbd_audio.c ****   * @brief  USBD_AUDIO_EP0_RxReady
  528:Middlewares/ST/STM32_USB_Device_Library/Class/AUDIO/Src/usbd_audio.c ****   *         handle EP0 Rx Ready event
  529:Middlewares/ST/STM32_USB_Device_Library/Class/AUDIO/Src/usbd_audio.c ****   * @param  pdev: device instance
-ARM GAS  /tmp/ccNHjMHP.s 			page 21
+ARM GAS  /tmp/ccGO2XCE.s 			page 21
 
 
  530:Middlewares/ST/STM32_USB_Device_Library/Class/AUDIO/Src/usbd_audio.c ****   * @retval status
@@ -1258,7 +1258,7 @@ ARM GAS  /tmp/ccNHjMHP.s 			page 1
  666 003c 1B78     		ldrb	r3, [r3]	@ zero_extendqisi2
  667 003e 1846     		mov	r0, r3
  668 0040 9047     		blx	r2
-ARM GAS  /tmp/ccNHjMHP.s 			page 22
+ARM GAS  /tmp/ccGO2XCE.s 			page 22
 
 
  543:Middlewares/ST/STM32_USB_Device_Library/Class/AUDIO/Src/usbd_audio.c ****       haudio->control.cmd = 0;
@@ -1318,7 +1318,7 @@ ARM GAS  /tmp/ccNHjMHP.s 			page 1
  710              	.LCFI32:
  711              		.cfi_def_cfa_offset 4
  712              		.cfi_offset 7, -4
-ARM GAS  /tmp/ccNHjMHP.s 			page 23
+ARM GAS  /tmp/ccGO2XCE.s 			page 23
 
 
  713 0002 83B0     		sub	sp, sp, #12
@@ -1378,7 +1378,7 @@ ARM GAS  /tmp/ccNHjMHP.s 			page 1
  758 0004 00AF     		add	r7, sp, #0
  759              	.LCFI40:
  760              		.cfi_def_cfa_register 7
-ARM GAS  /tmp/ccNHjMHP.s 			page 24
+ARM GAS  /tmp/ccGO2XCE.s 			page 24
 
 
  761 0006 7860     		str	r0, [r7, #4]
@@ -1438,7 +1438,7 @@ ARM GAS  /tmp/ccNHjMHP.s 			page 1
  806 000a FB70     		strb	r3, [r7, #3]
  580:Middlewares/ST/STM32_USB_Device_Library/Class/AUDIO/Src/usbd_audio.c ****   int8_t shift = 0;
  807              		.loc 1 580 0
-ARM GAS  /tmp/ccNHjMHP.s 			page 25
+ARM GAS  /tmp/ccGO2XCE.s 			page 25
 
 
  808 000c 0023     		movs	r3, #0
@@ -1498,7 +1498,7 @@ ARM GAS  /tmp/ccNHjMHP.s 			page 1
  848 0062 0633     		adds	r3, r3, #6
  849 0064 0022     		movs	r2, #0
  850 0066 1A80     		strh	r2, [r3]	@ movhi
-ARM GAS  /tmp/ccNHjMHP.s 			page 26
+ARM GAS  /tmp/ccGO2XCE.s 			page 26
 
 
  851              	.L43:
@@ -1558,7 +1558,7 @@ ARM GAS  /tmp/ccNHjMHP.s 			page 1
  895 00c2 26D9     		bls	.L47
  605:Middlewares/ST/STM32_USB_Device_Library/Class/AUDIO/Src/usbd_audio.c ****     {
  606:Middlewares/ST/STM32_USB_Device_Library/Class/AUDIO/Src/usbd_audio.c ****       shift = 4;
-ARM GAS  /tmp/ccNHjMHP.s 			page 27
+ARM GAS  /tmp/ccGO2XCE.s 			page 27
 
 
  896              		.loc 1 606 0
@@ -1618,7 +1618,7 @@ ARM GAS  /tmp/ccNHjMHP.s 			page 1
  619:Middlewares/ST/STM32_USB_Device_Library/Class/AUDIO/Src/usbd_audio.c ****     }  
  620:Middlewares/ST/STM32_USB_Device_Library/Class/AUDIO/Src/usbd_audio.c ****   }
  621:Middlewares/ST/STM32_USB_Device_Library/Class/AUDIO/Src/usbd_audio.c **** 
-ARM GAS  /tmp/ccNHjMHP.s 			page 28
+ARM GAS  /tmp/ccGO2XCE.s 			page 28
 
 
  622:Middlewares/ST/STM32_USB_Device_Library/Class/AUDIO/Src/usbd_audio.c ****   if(haudio->offset == AUDIO_OFFSET_FULL)
@@ -1678,7 +1678,7 @@ ARM GAS  /tmp/ccNHjMHP.s 			page 1
  973 0156 D3F81C32 		ldr	r3, [r3, #540]
  974 015a 9B68     		ldr	r3, [r3, #8]
  975 015c BA68     		ldr	r2, [r7, #8]
-ARM GAS  /tmp/ccNHjMHP.s 			page 29
+ARM GAS  /tmp/ccGO2XCE.s 			page 29
 
 
  976 015e 02F6C450 		addw	r0, r2, #3524
@@ -1738,7 +1738,7 @@ ARM GAS  /tmp/ccNHjMHP.s 			page 1
  1022              		.cfi_def_cfa_register 7
  1023 0006 7860     		str	r0, [r7, #4]
  1024 0008 0B46     		mov	r3, r1
-ARM GAS  /tmp/ccNHjMHP.s 			page 30
+ARM GAS  /tmp/ccGO2XCE.s 			page 30
 
 
  1025 000a FB70     		strb	r3, [r7, #3]
@@ -1798,7 +1798,7 @@ ARM GAS  /tmp/ccNHjMHP.s 			page 1
  1069 000a FB70     		strb	r3, [r7, #3]
  660:Middlewares/ST/STM32_USB_Device_Library/Class/AUDIO/Src/usbd_audio.c **** 
  661:Middlewares/ST/STM32_USB_Device_Library/Class/AUDIO/Src/usbd_audio.c ****   return USBD_OK;
-ARM GAS  /tmp/ccNHjMHP.s 			page 31
+ARM GAS  /tmp/ccGO2XCE.s 			page 31
 
 
  1070              		.loc 1 661 0
@@ -1858,7 +1858,7 @@ ARM GAS  /tmp/ccNHjMHP.s 			page 1
  674:Middlewares/ST/STM32_USB_Device_Library/Class/AUDIO/Src/usbd_audio.c ****   haudio = pdev->pClassData;
  1114              		.loc 1 674 0
  1115 000c 7B68     		ldr	r3, [r7, #4]
-ARM GAS  /tmp/ccNHjMHP.s 			page 32
+ARM GAS  /tmp/ccGO2XCE.s 			page 32
 
 
  1116 000e D3F81832 		ldr	r3, [r3, #536]
@@ -1918,7 +1918,7 @@ ARM GAS  /tmp/ccNHjMHP.s 			page 1
  1156 0062 9B68     		ldr	r3, [r3, #8]
  1157 0064 FA68     		ldr	r2, [r7, #12]
  1158 0066 101D     		adds	r0, r2, #4
-ARM GAS  /tmp/ccNHjMHP.s 			page 33
+ARM GAS  /tmp/ccGO2XCE.s 			page 33
 
 
  1159 0068 0122     		movs	r2, #1
@@ -1978,7 +1978,7 @@ ARM GAS  /tmp/ccNHjMHP.s 			page 1
  1195 00b0 1A46     		mov	r2, r3
  704:Middlewares/ST/STM32_USB_Device_Library/Class/AUDIO/Src/usbd_audio.c ****                            AUDIO_OUT_EP,
  1196              		.loc 1 704 0
-ARM GAS  /tmp/ccNHjMHP.s 			page 34
+ARM GAS  /tmp/ccGO2XCE.s 			page 34
 
 
  1197 00b2 FB68     		ldr	r3, [r7, #12]
@@ -2038,7 +2038,7 @@ ARM GAS  /tmp/ccNHjMHP.s 			page 1
  1237              	.LCFI67:
  1238              		.cfi_def_cfa_offset 24
  1239 0004 00AF     		add	r7, sp, #0
-ARM GAS  /tmp/ccNHjMHP.s 			page 35
+ARM GAS  /tmp/ccGO2XCE.s 			page 35
 
 
  1240              	.LCFI68:
@@ -2098,7 +2098,7 @@ ARM GAS  /tmp/ccNHjMHP.s 			page 1
  732:Middlewares/ST/STM32_USB_Device_Library/Class/AUDIO/Src/usbd_audio.c **** 
  733:Middlewares/ST/STM32_USB_Device_Library/Class/AUDIO/Src/usbd_audio.c **** /**
  734:Middlewares/ST/STM32_USB_Device_Library/Class/AUDIO/Src/usbd_audio.c ****   * @brief  AUDIO_Req_SetCurrent
-ARM GAS  /tmp/ccNHjMHP.s 			page 36
+ARM GAS  /tmp/ccGO2XCE.s 			page 36
 
 
  735:Middlewares/ST/STM32_USB_Device_Library/Class/AUDIO/Src/usbd_audio.c ****   *         Handles the SET_CUR Audio control request.
@@ -2158,7 +2158,7 @@ ARM GAS  /tmp/ccNHjMHP.s 			page 1
  752:Middlewares/ST/STM32_USB_Device_Library/Class/AUDIO/Src/usbd_audio.c ****     haudio->control.cmd = AUDIO_REQ_SET_CUR;     /* Set the request value */
  1322              		.loc 1 752 0
  1323 002e FB68     		ldr	r3, [r7, #12]
-ARM GAS  /tmp/ccNHjMHP.s 			page 37
+ARM GAS  /tmp/ccGO2XCE.s 			page 37
 
 
  1324 0030 03F5DC53 		add	r3, r3, #7040
@@ -2218,7 +2218,7 @@ ARM GAS  /tmp/ccNHjMHP.s 			page 1
  766:Middlewares/ST/STM32_USB_Device_Library/Class/AUDIO/Src/usbd_audio.c **** {
  1367              		.loc 1 766 0
  1368              		.cfi_startproc
-ARM GAS  /tmp/ccNHjMHP.s 			page 38
+ARM GAS  /tmp/ccGO2XCE.s 			page 38
 
 
  1369              		@ args = 0, pretend = 0, frame = 8
@@ -2278,7 +2278,7 @@ ARM GAS  /tmp/ccNHjMHP.s 			page 1
  774:Middlewares/ST/STM32_USB_Device_Library/Class/AUDIO/Src/usbd_audio.c **** * @retval status
  775:Middlewares/ST/STM32_USB_Device_Library/Class/AUDIO/Src/usbd_audio.c **** */
  776:Middlewares/ST/STM32_USB_Device_Library/Class/AUDIO/Src/usbd_audio.c **** uint8_t  USBD_AUDIO_RegisterInterface  (USBD_HandleTypeDef   *pdev, 
-ARM GAS  /tmp/ccNHjMHP.s 			page 39
+ARM GAS  /tmp/ccGO2XCE.s 			page 39
 
 
  777:Middlewares/ST/STM32_USB_Device_Library/Class/AUDIO/Src/usbd_audio.c ****                                         USBD_AUDIO_ItfTypeDef *fops)
@@ -2338,57 +2338,57 @@ ARM GAS  /tmp/ccNHjMHP.s 			page 1
  1465              		.file 2 "/usr/arm-none-eabi/include/machine/_default_types.h"
  1466              		.file 3 "/usr/arm-none-eabi/include/sys/_stdint.h"
  1467              		.file 4 "Middlewares/ST/STM32_USB_Device_Library/Core/Inc/usbd_def.h"
-ARM GAS  /tmp/ccNHjMHP.s 			page 40
+ARM GAS  /tmp/ccGO2XCE.s 			page 40
 
 
  1468              		.file 5 "Middlewares/ST/STM32_USB_Device_Library/Class/AUDIO/Inc/usbd_audio.h"
  1469              		.file 6 "Drivers/CMSIS/Include/core_cm4.h"
-ARM GAS  /tmp/ccNHjMHP.s 			page 41
+ARM GAS  /tmp/ccGO2XCE.s 			page 41
 
 
 DEFINED SYMBOLS
                             *ABS*:0000000000000000 usbd_audio.c
-     /tmp/ccNHjMHP.s:25     .data.USBD_AUDIO:0000000000000000 USBD_AUDIO
-     /tmp/ccNHjMHP.s:22     .data.USBD_AUDIO:0000000000000000 $d
-     /tmp/ccNHjMHP.s:174    .text.USBD_AUDIO_Init:0000000000000000 USBD_AUDIO_Init
-     /tmp/ccNHjMHP.s:292    .text.USBD_AUDIO_DeInit:0000000000000000 USBD_AUDIO_DeInit
-     /tmp/ccNHjMHP.s:357    .text.USBD_AUDIO_Setup:0000000000000000 USBD_AUDIO_Setup
-     /tmp/ccNHjMHP.s:702    .text.USBD_AUDIO_EP0_TxReady:0000000000000000 USBD_AUDIO_EP0_TxReady
-     /tmp/ccNHjMHP.s:623    .text.USBD_AUDIO_EP0_RxReady:0000000000000000 USBD_AUDIO_EP0_RxReady
-     /tmp/ccNHjMHP.s:579    .text.USBD_AUDIO_DataIn:0000000000000000 USBD_AUDIO_DataIn
-     /tmp/ccNHjMHP.s:1094   .text.USBD_AUDIO_DataOut:0000000000000000 USBD_AUDIO_DataOut
-     /tmp/ccNHjMHP.s:744    .text.USBD_AUDIO_SOF:0000000000000000 USBD_AUDIO_SOF
-     /tmp/ccNHjMHP.s:1006   .text.USBD_AUDIO_IsoINIncomplete:0000000000000000 USBD_AUDIO_IsoINIncomplete
-     /tmp/ccNHjMHP.s:1050   .text.USBD_AUDIO_IsoOutIncomplete:0000000000000000 USBD_AUDIO_IsoOutIncomplete
-     /tmp/ccNHjMHP.s:529    .text.USBD_AUDIO_GetCfgDesc:0000000000000000 USBD_AUDIO_GetCfgDesc
-     /tmp/ccNHjMHP.s:1365   .text.USBD_AUDIO_GetDeviceQualifierDesc:0000000000000000 USBD_AUDIO_GetDeviceQualifierDesc
-     /tmp/ccNHjMHP.s:41     .data.USBD_AUDIO_CfgDesc:0000000000000000 $d
-     /tmp/ccNHjMHP.s:44     .data.USBD_AUDIO_CfgDesc:0000000000000000 USBD_AUDIO_CfgDesc
-     /tmp/ccNHjMHP.s:155    .data.USBD_AUDIO_DeviceQualifierDesc:0000000000000000 $d
-     /tmp/ccNHjMHP.s:158    .data.USBD_AUDIO_DeviceQualifierDesc:0000000000000000 USBD_AUDIO_DeviceQualifierDesc
-     /tmp/ccNHjMHP.s:170    .text.USBD_AUDIO_Init:0000000000000000 $t
-     /tmp/ccNHjMHP.s:288    .text.USBD_AUDIO_DeInit:0000000000000000 $t
-     /tmp/ccNHjMHP.s:353    .text.USBD_AUDIO_Setup:0000000000000000 $t
-     /tmp/ccNHjMHP.s:1225   .text.AUDIO_REQ_GetCurrent:0000000000000000 AUDIO_REQ_GetCurrent
-     /tmp/ccNHjMHP.s:1284   .text.AUDIO_REQ_SetCurrent:0000000000000000 AUDIO_REQ_SetCurrent
-     /tmp/ccNHjMHP.s:520    .text.USBD_AUDIO_Setup:00000000000000dc $d
-     /tmp/ccNHjMHP.s:525    .text.USBD_AUDIO_GetCfgDesc:0000000000000000 $t
-     /tmp/ccNHjMHP.s:570    .text.USBD_AUDIO_GetCfgDesc:000000000000001c $d
-     /tmp/ccNHjMHP.s:575    .text.USBD_AUDIO_DataIn:0000000000000000 $t
-     /tmp/ccNHjMHP.s:619    .text.USBD_AUDIO_EP0_RxReady:0000000000000000 $t
-     /tmp/ccNHjMHP.s:698    .text.USBD_AUDIO_EP0_TxReady:0000000000000000 $t
-     /tmp/ccNHjMHP.s:740    .text.USBD_AUDIO_SOF:0000000000000000 $t
-     /tmp/ccNHjMHP.s:782    .text.USBD_AUDIO_Sync:0000000000000000 $t
-     /tmp/ccNHjMHP.s:787    .text.USBD_AUDIO_Sync:0000000000000000 USBD_AUDIO_Sync
-     /tmp/ccNHjMHP.s:1002   .text.USBD_AUDIO_IsoINIncomplete:0000000000000000 $t
-     /tmp/ccNHjMHP.s:1046   .text.USBD_AUDIO_IsoOutIncomplete:0000000000000000 $t
-     /tmp/ccNHjMHP.s:1090   .text.USBD_AUDIO_DataOut:0000000000000000 $t
-     /tmp/ccNHjMHP.s:1221   .text.AUDIO_REQ_GetCurrent:0000000000000000 $t
-     /tmp/ccNHjMHP.s:1280   .text.AUDIO_REQ_SetCurrent:0000000000000000 $t
-     /tmp/ccNHjMHP.s:1361   .text.USBD_AUDIO_GetDeviceQualifierDesc:0000000000000000 $t
-     /tmp/ccNHjMHP.s:1406   .text.USBD_AUDIO_GetDeviceQualifierDesc:000000000000001c $d
-     /tmp/ccNHjMHP.s:1411   .text.USBD_AUDIO_RegisterInterface:0000000000000000 $t
-     /tmp/ccNHjMHP.s:1416   .text.USBD_AUDIO_RegisterInterface:0000000000000000 USBD_AUDIO_RegisterInterface
+     /tmp/ccGO2XCE.s:25     .data.USBD_AUDIO:0000000000000000 USBD_AUDIO
+     /tmp/ccGO2XCE.s:22     .data.USBD_AUDIO:0000000000000000 $d
+     /tmp/ccGO2XCE.s:174    .text.USBD_AUDIO_Init:0000000000000000 USBD_AUDIO_Init
+     /tmp/ccGO2XCE.s:292    .text.USBD_AUDIO_DeInit:0000000000000000 USBD_AUDIO_DeInit
+     /tmp/ccGO2XCE.s:357    .text.USBD_AUDIO_Setup:0000000000000000 USBD_AUDIO_Setup
+     /tmp/ccGO2XCE.s:702    .text.USBD_AUDIO_EP0_TxReady:0000000000000000 USBD_AUDIO_EP0_TxReady
+     /tmp/ccGO2XCE.s:623    .text.USBD_AUDIO_EP0_RxReady:0000000000000000 USBD_AUDIO_EP0_RxReady
+     /tmp/ccGO2XCE.s:579    .text.USBD_AUDIO_DataIn:0000000000000000 USBD_AUDIO_DataIn
+     /tmp/ccGO2XCE.s:1094   .text.USBD_AUDIO_DataOut:0000000000000000 USBD_AUDIO_DataOut
+     /tmp/ccGO2XCE.s:744    .text.USBD_AUDIO_SOF:0000000000000000 USBD_AUDIO_SOF
+     /tmp/ccGO2XCE.s:1006   .text.USBD_AUDIO_IsoINIncomplete:0000000000000000 USBD_AUDIO_IsoINIncomplete
+     /tmp/ccGO2XCE.s:1050   .text.USBD_AUDIO_IsoOutIncomplete:0000000000000000 USBD_AUDIO_IsoOutIncomplete
+     /tmp/ccGO2XCE.s:529    .text.USBD_AUDIO_GetCfgDesc:0000000000000000 USBD_AUDIO_GetCfgDesc
+     /tmp/ccGO2XCE.s:1365   .text.USBD_AUDIO_GetDeviceQualifierDesc:0000000000000000 USBD_AUDIO_GetDeviceQualifierDesc
+     /tmp/ccGO2XCE.s:41     .data.USBD_AUDIO_CfgDesc:0000000000000000 $d
+     /tmp/ccGO2XCE.s:44     .data.USBD_AUDIO_CfgDesc:0000000000000000 USBD_AUDIO_CfgDesc
+     /tmp/ccGO2XCE.s:155    .data.USBD_AUDIO_DeviceQualifierDesc:0000000000000000 $d
+     /tmp/ccGO2XCE.s:158    .data.USBD_AUDIO_DeviceQualifierDesc:0000000000000000 USBD_AUDIO_DeviceQualifierDesc
+     /tmp/ccGO2XCE.s:170    .text.USBD_AUDIO_Init:0000000000000000 $t
+     /tmp/ccGO2XCE.s:288    .text.USBD_AUDIO_DeInit:0000000000000000 $t
+     /tmp/ccGO2XCE.s:353    .text.USBD_AUDIO_Setup:0000000000000000 $t
+     /tmp/ccGO2XCE.s:1225   .text.AUDIO_REQ_GetCurrent:0000000000000000 AUDIO_REQ_GetCurrent
+     /tmp/ccGO2XCE.s:1284   .text.AUDIO_REQ_SetCurrent:0000000000000000 AUDIO_REQ_SetCurrent
+     /tmp/ccGO2XCE.s:520    .text.USBD_AUDIO_Setup:00000000000000dc $d
+     /tmp/ccGO2XCE.s:525    .text.USBD_AUDIO_GetCfgDesc:0000000000000000 $t
+     /tmp/ccGO2XCE.s:570    .text.USBD_AUDIO_GetCfgDesc:000000000000001c $d
+     /tmp/ccGO2XCE.s:575    .text.USBD_AUDIO_DataIn:0000000000000000 $t
+     /tmp/ccGO2XCE.s:619    .text.USBD_AUDIO_EP0_RxReady:0000000000000000 $t
+     /tmp/ccGO2XCE.s:698    .text.USBD_AUDIO_EP0_TxReady:0000000000000000 $t
+     /tmp/ccGO2XCE.s:740    .text.USBD_AUDIO_SOF:0000000000000000 $t
+     /tmp/ccGO2XCE.s:782    .text.USBD_AUDIO_Sync:0000000000000000 $t
+     /tmp/ccGO2XCE.s:787    .text.USBD_AUDIO_Sync:0000000000000000 USBD_AUDIO_Sync
+     /tmp/ccGO2XCE.s:1002   .text.USBD_AUDIO_IsoINIncomplete:0000000000000000 $t
+     /tmp/ccGO2XCE.s:1046   .text.USBD_AUDIO_IsoOutIncomplete:0000000000000000 $t
+     /tmp/ccGO2XCE.s:1090   .text.USBD_AUDIO_DataOut:0000000000000000 $t
+     /tmp/ccGO2XCE.s:1221   .text.AUDIO_REQ_GetCurrent:0000000000000000 $t
+     /tmp/ccGO2XCE.s:1280   .text.AUDIO_REQ_SetCurrent:0000000000000000 $t
+     /tmp/ccGO2XCE.s:1361   .text.USBD_AUDIO_GetDeviceQualifierDesc:0000000000000000 $t
+     /tmp/ccGO2XCE.s:1406   .text.USBD_AUDIO_GetDeviceQualifierDesc:000000000000001c $d
+     /tmp/ccGO2XCE.s:1411   .text.USBD_AUDIO_RegisterInterface:0000000000000000 $t
+     /tmp/ccGO2XCE.s:1416   .text.USBD_AUDIO_RegisterInterface:0000000000000000 USBD_AUDIO_RegisterInterface
                      .debug_frame:0000000000000010 $d
 
 UNDEFINED SYMBOLS
