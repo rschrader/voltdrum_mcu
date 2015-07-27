@@ -1,0 +1,713 @@
+ARM GAS  /tmp/ccD5GgRy.s 			page 1
+
+
+   1              		.syntax unified
+   2              		.cpu cortex-m4
+   3              		.eabi_attribute 27, 1
+   4              		.fpu fpv4-sp-d16
+   5              		.eabi_attribute 20, 1
+   6              		.eabi_attribute 21, 1
+   7              		.eabi_attribute 23, 3
+   8              		.eabi_attribute 24, 1
+   9              		.eabi_attribute 25, 1
+  10              		.eabi_attribute 26, 1
+  11              		.eabi_attribute 30, 6
+  12              		.eabi_attribute 34, 1
+  13              		.eabi_attribute 18, 4
+  14              		.thumb
+  15              		.syntax unified
+  16              		.file	"usbd_audio_if.c"
+  17              		.text
+  18              	.Ltext0:
+  19              		.cfi_sections	.debug_frame
+  20              		.comm	hUsbDevice_0,4,4
+  21              		.global	USBD_AUDIO_fops_FS
+  22              		.section	.data.USBD_AUDIO_fops_FS,"aw",%progbits
+  23              		.align	2
+  26              	USBD_AUDIO_fops_FS:
+  27 0000 00000000 		.word	AUDIO_Init_FS
+  28 0004 00000000 		.word	AUDIO_DeInit_FS
+  29 0008 00000000 		.word	AUDIO_AudioCmd_FS
+  30 000c 00000000 		.word	AUDIO_VolumeCtl_FS
+  31 0010 00000000 		.word	AUDIO_MuteCtl_FS
+  32 0014 00000000 		.word	AUDIO_PeriodicTC_FS
+  33 0018 00000000 		.word	AUDIO_GetState_FS
+  34              		.section	.text.AUDIO_Init_FS,"ax",%progbits
+  35              		.align	2
+  36              		.thumb
+  37              		.thumb_func
+  39              	AUDIO_Init_FS:
+  40              	.LFB112:
+  41              		.file 1 "Src/usbd_audio_if.c"
+   1:Src/usbd_audio_if.c **** /**
+   2:Src/usbd_audio_if.c ****   ******************************************************************************
+   3:Src/usbd_audio_if.c ****   * @file           : usbd_audio_if.c
+   4:Src/usbd_audio_if.c ****   * @author         : MCD Application Team
+   5:Src/usbd_audio_if.c ****   * @version        : V1.1.0
+   6:Src/usbd_audio_if.c ****   * @date           : 19-March-2012
+   7:Src/usbd_audio_if.c ****   * @brief          : Generic media access Layer.
+   8:Src/usbd_audio_if.c ****   ******************************************************************************
+   9:Src/usbd_audio_if.c ****   *
+  10:Src/usbd_audio_if.c ****   * COPYRIGHT(c) 2015 STMicroelectronics
+  11:Src/usbd_audio_if.c ****   *
+  12:Src/usbd_audio_if.c ****   * Redistribution and use in source and binary forms, with or without modification,
+  13:Src/usbd_audio_if.c ****   * are permitted provided that the following conditions are met:
+  14:Src/usbd_audio_if.c ****   * 1. Redistributions of source code must retain the above copyright notice,
+  15:Src/usbd_audio_if.c ****   * this list of conditions and the following disclaimer.
+  16:Src/usbd_audio_if.c ****   * 2. Redistributions in binary form must reproduce the above copyright notice,
+  17:Src/usbd_audio_if.c ****   * this list of conditions and the following disclaimer in the documentation
+  18:Src/usbd_audio_if.c ****   * and/or other materials provided with the distribution.
+  19:Src/usbd_audio_if.c ****   * 3. Neither the name of STMicroelectronics nor the names of its contributors
+ARM GAS  /tmp/ccD5GgRy.s 			page 2
+
+
+  20:Src/usbd_audio_if.c ****   * may be used to endorse or promote products derived from this software
+  21:Src/usbd_audio_if.c ****   * without specific prior written permission.
+  22:Src/usbd_audio_if.c ****   *
+  23:Src/usbd_audio_if.c ****   * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS"
+  24:Src/usbd_audio_if.c ****   * AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
+  25:Src/usbd_audio_if.c ****   * IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
+  26:Src/usbd_audio_if.c ****   * DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE LIABLE
+  27:Src/usbd_audio_if.c ****   * FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL
+  28:Src/usbd_audio_if.c ****   * DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR
+  29:Src/usbd_audio_if.c ****   * SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER
+  30:Src/usbd_audio_if.c ****   * CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY,
+  31:Src/usbd_audio_if.c ****   * OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
+  32:Src/usbd_audio_if.c ****   * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+  33:Src/usbd_audio_if.c ****   *
+  34:Src/usbd_audio_if.c ****   ******************************************************************************
+  35:Src/usbd_audio_if.c **** */
+  36:Src/usbd_audio_if.c **** 
+  37:Src/usbd_audio_if.c **** /* Includes ------------------------------------------------------------------*/
+  38:Src/usbd_audio_if.c **** #include "usbd_audio_if.h"
+  39:Src/usbd_audio_if.c **** 
+  40:Src/usbd_audio_if.c **** /** @addtogroup STM32_USB_OTG_DEVICE_LIBRARY
+  41:Src/usbd_audio_if.c ****   * @{
+  42:Src/usbd_audio_if.c ****   */
+  43:Src/usbd_audio_if.c **** 
+  44:Src/usbd_audio_if.c **** /** @defgroup USBD_AUDIO 
+  45:Src/usbd_audio_if.c ****   * @brief usbd core module
+  46:Src/usbd_audio_if.c ****   * @{
+  47:Src/usbd_audio_if.c ****   */ 
+  48:Src/usbd_audio_if.c **** 
+  49:Src/usbd_audio_if.c **** /** @defgroup USBD_AUDIO_Private_TypesDefinitions
+  50:Src/usbd_audio_if.c ****   * @{
+  51:Src/usbd_audio_if.c ****   */ 
+  52:Src/usbd_audio_if.c **** /**
+  53:Src/usbd_audio_if.c ****   * @}
+  54:Src/usbd_audio_if.c ****   */ 
+  55:Src/usbd_audio_if.c **** 
+  56:Src/usbd_audio_if.c **** /** @defgroup USBD_AUDIO_Private_Defines
+  57:Src/usbd_audio_if.c ****   * @{
+  58:Src/usbd_audio_if.c ****   */ 
+  59:Src/usbd_audio_if.c **** /**
+  60:Src/usbd_audio_if.c ****   * @}
+  61:Src/usbd_audio_if.c ****   */ 
+  62:Src/usbd_audio_if.c **** 
+  63:Src/usbd_audio_if.c **** /** @defgroup USBD_AUDIO_Private_Macros
+  64:Src/usbd_audio_if.c ****   * @{
+  65:Src/usbd_audio_if.c ****   */ 
+  66:Src/usbd_audio_if.c **** 
+  67:Src/usbd_audio_if.c **** /**
+  68:Src/usbd_audio_if.c ****   * @}
+  69:Src/usbd_audio_if.c ****   */ 
+  70:Src/usbd_audio_if.c **** 
+  71:Src/usbd_audio_if.c **** /* Private variables ---------------------------------------------------------*/
+  72:Src/usbd_audio_if.c **** /* USB handler declaration */
+  73:Src/usbd_audio_if.c **** /* Handle for USB Full Speed IP */
+  74:Src/usbd_audio_if.c **** USBD_HandleTypeDef  *hUsbDevice_0;
+  75:Src/usbd_audio_if.c **** 
+  76:Src/usbd_audio_if.c **** extern USBD_HandleTypeDef hUsbDeviceFS;
+ARM GAS  /tmp/ccD5GgRy.s 			page 3
+
+
+  77:Src/usbd_audio_if.c **** 
+  78:Src/usbd_audio_if.c **** /** @defgroup USBD_AUDIO_Private_FunctionPrototypes
+  79:Src/usbd_audio_if.c ****   * @{
+  80:Src/usbd_audio_if.c ****   */
+  81:Src/usbd_audio_if.c **** static int8_t  AUDIO_Init_FS         (uint32_t  AudioFreq, uint32_t Volume, uint32_t options);
+  82:Src/usbd_audio_if.c **** static int8_t  AUDIO_DeInit_FS       (uint32_t options);
+  83:Src/usbd_audio_if.c **** static int8_t  AUDIO_AudioCmd_FS     (uint8_t* pbuf, uint32_t size, uint8_t cmd);
+  84:Src/usbd_audio_if.c **** static int8_t  AUDIO_VolumeCtl_FS    (uint8_t vol);
+  85:Src/usbd_audio_if.c **** static int8_t  AUDIO_MuteCtl_FS      (uint8_t cmd);
+  86:Src/usbd_audio_if.c **** static int8_t  AUDIO_PeriodicTC_FS   (uint8_t cmd);
+  87:Src/usbd_audio_if.c **** static int8_t  AUDIO_GetState_FS     (void);
+  88:Src/usbd_audio_if.c **** 
+  89:Src/usbd_audio_if.c **** USBD_AUDIO_ItfTypeDef USBD_AUDIO_fops_FS = 
+  90:Src/usbd_audio_if.c **** {
+  91:Src/usbd_audio_if.c ****   AUDIO_Init_FS,
+  92:Src/usbd_audio_if.c ****   AUDIO_DeInit_FS,
+  93:Src/usbd_audio_if.c ****   AUDIO_AudioCmd_FS,
+  94:Src/usbd_audio_if.c ****   AUDIO_VolumeCtl_FS,
+  95:Src/usbd_audio_if.c ****   AUDIO_MuteCtl_FS,
+  96:Src/usbd_audio_if.c ****   AUDIO_PeriodicTC_FS,
+  97:Src/usbd_audio_if.c ****   AUDIO_GetState_FS,
+  98:Src/usbd_audio_if.c **** };
+  99:Src/usbd_audio_if.c **** 
+ 100:Src/usbd_audio_if.c **** /* Private functions ---------------------------------------------------------*/
+ 101:Src/usbd_audio_if.c **** /**
+ 102:Src/usbd_audio_if.c ****   * @brief  AUDIO_Init_FS
+ 103:Src/usbd_audio_if.c ****   *         Initializes the AUDIO media low layer over USB FS IP
+ 104:Src/usbd_audio_if.c ****   * @param  AudioFreq: Audio frequency used to play the audio stream.
+ 105:Src/usbd_audio_if.c ****   * @param  Volume: Initial volume level (from 0 (Mute) to 100 (Max))
+ 106:Src/usbd_audio_if.c ****   * @param  options: Reserved for future use 
+ 107:Src/usbd_audio_if.c ****   * @retval Result of the operation: USBD_OK if all operations are OK else USBD_FAIL
+ 108:Src/usbd_audio_if.c ****   */
+ 109:Src/usbd_audio_if.c **** static int8_t AUDIO_Init_FS(uint32_t  AudioFreq, uint32_t Volume, uint32_t options)
+ 110:Src/usbd_audio_if.c **** {
+  42              		.loc 1 110 0
+  43              		.cfi_startproc
+  44              		@ args = 0, pretend = 0, frame = 16
+  45              		@ frame_needed = 1, uses_anonymous_args = 0
+  46              		@ link register save eliminated.
+  47 0000 80B4     		push	{r7}
+  48              	.LCFI0:
+  49              		.cfi_def_cfa_offset 4
+  50              		.cfi_offset 7, -4
+  51 0002 85B0     		sub	sp, sp, #20
+  52              	.LCFI1:
+  53              		.cfi_def_cfa_offset 24
+  54 0004 00AF     		add	r7, sp, #0
+  55              	.LCFI2:
+  56              		.cfi_def_cfa_register 7
+  57 0006 F860     		str	r0, [r7, #12]
+  58 0008 B960     		str	r1, [r7, #8]
+  59 000a 7A60     		str	r2, [r7, #4]
+ 111:Src/usbd_audio_if.c ****   hUsbDevice_0 = &hUsbDeviceFS;
+  60              		.loc 1 111 0
+  61 000c 054B     		ldr	r3, .L3
+  62 000e 064A     		ldr	r2, .L3+4
+  63 0010 1A60     		str	r2, [r3]
+ARM GAS  /tmp/ccD5GgRy.s 			page 4
+
+
+ 112:Src/usbd_audio_if.c ****   /* USER CODE BEGIN 0 */
+ 113:Src/usbd_audio_if.c ****   return (USBD_OK);
+  64              		.loc 1 113 0
+  65 0012 0023     		movs	r3, #0
+  66 0014 5BB2     		sxtb	r3, r3
+ 114:Src/usbd_audio_if.c ****   /* USER CODE END 0 */
+ 115:Src/usbd_audio_if.c **** }
+  67              		.loc 1 115 0
+  68 0016 1846     		mov	r0, r3
+  69 0018 1437     		adds	r7, r7, #20
+  70              	.LCFI3:
+  71              		.cfi_def_cfa_offset 4
+  72 001a BD46     		mov	sp, r7
+  73              	.LCFI4:
+  74              		.cfi_def_cfa_register 13
+  75              		@ sp needed
+  76 001c 5DF8047B 		ldr	r7, [sp], #4
+  77              	.LCFI5:
+  78              		.cfi_restore 7
+  79              		.cfi_def_cfa_offset 0
+  80 0020 7047     		bx	lr
+  81              	.L4:
+  82 0022 00BF     		.align	2
+  83              	.L3:
+  84 0024 00000000 		.word	hUsbDevice_0
+  85 0028 00000000 		.word	hUsbDeviceFS
+  86              		.cfi_endproc
+  87              	.LFE112:
+  89              		.section	.text.AUDIO_DeInit_FS,"ax",%progbits
+  90              		.align	2
+  91              		.thumb
+  92              		.thumb_func
+  94              	AUDIO_DeInit_FS:
+  95              	.LFB113:
+ 116:Src/usbd_audio_if.c **** 
+ 117:Src/usbd_audio_if.c **** /**
+ 118:Src/usbd_audio_if.c ****   * @brief  AUDIO_DeInit_FS
+ 119:Src/usbd_audio_if.c ****   *         DeInitializes the AUDIO media low layer
+ 120:Src/usbd_audio_if.c ****   * @param  options: Reserved for future use
+ 121:Src/usbd_audio_if.c ****   * @retval Result of the operation: USBD_OK if all operations are OK else USBD_FAIL
+ 122:Src/usbd_audio_if.c ****   */
+ 123:Src/usbd_audio_if.c **** static int8_t AUDIO_DeInit_FS(uint32_t options)
+ 124:Src/usbd_audio_if.c **** {
+  96              		.loc 1 124 0
+  97              		.cfi_startproc
+  98              		@ args = 0, pretend = 0, frame = 8
+  99              		@ frame_needed = 1, uses_anonymous_args = 0
+ 100              		@ link register save eliminated.
+ 101 0000 80B4     		push	{r7}
+ 102              	.LCFI6:
+ 103              		.cfi_def_cfa_offset 4
+ 104              		.cfi_offset 7, -4
+ 105 0002 83B0     		sub	sp, sp, #12
+ 106              	.LCFI7:
+ 107              		.cfi_def_cfa_offset 16
+ 108 0004 00AF     		add	r7, sp, #0
+ 109              	.LCFI8:
+ARM GAS  /tmp/ccD5GgRy.s 			page 5
+
+
+ 110              		.cfi_def_cfa_register 7
+ 111 0006 7860     		str	r0, [r7, #4]
+ 125:Src/usbd_audio_if.c ****   /* USER CODE BEGIN 1 */ 
+ 126:Src/usbd_audio_if.c ****   return (USBD_OK);
+ 112              		.loc 1 126 0
+ 113 0008 0023     		movs	r3, #0
+ 114 000a 5BB2     		sxtb	r3, r3
+ 127:Src/usbd_audio_if.c ****   /* USER CODE END 1 */
+ 128:Src/usbd_audio_if.c **** }
+ 115              		.loc 1 128 0
+ 116 000c 1846     		mov	r0, r3
+ 117 000e 0C37     		adds	r7, r7, #12
+ 118              	.LCFI9:
+ 119              		.cfi_def_cfa_offset 4
+ 120 0010 BD46     		mov	sp, r7
+ 121              	.LCFI10:
+ 122              		.cfi_def_cfa_register 13
+ 123              		@ sp needed
+ 124 0012 5DF8047B 		ldr	r7, [sp], #4
+ 125              	.LCFI11:
+ 126              		.cfi_restore 7
+ 127              		.cfi_def_cfa_offset 0
+ 128 0016 7047     		bx	lr
+ 129              		.cfi_endproc
+ 130              	.LFE113:
+ 132              		.section	.text.AUDIO_AudioCmd_FS,"ax",%progbits
+ 133              		.align	2
+ 134              		.thumb
+ 135              		.thumb_func
+ 137              	AUDIO_AudioCmd_FS:
+ 138              	.LFB114:
+ 129:Src/usbd_audio_if.c **** 
+ 130:Src/usbd_audio_if.c **** /**
+ 131:Src/usbd_audio_if.c ****   * @brief  AUDIO_AudioCmd_FS
+ 132:Src/usbd_audio_if.c ****   *         Handles AUDIO command.
+ 133:Src/usbd_audio_if.c ****   * @param  pbuf: Pointer to buffer of data to be sent
+ 134:Src/usbd_audio_if.c ****   * @param  size: Number of data to be sent (in bytes)
+ 135:Src/usbd_audio_if.c ****   * @param  cmd: Command opcode
+ 136:Src/usbd_audio_if.c ****   * @retval Result of the operation: USBD_OK if all operations are OK else USBD_FAIL
+ 137:Src/usbd_audio_if.c ****   */
+ 138:Src/usbd_audio_if.c **** static int8_t AUDIO_AudioCmd_FS (uint8_t* pbuf, uint32_t size, uint8_t cmd)
+ 139:Src/usbd_audio_if.c **** {
+ 139              		.loc 1 139 0
+ 140              		.cfi_startproc
+ 141              		@ args = 0, pretend = 0, frame = 16
+ 142              		@ frame_needed = 1, uses_anonymous_args = 0
+ 143              		@ link register save eliminated.
+ 144 0000 80B4     		push	{r7}
+ 145              	.LCFI12:
+ 146              		.cfi_def_cfa_offset 4
+ 147              		.cfi_offset 7, -4
+ 148 0002 85B0     		sub	sp, sp, #20
+ 149              	.LCFI13:
+ 150              		.cfi_def_cfa_offset 24
+ 151 0004 00AF     		add	r7, sp, #0
+ 152              	.LCFI14:
+ 153              		.cfi_def_cfa_register 7
+ARM GAS  /tmp/ccD5GgRy.s 			page 6
+
+
+ 154 0006 F860     		str	r0, [r7, #12]
+ 155 0008 B960     		str	r1, [r7, #8]
+ 156 000a 1346     		mov	r3, r2
+ 157 000c FB71     		strb	r3, [r7, #7]
+ 140:Src/usbd_audio_if.c ****   /* USER CODE BEGIN 2 */
+ 141:Src/usbd_audio_if.c ****   switch(cmd)
+ 158              		.loc 1 141 0
+ 159 000e FB79     		ldrb	r3, [r7, #7]	@ zero_extendqisi2
+ 160 0010 012B     		cmp	r3, #1
+ 161 0012 01D0     		beq	.L12
+ 162 0014 022B     		cmp	r3, #2
+ 142:Src/usbd_audio_if.c ****   {
+ 143:Src/usbd_audio_if.c ****     case AUDIO_CMD_START:    
+ 144:Src/usbd_audio_if.c ****     break;
+ 145:Src/usbd_audio_if.c ****   
+ 146:Src/usbd_audio_if.c ****     case AUDIO_CMD_PLAY:   
+ 147:Src/usbd_audio_if.c ****     break;	
+ 163              		.loc 1 147 0
+ 164 0016 00E0     		b	.L8
+ 165              	.L12:
+ 144:Src/usbd_audio_if.c ****   
+ 166              		.loc 1 144 0
+ 167 0018 00BF     		nop
+ 168              	.L8:
+ 148:Src/usbd_audio_if.c ****   }
+ 149:Src/usbd_audio_if.c ****   return (USBD_OK);
+ 169              		.loc 1 149 0
+ 170 001a 0023     		movs	r3, #0
+ 171 001c 5BB2     		sxtb	r3, r3
+ 150:Src/usbd_audio_if.c ****   /* USER CODE END 2 */
+ 151:Src/usbd_audio_if.c ****   
+ 152:Src/usbd_audio_if.c **** }
+ 172              		.loc 1 152 0
+ 173 001e 1846     		mov	r0, r3
+ 174 0020 1437     		adds	r7, r7, #20
+ 175              	.LCFI15:
+ 176              		.cfi_def_cfa_offset 4
+ 177 0022 BD46     		mov	sp, r7
+ 178              	.LCFI16:
+ 179              		.cfi_def_cfa_register 13
+ 180              		@ sp needed
+ 181 0024 5DF8047B 		ldr	r7, [sp], #4
+ 182              	.LCFI17:
+ 183              		.cfi_restore 7
+ 184              		.cfi_def_cfa_offset 0
+ 185 0028 7047     		bx	lr
+ 186              		.cfi_endproc
+ 187              	.LFE114:
+ 189 002a 00BF     		.section	.text.AUDIO_VolumeCtl_FS,"ax",%progbits
+ 190              		.align	2
+ 191              		.thumb
+ 192              		.thumb_func
+ 194              	AUDIO_VolumeCtl_FS:
+ 195              	.LFB115:
+ 153:Src/usbd_audio_if.c **** 
+ 154:Src/usbd_audio_if.c **** /**
+ 155:Src/usbd_audio_if.c ****   * @brief  AUDIO_VolumeCtl_FS   
+ARM GAS  /tmp/ccD5GgRy.s 			page 7
+
+
+ 156:Src/usbd_audio_if.c ****   *         Controls AUDIO Volume.
+ 157:Src/usbd_audio_if.c ****   * @param  vol: volume level (0..100)
+ 158:Src/usbd_audio_if.c ****   * @retval Result of the operation: USBD_OK if all operations are OK else USBD_FAIL
+ 159:Src/usbd_audio_if.c ****   */
+ 160:Src/usbd_audio_if.c **** static int8_t AUDIO_VolumeCtl_FS (uint8_t vol)
+ 161:Src/usbd_audio_if.c **** {
+ 196              		.loc 1 161 0
+ 197              		.cfi_startproc
+ 198              		@ args = 0, pretend = 0, frame = 8
+ 199              		@ frame_needed = 1, uses_anonymous_args = 0
+ 200              		@ link register save eliminated.
+ 201 0000 80B4     		push	{r7}
+ 202              	.LCFI18:
+ 203              		.cfi_def_cfa_offset 4
+ 204              		.cfi_offset 7, -4
+ 205 0002 83B0     		sub	sp, sp, #12
+ 206              	.LCFI19:
+ 207              		.cfi_def_cfa_offset 16
+ 208 0004 00AF     		add	r7, sp, #0
+ 209              	.LCFI20:
+ 210              		.cfi_def_cfa_register 7
+ 211 0006 0346     		mov	r3, r0
+ 212 0008 FB71     		strb	r3, [r7, #7]
+ 162:Src/usbd_audio_if.c ****   /* USER CODE BEGIN 3 */ 
+ 163:Src/usbd_audio_if.c ****   return (USBD_OK);
+ 213              		.loc 1 163 0
+ 214 000a 0023     		movs	r3, #0
+ 215 000c 5BB2     		sxtb	r3, r3
+ 164:Src/usbd_audio_if.c ****   /* USER CODE END 3 */
+ 165:Src/usbd_audio_if.c **** }
+ 216              		.loc 1 165 0
+ 217 000e 1846     		mov	r0, r3
+ 218 0010 0C37     		adds	r7, r7, #12
+ 219              	.LCFI21:
+ 220              		.cfi_def_cfa_offset 4
+ 221 0012 BD46     		mov	sp, r7
+ 222              	.LCFI22:
+ 223              		.cfi_def_cfa_register 13
+ 224              		@ sp needed
+ 225 0014 5DF8047B 		ldr	r7, [sp], #4
+ 226              	.LCFI23:
+ 227              		.cfi_restore 7
+ 228              		.cfi_def_cfa_offset 0
+ 229 0018 7047     		bx	lr
+ 230              		.cfi_endproc
+ 231              	.LFE115:
+ 233 001a 00BF     		.section	.text.AUDIO_MuteCtl_FS,"ax",%progbits
+ 234              		.align	2
+ 235              		.thumb
+ 236              		.thumb_func
+ 238              	AUDIO_MuteCtl_FS:
+ 239              	.LFB116:
+ 166:Src/usbd_audio_if.c **** 
+ 167:Src/usbd_audio_if.c **** /**
+ 168:Src/usbd_audio_if.c ****   * @brief  AUDIO_MuteCtl_FS
+ 169:Src/usbd_audio_if.c ****   *         Controls AUDIO Mute.   
+ 170:Src/usbd_audio_if.c ****   * @param  cmd: command opcode
+ARM GAS  /tmp/ccD5GgRy.s 			page 8
+
+
+ 171:Src/usbd_audio_if.c ****   * @retval Result of the operation: USBD_OK if all operations are OK else USBD_FAIL
+ 172:Src/usbd_audio_if.c ****   */
+ 173:Src/usbd_audio_if.c **** static int8_t AUDIO_MuteCtl_FS (uint8_t cmd)
+ 174:Src/usbd_audio_if.c **** {
+ 240              		.loc 1 174 0
+ 241              		.cfi_startproc
+ 242              		@ args = 0, pretend = 0, frame = 8
+ 243              		@ frame_needed = 1, uses_anonymous_args = 0
+ 244              		@ link register save eliminated.
+ 245 0000 80B4     		push	{r7}
+ 246              	.LCFI24:
+ 247              		.cfi_def_cfa_offset 4
+ 248              		.cfi_offset 7, -4
+ 249 0002 83B0     		sub	sp, sp, #12
+ 250              	.LCFI25:
+ 251              		.cfi_def_cfa_offset 16
+ 252 0004 00AF     		add	r7, sp, #0
+ 253              	.LCFI26:
+ 254              		.cfi_def_cfa_register 7
+ 255 0006 0346     		mov	r3, r0
+ 256 0008 FB71     		strb	r3, [r7, #7]
+ 175:Src/usbd_audio_if.c ****   /* USER CODE BEGIN 4 */ 
+ 176:Src/usbd_audio_if.c ****   return (USBD_OK);
+ 257              		.loc 1 176 0
+ 258 000a 0023     		movs	r3, #0
+ 259 000c 5BB2     		sxtb	r3, r3
+ 177:Src/usbd_audio_if.c ****   /* USER CODE END 4 */
+ 178:Src/usbd_audio_if.c **** }
+ 260              		.loc 1 178 0
+ 261 000e 1846     		mov	r0, r3
+ 262 0010 0C37     		adds	r7, r7, #12
+ 263              	.LCFI27:
+ 264              		.cfi_def_cfa_offset 4
+ 265 0012 BD46     		mov	sp, r7
+ 266              	.LCFI28:
+ 267              		.cfi_def_cfa_register 13
+ 268              		@ sp needed
+ 269 0014 5DF8047B 		ldr	r7, [sp], #4
+ 270              	.LCFI29:
+ 271              		.cfi_restore 7
+ 272              		.cfi_def_cfa_offset 0
+ 273 0018 7047     		bx	lr
+ 274              		.cfi_endproc
+ 275              	.LFE116:
+ 277 001a 00BF     		.section	.text.AUDIO_PeriodicTC_FS,"ax",%progbits
+ 278              		.align	2
+ 279              		.thumb
+ 280              		.thumb_func
+ 282              	AUDIO_PeriodicTC_FS:
+ 283              	.LFB117:
+ 179:Src/usbd_audio_if.c **** 
+ 180:Src/usbd_audio_if.c **** /**
+ 181:Src/usbd_audio_if.c ****   * @brief  AUDIO_PeriodicT_FS              
+ 182:Src/usbd_audio_if.c ****   * @param  cmd: Command opcode
+ 183:Src/usbd_audio_if.c ****   * @retval Result of the operation: USBD_OK if all operations are OK else USBD_FAIL
+ 184:Src/usbd_audio_if.c ****   */
+ 185:Src/usbd_audio_if.c **** static int8_t AUDIO_PeriodicTC_FS (uint8_t cmd)
+ARM GAS  /tmp/ccD5GgRy.s 			page 9
+
+
+ 186:Src/usbd_audio_if.c **** {
+ 284              		.loc 1 186 0
+ 285              		.cfi_startproc
+ 286              		@ args = 0, pretend = 0, frame = 8
+ 287              		@ frame_needed = 1, uses_anonymous_args = 0
+ 288              		@ link register save eliminated.
+ 289 0000 80B4     		push	{r7}
+ 290              	.LCFI30:
+ 291              		.cfi_def_cfa_offset 4
+ 292              		.cfi_offset 7, -4
+ 293 0002 83B0     		sub	sp, sp, #12
+ 294              	.LCFI31:
+ 295              		.cfi_def_cfa_offset 16
+ 296 0004 00AF     		add	r7, sp, #0
+ 297              	.LCFI32:
+ 298              		.cfi_def_cfa_register 7
+ 299 0006 0346     		mov	r3, r0
+ 300 0008 FB71     		strb	r3, [r7, #7]
+ 187:Src/usbd_audio_if.c ****   /* USER CODE BEGIN 5 */ 
+ 188:Src/usbd_audio_if.c ****   return (USBD_OK);
+ 301              		.loc 1 188 0
+ 302 000a 0023     		movs	r3, #0
+ 303 000c 5BB2     		sxtb	r3, r3
+ 189:Src/usbd_audio_if.c ****   /* USER CODE END 5 */
+ 190:Src/usbd_audio_if.c **** }
+ 304              		.loc 1 190 0
+ 305 000e 1846     		mov	r0, r3
+ 306 0010 0C37     		adds	r7, r7, #12
+ 307              	.LCFI33:
+ 308              		.cfi_def_cfa_offset 4
+ 309 0012 BD46     		mov	sp, r7
+ 310              	.LCFI34:
+ 311              		.cfi_def_cfa_register 13
+ 312              		@ sp needed
+ 313 0014 5DF8047B 		ldr	r7, [sp], #4
+ 314              	.LCFI35:
+ 315              		.cfi_restore 7
+ 316              		.cfi_def_cfa_offset 0
+ 317 0018 7047     		bx	lr
+ 318              		.cfi_endproc
+ 319              	.LFE117:
+ 321 001a 00BF     		.section	.text.AUDIO_GetState_FS,"ax",%progbits
+ 322              		.align	2
+ 323              		.thumb
+ 324              		.thumb_func
+ 326              	AUDIO_GetState_FS:
+ 327              	.LFB118:
+ 191:Src/usbd_audio_if.c **** 
+ 192:Src/usbd_audio_if.c **** /**
+ 193:Src/usbd_audio_if.c ****   * @brief  AUDIO_GetState_FS
+ 194:Src/usbd_audio_if.c ****   *         Gets AUDIO State.  
+ 195:Src/usbd_audio_if.c ****   * @param  None
+ 196:Src/usbd_audio_if.c ****   * @retval Result of the operation: USBD_OK if all operations are OK else USBD_FAIL
+ 197:Src/usbd_audio_if.c ****   */
+ 198:Src/usbd_audio_if.c **** static int8_t AUDIO_GetState_FS (void)
+ 199:Src/usbd_audio_if.c **** {
+ 328              		.loc 1 199 0
+ARM GAS  /tmp/ccD5GgRy.s 			page 10
+
+
+ 329              		.cfi_startproc
+ 330              		@ args = 0, pretend = 0, frame = 0
+ 331              		@ frame_needed = 1, uses_anonymous_args = 0
+ 332              		@ link register save eliminated.
+ 333 0000 80B4     		push	{r7}
+ 334              	.LCFI36:
+ 335              		.cfi_def_cfa_offset 4
+ 336              		.cfi_offset 7, -4
+ 337 0002 00AF     		add	r7, sp, #0
+ 338              	.LCFI37:
+ 339              		.cfi_def_cfa_register 7
+ 200:Src/usbd_audio_if.c ****   /* USER CODE BEGIN 6 */ 
+ 201:Src/usbd_audio_if.c ****   return (USBD_OK);
+ 340              		.loc 1 201 0
+ 341 0004 0023     		movs	r3, #0
+ 342 0006 5BB2     		sxtb	r3, r3
+ 202:Src/usbd_audio_if.c ****   /* USER CODE END 6 */
+ 203:Src/usbd_audio_if.c **** }
+ 343              		.loc 1 203 0
+ 344 0008 1846     		mov	r0, r3
+ 345 000a BD46     		mov	sp, r7
+ 346              	.LCFI38:
+ 347              		.cfi_def_cfa_register 13
+ 348              		@ sp needed
+ 349 000c 5DF8047B 		ldr	r7, [sp], #4
+ 350              	.LCFI39:
+ 351              		.cfi_restore 7
+ 352              		.cfi_def_cfa_offset 0
+ 353 0010 7047     		bx	lr
+ 354              		.cfi_endproc
+ 355              	.LFE118:
+ 357 0012 00BF     		.section	.text.TransferComplete_CallBack_FS,"ax",%progbits
+ 358              		.align	2
+ 359              		.global	TransferComplete_CallBack_FS
+ 360              		.thumb
+ 361              		.thumb_func
+ 363              	TransferComplete_CallBack_FS:
+ 364              	.LFB119:
+ 204:Src/usbd_audio_if.c **** 
+ 205:Src/usbd_audio_if.c **** /**
+ 206:Src/usbd_audio_if.c ****   * @brief  Manages the DMA full Transfer complete event.
+ 207:Src/usbd_audio_if.c ****   * @param  None
+ 208:Src/usbd_audio_if.c ****   * @retval None
+ 209:Src/usbd_audio_if.c ****   */
+ 210:Src/usbd_audio_if.c **** void TransferComplete_CallBack_FS(void)
+ 211:Src/usbd_audio_if.c **** {
+ 365              		.loc 1 211 0
+ 366              		.cfi_startproc
+ 367              		@ args = 0, pretend = 0, frame = 0
+ 368              		@ frame_needed = 1, uses_anonymous_args = 0
+ 369 0000 80B5     		push	{r7, lr}
+ 370              	.LCFI40:
+ 371              		.cfi_def_cfa_offset 8
+ 372              		.cfi_offset 7, -8
+ 373              		.cfi_offset 14, -4
+ 374 0002 00AF     		add	r7, sp, #0
+ 375              	.LCFI41:
+ARM GAS  /tmp/ccD5GgRy.s 			page 11
+
+
+ 376              		.cfi_def_cfa_register 7
+ 212:Src/usbd_audio_if.c ****   /* USER CODE BEGIN 7 */ 
+ 213:Src/usbd_audio_if.c ****   USBD_AUDIO_Sync(hUsbDevice_0, AUDIO_OFFSET_FULL);
+ 377              		.loc 1 213 0
+ 378 0004 034B     		ldr	r3, .L22
+ 379 0006 1B68     		ldr	r3, [r3]
+ 380 0008 0221     		movs	r1, #2
+ 381 000a 1846     		mov	r0, r3
+ 382 000c FFF7FEFF 		bl	USBD_AUDIO_Sync
+ 214:Src/usbd_audio_if.c ****   /* USER CODE END 7 */
+ 215:Src/usbd_audio_if.c **** }
+ 383              		.loc 1 215 0
+ 384 0010 00BF     		nop
+ 385 0012 80BD     		pop	{r7, pc}
+ 386              	.L23:
+ 387              		.align	2
+ 388              	.L22:
+ 389 0014 00000000 		.word	hUsbDevice_0
+ 390              		.cfi_endproc
+ 391              	.LFE119:
+ 393              		.section	.text.HalfTransfer_CallBack_FS,"ax",%progbits
+ 394              		.align	2
+ 395              		.global	HalfTransfer_CallBack_FS
+ 396              		.thumb
+ 397              		.thumb_func
+ 399              	HalfTransfer_CallBack_FS:
+ 400              	.LFB120:
+ 216:Src/usbd_audio_if.c **** 
+ 217:Src/usbd_audio_if.c **** /**
+ 218:Src/usbd_audio_if.c ****   * @brief  Manages the DMA Half Transfer complete event.
+ 219:Src/usbd_audio_if.c ****   * @param  None
+ 220:Src/usbd_audio_if.c ****   * @retval None
+ 221:Src/usbd_audio_if.c ****   */
+ 222:Src/usbd_audio_if.c **** void HalfTransfer_CallBack_FS(void)
+ 223:Src/usbd_audio_if.c **** { 
+ 401              		.loc 1 223 0
+ 402              		.cfi_startproc
+ 403              		@ args = 0, pretend = 0, frame = 0
+ 404              		@ frame_needed = 1, uses_anonymous_args = 0
+ 405 0000 80B5     		push	{r7, lr}
+ 406              	.LCFI42:
+ 407              		.cfi_def_cfa_offset 8
+ 408              		.cfi_offset 7, -8
+ 409              		.cfi_offset 14, -4
+ 410 0002 00AF     		add	r7, sp, #0
+ 411              	.LCFI43:
+ 412              		.cfi_def_cfa_register 7
+ 224:Src/usbd_audio_if.c ****   /* USER CODE BEGIN 8 */ 
+ 225:Src/usbd_audio_if.c ****   USBD_AUDIO_Sync(hUsbDevice_0, AUDIO_OFFSET_HALF);
+ 413              		.loc 1 225 0
+ 414 0004 034B     		ldr	r3, .L25
+ 415 0006 1B68     		ldr	r3, [r3]
+ 416 0008 0121     		movs	r1, #1
+ 417 000a 1846     		mov	r0, r3
+ 418 000c FFF7FEFF 		bl	USBD_AUDIO_Sync
+ 226:Src/usbd_audio_if.c ****   /* USER CODE END 8 */
+ 227:Src/usbd_audio_if.c **** }
+ARM GAS  /tmp/ccD5GgRy.s 			page 12
+
+
+ 419              		.loc 1 227 0
+ 420 0010 00BF     		nop
+ 421 0012 80BD     		pop	{r7, pc}
+ 422              	.L26:
+ 423              		.align	2
+ 424              	.L25:
+ 425 0014 00000000 		.word	hUsbDevice_0
+ 426              		.cfi_endproc
+ 427              	.LFE120:
+ 429              		.text
+ 430              	.Letext0:
+ 431              		.file 2 "/usr/arm-none-eabi/include/machine/_default_types.h"
+ 432              		.file 3 "/usr/arm-none-eabi/include/sys/_stdint.h"
+ 433              		.file 4 "Middlewares/ST/STM32_USB_Device_Library/Core/Inc/usbd_def.h"
+ 434              		.file 5 "Middlewares/ST/STM32_USB_Device_Library/Class/AUDIO/Inc/usbd_audio.h"
+ 435              		.file 6 "Drivers/CMSIS/Include/core_cm4.h"
+ARM GAS  /tmp/ccD5GgRy.s 			page 13
+
+
+DEFINED SYMBOLS
+                            *ABS*:0000000000000000 usbd_audio_if.c
+                            *COM*:0000000000000004 hUsbDevice_0
+     /tmp/ccD5GgRy.s:26     .data.USBD_AUDIO_fops_FS:0000000000000000 USBD_AUDIO_fops_FS
+     /tmp/ccD5GgRy.s:23     .data.USBD_AUDIO_fops_FS:0000000000000000 $d
+     /tmp/ccD5GgRy.s:39     .text.AUDIO_Init_FS:0000000000000000 AUDIO_Init_FS
+     /tmp/ccD5GgRy.s:94     .text.AUDIO_DeInit_FS:0000000000000000 AUDIO_DeInit_FS
+     /tmp/ccD5GgRy.s:137    .text.AUDIO_AudioCmd_FS:0000000000000000 AUDIO_AudioCmd_FS
+     /tmp/ccD5GgRy.s:194    .text.AUDIO_VolumeCtl_FS:0000000000000000 AUDIO_VolumeCtl_FS
+     /tmp/ccD5GgRy.s:238    .text.AUDIO_MuteCtl_FS:0000000000000000 AUDIO_MuteCtl_FS
+     /tmp/ccD5GgRy.s:282    .text.AUDIO_PeriodicTC_FS:0000000000000000 AUDIO_PeriodicTC_FS
+     /tmp/ccD5GgRy.s:326    .text.AUDIO_GetState_FS:0000000000000000 AUDIO_GetState_FS
+     /tmp/ccD5GgRy.s:35     .text.AUDIO_Init_FS:0000000000000000 $t
+     /tmp/ccD5GgRy.s:84     .text.AUDIO_Init_FS:0000000000000024 $d
+     /tmp/ccD5GgRy.s:90     .text.AUDIO_DeInit_FS:0000000000000000 $t
+     /tmp/ccD5GgRy.s:133    .text.AUDIO_AudioCmd_FS:0000000000000000 $t
+     /tmp/ccD5GgRy.s:190    .text.AUDIO_VolumeCtl_FS:0000000000000000 $t
+     /tmp/ccD5GgRy.s:234    .text.AUDIO_MuteCtl_FS:0000000000000000 $t
+     /tmp/ccD5GgRy.s:278    .text.AUDIO_PeriodicTC_FS:0000000000000000 $t
+     /tmp/ccD5GgRy.s:322    .text.AUDIO_GetState_FS:0000000000000000 $t
+     /tmp/ccD5GgRy.s:358    .text.TransferComplete_CallBack_FS:0000000000000000 $t
+     /tmp/ccD5GgRy.s:363    .text.TransferComplete_CallBack_FS:0000000000000000 TransferComplete_CallBack_FS
+     /tmp/ccD5GgRy.s:389    .text.TransferComplete_CallBack_FS:0000000000000014 $d
+     /tmp/ccD5GgRy.s:394    .text.HalfTransfer_CallBack_FS:0000000000000000 $t
+     /tmp/ccD5GgRy.s:399    .text.HalfTransfer_CallBack_FS:0000000000000000 HalfTransfer_CallBack_FS
+     /tmp/ccD5GgRy.s:425    .text.HalfTransfer_CallBack_FS:0000000000000014 $d
+                     .debug_frame:0000000000000010 $d
+
+UNDEFINED SYMBOLS
+hUsbDeviceFS
+USBD_AUDIO_Sync

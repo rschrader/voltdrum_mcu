@@ -1,0 +1,2118 @@
+ARM GAS  /tmp/ccPTyFyG.s 			page 1
+
+
+   1              		.syntax unified
+   2              		.cpu cortex-m4
+   3              		.eabi_attribute 27, 1
+   4              		.fpu fpv4-sp-d16
+   5              		.eabi_attribute 20, 1
+   6              		.eabi_attribute 21, 1
+   7              		.eabi_attribute 23, 3
+   8              		.eabi_attribute 24, 1
+   9              		.eabi_attribute 25, 1
+  10              		.eabi_attribute 26, 1
+  11              		.eabi_attribute 30, 6
+  12              		.eabi_attribute 34, 1
+  13              		.eabi_attribute 18, 4
+  14              		.thumb
+  15              		.syntax unified
+  16              		.file	"main.c"
+  17              		.text
+  18              	.Ltext0:
+  19              		.cfi_sections	.debug_frame
+  20              		.comm	midiMessagebuffer,4,4
+  21              		.global	irqflag_timer1
+  22              		.section	.bss.irqflag_timer1,"aw",%nobits
+  23              		.align	2
+  26              	irqflag_timer1:
+  27 0000 00000000 		.space	4
+  28              		.global	irqflag_timer2
+  29              		.section	.bss.irqflag_timer2,"aw",%nobits
+  30              		.align	2
+  33              	irqflag_timer2:
+  34 0000 00000000 		.space	4
+  35              		.global	irqflag_timer3
+  36              		.section	.bss.irqflag_timer3,"aw",%nobits
+  37              		.align	2
+  40              	irqflag_timer3:
+  41 0000 00000000 		.space	4
+  42              		.global	irqflag_btns
+  43              		.section	.bss.irqflag_btns,"aw",%nobits
+  44              		.align	2
+  47              	irqflag_btns:
+  48 0000 00000000 		.space	12
+  48      00000000 
+  48      00000000 
+  49              		.comm	adc1Samples,160,4
+  50              		.comm	adc2Samples,112,4
+  51              		.comm	adc3Samples,48,4
+  52              		.comm	adc4Samples,8,4
+  53              		.comm	triggerChannelsHead,760,4
+  54              		.comm	triggerChannelsRim,760,4
+  55              		.comm	hiHatChannels,136,4
+  56              		.section	.text.initHeadChannels,"ax",%progbits
+  57              		.align	2
+  58              		.global	initHeadChannels
+  59              		.thumb
+  60              		.thumb_func
+  62              	initHeadChannels:
+  63              	.LFB112:
+  64              		.file 1 "Src/main.c"
+ARM GAS  /tmp/ccPTyFyG.s 			page 2
+
+
+   1:Src/main.c    **** /**
+   2:Src/main.c    ****   ******************************************************************************
+   3:Src/main.c    ****   * File Name          : main.c
+   4:Src/main.c    ****   * Date               : 26/05/2015 10:05:21
+   5:Src/main.c    ****   * Description        : Main program body
+   6:Src/main.c    ****   ******************************************************************************
+   7:Src/main.c    ****   *
+   8:Src/main.c    ****   * COPYRIGHT(c) 2015 STMicroelectronics
+   9:Src/main.c    ****   *
+  10:Src/main.c    ****   * Redistribution and use in source and binary forms, with or without modification,
+  11:Src/main.c    ****   * are permitted provided that the following conditions are met:
+  12:Src/main.c    ****   *   1. Redistributions of source code must retain the above copyright notice,
+  13:Src/main.c    ****   *      this list of conditions and the following disclaimer.
+  14:Src/main.c    ****   *   2. Redistributions in binary form must reproduce the above copyright notice,
+  15:Src/main.c    ****   *      this list of conditions and the following disclaimer in the documentation
+  16:Src/main.c    ****   *      and/or other materials provided with the distribution.
+  17:Src/main.c    ****   *   3. Neither the name of STMicroelectronics nor the names of its contributors
+  18:Src/main.c    ****   *      may be used to endorse or promote products derived from this software
+  19:Src/main.c    ****   *      without specific prior written permission.
+  20:Src/main.c    ****   *
+  21:Src/main.c    ****   * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS"
+  22:Src/main.c    ****   * AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
+  23:Src/main.c    ****   * IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
+  24:Src/main.c    ****   * DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE LIABLE
+  25:Src/main.c    ****   * FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL
+  26:Src/main.c    ****   * DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR
+  27:Src/main.c    ****   * SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER
+  28:Src/main.c    ****   * CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY,
+  29:Src/main.c    ****   * OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
+  30:Src/main.c    ****   * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+  31:Src/main.c    ****   *
+  32:Src/main.c    ****   ******************************************************************************
+  33:Src/main.c    ****   */
+  34:Src/main.c    **** 
+  35:Src/main.c    **** /* Includes ------------------------------------------------------------------*/
+  36:Src/main.c    **** #include "stm32f3xx_hal.h"
+  37:Src/main.c    **** #include "adc.h"
+  38:Src/main.c    **** #include "dma.h"
+  39:Src/main.c    **** #include "spi.h"
+  40:Src/main.c    **** #include "tim.h"
+  41:Src/main.c    **** #include "usart.h"
+  42:Src/main.c    **** #include "usb_device.h"
+  43:Src/main.c    **** #include "gpio.h"
+  44:Src/main.c    **** 
+  45:Src/main.c    **** /* USER CODE BEGIN Includes */
+  46:Src/main.c    **** #include "uartmessagebuffer.h"
+  47:Src/main.c    **** #include "midi.h"
+  48:Src/main.c    **** #include "mcp4251.h"
+  49:Src/main.c    **** #include "triggerchannel.h"
+  50:Src/main.c    **** #include "hihatchannel.h"
+  51:Src/main.c    **** #include "performance.h"
+  52:Src/main.c    **** /* USER CODE END Includes */
+  53:Src/main.c    **** 
+  54:Src/main.c    **** /* Private variables ---------------------------------------------------------*/
+  55:Src/main.c    **** 
+  56:Src/main.c    **** /* USER CODE BEGIN PV */
+  57:Src/main.c    **** 
+ARM GAS  /tmp/ccPTyFyG.s 			page 3
+
+
+  58:Src/main.c    **** #define headChannelCount 10
+  59:Src/main.c    **** #define rimChannelCount 10
+  60:Src/main.c    **** #define hihatChannelCount 2
+  61:Src/main.c    **** 
+  62:Src/main.c    **** volatile int irqflag_timer1 = 0;
+  63:Src/main.c    **** volatile int irqflag_timer2 = 0;
+  64:Src/main.c    **** volatile int irqflag_timer3 = 0;
+  65:Src/main.c    **** volatile int irqflag_btns[3] = {0,0,0};
+  66:Src/main.c    **** 
+  67:Src/main.c    **** volatile uint32_t adc1Samples[10*4];
+  68:Src/main.c    **** volatile uint32_t adc2Samples[7*4];
+  69:Src/main.c    **** volatile uint32_t adc3Samples[3*4];
+  70:Src/main.c    **** volatile uint32_t adc4Samples[2];
+  71:Src/main.c    **** 
+  72:Src/main.c    **** TriggerChannel triggerChannelsHead[headChannelCount];
+  73:Src/main.c    **** TriggerChannel triggerChannelsRim[rimChannelCount];
+  74:Src/main.c    **** HiHatChannel hiHatChannels[hihatChannelCount];
+  75:Src/main.c    **** 
+  76:Src/main.c    **** /* USER CODE END PV */
+  77:Src/main.c    **** 
+  78:Src/main.c    **** /* Private function prototypes -----------------------------------------------*/
+  79:Src/main.c    **** void SystemClock_Config(void);
+  80:Src/main.c    **** 
+  81:Src/main.c    **** /* USER CODE BEGIN PFP */
+  82:Src/main.c    **** 
+  83:Src/main.c    **** /* USER CODE END PFP */
+  84:Src/main.c    **** 
+  85:Src/main.c    **** /* USER CODE BEGIN 0 */
+  86:Src/main.c    **** 
+  87:Src/main.c    **** void initHeadChannels(){
+  65              		.loc 1 87 0
+  66              		.cfi_startproc
+  67              		@ args = 0, pretend = 0, frame = 8
+  68              		@ frame_needed = 1, uses_anonymous_args = 0
+  69 0000 B0B5     		push	{r4, r5, r7, lr}
+  70              	.LCFI0:
+  71              		.cfi_def_cfa_offset 16
+  72              		.cfi_offset 4, -16
+  73              		.cfi_offset 5, -12
+  74              		.cfi_offset 7, -8
+  75              		.cfi_offset 14, -4
+  76 0002 84B0     		sub	sp, sp, #16
+  77              	.LCFI1:
+  78              		.cfi_def_cfa_offset 32
+  79 0004 02AF     		add	r7, sp, #8
+  80              	.LCFI2:
+  81              		.cfi_def_cfa 7, 24
+  88:Src/main.c    **** 
+  89:Src/main.c    **** 	int i;
+  90:Src/main.c    **** 	for(i = 0; i < headChannelCount; i++){
+  82              		.loc 1 90 0
+  83 0006 0023     		movs	r3, #0
+  84 0008 7B60     		str	r3, [r7, #4]
+  85 000a 29E0     		b	.L2
+  86              	.L3:
+  91:Src/main.c    **** 		triggerChannelsHead[i].potiWiperId = MCP4261_WIPER0;
+  87              		.loc 1 91 0 discriminator 3
+ARM GAS  /tmp/ccPTyFyG.s 			page 4
+
+
+  88 000c 784A     		ldr	r2, .L6
+  89 000e 7B68     		ldr	r3, [r7, #4]
+  90 0010 4C21     		movs	r1, #76
+  91 0012 01FB03F3 		mul	r3, r1, r3
+  92 0016 1344     		add	r3, r3, r2
+  93 0018 4A33     		adds	r3, r3, #74
+  94 001a 0022     		movs	r2, #0
+  95 001c 1A70     		strb	r2, [r3]
+  92:Src/main.c    **** 		triggerchannel_init(&triggerChannelsHead[i], &(adc1Samples[i]), &(adc1Samples[i+10]), &(adc1Sampl
+  96              		.loc 1 92 0 discriminator 3
+  97 001e 7B68     		ldr	r3, [r7, #4]
+  98 0020 4C22     		movs	r2, #76
+  99 0022 02FB03F3 		mul	r3, r2, r3
+ 100 0026 724A     		ldr	r2, .L6
+ 101 0028 9818     		adds	r0, r3, r2
+ 102 002a 7B68     		ldr	r3, [r7, #4]
+ 103 002c 9B00     		lsls	r3, r3, #2
+ 104 002e 714A     		ldr	r2, .L6+4
+ 105 0030 9918     		adds	r1, r3, r2
+ 106 0032 7B68     		ldr	r3, [r7, #4]
+ 107 0034 0A33     		adds	r3, r3, #10
+ 108 0036 9B00     		lsls	r3, r3, #2
+ 109 0038 6E4A     		ldr	r2, .L6+4
+ 110 003a 9C18     		adds	r4, r3, r2
+ 111 003c 7B68     		ldr	r3, [r7, #4]
+ 112 003e 1433     		adds	r3, r3, #20
+ 113 0040 9B00     		lsls	r3, r3, #2
+ 114 0042 6C4A     		ldr	r2, .L6+4
+ 115 0044 9D18     		adds	r5, r3, r2
+ 116 0046 7B68     		ldr	r3, [r7, #4]
+ 117 0048 1E33     		adds	r3, r3, #30
+ 118 004a 9B00     		lsls	r3, r3, #2
+ 119 004c 694A     		ldr	r2, .L6+4
+ 120 004e 1344     		add	r3, r3, r2
+ 121 0050 0093     		str	r3, [sp]
+ 122 0052 2B46     		mov	r3, r5
+ 123 0054 2246     		mov	r2, r4
+ 124 0056 FFF7FEFF 		bl	triggerchannel_init
+  90:Src/main.c    **** 		triggerChannelsHead[i].potiWiperId = MCP4261_WIPER0;
+ 125              		.loc 1 90 0 discriminator 3
+ 126 005a 7B68     		ldr	r3, [r7, #4]
+ 127 005c 0133     		adds	r3, r3, #1
+ 128 005e 7B60     		str	r3, [r7, #4]
+ 129              	.L2:
+  90:Src/main.c    **** 		triggerChannelsHead[i].potiWiperId = MCP4261_WIPER0;
+ 130              		.loc 1 90 0 is_stmt 0 discriminator 1
+ 131 0060 7B68     		ldr	r3, [r7, #4]
+ 132 0062 092B     		cmp	r3, #9
+ 133 0064 D2DD     		ble	.L3
+  93:Src/main.c    **** 
+  94:Src/main.c    **** 	}
+  95:Src/main.c    **** 
+  96:Src/main.c    **** 	triggerChannelsHead[0].potiCsPort = GPIOC;
+ 134              		.loc 1 96 0 is_stmt 1
+ 135 0066 624B     		ldr	r3, .L6
+ 136 0068 634A     		ldr	r2, .L6+8
+ 137 006a 5A64     		str	r2, [r3, #68]
+ARM GAS  /tmp/ccPTyFyG.s 			page 5
+
+
+  97:Src/main.c    **** 	triggerChannelsHead[0].potiCsPin = GPIO_PIN_11;
+ 138              		.loc 1 97 0
+ 139 006c 604B     		ldr	r3, .L6
+ 140 006e 4FF40062 		mov	r2, #2048
+ 141 0072 A3F84820 		strh	r2, [r3, #72]	@ movhi
+  98:Src/main.c    **** 	triggerChannelsHead[0].midinote = 36;
+ 142              		.loc 1 98 0
+ 143 0076 5E4B     		ldr	r3, .L6
+ 144 0078 2422     		movs	r2, #36
+ 145 007a 1A64     		str	r2, [r3, #64]
+  99:Src/main.c    **** 
+ 100:Src/main.c    **** 	triggerChannelsHead[1].potiCsPort = GPIOC;
+ 146              		.loc 1 100 0
+ 147 007c 5C4B     		ldr	r3, .L6
+ 148 007e 5E4A     		ldr	r2, .L6+8
+ 149 0080 C3F89020 		str	r2, [r3, #144]
+ 101:Src/main.c    **** 	triggerChannelsHead[1].potiCsPin = GPIO_PIN_12;
+ 150              		.loc 1 101 0
+ 151 0084 5A4B     		ldr	r3, .L6
+ 152 0086 4FF48052 		mov	r2, #4096
+ 153 008a A3F89420 		strh	r2, [r3, #148]	@ movhi
+ 102:Src/main.c    **** 	triggerChannelsHead[1].midinote = 38;
+ 154              		.loc 1 102 0
+ 155 008e 584B     		ldr	r3, .L6
+ 156 0090 2622     		movs	r2, #38
+ 157 0092 C3F88C20 		str	r2, [r3, #140]
+ 103:Src/main.c    **** 
+ 104:Src/main.c    **** 	triggerChannelsHead[2].potiCsPort = GPIOD;
+ 158              		.loc 1 104 0
+ 159 0096 564B     		ldr	r3, .L6
+ 160 0098 584A     		ldr	r2, .L6+12
+ 161 009a C3F8DC20 		str	r2, [r3, #220]
+ 105:Src/main.c    **** 	triggerChannelsHead[2].potiCsPin = GPIO_PIN_0;
+ 162              		.loc 1 105 0
+ 163 009e 544B     		ldr	r3, .L6
+ 164 00a0 0122     		movs	r2, #1
+ 165 00a2 A3F8E020 		strh	r2, [r3, #224]	@ movhi
+ 106:Src/main.c    **** 	triggerChannelsHead[2].midinote = 38;
+ 166              		.loc 1 106 0
+ 167 00a6 524B     		ldr	r3, .L6
+ 168 00a8 2622     		movs	r2, #38
+ 169 00aa C3F8D820 		str	r2, [r3, #216]
+ 107:Src/main.c    **** 
+ 108:Src/main.c    **** 	triggerChannelsHead[3].potiCsPort = GPIOD;
+ 170              		.loc 1 108 0
+ 171 00ae 504B     		ldr	r3, .L6
+ 172 00b0 524A     		ldr	r2, .L6+12
+ 173 00b2 C3F82821 		str	r2, [r3, #296]
+ 109:Src/main.c    **** 	triggerChannelsHead[3].potiCsPin = GPIO_PIN_1;
+ 174              		.loc 1 109 0
+ 175 00b6 4E4B     		ldr	r3, .L6
+ 176 00b8 0222     		movs	r2, #2
+ 177 00ba A3F82C21 		strh	r2, [r3, #300]	@ movhi
+ 110:Src/main.c    **** 	triggerChannelsHead[3].midinote = 38;
+ 178              		.loc 1 110 0
+ 179 00be 4C4B     		ldr	r3, .L6
+ 180 00c0 2622     		movs	r2, #38
+ARM GAS  /tmp/ccPTyFyG.s 			page 6
+
+
+ 181 00c2 C3F82421 		str	r2, [r3, #292]
+ 111:Src/main.c    **** 
+ 112:Src/main.c    **** 	triggerChannelsHead[4].potiCsPort = GPIOD;
+ 182              		.loc 1 112 0
+ 183 00c6 4A4B     		ldr	r3, .L6
+ 184 00c8 4C4A     		ldr	r2, .L6+12
+ 185 00ca C3F87421 		str	r2, [r3, #372]
+ 113:Src/main.c    **** 	triggerChannelsHead[4].potiCsPin = GPIO_PIN_2;
+ 186              		.loc 1 113 0
+ 187 00ce 484B     		ldr	r3, .L6
+ 188 00d0 0422     		movs	r2, #4
+ 189 00d2 A3F87821 		strh	r2, [r3, #376]	@ movhi
+ 114:Src/main.c    **** 	triggerChannelsHead[4].midinote = 38;
+ 190              		.loc 1 114 0
+ 191 00d6 464B     		ldr	r3, .L6
+ 192 00d8 2622     		movs	r2, #38
+ 193 00da C3F87021 		str	r2, [r3, #368]
+ 115:Src/main.c    **** 
+ 116:Src/main.c    **** 	triggerChannelsHead[5].potiCsPort = GPIOD;
+ 194              		.loc 1 116 0
+ 195 00de 444B     		ldr	r3, .L6
+ 196 00e0 464A     		ldr	r2, .L6+12
+ 197 00e2 C3F8C021 		str	r2, [r3, #448]
+ 117:Src/main.c    **** 	triggerChannelsHead[5].potiCsPin = GPIO_PIN_3;
+ 198              		.loc 1 117 0
+ 199 00e6 424B     		ldr	r3, .L6
+ 200 00e8 0822     		movs	r2, #8
+ 201 00ea A3F8C421 		strh	r2, [r3, #452]	@ movhi
+ 118:Src/main.c    **** 	triggerChannelsHead[5].midinote = 38;
+ 202              		.loc 1 118 0
+ 203 00ee 404B     		ldr	r3, .L6
+ 204 00f0 2622     		movs	r2, #38
+ 205 00f2 C3F8BC21 		str	r2, [r3, #444]
+ 119:Src/main.c    **** 
+ 120:Src/main.c    **** 	triggerChannelsHead[6].potiCsPort = GPIOD;
+ 206              		.loc 1 120 0
+ 207 00f6 3E4B     		ldr	r3, .L6
+ 208 00f8 404A     		ldr	r2, .L6+12
+ 209 00fa C3F80C22 		str	r2, [r3, #524]
+ 121:Src/main.c    **** 	triggerChannelsHead[6].potiCsPin = GPIO_PIN_4;
+ 210              		.loc 1 121 0
+ 211 00fe 3C4B     		ldr	r3, .L6
+ 212 0100 1022     		movs	r2, #16
+ 213 0102 A3F81022 		strh	r2, [r3, #528]	@ movhi
+ 122:Src/main.c    **** 	triggerChannelsHead[6].midinote = 38;
+ 214              		.loc 1 122 0
+ 215 0106 3A4B     		ldr	r3, .L6
+ 216 0108 2622     		movs	r2, #38
+ 217 010a C3F80822 		str	r2, [r3, #520]
+ 123:Src/main.c    **** 
+ 124:Src/main.c    **** 	triggerChannelsHead[7].potiCsPort = GPIOD;
+ 218              		.loc 1 124 0
+ 219 010e 384B     		ldr	r3, .L6
+ 220 0110 3A4A     		ldr	r2, .L6+12
+ 221 0112 C3F85822 		str	r2, [r3, #600]
+ 125:Src/main.c    **** 	triggerChannelsHead[7].potiCsPin = GPIO_PIN_5;
+ 222              		.loc 1 125 0
+ARM GAS  /tmp/ccPTyFyG.s 			page 7
+
+
+ 223 0116 364B     		ldr	r3, .L6
+ 224 0118 2022     		movs	r2, #32
+ 225 011a A3F85C22 		strh	r2, [r3, #604]	@ movhi
+ 126:Src/main.c    **** 	triggerChannelsHead[7].midinote = 38;
+ 226              		.loc 1 126 0
+ 227 011e 344B     		ldr	r3, .L6
+ 228 0120 2622     		movs	r2, #38
+ 229 0122 C3F85422 		str	r2, [r3, #596]
+ 127:Src/main.c    **** 
+ 128:Src/main.c    **** 	triggerChannelsHead[8].potiCsPort = GPIOD;
+ 230              		.loc 1 128 0
+ 231 0126 324B     		ldr	r3, .L6
+ 232 0128 344A     		ldr	r2, .L6+12
+ 233 012a C3F8A422 		str	r2, [r3, #676]
+ 129:Src/main.c    **** 	triggerChannelsHead[8].potiCsPin = GPIO_PIN_6;
+ 234              		.loc 1 129 0
+ 235 012e 304B     		ldr	r3, .L6
+ 236 0130 4022     		movs	r2, #64
+ 237 0132 A3F8A822 		strh	r2, [r3, #680]	@ movhi
+ 130:Src/main.c    **** 	triggerChannelsHead[8].midinote = 38;
+ 238              		.loc 1 130 0
+ 239 0136 2E4B     		ldr	r3, .L6
+ 240 0138 2622     		movs	r2, #38
+ 241 013a C3F8A022 		str	r2, [r3, #672]
+ 131:Src/main.c    **** 
+ 132:Src/main.c    **** 	triggerChannelsHead[9].potiCsPort = GPIOD;
+ 242              		.loc 1 132 0
+ 243 013e 2C4B     		ldr	r3, .L6
+ 244 0140 2E4A     		ldr	r2, .L6+12
+ 245 0142 C3F8F022 		str	r2, [r3, #752]
+ 133:Src/main.c    **** 	triggerChannelsHead[9].potiCsPin = GPIO_PIN_7;
+ 246              		.loc 1 133 0
+ 247 0146 2A4B     		ldr	r3, .L6
+ 248 0148 8022     		movs	r2, #128
+ 249 014a A3F8F422 		strh	r2, [r3, #756]	@ movhi
+ 134:Src/main.c    **** 	triggerChannelsHead[9].midinote = 38;
+ 250              		.loc 1 134 0
+ 251 014e 284B     		ldr	r3, .L6
+ 252 0150 2622     		movs	r2, #38
+ 253 0152 C3F8EC22 		str	r2, [r3, #748]
+ 135:Src/main.c    **** 
+ 136:Src/main.c    **** 	for(i = 0; i < headChannelCount; i++){
+ 254              		.loc 1 136 0
+ 255 0156 0023     		movs	r3, #0
+ 256 0158 7B60     		str	r3, [r7, #4]
+ 257 015a 16E0     		b	.L4
+ 258              	.L5:
+ 137:Src/main.c    **** 		HAL_GPIO_WritePin(triggerChannelsHead[i].potiCsPort,triggerChannelsHead[i].potiCsPin,GPIO_PIN_SET
+ 259              		.loc 1 137 0 discriminator 3
+ 260 015c 244A     		ldr	r2, .L6
+ 261 015e 7B68     		ldr	r3, [r7, #4]
+ 262 0160 4C21     		movs	r1, #76
+ 263 0162 01FB03F3 		mul	r3, r1, r3
+ 264 0166 1344     		add	r3, r3, r2
+ 265 0168 4433     		adds	r3, r3, #68
+ 266 016a 1868     		ldr	r0, [r3]
+ 267 016c 204A     		ldr	r2, .L6
+ARM GAS  /tmp/ccPTyFyG.s 			page 8
+
+
+ 268 016e 7B68     		ldr	r3, [r7, #4]
+ 269 0170 4C21     		movs	r1, #76
+ 270 0172 01FB03F3 		mul	r3, r1, r3
+ 271 0176 1344     		add	r3, r3, r2
+ 272 0178 4833     		adds	r3, r3, #72
+ 273 017a 1B88     		ldrh	r3, [r3]
+ 274 017c 0122     		movs	r2, #1
+ 275 017e 1946     		mov	r1, r3
+ 276 0180 FFF7FEFF 		bl	HAL_GPIO_WritePin
+ 136:Src/main.c    **** 		HAL_GPIO_WritePin(triggerChannelsHead[i].potiCsPort,triggerChannelsHead[i].potiCsPin,GPIO_PIN_SET
+ 277              		.loc 1 136 0 discriminator 3
+ 278 0184 7B68     		ldr	r3, [r7, #4]
+ 279 0186 0133     		adds	r3, r3, #1
+ 280 0188 7B60     		str	r3, [r7, #4]
+ 281              	.L4:
+ 136:Src/main.c    **** 		HAL_GPIO_WritePin(triggerChannelsHead[i].potiCsPort,triggerChannelsHead[i].potiCsPin,GPIO_PIN_SET
+ 282              		.loc 1 136 0 is_stmt 0 discriminator 1
+ 283 018a 7B68     		ldr	r3, [r7, #4]
+ 284 018c 092B     		cmp	r3, #9
+ 285 018e E5DD     		ble	.L5
+ 138:Src/main.c    **** 	}
+ 139:Src/main.c    **** 
+ 140:Src/main.c    **** 	HAL_Delay(10);
+ 286              		.loc 1 140 0 is_stmt 1
+ 287 0190 0A20     		movs	r0, #10
+ 288 0192 FFF7FEFF 		bl	HAL_Delay
+ 141:Src/main.c    **** 
+ 142:Src/main.c    **** 	//set initial wiper positions
+ 143:Src/main.c    **** 	triggerchannel_setWiper(&triggerChannelsHead[0], 16);
+ 289              		.loc 1 143 0
+ 290 0196 1021     		movs	r1, #16
+ 291 0198 1548     		ldr	r0, .L6
+ 292 019a FFF7FEFF 		bl	triggerchannel_setWiper
+ 144:Src/main.c    **** 	triggerchannel_setWiper(&triggerChannelsHead[1], 30);
+ 293              		.loc 1 144 0
+ 294 019e 1E21     		movs	r1, #30
+ 295 01a0 1748     		ldr	r0, .L6+16
+ 296 01a2 FFF7FEFF 		bl	triggerchannel_setWiper
+ 145:Src/main.c    **** 	triggerchannel_setWiper(&triggerChannelsHead[2], 30);
+ 297              		.loc 1 145 0
+ 298 01a6 1E21     		movs	r1, #30
+ 299 01a8 1648     		ldr	r0, .L6+20
+ 300 01aa FFF7FEFF 		bl	triggerchannel_setWiper
+ 146:Src/main.c    **** 	triggerchannel_setWiper(&triggerChannelsHead[3], 30);
+ 301              		.loc 1 146 0
+ 302 01ae 1E21     		movs	r1, #30
+ 303 01b0 1548     		ldr	r0, .L6+24
+ 304 01b2 FFF7FEFF 		bl	triggerchannel_setWiper
+ 147:Src/main.c    **** 	triggerchannel_setWiper(&triggerChannelsHead[4], 30);
+ 305              		.loc 1 147 0
+ 306 01b6 1E21     		movs	r1, #30
+ 307 01b8 1448     		ldr	r0, .L6+28
+ 308 01ba FFF7FEFF 		bl	triggerchannel_setWiper
+ 148:Src/main.c    **** 	triggerchannel_setWiper(&triggerChannelsHead[5], 30);
+ 309              		.loc 1 148 0
+ 310 01be 1E21     		movs	r1, #30
+ 311 01c0 1348     		ldr	r0, .L6+32
+ARM GAS  /tmp/ccPTyFyG.s 			page 9
+
+
+ 312 01c2 FFF7FEFF 		bl	triggerchannel_setWiper
+ 149:Src/main.c    **** 	triggerchannel_setWiper(&triggerChannelsHead[6], 30);
+ 313              		.loc 1 149 0
+ 314 01c6 1E21     		movs	r1, #30
+ 315 01c8 1248     		ldr	r0, .L6+36
+ 316 01ca FFF7FEFF 		bl	triggerchannel_setWiper
+ 150:Src/main.c    **** 	triggerchannel_setWiper(&triggerChannelsHead[7], 30);
+ 317              		.loc 1 150 0
+ 318 01ce 1E21     		movs	r1, #30
+ 319 01d0 1148     		ldr	r0, .L6+40
+ 320 01d2 FFF7FEFF 		bl	triggerchannel_setWiper
+ 151:Src/main.c    **** 	triggerchannel_setWiper(&triggerChannelsHead[8], 30);
+ 321              		.loc 1 151 0
+ 322 01d6 1E21     		movs	r1, #30
+ 323 01d8 1048     		ldr	r0, .L6+44
+ 324 01da FFF7FEFF 		bl	triggerchannel_setWiper
+ 152:Src/main.c    **** 	triggerchannel_setWiper(&triggerChannelsHead[9], 30);
+ 325              		.loc 1 152 0
+ 326 01de 1E21     		movs	r1, #30
+ 327 01e0 0F48     		ldr	r0, .L6+48
+ 328 01e2 FFF7FEFF 		bl	triggerchannel_setWiper
+ 153:Src/main.c    **** 
+ 154:Src/main.c    **** }
+ 329              		.loc 1 154 0
+ 330 01e6 00BF     		nop
+ 331 01e8 0837     		adds	r7, r7, #8
+ 332              	.LCFI3:
+ 333              		.cfi_def_cfa_offset 16
+ 334 01ea BD46     		mov	sp, r7
+ 335              	.LCFI4:
+ 336              		.cfi_def_cfa_register 13
+ 337              		@ sp needed
+ 338 01ec B0BD     		pop	{r4, r5, r7, pc}
+ 339              	.L7:
+ 340 01ee 00BF     		.align	2
+ 341              	.L6:
+ 342 01f0 00000000 		.word	triggerChannelsHead
+ 343 01f4 00000000 		.word	adc1Samples
+ 344 01f8 00080048 		.word	1207961600
+ 345 01fc 000C0048 		.word	1207962624
+ 346 0200 4C000000 		.word	triggerChannelsHead+76
+ 347 0204 98000000 		.word	triggerChannelsHead+152
+ 348 0208 E4000000 		.word	triggerChannelsHead+228
+ 349 020c 30010000 		.word	triggerChannelsHead+304
+ 350 0210 7C010000 		.word	triggerChannelsHead+380
+ 351 0214 C8010000 		.word	triggerChannelsHead+456
+ 352 0218 14020000 		.word	triggerChannelsHead+532
+ 353 021c 60020000 		.word	triggerChannelsHead+608
+ 354 0220 AC020000 		.word	triggerChannelsHead+684
+ 355              		.cfi_endproc
+ 356              	.LFE112:
+ 358              		.section	.text.initRimChannels,"ax",%progbits
+ 359              		.align	2
+ 360              		.global	initRimChannels
+ 361              		.thumb
+ 362              		.thumb_func
+ 364              	initRimChannels:
+ARM GAS  /tmp/ccPTyFyG.s 			page 10
+
+
+ 365              	.LFB113:
+ 155:Src/main.c    **** 
+ 156:Src/main.c    **** void initRimChannels(){
+ 366              		.loc 1 156 0
+ 367              		.cfi_startproc
+ 368              		@ args = 0, pretend = 0, frame = 8
+ 369              		@ frame_needed = 1, uses_anonymous_args = 0
+ 370 0000 B0B5     		push	{r4, r5, r7, lr}
+ 371              	.LCFI5:
+ 372              		.cfi_def_cfa_offset 16
+ 373              		.cfi_offset 4, -16
+ 374              		.cfi_offset 5, -12
+ 375              		.cfi_offset 7, -8
+ 376              		.cfi_offset 14, -4
+ 377 0002 84B0     		sub	sp, sp, #16
+ 378              	.LCFI6:
+ 379              		.cfi_def_cfa_offset 32
+ 380 0004 02AF     		add	r7, sp, #8
+ 381              	.LCFI7:
+ 382              		.cfi_def_cfa 7, 24
+ 157:Src/main.c    **** 
+ 158:Src/main.c    **** 	int i;
+ 159:Src/main.c    **** 	for(i = 0; i < headChannelCount; i++){
+ 383              		.loc 1 159 0
+ 384 0006 0023     		movs	r3, #0
+ 385 0008 7B60     		str	r3, [r7, #4]
+ 386 000a 4CE0     		b	.L9
+ 387              	.L12:
+ 160:Src/main.c    **** 		triggerChannelsRim[i].potiWiperId = MCP4261_WIPER1;
+ 388              		.loc 1 160 0
+ 389 000c 894A     		ldr	r2, .L15
+ 390 000e 7B68     		ldr	r3, [r7, #4]
+ 391 0010 4C21     		movs	r1, #76
+ 392 0012 01FB03F3 		mul	r3, r1, r3
+ 393 0016 1344     		add	r3, r3, r2
+ 394 0018 4A33     		adds	r3, r3, #74
+ 395 001a 1022     		movs	r2, #16
+ 396 001c 1A70     		strb	r2, [r3]
+ 161:Src/main.c    **** 		if(i < 7) triggerchannel_init(&triggerChannelsRim[i], &(adc2Samples[i]),&(adc2Samples[i+7]),&(adc
+ 397              		.loc 1 161 0
+ 398 001e 7B68     		ldr	r3, [r7, #4]
+ 399 0020 062B     		cmp	r3, #6
+ 400 0022 1EDC     		bgt	.L10
+ 401              		.loc 1 161 0 is_stmt 0 discriminator 1
+ 402 0024 7B68     		ldr	r3, [r7, #4]
+ 403 0026 4C22     		movs	r2, #76
+ 404 0028 02FB03F3 		mul	r3, r2, r3
+ 405 002c 814A     		ldr	r2, .L15
+ 406 002e 9818     		adds	r0, r3, r2
+ 407 0030 7B68     		ldr	r3, [r7, #4]
+ 408 0032 9B00     		lsls	r3, r3, #2
+ 409 0034 804A     		ldr	r2, .L15+4
+ 410 0036 9918     		adds	r1, r3, r2
+ 411 0038 7B68     		ldr	r3, [r7, #4]
+ 412 003a 0733     		adds	r3, r3, #7
+ 413 003c 9B00     		lsls	r3, r3, #2
+ 414 003e 7E4A     		ldr	r2, .L15+4
+ARM GAS  /tmp/ccPTyFyG.s 			page 11
+
+
+ 415 0040 9C18     		adds	r4, r3, r2
+ 416 0042 7B68     		ldr	r3, [r7, #4]
+ 417 0044 0E33     		adds	r3, r3, #14
+ 418 0046 9B00     		lsls	r3, r3, #2
+ 419 0048 7B4A     		ldr	r2, .L15+4
+ 420 004a 9D18     		adds	r5, r3, r2
+ 421 004c 7B68     		ldr	r3, [r7, #4]
+ 422 004e 1533     		adds	r3, r3, #21
+ 423 0050 9B00     		lsls	r3, r3, #2
+ 424 0052 794A     		ldr	r2, .L15+4
+ 425 0054 1344     		add	r3, r3, r2
+ 426 0056 0093     		str	r3, [sp]
+ 427 0058 2B46     		mov	r3, r5
+ 428 005a 2246     		mov	r2, r4
+ 429 005c FFF7FEFF 		bl	triggerchannel_init
+ 430 0060 1EE0     		b	.L11
+ 431              	.L10:
+ 162:Src/main.c    **** 		else triggerchannel_init(&triggerChannelsRim[i], &(adc3Samples[i-7]),&(adc3Samples[i-7+3]),&(adc3
+ 432              		.loc 1 162 0 is_stmt 1
+ 433 0062 7B68     		ldr	r3, [r7, #4]
+ 434 0064 4C22     		movs	r2, #76
+ 435 0066 02FB03F3 		mul	r3, r2, r3
+ 436 006a 724A     		ldr	r2, .L15
+ 437 006c 9818     		adds	r0, r3, r2
+ 438 006e 7B68     		ldr	r3, [r7, #4]
+ 439 0070 073B     		subs	r3, r3, #7
+ 440 0072 9B00     		lsls	r3, r3, #2
+ 441 0074 714A     		ldr	r2, .L15+8
+ 442 0076 9918     		adds	r1, r3, r2
+ 443 0078 7B68     		ldr	r3, [r7, #4]
+ 444 007a 043B     		subs	r3, r3, #4
+ 445 007c 9B00     		lsls	r3, r3, #2
+ 446 007e 6F4A     		ldr	r2, .L15+8
+ 447 0080 9C18     		adds	r4, r3, r2
+ 448 0082 7B68     		ldr	r3, [r7, #4]
+ 449 0084 013B     		subs	r3, r3, #1
+ 450 0086 9B00     		lsls	r3, r3, #2
+ 451 0088 6C4A     		ldr	r2, .L15+8
+ 452 008a 9D18     		adds	r5, r3, r2
+ 453 008c 7B68     		ldr	r3, [r7, #4]
+ 454 008e 0233     		adds	r3, r3, #2
+ 455 0090 9B00     		lsls	r3, r3, #2
+ 456 0092 6A4A     		ldr	r2, .L15+8
+ 457 0094 1344     		add	r3, r3, r2
+ 458 0096 0093     		str	r3, [sp]
+ 459 0098 2B46     		mov	r3, r5
+ 460 009a 2246     		mov	r2, r4
+ 461 009c FFF7FEFF 		bl	triggerchannel_init
+ 462              	.L11:
+ 159:Src/main.c    **** 		triggerChannelsRim[i].potiWiperId = MCP4261_WIPER1;
+ 463              		.loc 1 159 0 discriminator 2
+ 464 00a0 7B68     		ldr	r3, [r7, #4]
+ 465 00a2 0133     		adds	r3, r3, #1
+ 466 00a4 7B60     		str	r3, [r7, #4]
+ 467              	.L9:
+ 159:Src/main.c    **** 		triggerChannelsRim[i].potiWiperId = MCP4261_WIPER1;
+ 468              		.loc 1 159 0 is_stmt 0 discriminator 1
+ARM GAS  /tmp/ccPTyFyG.s 			page 12
+
+
+ 469 00a6 7B68     		ldr	r3, [r7, #4]
+ 470 00a8 092B     		cmp	r3, #9
+ 471 00aa AFDD     		ble	.L12
+ 163:Src/main.c    **** 	}
+ 164:Src/main.c    **** 
+ 165:Src/main.c    **** 	triggerChannelsRim[0].potiCsPort = GPIOC;
+ 472              		.loc 1 165 0 is_stmt 1
+ 473 00ac 614B     		ldr	r3, .L15
+ 474 00ae 644A     		ldr	r2, .L15+12
+ 475 00b0 5A64     		str	r2, [r3, #68]
+ 166:Src/main.c    **** 	triggerChannelsRim[0].potiCsPin = GPIO_PIN_11;
+ 476              		.loc 1 166 0
+ 477 00b2 604B     		ldr	r3, .L15
+ 478 00b4 4FF40062 		mov	r2, #2048
+ 479 00b8 A3F84820 		strh	r2, [r3, #72]	@ movhi
+ 167:Src/main.c    **** 	triggerChannelsRim[0].midinote = 36;
+ 480              		.loc 1 167 0
+ 481 00bc 5D4B     		ldr	r3, .L15
+ 482 00be 2422     		movs	r2, #36
+ 483 00c0 1A64     		str	r2, [r3, #64]
+ 168:Src/main.c    **** 
+ 169:Src/main.c    **** 	triggerChannelsRim[1].potiCsPort = GPIOC;
+ 484              		.loc 1 169 0
+ 485 00c2 5C4B     		ldr	r3, .L15
+ 486 00c4 5E4A     		ldr	r2, .L15+12
+ 487 00c6 C3F89020 		str	r2, [r3, #144]
+ 170:Src/main.c    **** 	triggerChannelsRim[1].potiCsPin = GPIO_PIN_12;
+ 488              		.loc 1 170 0
+ 489 00ca 5A4B     		ldr	r3, .L15
+ 490 00cc 4FF48052 		mov	r2, #4096
+ 491 00d0 A3F89420 		strh	r2, [r3, #148]	@ movhi
+ 171:Src/main.c    **** 	triggerChannelsRim[1].midinote = 38;
+ 492              		.loc 1 171 0
+ 493 00d4 574B     		ldr	r3, .L15
+ 494 00d6 2622     		movs	r2, #38
+ 495 00d8 C3F88C20 		str	r2, [r3, #140]
+ 172:Src/main.c    **** 
+ 173:Src/main.c    **** 	triggerChannelsRim[2].potiCsPort = GPIOD;
+ 496              		.loc 1 173 0
+ 497 00dc 554B     		ldr	r3, .L15
+ 498 00de 594A     		ldr	r2, .L15+16
+ 499 00e0 C3F8DC20 		str	r2, [r3, #220]
+ 174:Src/main.c    **** 	triggerChannelsRim[2].potiCsPin = GPIO_PIN_0;
+ 500              		.loc 1 174 0
+ 501 00e4 534B     		ldr	r3, .L15
+ 502 00e6 0122     		movs	r2, #1
+ 503 00e8 A3F8E020 		strh	r2, [r3, #224]	@ movhi
+ 175:Src/main.c    **** 	triggerChannelsRim[2].midinote = 38;
+ 504              		.loc 1 175 0
+ 505 00ec 514B     		ldr	r3, .L15
+ 506 00ee 2622     		movs	r2, #38
+ 507 00f0 C3F8D820 		str	r2, [r3, #216]
+ 176:Src/main.c    **** 
+ 177:Src/main.c    **** 	triggerChannelsRim[3].potiCsPort = GPIOD;
+ 508              		.loc 1 177 0
+ 509 00f4 4F4B     		ldr	r3, .L15
+ 510 00f6 534A     		ldr	r2, .L15+16
+ARM GAS  /tmp/ccPTyFyG.s 			page 13
+
+
+ 511 00f8 C3F82821 		str	r2, [r3, #296]
+ 178:Src/main.c    **** 	triggerChannelsRim[3].potiCsPin = GPIO_PIN_1;
+ 512              		.loc 1 178 0
+ 513 00fc 4D4B     		ldr	r3, .L15
+ 514 00fe 0222     		movs	r2, #2
+ 515 0100 A3F82C21 		strh	r2, [r3, #300]	@ movhi
+ 179:Src/main.c    **** 	triggerChannelsRim[3].midinote = 38;
+ 516              		.loc 1 179 0
+ 517 0104 4B4B     		ldr	r3, .L15
+ 518 0106 2622     		movs	r2, #38
+ 519 0108 C3F82421 		str	r2, [r3, #292]
+ 180:Src/main.c    **** 
+ 181:Src/main.c    **** 	triggerChannelsRim[4].potiCsPort = GPIOD;
+ 520              		.loc 1 181 0
+ 521 010c 494B     		ldr	r3, .L15
+ 522 010e 4D4A     		ldr	r2, .L15+16
+ 523 0110 C3F87421 		str	r2, [r3, #372]
+ 182:Src/main.c    **** 	triggerChannelsRim[4].potiCsPin = GPIO_PIN_2;
+ 524              		.loc 1 182 0
+ 525 0114 474B     		ldr	r3, .L15
+ 526 0116 0422     		movs	r2, #4
+ 527 0118 A3F87821 		strh	r2, [r3, #376]	@ movhi
+ 183:Src/main.c    **** 	triggerChannelsRim[4].midinote = 38;
+ 528              		.loc 1 183 0
+ 529 011c 454B     		ldr	r3, .L15
+ 530 011e 2622     		movs	r2, #38
+ 531 0120 C3F87021 		str	r2, [r3, #368]
+ 184:Src/main.c    **** 
+ 185:Src/main.c    **** 	triggerChannelsRim[5].potiCsPort = GPIOD;
+ 532              		.loc 1 185 0
+ 533 0124 434B     		ldr	r3, .L15
+ 534 0126 474A     		ldr	r2, .L15+16
+ 535 0128 C3F8C021 		str	r2, [r3, #448]
+ 186:Src/main.c    **** 	triggerChannelsRim[5].potiCsPin = GPIO_PIN_3;
+ 536              		.loc 1 186 0
+ 537 012c 414B     		ldr	r3, .L15
+ 538 012e 0822     		movs	r2, #8
+ 539 0130 A3F8C421 		strh	r2, [r3, #452]	@ movhi
+ 187:Src/main.c    **** 	triggerChannelsRim[5].midinote = 38;
+ 540              		.loc 1 187 0
+ 541 0134 3F4B     		ldr	r3, .L15
+ 542 0136 2622     		movs	r2, #38
+ 543 0138 C3F8BC21 		str	r2, [r3, #444]
+ 188:Src/main.c    **** 
+ 189:Src/main.c    **** 	triggerChannelsRim[6].potiCsPort = GPIOD;
+ 544              		.loc 1 189 0
+ 545 013c 3D4B     		ldr	r3, .L15
+ 546 013e 414A     		ldr	r2, .L15+16
+ 547 0140 C3F80C22 		str	r2, [r3, #524]
+ 190:Src/main.c    **** 	triggerChannelsRim[6].potiCsPin = GPIO_PIN_4;
+ 548              		.loc 1 190 0
+ 549 0144 3B4B     		ldr	r3, .L15
+ 550 0146 1022     		movs	r2, #16
+ 551 0148 A3F81022 		strh	r2, [r3, #528]	@ movhi
+ 191:Src/main.c    **** 	triggerChannelsRim[6].midinote = 38;
+ 552              		.loc 1 191 0
+ 553 014c 394B     		ldr	r3, .L15
+ARM GAS  /tmp/ccPTyFyG.s 			page 14
+
+
+ 554 014e 2622     		movs	r2, #38
+ 555 0150 C3F80822 		str	r2, [r3, #520]
+ 192:Src/main.c    **** 
+ 193:Src/main.c    **** 	triggerChannelsRim[7].potiCsPort = GPIOD;
+ 556              		.loc 1 193 0
+ 557 0154 374B     		ldr	r3, .L15
+ 558 0156 3B4A     		ldr	r2, .L15+16
+ 559 0158 C3F85822 		str	r2, [r3, #600]
+ 194:Src/main.c    **** 	triggerChannelsRim[7].potiCsPin = GPIO_PIN_5;
+ 560              		.loc 1 194 0
+ 561 015c 354B     		ldr	r3, .L15
+ 562 015e 2022     		movs	r2, #32
+ 563 0160 A3F85C22 		strh	r2, [r3, #604]	@ movhi
+ 195:Src/main.c    **** 	triggerChannelsRim[7].midinote = 38;
+ 564              		.loc 1 195 0
+ 565 0164 334B     		ldr	r3, .L15
+ 566 0166 2622     		movs	r2, #38
+ 567 0168 C3F85422 		str	r2, [r3, #596]
+ 196:Src/main.c    **** 
+ 197:Src/main.c    **** 	triggerChannelsRim[8].potiCsPort = GPIOD;
+ 568              		.loc 1 197 0
+ 569 016c 314B     		ldr	r3, .L15
+ 570 016e 354A     		ldr	r2, .L15+16
+ 571 0170 C3F8A422 		str	r2, [r3, #676]
+ 198:Src/main.c    **** 	triggerChannelsRim[8].potiCsPin = GPIO_PIN_6;
+ 572              		.loc 1 198 0
+ 573 0174 2F4B     		ldr	r3, .L15
+ 574 0176 4022     		movs	r2, #64
+ 575 0178 A3F8A822 		strh	r2, [r3, #680]	@ movhi
+ 199:Src/main.c    **** 	triggerChannelsRim[8].midinote = 38;
+ 576              		.loc 1 199 0
+ 577 017c 2D4B     		ldr	r3, .L15
+ 578 017e 2622     		movs	r2, #38
+ 579 0180 C3F8A022 		str	r2, [r3, #672]
+ 200:Src/main.c    **** 
+ 201:Src/main.c    **** 	triggerChannelsRim[9].potiCsPort = GPIOD;
+ 580              		.loc 1 201 0
+ 581 0184 2B4B     		ldr	r3, .L15
+ 582 0186 2F4A     		ldr	r2, .L15+16
+ 583 0188 C3F8F022 		str	r2, [r3, #752]
+ 202:Src/main.c    **** 	triggerChannelsRim[9].potiCsPin = GPIO_PIN_7;
+ 584              		.loc 1 202 0
+ 585 018c 294B     		ldr	r3, .L15
+ 586 018e 8022     		movs	r2, #128
+ 587 0190 A3F8F422 		strh	r2, [r3, #756]	@ movhi
+ 203:Src/main.c    **** 	triggerChannelsRim[9].midinote = 38;
+ 588              		.loc 1 203 0
+ 589 0194 274B     		ldr	r3, .L15
+ 590 0196 2622     		movs	r2, #38
+ 591 0198 C3F8EC22 		str	r2, [r3, #748]
+ 204:Src/main.c    **** 
+ 205:Src/main.c    **** 
+ 206:Src/main.c    **** 	for(i = 0; i < rimChannelCount; i++){
+ 592              		.loc 1 206 0
+ 593 019c 0023     		movs	r3, #0
+ 594 019e 7B60     		str	r3, [r7, #4]
+ 595 01a0 16E0     		b	.L13
+ARM GAS  /tmp/ccPTyFyG.s 			page 15
+
+
+ 596              	.L14:
+ 207:Src/main.c    **** 
+ 208:Src/main.c    **** 		HAL_GPIO_WritePin(triggerChannelsRim[i].potiCsPort,triggerChannelsRim[i].potiCsPin,GPIO_PIN_SET);
+ 597              		.loc 1 208 0 discriminator 3
+ 598 01a2 244A     		ldr	r2, .L15
+ 599 01a4 7B68     		ldr	r3, [r7, #4]
+ 600 01a6 4C21     		movs	r1, #76
+ 601 01a8 01FB03F3 		mul	r3, r1, r3
+ 602 01ac 1344     		add	r3, r3, r2
+ 603 01ae 4433     		adds	r3, r3, #68
+ 604 01b0 1868     		ldr	r0, [r3]
+ 605 01b2 204A     		ldr	r2, .L15
+ 606 01b4 7B68     		ldr	r3, [r7, #4]
+ 607 01b6 4C21     		movs	r1, #76
+ 608 01b8 01FB03F3 		mul	r3, r1, r3
+ 609 01bc 1344     		add	r3, r3, r2
+ 610 01be 4833     		adds	r3, r3, #72
+ 611 01c0 1B88     		ldrh	r3, [r3]
+ 612 01c2 0122     		movs	r2, #1
+ 613 01c4 1946     		mov	r1, r3
+ 614 01c6 FFF7FEFF 		bl	HAL_GPIO_WritePin
+ 206:Src/main.c    **** 
+ 615              		.loc 1 206 0 discriminator 3
+ 616 01ca 7B68     		ldr	r3, [r7, #4]
+ 617 01cc 0133     		adds	r3, r3, #1
+ 618 01ce 7B60     		str	r3, [r7, #4]
+ 619              	.L13:
+ 206:Src/main.c    **** 
+ 620              		.loc 1 206 0 is_stmt 0 discriminator 1
+ 621 01d0 7B68     		ldr	r3, [r7, #4]
+ 622 01d2 092B     		cmp	r3, #9
+ 623 01d4 E5DD     		ble	.L14
+ 209:Src/main.c    **** 
+ 210:Src/main.c    **** 	}
+ 211:Src/main.c    **** 
+ 212:Src/main.c    **** 	HAL_Delay(10);
+ 624              		.loc 1 212 0 is_stmt 1
+ 625 01d6 0A20     		movs	r0, #10
+ 626 01d8 FFF7FEFF 		bl	HAL_Delay
+ 213:Src/main.c    **** 
+ 214:Src/main.c    **** 	triggerchannel_setWiper(&triggerChannelsRim[0], 50);
+ 627              		.loc 1 214 0
+ 628 01dc 3221     		movs	r1, #50
+ 629 01de 1548     		ldr	r0, .L15
+ 630 01e0 FFF7FEFF 		bl	triggerchannel_setWiper
+ 215:Src/main.c    **** 	triggerchannel_setWiper(&triggerChannelsRim[1], 50);
+ 631              		.loc 1 215 0
+ 632 01e4 3221     		movs	r1, #50
+ 633 01e6 1848     		ldr	r0, .L15+20
+ 634 01e8 FFF7FEFF 		bl	triggerchannel_setWiper
+ 216:Src/main.c    **** 	triggerchannel_setWiper(&triggerChannelsRim[2], 50);
+ 635              		.loc 1 216 0
+ 636 01ec 3221     		movs	r1, #50
+ 637 01ee 1748     		ldr	r0, .L15+24
+ 638 01f0 FFF7FEFF 		bl	triggerchannel_setWiper
+ 217:Src/main.c    **** 	triggerchannel_setWiper(&triggerChannelsRim[3], 50);
+ 639              		.loc 1 217 0
+ARM GAS  /tmp/ccPTyFyG.s 			page 16
+
+
+ 640 01f4 3221     		movs	r1, #50
+ 641 01f6 1648     		ldr	r0, .L15+28
+ 642 01f8 FFF7FEFF 		bl	triggerchannel_setWiper
+ 218:Src/main.c    **** 	triggerchannel_setWiper(&triggerChannelsRim[4], 50);
+ 643              		.loc 1 218 0
+ 644 01fc 3221     		movs	r1, #50
+ 645 01fe 1548     		ldr	r0, .L15+32
+ 646 0200 FFF7FEFF 		bl	triggerchannel_setWiper
+ 219:Src/main.c    **** 	triggerchannel_setWiper(&triggerChannelsRim[5], 50);
+ 647              		.loc 1 219 0
+ 648 0204 3221     		movs	r1, #50
+ 649 0206 1448     		ldr	r0, .L15+36
+ 650 0208 FFF7FEFF 		bl	triggerchannel_setWiper
+ 220:Src/main.c    **** 	triggerchannel_setWiper(&triggerChannelsRim[6], 50);
+ 651              		.loc 1 220 0
+ 652 020c 3221     		movs	r1, #50
+ 653 020e 1348     		ldr	r0, .L15+40
+ 654 0210 FFF7FEFF 		bl	triggerchannel_setWiper
+ 221:Src/main.c    **** 	triggerchannel_setWiper(&triggerChannelsRim[7], 50);
+ 655              		.loc 1 221 0
+ 656 0214 3221     		movs	r1, #50
+ 657 0216 1248     		ldr	r0, .L15+44
+ 658 0218 FFF7FEFF 		bl	triggerchannel_setWiper
+ 222:Src/main.c    **** 	triggerchannel_setWiper(&triggerChannelsRim[8], 50);
+ 659              		.loc 1 222 0
+ 660 021c 3221     		movs	r1, #50
+ 661 021e 1148     		ldr	r0, .L15+48
+ 662 0220 FFF7FEFF 		bl	triggerchannel_setWiper
+ 223:Src/main.c    **** 	triggerchannel_setWiper(&triggerChannelsRim[9], 50);
+ 663              		.loc 1 223 0
+ 664 0224 3221     		movs	r1, #50
+ 665 0226 1048     		ldr	r0, .L15+52
+ 666 0228 FFF7FEFF 		bl	triggerchannel_setWiper
+ 224:Src/main.c    **** 
+ 225:Src/main.c    **** }
+ 667              		.loc 1 225 0
+ 668 022c 00BF     		nop
+ 669 022e 0837     		adds	r7, r7, #8
+ 670              	.LCFI8:
+ 671              		.cfi_def_cfa_offset 16
+ 672 0230 BD46     		mov	sp, r7
+ 673              	.LCFI9:
+ 674              		.cfi_def_cfa_register 13
+ 675              		@ sp needed
+ 676 0232 B0BD     		pop	{r4, r5, r7, pc}
+ 677              	.L16:
+ 678              		.align	2
+ 679              	.L15:
+ 680 0234 00000000 		.word	triggerChannelsRim
+ 681 0238 00000000 		.word	adc2Samples
+ 682 023c 00000000 		.word	adc3Samples
+ 683 0240 00080048 		.word	1207961600
+ 684 0244 000C0048 		.word	1207962624
+ 685 0248 4C000000 		.word	triggerChannelsRim+76
+ 686 024c 98000000 		.word	triggerChannelsRim+152
+ 687 0250 E4000000 		.word	triggerChannelsRim+228
+ 688 0254 30010000 		.word	triggerChannelsRim+304
+ARM GAS  /tmp/ccPTyFyG.s 			page 17
+
+
+ 689 0258 7C010000 		.word	triggerChannelsRim+380
+ 690 025c C8010000 		.word	triggerChannelsRim+456
+ 691 0260 14020000 		.word	triggerChannelsRim+532
+ 692 0264 60020000 		.word	triggerChannelsRim+608
+ 693 0268 AC020000 		.word	triggerChannelsRim+684
+ 694              		.cfi_endproc
+ 695              	.LFE113:
+ 697              		.section	.text.initHiHatChannels,"ax",%progbits
+ 698              		.align	2
+ 699              		.global	initHiHatChannels
+ 700              		.thumb
+ 701              		.thumb_func
+ 703              	initHiHatChannels:
+ 704              	.LFB114:
+ 226:Src/main.c    **** 
+ 227:Src/main.c    **** void initHiHatChannels(){
+ 705              		.loc 1 227 0
+ 706              		.cfi_startproc
+ 707              		@ args = 0, pretend = 0, frame = 0
+ 708              		@ frame_needed = 1, uses_anonymous_args = 0
+ 709 0000 80B5     		push	{r7, lr}
+ 710              	.LCFI10:
+ 711              		.cfi_def_cfa_offset 8
+ 712              		.cfi_offset 7, -8
+ 713              		.cfi_offset 14, -4
+ 714 0002 00AF     		add	r7, sp, #0
+ 715              	.LCFI11:
+ 716              		.cfi_def_cfa_register 7
+ 228:Src/main.c    **** 		hihatchannel_init(&hiHatChannels[0], &adc4Samples[0], &triggerChannelsHead [0]);
+ 717              		.loc 1 228 0
+ 718 0004 054A     		ldr	r2, .L18
+ 719 0006 0649     		ldr	r1, .L18+4
+ 720 0008 0648     		ldr	r0, .L18+8
+ 721 000a FFF7FEFF 		bl	hihatchannel_init
+ 229:Src/main.c    **** 		hihatchannel_init(&hiHatChannels[1], &adc4Samples[1], &triggerChannelsRim [9]);
+ 722              		.loc 1 229 0
+ 723 000e 064A     		ldr	r2, .L18+12
+ 724 0010 0649     		ldr	r1, .L18+16
+ 725 0012 0748     		ldr	r0, .L18+20
+ 726 0014 FFF7FEFF 		bl	hihatchannel_init
+ 230:Src/main.c    **** 
+ 231:Src/main.c    **** }
+ 727              		.loc 1 231 0
+ 728 0018 00BF     		nop
+ 729 001a 80BD     		pop	{r7, pc}
+ 730              	.L19:
+ 731              		.align	2
+ 732              	.L18:
+ 733 001c 00000000 		.word	triggerChannelsHead
+ 734 0020 00000000 		.word	adc4Samples
+ 735 0024 00000000 		.word	hiHatChannels
+ 736 0028 AC020000 		.word	triggerChannelsRim+684
+ 737 002c 04000000 		.word	adc4Samples+4
+ 738 0030 44000000 		.word	hiHatChannels+68
+ 739              		.cfi_endproc
+ 740              	.LFE114:
+ 742              		.global	btnDebounceIRQTimer
+ARM GAS  /tmp/ccPTyFyG.s 			page 18
+
+
+ 743              		.section	.bss.btnDebounceIRQTimer,"aw",%nobits
+ 744              		.align	2
+ 747              	btnDebounceIRQTimer:
+ 748 0000 00000000 		.space	12
+ 748      00000000 
+ 748      00000000 
+ 749              		.section	.text.HAL_GPIO_EXTI_Callback,"ax",%progbits
+ 750              		.align	2
+ 751              		.global	HAL_GPIO_EXTI_Callback
+ 752              		.thumb
+ 753              		.thumb_func
+ 755              	HAL_GPIO_EXTI_Callback:
+ 756              	.LFB115:
+ 232:Src/main.c    **** 
+ 233:Src/main.c    **** 
+ 234:Src/main.c    **** //
+ 235:Src/main.c    **** //int getHiHatResistance(HiHatChannel *chan){
+ 236:Src/main.c    **** //	int16_t adcValue = -1; // -1 is Errorvalue
+ 237:Src/main.c    **** //
+ 238:Src/main.c    **** //	// setup adc for channel
+ 239:Src/main.c    **** //	HAL_ADC_ConfigChannel(chan->adcHandle, &chan->adcSConfig);
+ 240:Src/main.c    **** //
+ 241:Src/main.c    **** //
+ 242:Src/main.c    **** //	HAL_ADC_Start(chan->adcHandle);									//start sampling
+ 243:Src/main.c    **** //	HAL_ADC_PollForConversion(chan->adcHandle, 100);					//wait for conversion
+ 244:Src/main.c    **** //
+ 245:Src/main.c    **** //	if(HAL_ADC_GetState(chan->adcHandle) == HAL_ADC_STATE_EOC_REG){ 	//check ADC error state
+ 246:Src/main.c    **** //		adcValue = HAL_ADC_GetValue(chan->adcHandle);
+ 247:Src/main.c    **** //
+ 248:Src/main.c    **** //		HAL_ADC_Stop(chan->adcHandle);
+ 249:Src/main.c    **** //	}
+ 250:Src/main.c    **** //
+ 251:Src/main.c    **** //	int resistance = 10000/( (3.3 * 4096) / (adcValue * 3.3) -1 );
+ 252:Src/main.c    **** //
+ 253:Src/main.c    **** //	return resistance;
+ 254:Src/main.c    **** //}
+ 255:Src/main.c    **** 
+ 256:Src/main.c    **** 
+ 257:Src/main.c    **** 
+ 258:Src/main.c    **** volatile int btnDebounceIRQTimer[3] = {0,0,0};
+ 259:Src/main.c    **** void HAL_GPIO_EXTI_Callback (uint16_t GPIO_Pin){
+ 757              		.loc 1 259 0
+ 758              		.cfi_startproc
+ 759              		@ args = 0, pretend = 0, frame = 8
+ 760              		@ frame_needed = 1, uses_anonymous_args = 0
+ 761              		@ link register save eliminated.
+ 762 0000 80B4     		push	{r7}
+ 763              	.LCFI12:
+ 764              		.cfi_def_cfa_offset 4
+ 765              		.cfi_offset 7, -4
+ 766 0002 83B0     		sub	sp, sp, #12
+ 767              	.LCFI13:
+ 768              		.cfi_def_cfa_offset 16
+ 769 0004 00AF     		add	r7, sp, #0
+ 770              	.LCFI14:
+ 771              		.cfi_def_cfa_register 7
+ 772 0006 0346     		mov	r3, r0
+ARM GAS  /tmp/ccPTyFyG.s 			page 19
+
+
+ 773 0008 FB80     		strh	r3, [r7, #6]	@ movhi
+ 260:Src/main.c    **** 	if(GPIO_Pin == GPIO_PIN_10) btnDebounceIRQTimer[0] = 1;	// Btn 0 clicked
+ 774              		.loc 1 260 0
+ 775 000a FB88     		ldrh	r3, [r7, #6]
+ 776 000c B3F5806F 		cmp	r3, #1024
+ 777 0010 02D1     		bne	.L21
+ 778              		.loc 1 260 0 is_stmt 0 discriminator 1
+ 779 0012 0B4B     		ldr	r3, .L25
+ 780 0014 0122     		movs	r2, #1
+ 781 0016 1A60     		str	r2, [r3]
+ 782              	.L21:
+ 261:Src/main.c    **** 	if(GPIO_Pin == GPIO_PIN_11) btnDebounceIRQTimer[1] = 1;	// Btn 1 clicked
+ 783              		.loc 1 261 0 is_stmt 1
+ 784 0018 FB88     		ldrh	r3, [r7, #6]
+ 785 001a B3F5006F 		cmp	r3, #2048
+ 786 001e 02D1     		bne	.L22
+ 787              		.loc 1 261 0 is_stmt 0 discriminator 1
+ 788 0020 074B     		ldr	r3, .L25
+ 789 0022 0122     		movs	r2, #1
+ 790 0024 5A60     		str	r2, [r3, #4]
+ 791              	.L22:
+ 262:Src/main.c    **** 	if(GPIO_Pin == GPIO_PIN_12) btnDebounceIRQTimer[2] = 1;	// Btn 2 clicked
+ 792              		.loc 1 262 0 is_stmt 1
+ 793 0026 FB88     		ldrh	r3, [r7, #6]
+ 794 0028 B3F5805F 		cmp	r3, #4096
+ 795 002c 02D1     		bne	.L24
+ 796              		.loc 1 262 0 is_stmt 0 discriminator 1
+ 797 002e 044B     		ldr	r3, .L25
+ 798 0030 0122     		movs	r2, #1
+ 799 0032 9A60     		str	r2, [r3, #8]
+ 800              	.L24:
+ 263:Src/main.c    **** }
+ 801              		.loc 1 263 0 is_stmt 1
+ 802 0034 00BF     		nop
+ 803 0036 0C37     		adds	r7, r7, #12
+ 804              	.LCFI15:
+ 805              		.cfi_def_cfa_offset 4
+ 806 0038 BD46     		mov	sp, r7
+ 807              	.LCFI16:
+ 808              		.cfi_def_cfa_register 13
+ 809              		@ sp needed
+ 810 003a 5DF8047B 		ldr	r7, [sp], #4
+ 811              	.LCFI17:
+ 812              		.cfi_restore 7
+ 813              		.cfi_def_cfa_offset 0
+ 814 003e 7047     		bx	lr
+ 815              	.L26:
+ 816              		.align	2
+ 817              	.L25:
+ 818 0040 00000000 		.word	btnDebounceIRQTimer
+ 819              		.cfi_endproc
+ 820              	.LFE115:
+ 822              		.section	.text.HAL_UART_TxCpltCallback,"ax",%progbits
+ 823              		.align	2
+ 824              		.global	HAL_UART_TxCpltCallback
+ 825              		.thumb
+ 826              		.thumb_func
+ARM GAS  /tmp/ccPTyFyG.s 			page 20
+
+
+ 828              	HAL_UART_TxCpltCallback:
+ 829              	.LFB116:
+ 264:Src/main.c    **** 
+ 265:Src/main.c    **** void HAL_UART_TxCpltCallback (UART_HandleTypeDef *huart){
+ 830              		.loc 1 265 0
+ 831              		.cfi_startproc
+ 832              		@ args = 0, pretend = 0, frame = 8
+ 833              		@ frame_needed = 1, uses_anonymous_args = 0
+ 834 0000 80B5     		push	{r7, lr}
+ 835              	.LCFI18:
+ 836              		.cfi_def_cfa_offset 8
+ 837              		.cfi_offset 7, -8
+ 838              		.cfi_offset 14, -4
+ 839 0002 82B0     		sub	sp, sp, #8
+ 840              	.LCFI19:
+ 841              		.cfi_def_cfa_offset 16
+ 842 0004 00AF     		add	r7, sp, #0
+ 843              	.LCFI20:
+ 844              		.cfi_def_cfa_register 7
+ 845 0006 7860     		str	r0, [r7, #4]
+ 266:Src/main.c    **** 	if(midiMessagebuffer != 0 && midiMessagebuffer->uarthandle == huart) uartmessagebuffer_onTxComplet
+ 846              		.loc 1 266 0
+ 847 0008 094B     		ldr	r3, .L30
+ 848 000a 1B68     		ldr	r3, [r3]
+ 849 000c 002B     		cmp	r3, #0
+ 850 000e 0AD0     		beq	.L29
+ 851              		.loc 1 266 0 is_stmt 0 discriminator 1
+ 852 0010 074B     		ldr	r3, .L30
+ 853 0012 1B68     		ldr	r3, [r3]
+ 854 0014 1A68     		ldr	r2, [r3]
+ 855 0016 7B68     		ldr	r3, [r7, #4]
+ 856 0018 9A42     		cmp	r2, r3
+ 857 001a 04D1     		bne	.L29
+ 858              		.loc 1 266 0 discriminator 2
+ 859 001c 044B     		ldr	r3, .L30
+ 860 001e 1B68     		ldr	r3, [r3]
+ 861 0020 1846     		mov	r0, r3
+ 862 0022 FFF7FEFF 		bl	uartmessagebuffer_onTxComplete
+ 863              	.L29:
+ 267:Src/main.c    **** }
+ 864              		.loc 1 267 0 is_stmt 1
+ 865 0026 00BF     		nop
+ 866 0028 0837     		adds	r7, r7, #8
+ 867              	.LCFI21:
+ 868              		.cfi_def_cfa_offset 8
+ 869 002a BD46     		mov	sp, r7
+ 870              	.LCFI22:
+ 871              		.cfi_def_cfa_register 13
+ 872              		@ sp needed
+ 873 002c 80BD     		pop	{r7, pc}
+ 874              	.L31:
+ 875 002e 00BF     		.align	2
+ 876              	.L30:
+ 877 0030 00000000 		.word	midiMessagebuffer
+ 878              		.cfi_endproc
+ 879              	.LFE116:
+ 881              		.section	.text.HAL_UART_ErrorCallback,"ax",%progbits
+ARM GAS  /tmp/ccPTyFyG.s 			page 21
+
+
+ 882              		.align	2
+ 883              		.global	HAL_UART_ErrorCallback
+ 884              		.thumb
+ 885              		.thumb_func
+ 887              	HAL_UART_ErrorCallback:
+ 888              	.LFB117:
+ 268:Src/main.c    **** void HAL_UART_ErrorCallback (UART_HandleTypeDef *huart){
+ 889              		.loc 1 268 0
+ 890              		.cfi_startproc
+ 891              		@ args = 0, pretend = 0, frame = 8
+ 892              		@ frame_needed = 1, uses_anonymous_args = 0
+ 893 0000 80B5     		push	{r7, lr}
+ 894              	.LCFI23:
+ 895              		.cfi_def_cfa_offset 8
+ 896              		.cfi_offset 7, -8
+ 897              		.cfi_offset 14, -4
+ 898 0002 82B0     		sub	sp, sp, #8
+ 899              	.LCFI24:
+ 900              		.cfi_def_cfa_offset 16
+ 901 0004 00AF     		add	r7, sp, #0
+ 902              	.LCFI25:
+ 903              		.cfi_def_cfa_register 7
+ 904 0006 7860     		str	r0, [r7, #4]
+ 269:Src/main.c    **** 	if(midiMessagebuffer != 0 && midiMessagebuffer->uarthandle == huart) uartmessagebuffer_onTxComplet
+ 905              		.loc 1 269 0
+ 906 0008 094B     		ldr	r3, .L35
+ 907 000a 1B68     		ldr	r3, [r3]
+ 908 000c 002B     		cmp	r3, #0
+ 909 000e 0AD0     		beq	.L34
+ 910              		.loc 1 269 0 is_stmt 0 discriminator 1
+ 911 0010 074B     		ldr	r3, .L35
+ 912 0012 1B68     		ldr	r3, [r3]
+ 913 0014 1A68     		ldr	r2, [r3]
+ 914 0016 7B68     		ldr	r3, [r7, #4]
+ 915 0018 9A42     		cmp	r2, r3
+ 916 001a 04D1     		bne	.L34
+ 917              		.loc 1 269 0 discriminator 2
+ 918 001c 044B     		ldr	r3, .L35
+ 919 001e 1B68     		ldr	r3, [r3]
+ 920 0020 1846     		mov	r0, r3
+ 921 0022 FFF7FEFF 		bl	uartmessagebuffer_onTxComplete
+ 922              	.L34:
+ 270:Src/main.c    **** 
+ 271:Src/main.c    **** }
+ 923              		.loc 1 271 0 is_stmt 1
+ 924 0026 00BF     		nop
+ 925 0028 0837     		adds	r7, r7, #8
+ 926              	.LCFI26:
+ 927              		.cfi_def_cfa_offset 8
+ 928 002a BD46     		mov	sp, r7
+ 929              	.LCFI27:
+ 930              		.cfi_def_cfa_register 13
+ 931              		@ sp needed
+ 932 002c 80BD     		pop	{r7, pc}
+ 933              	.L36:
+ 934 002e 00BF     		.align	2
+ 935              	.L35:
+ARM GAS  /tmp/ccPTyFyG.s 			page 22
+
+
+ 936 0030 00000000 		.word	midiMessagebuffer
+ 937              		.cfi_endproc
+ 938              	.LFE117:
+ 940              		.section	.text.onTimer1Triggered,"ax",%progbits
+ 941              		.align	2
+ 942              		.global	onTimer1Triggered
+ 943              		.thumb
+ 944              		.thumb_func
+ 946              	onTimer1Triggered:
+ 947              	.LFB118:
+ 272:Src/main.c    **** 
+ 273:Src/main.c    **** 
+ 274:Src/main.c    **** 
+ 275:Src/main.c    **** /*
+ 276:Src/main.c    ****  * Triggered every 200us
+ 277:Src/main.c    ****  *
+ 278:Src/main.c    ****  * Processing triggerchannel samples taken
+ 279:Src/main.c    ****  */
+ 280:Src/main.c    **** void onTimer1Triggered(){
+ 948              		.loc 1 280 0
+ 949              		.cfi_startproc
+ 950              		@ args = 0, pretend = 0, frame = 8
+ 951              		@ frame_needed = 1, uses_anonymous_args = 0
+ 952 0000 80B5     		push	{r7, lr}
+ 953              	.LCFI28:
+ 954              		.cfi_def_cfa_offset 8
+ 955              		.cfi_offset 7, -8
+ 956              		.cfi_offset 14, -4
+ 957 0002 82B0     		sub	sp, sp, #8
+ 958              	.LCFI29:
+ 959              		.cfi_def_cfa_offset 16
+ 960 0004 00AF     		add	r7, sp, #0
+ 961              	.LCFI30:
+ 962              		.cfi_def_cfa_register 7
+ 281:Src/main.c    **** 	int i;
+ 282:Src/main.c    **** 	//triggerchannel_process(&triggerChannelsHead[0]);
+ 283:Src/main.c    **** 
+ 284:Src/main.c    **** 	for(i = 0; i < headChannelCount; i++){
+ 963              		.loc 1 284 0
+ 964 0006 0023     		movs	r3, #0
+ 965 0008 7B60     		str	r3, [r7, #4]
+ 966 000a 0BE0     		b	.L38
+ 967              	.L39:
+ 285:Src/main.c    **** 		triggerchannel_process(&triggerChannelsHead[i]);
+ 968              		.loc 1 285 0 discriminator 3
+ 969 000c 7B68     		ldr	r3, [r7, #4]
+ 970 000e 4C22     		movs	r2, #76
+ 971 0010 02FB03F3 		mul	r3, r2, r3
+ 972 0014 104A     		ldr	r2, .L42
+ 973 0016 1344     		add	r3, r3, r2
+ 974 0018 1846     		mov	r0, r3
+ 975 001a FFF7FEFF 		bl	triggerchannel_process
+ 284:Src/main.c    **** 		triggerchannel_process(&triggerChannelsHead[i]);
+ 976              		.loc 1 284 0 discriminator 3
+ 977 001e 7B68     		ldr	r3, [r7, #4]
+ 978 0020 0133     		adds	r3, r3, #1
+ 979 0022 7B60     		str	r3, [r7, #4]
+ARM GAS  /tmp/ccPTyFyG.s 			page 23
+
+
+ 980              	.L38:
+ 284:Src/main.c    **** 		triggerchannel_process(&triggerChannelsHead[i]);
+ 981              		.loc 1 284 0 is_stmt 0 discriminator 1
+ 982 0024 7B68     		ldr	r3, [r7, #4]
+ 983 0026 092B     		cmp	r3, #9
+ 984 0028 F0DD     		ble	.L39
+ 286:Src/main.c    **** 	}
+ 287:Src/main.c    **** 
+ 288:Src/main.c    **** 	for(i = 0; i < rimChannelCount; i++){
+ 985              		.loc 1 288 0 is_stmt 1
+ 986 002a 0023     		movs	r3, #0
+ 987 002c 7B60     		str	r3, [r7, #4]
+ 988 002e 0BE0     		b	.L40
+ 989              	.L41:
+ 289:Src/main.c    **** 		triggerchannel_process(&triggerChannelsRim[i]);
+ 990              		.loc 1 289 0 discriminator 3
+ 991 0030 7B68     		ldr	r3, [r7, #4]
+ 992 0032 4C22     		movs	r2, #76
+ 993 0034 02FB03F3 		mul	r3, r2, r3
+ 994 0038 084A     		ldr	r2, .L42+4
+ 995 003a 1344     		add	r3, r3, r2
+ 996 003c 1846     		mov	r0, r3
+ 997 003e FFF7FEFF 		bl	triggerchannel_process
+ 288:Src/main.c    **** 		triggerchannel_process(&triggerChannelsRim[i]);
+ 998              		.loc 1 288 0 discriminator 3
+ 999 0042 7B68     		ldr	r3, [r7, #4]
+ 1000 0044 0133     		adds	r3, r3, #1
+ 1001 0046 7B60     		str	r3, [r7, #4]
+ 1002              	.L40:
+ 288:Src/main.c    **** 		triggerchannel_process(&triggerChannelsRim[i]);
+ 1003              		.loc 1 288 0 is_stmt 0 discriminator 1
+ 1004 0048 7B68     		ldr	r3, [r7, #4]
+ 1005 004a 092B     		cmp	r3, #9
+ 1006 004c F0DD     		ble	.L41
+ 290:Src/main.c    **** 	}
+ 291:Src/main.c    **** 
+ 292:Src/main.c    **** }
+ 1007              		.loc 1 292 0 is_stmt 1
+ 1008 004e 00BF     		nop
+ 1009 0050 0837     		adds	r7, r7, #8
+ 1010              	.LCFI31:
+ 1011              		.cfi_def_cfa_offset 8
+ 1012 0052 BD46     		mov	sp, r7
+ 1013              	.LCFI32:
+ 1014              		.cfi_def_cfa_register 13
+ 1015              		@ sp needed
+ 1016 0054 80BD     		pop	{r7, pc}
+ 1017              	.L43:
+ 1018 0056 00BF     		.align	2
+ 1019              	.L42:
+ 1020 0058 00000000 		.word	triggerChannelsHead
+ 1021 005c 00000000 		.word	triggerChannelsRim
+ 1022              		.cfi_endproc
+ 1023              	.LFE118:
+ 1025              		.section	.text.onTimer2Triggered,"ax",%progbits
+ 1026              		.align	2
+ 1027              		.global	onTimer2Triggered
+ARM GAS  /tmp/ccPTyFyG.s 			page 24
+
+
+ 1028              		.thumb
+ 1029              		.thumb_func
+ 1031              	onTimer2Triggered:
+ 1032              	.LFB119:
+ 293:Src/main.c    **** /*
+ 294:Src/main.c    ****  * Triggered every 1ms
+ 295:Src/main.c    ****  *
+ 296:Src/main.c    ****  * processing hihat-samples taken
+ 297:Src/main.c    ****  */
+ 298:Src/main.c    **** void onTimer2Triggered(){
+ 1033              		.loc 1 298 0
+ 1034              		.cfi_startproc
+ 1035              		@ args = 0, pretend = 0, frame = 8
+ 1036              		@ frame_needed = 1, uses_anonymous_args = 0
+ 1037 0000 80B5     		push	{r7, lr}
+ 1038              	.LCFI33:
+ 1039              		.cfi_def_cfa_offset 8
+ 1040              		.cfi_offset 7, -8
+ 1041              		.cfi_offset 14, -4
+ 1042 0002 82B0     		sub	sp, sp, #8
+ 1043              	.LCFI34:
+ 1044              		.cfi_def_cfa_offset 16
+ 1045 0004 00AF     		add	r7, sp, #0
+ 1046              	.LCFI35:
+ 1047              		.cfi_def_cfa_register 7
+ 299:Src/main.c    **** 	int i;
+ 300:Src/main.c    **** 
+ 301:Src/main.c    **** 	for(i = 0; i < hihatChannelCount; i++){
+ 1048              		.loc 1 301 0
+ 1049 0006 0023     		movs	r3, #0
+ 1050 0008 7B60     		str	r3, [r7, #4]
+ 1051 000a 0CE0     		b	.L45
+ 1052              	.L46:
+ 302:Src/main.c    **** 		hihatchannel_process(&hiHatChannels[i]);
+ 1053              		.loc 1 302 0 discriminator 3
+ 1054 000c 7A68     		ldr	r2, [r7, #4]
+ 1055 000e 1346     		mov	r3, r2
+ 1056 0010 1B01     		lsls	r3, r3, #4
+ 1057 0012 1344     		add	r3, r3, r2
+ 1058 0014 9B00     		lsls	r3, r3, #2
+ 1059 0016 074A     		ldr	r2, .L47
+ 1060 0018 1344     		add	r3, r3, r2
+ 1061 001a 1846     		mov	r0, r3
+ 1062 001c FFF7FEFF 		bl	hihatchannel_process
+ 301:Src/main.c    **** 		hihatchannel_process(&hiHatChannels[i]);
+ 1063              		.loc 1 301 0 discriminator 3
+ 1064 0020 7B68     		ldr	r3, [r7, #4]
+ 1065 0022 0133     		adds	r3, r3, #1
+ 1066 0024 7B60     		str	r3, [r7, #4]
+ 1067              	.L45:
+ 301:Src/main.c    **** 		hihatchannel_process(&hiHatChannels[i]);
+ 1068              		.loc 1 301 0 is_stmt 0 discriminator 1
+ 1069 0026 7B68     		ldr	r3, [r7, #4]
+ 1070 0028 012B     		cmp	r3, #1
+ 1071 002a EFDD     		ble	.L46
+ 303:Src/main.c    **** 	}
+ 304:Src/main.c    **** 
+ARM GAS  /tmp/ccPTyFyG.s 			page 25
+
+
+ 305:Src/main.c    **** }
+ 1072              		.loc 1 305 0 is_stmt 1
+ 1073 002c 00BF     		nop
+ 1074 002e 0837     		adds	r7, r7, #8
+ 1075              	.LCFI36:
+ 1076              		.cfi_def_cfa_offset 8
+ 1077 0030 BD46     		mov	sp, r7
+ 1078              	.LCFI37:
+ 1079              		.cfi_def_cfa_register 13
+ 1080              		@ sp needed
+ 1081 0032 80BD     		pop	{r7, pc}
+ 1082              	.L48:
+ 1083              		.align	2
+ 1084              	.L47:
+ 1085 0034 00000000 		.word	hiHatChannels
+ 1086              		.cfi_endproc
+ 1087              	.LFE119:
+ 1089              		.section	.text.onBtn0Triggered,"ax",%progbits
+ 1090              		.align	2
+ 1091              		.global	onBtn0Triggered
+ 1092              		.thumb
+ 1093              		.thumb_func
+ 1095              	onBtn0Triggered:
+ 1096              	.LFB120:
+ 306:Src/main.c    **** 
+ 307:Src/main.c    **** /*
+ 308:Src/main.c    ****  * Triggered on btn0 click with debounce delay
+ 309:Src/main.c    ****  */
+ 310:Src/main.c    **** void onBtn0Triggered(){
+ 1097              		.loc 1 310 0
+ 1098              		.cfi_startproc
+ 1099              		@ args = 0, pretend = 0, frame = 0
+ 1100              		@ frame_needed = 1, uses_anonymous_args = 0
+ 1101 0000 80B5     		push	{r7, lr}
+ 1102              	.LCFI38:
+ 1103              		.cfi_def_cfa_offset 8
+ 1104              		.cfi_offset 7, -8
+ 1105              		.cfi_offset 14, -4
+ 1106 0002 00AF     		add	r7, sp, #0
+ 1107              	.LCFI39:
+ 1108              		.cfi_def_cfa_register 7
+ 311:Src/main.c    **** 	midi_sendNote(10,36,120);
+ 1109              		.loc 1 311 0
+ 1110 0004 7822     		movs	r2, #120
+ 1111 0006 2421     		movs	r1, #36
+ 1112 0008 0A20     		movs	r0, #10
+ 1113 000a FFF7FEFF 		bl	midi_sendNote
+ 312:Src/main.c    **** }
+ 1114              		.loc 1 312 0
+ 1115 000e 00BF     		nop
+ 1116 0010 80BD     		pop	{r7, pc}
+ 1117              		.cfi_endproc
+ 1118              	.LFE120:
+ 1120 0012 00BF     		.section	.text.onBtn1Triggered,"ax",%progbits
+ 1121              		.align	2
+ 1122              		.global	onBtn1Triggered
+ 1123              		.thumb
+ARM GAS  /tmp/ccPTyFyG.s 			page 26
+
+
+ 1124              		.thumb_func
+ 1126              	onBtn1Triggered:
+ 1127              	.LFB121:
+ 313:Src/main.c    **** 
+ 314:Src/main.c    **** /*
+ 315:Src/main.c    ****  * Triggered on btn1 click with debounce delay
+ 316:Src/main.c    ****  */
+ 317:Src/main.c    **** void onBtn1Triggered(){
+ 1128              		.loc 1 317 0
+ 1129              		.cfi_startproc
+ 1130              		@ args = 0, pretend = 0, frame = 0
+ 1131              		@ frame_needed = 1, uses_anonymous_args = 0
+ 1132              		@ link register save eliminated.
+ 1133 0000 80B4     		push	{r7}
+ 1134              	.LCFI40:
+ 1135              		.cfi_def_cfa_offset 4
+ 1136              		.cfi_offset 7, -4
+ 1137 0002 00AF     		add	r7, sp, #0
+ 1138              	.LCFI41:
+ 1139              		.cfi_def_cfa_register 7
+ 318:Src/main.c    **** 
+ 319:Src/main.c    **** 		triggerChannelsHead[0].midinote = 38;
+ 1140              		.loc 1 319 0
+ 1141 0004 034B     		ldr	r3, .L51
+ 1142 0006 2622     		movs	r2, #38
+ 1143 0008 1A64     		str	r2, [r3, #64]
+ 320:Src/main.c    **** 
+ 321:Src/main.c    **** }
+ 1144              		.loc 1 321 0
+ 1145 000a 00BF     		nop
+ 1146 000c BD46     		mov	sp, r7
+ 1147              	.LCFI42:
+ 1148              		.cfi_def_cfa_register 13
+ 1149              		@ sp needed
+ 1150 000e 5DF8047B 		ldr	r7, [sp], #4
+ 1151              	.LCFI43:
+ 1152              		.cfi_restore 7
+ 1153              		.cfi_def_cfa_offset 0
+ 1154 0012 7047     		bx	lr
+ 1155              	.L52:
+ 1156              		.align	2
+ 1157              	.L51:
+ 1158 0014 00000000 		.word	triggerChannelsHead
+ 1159              		.cfi_endproc
+ 1160              	.LFE121:
+ 1162              		.section	.text.onBtn2Triggered,"ax",%progbits
+ 1163              		.align	2
+ 1164              		.global	onBtn2Triggered
+ 1165              		.thumb
+ 1166              		.thumb_func
+ 1168              	onBtn2Triggered:
+ 1169              	.LFB122:
+ 322:Src/main.c    **** 
+ 323:Src/main.c    **** /*
+ 324:Src/main.c    ****  * Triggered on btn2 click with debounce delay
+ 325:Src/main.c    ****  */
+ 326:Src/main.c    **** void onBtn2Triggered(){
+ARM GAS  /tmp/ccPTyFyG.s 			page 27
+
+
+ 1170              		.loc 1 326 0
+ 1171              		.cfi_startproc
+ 1172              		@ args = 0, pretend = 0, frame = 0
+ 1173              		@ frame_needed = 1, uses_anonymous_args = 0
+ 1174              		@ link register save eliminated.
+ 1175 0000 80B4     		push	{r7}
+ 1176              	.LCFI44:
+ 1177              		.cfi_def_cfa_offset 4
+ 1178              		.cfi_offset 7, -4
+ 1179 0002 00AF     		add	r7, sp, #0
+ 1180              	.LCFI45:
+ 1181              		.cfi_def_cfa_register 7
+ 327:Src/main.c    **** 
+ 328:Src/main.c    **** 
+ 329:Src/main.c    **** }
+ 1182              		.loc 1 329 0
+ 1183 0004 00BF     		nop
+ 1184 0006 BD46     		mov	sp, r7
+ 1185              	.LCFI46:
+ 1186              		.cfi_def_cfa_register 13
+ 1187              		@ sp needed
+ 1188 0008 5DF8047B 		ldr	r7, [sp], #4
+ 1189              	.LCFI47:
+ 1190              		.cfi_restore 7
+ 1191              		.cfi_def_cfa_offset 0
+ 1192 000c 7047     		bx	lr
+ 1193              		.cfi_endproc
+ 1194              	.LFE122:
+ 1196 000e 00BF     		.section	.rodata
+ 1197              		.align	2
+ 1198              	.LC0:
+ 1199 0000 696E6974 		.ascii	"init...\000"
+ 1199      2E2E2E00 
+ 1200              		.section	.text.main,"ax",%progbits
+ 1201              		.align	2
+ 1202              		.global	main
+ 1203              		.thumb
+ 1204              		.thumb_func
+ 1206              	main:
+ 1207              	.LFB123:
+ 330:Src/main.c    **** 
+ 331:Src/main.c    **** 
+ 332:Src/main.c    **** 
+ 333:Src/main.c    **** 
+ 334:Src/main.c    **** /* USER CODE END 0 */
+ 335:Src/main.c    **** 
+ 336:Src/main.c    **** int main(void)
+ 337:Src/main.c    **** {
+ 1208              		.loc 1 337 0
+ 1209              		.cfi_startproc
+ 1210              		@ args = 0, pretend = 0, frame = 0
+ 1211              		@ frame_needed = 1, uses_anonymous_args = 0
+ 1212 0000 80B5     		push	{r7, lr}
+ 1213              	.LCFI48:
+ 1214              		.cfi_def_cfa_offset 8
+ 1215              		.cfi_offset 7, -8
+ 1216              		.cfi_offset 14, -4
+ARM GAS  /tmp/ccPTyFyG.s 			page 28
+
+
+ 1217 0002 00AF     		add	r7, sp, #0
+ 1218              	.LCFI49:
+ 1219              		.cfi_def_cfa_register 7
+ 338:Src/main.c    **** 
+ 339:Src/main.c    ****   /* USER CODE BEGIN 1 */
+ 340:Src/main.c    **** 
+ 341:Src/main.c    ****   /* USER CODE END 1 */
+ 342:Src/main.c    **** 
+ 343:Src/main.c    ****   /* MCU Configuration----------------------------------------------------------*/
+ 344:Src/main.c    **** 
+ 345:Src/main.c    ****   /* Reset of all peripherals, Initializes the Flash interface and the Systick. */
+ 346:Src/main.c    ****   HAL_Init();
+ 1220              		.loc 1 346 0
+ 1221 0004 FFF7FEFF 		bl	HAL_Init
+ 347:Src/main.c    **** 
+ 348:Src/main.c    ****   /* Configure the system clock */
+ 349:Src/main.c    ****   SystemClock_Config();
+ 1222              		.loc 1 349 0
+ 1223 0008 FFF7FEFF 		bl	SystemClock_Config
+ 350:Src/main.c    **** 
+ 351:Src/main.c    ****   /* Initialize all configured peripherals */
+ 352:Src/main.c    ****   MX_GPIO_Init();
+ 1224              		.loc 1 352 0
+ 1225 000c FFF7FEFF 		bl	MX_GPIO_Init
+ 353:Src/main.c    ****   MX_DMA_Init();
+ 1226              		.loc 1 353 0
+ 1227 0010 FFF7FEFF 		bl	MX_DMA_Init
+ 354:Src/main.c    ****   MX_ADC1_Init();
+ 1228              		.loc 1 354 0
+ 1229 0014 FFF7FEFF 		bl	MX_ADC1_Init
+ 355:Src/main.c    ****   MX_ADC2_Init();
+ 1230              		.loc 1 355 0
+ 1231 0018 FFF7FEFF 		bl	MX_ADC2_Init
+ 356:Src/main.c    ****   MX_ADC3_Init();
+ 1232              		.loc 1 356 0
+ 1233 001c FFF7FEFF 		bl	MX_ADC3_Init
+ 357:Src/main.c    ****   MX_ADC4_Init();
+ 1234              		.loc 1 357 0
+ 1235 0020 FFF7FEFF 		bl	MX_ADC4_Init
+ 358:Src/main.c    ****   MX_SPI2_Init();
+ 1236              		.loc 1 358 0
+ 1237 0024 FFF7FEFF 		bl	MX_SPI2_Init
+ 359:Src/main.c    ****   MX_TIM1_Init();
+ 1238              		.loc 1 359 0
+ 1239 0028 FFF7FEFF 		bl	MX_TIM1_Init
+ 360:Src/main.c    ****   MX_TIM2_Init();
+ 1240              		.loc 1 360 0
+ 1241 002c FFF7FEFF 		bl	MX_TIM2_Init
+ 361:Src/main.c    ****   MX_TIM3_Init();
+ 1242              		.loc 1 361 0
+ 1243 0030 FFF7FEFF 		bl	MX_TIM3_Init
+ 362:Src/main.c    ****   MX_USART1_UART_Init();
+ 1244              		.loc 1 362 0
+ 1245 0034 FFF7FEFF 		bl	MX_USART1_UART_Init
+ 363:Src/main.c    ****   MX_USART3_UART_Init();
+ 1246              		.loc 1 363 0
+ 1247 0038 FFF7FEFF 		bl	MX_USART3_UART_Init
+ARM GAS  /tmp/ccPTyFyG.s 			page 29
+
+
+ 364:Src/main.c    ****   MX_USB_DEVICE_Init();
+ 1248              		.loc 1 364 0
+ 1249 003c FFF7FEFF 		bl	MX_USB_DEVICE_Init
+ 365:Src/main.c    **** 
+ 366:Src/main.c    ****   /* USER CODE BEGIN 2 */
+ 367:Src/main.c    **** 
+ 368:Src/main.c    ****   //initializes the datastructure and amplifiing of the triggerchannels
+ 369:Src/main.c    ****   midi_init();
+ 1250              		.loc 1 369 0
+ 1251 0040 FFF7FEFF 		bl	midi_init
+ 370:Src/main.c    ****   initHeadChannels();
+ 1252              		.loc 1 370 0
+ 1253 0044 FFF7FEFF 		bl	initHeadChannels
+ 371:Src/main.c    ****   initRimChannels();
+ 1254              		.loc 1 371 0
+ 1255 0048 FFF7FEFF 		bl	initRimChannels
+ 372:Src/main.c    ****   initHiHatChannels();
+ 1256              		.loc 1 372 0
+ 1257 004c FFF7FEFF 		bl	initHiHatChannels
+ 373:Src/main.c    **** 
+ 374:Src/main.c    ****   HAL_UART_Transmit_IT(&huart1, "init...",7);
+ 1258              		.loc 1 374 0
+ 1259 0050 0722     		movs	r2, #7
+ 1260 0052 1F49     		ldr	r1, .L61
+ 1261 0054 1F48     		ldr	r0, .L61+4
+ 1262 0056 FFF7FEFF 		bl	HAL_UART_Transmit_IT
+ 375:Src/main.c    ****   HAL_TIM_Base_Start_IT(&htim1);
+ 1263              		.loc 1 375 0
+ 1264 005a 1F48     		ldr	r0, .L61+8
+ 1265 005c FFF7FEFF 		bl	HAL_TIM_Base_Start_IT
+ 376:Src/main.c    ****   HAL_TIM_Base_Start_IT(&htim2);
+ 1266              		.loc 1 376 0
+ 1267 0060 1E48     		ldr	r0, .L61+12
+ 1268 0062 FFF7FEFF 		bl	HAL_TIM_Base_Start_IT
+ 377:Src/main.c    ****   HAL_TIM_Base_Start_IT(&htim3);
+ 1269              		.loc 1 377 0
+ 1270 0066 1E48     		ldr	r0, .L61+16
+ 1271 0068 FFF7FEFF 		bl	HAL_TIM_Base_Start_IT
+ 1272              	.L60:
+ 378:Src/main.c    ****   /* USER CODE END 2 */
+ 379:Src/main.c    **** 
+ 380:Src/main.c    ****   /* USER CODE BEGIN 3 */
+ 381:Src/main.c    ****   /* Infinite loop */
+ 382:Src/main.c    ****   while (1)
+ 383:Src/main.c    ****   {
+ 384:Src/main.c    **** 
+ 385:Src/main.c    **** 	  if(irqflag_timer1){
+ 1273              		.loc 1 385 0
+ 1274 006c 1D4B     		ldr	r3, .L61+20
+ 1275 006e 1B68     		ldr	r3, [r3]
+ 1276 0070 002B     		cmp	r3, #0
+ 1277 0072 05D0     		beq	.L55
+ 386:Src/main.c    **** 			irqflag_timer1 = 0;
+ 1278              		.loc 1 386 0
+ 1279 0074 1B4B     		ldr	r3, .L61+20
+ 1280 0076 0022     		movs	r2, #0
+ 1281 0078 1A60     		str	r2, [r3]
+ARM GAS  /tmp/ccPTyFyG.s 			page 30
+
+
+ 387:Src/main.c    **** 			onTimer1Triggered();
+ 1282              		.loc 1 387 0
+ 1283 007a FFF7FEFF 		bl	onTimer1Triggered
+ 1284 007e F5E7     		b	.L60
+ 1285              	.L55:
+ 388:Src/main.c    **** 	  } else if(irqflag_timer2){
+ 1286              		.loc 1 388 0
+ 1287 0080 194B     		ldr	r3, .L61+24
+ 1288 0082 1B68     		ldr	r3, [r3]
+ 1289 0084 002B     		cmp	r3, #0
+ 1290 0086 05D0     		beq	.L57
+ 389:Src/main.c    **** 		  irqflag_timer2 = 0;
+ 1291              		.loc 1 389 0
+ 1292 0088 174B     		ldr	r3, .L61+24
+ 1293 008a 0022     		movs	r2, #0
+ 1294 008c 1A60     		str	r2, [r3]
+ 390:Src/main.c    **** 		  onTimer2Triggered();
+ 1295              		.loc 1 390 0
+ 1296 008e FFF7FEFF 		bl	onTimer2Triggered
+ 1297 0092 EBE7     		b	.L60
+ 1298              	.L57:
+ 391:Src/main.c    **** 	  } else if(irqflag_btns[0]){
+ 1299              		.loc 1 391 0
+ 1300 0094 154B     		ldr	r3, .L61+28
+ 1301 0096 1B68     		ldr	r3, [r3]
+ 1302 0098 002B     		cmp	r3, #0
+ 1303 009a 05D0     		beq	.L58
+ 392:Src/main.c    **** 		  irqflag_btns[0] = 0;
+ 1304              		.loc 1 392 0
+ 1305 009c 134B     		ldr	r3, .L61+28
+ 1306 009e 0022     		movs	r2, #0
+ 1307 00a0 1A60     		str	r2, [r3]
+ 393:Src/main.c    **** 		  onBtn0Triggered();
+ 1308              		.loc 1 393 0
+ 1309 00a2 FFF7FEFF 		bl	onBtn0Triggered
+ 1310 00a6 E1E7     		b	.L60
+ 1311              	.L58:
+ 394:Src/main.c    **** 	  } else if(irqflag_btns[1]){
+ 1312              		.loc 1 394 0
+ 1313 00a8 104B     		ldr	r3, .L61+28
+ 1314 00aa 5B68     		ldr	r3, [r3, #4]
+ 1315 00ac 002B     		cmp	r3, #0
+ 1316 00ae 05D0     		beq	.L59
+ 395:Src/main.c    **** 		  irqflag_btns[1] = 0;
+ 1317              		.loc 1 395 0
+ 1318 00b0 0E4B     		ldr	r3, .L61+28
+ 1319 00b2 0022     		movs	r2, #0
+ 1320 00b4 5A60     		str	r2, [r3, #4]
+ 396:Src/main.c    **** 		  onBtn1Triggered();
+ 1321              		.loc 1 396 0
+ 1322 00b6 FFF7FEFF 		bl	onBtn1Triggered
+ 1323 00ba D7E7     		b	.L60
+ 1324              	.L59:
+ 397:Src/main.c    **** 	  } else if(irqflag_btns[2]){
+ 1325              		.loc 1 397 0
+ 1326 00bc 0B4B     		ldr	r3, .L61+28
+ 1327 00be 9B68     		ldr	r3, [r3, #8]
+ARM GAS  /tmp/ccPTyFyG.s 			page 31
+
+
+ 1328 00c0 002B     		cmp	r3, #0
+ 1329 00c2 D3D0     		beq	.L60
+ 398:Src/main.c    **** 		  irqflag_btns[2] = 0;
+ 1330              		.loc 1 398 0
+ 1331 00c4 094B     		ldr	r3, .L61+28
+ 1332 00c6 0022     		movs	r2, #0
+ 1333 00c8 9A60     		str	r2, [r3, #8]
+ 399:Src/main.c    **** 		  onBtn2Triggered();
+ 1334              		.loc 1 399 0
+ 1335 00ca FFF7FEFF 		bl	onBtn2Triggered
+ 400:Src/main.c    **** 	  }
+ 401:Src/main.c    **** 
+ 402:Src/main.c    ****   }
+ 1336              		.loc 1 402 0
+ 1337 00ce CDE7     		b	.L60
+ 1338              	.L62:
+ 1339              		.align	2
+ 1340              	.L61:
+ 1341 00d0 00000000 		.word	.LC0
+ 1342 00d4 00000000 		.word	huart1
+ 1343 00d8 00000000 		.word	htim1
+ 1344 00dc 00000000 		.word	htim2
+ 1345 00e0 00000000 		.word	htim3
+ 1346 00e4 00000000 		.word	irqflag_timer1
+ 1347 00e8 00000000 		.word	irqflag_timer2
+ 1348 00ec 00000000 		.word	irqflag_btns
+ 1349              		.cfi_endproc
+ 1350              	.LFE123:
+ 1352              		.section	.text.SystemClock_Config,"ax",%progbits
+ 1353              		.align	2
+ 1354              		.global	SystemClock_Config
+ 1355              		.thumb
+ 1356              		.thumb_func
+ 1358              	SystemClock_Config:
+ 1359              	.LFB124:
+ 403:Src/main.c    ****   /* USER CODE END 3 */
+ 404:Src/main.c    **** 
+ 405:Src/main.c    **** }
+ 406:Src/main.c    **** 
+ 407:Src/main.c    **** /** System Clock Configuration
+ 408:Src/main.c    **** */
+ 409:Src/main.c    **** void SystemClock_Config(void)
+ 410:Src/main.c    **** {
+ 1360              		.loc 1 410 0
+ 1361              		.cfi_startproc
+ 1362              		@ args = 0, pretend = 0, frame = 120
+ 1363              		@ frame_needed = 1, uses_anonymous_args = 0
+ 1364 0000 80B5     		push	{r7, lr}
+ 1365              	.LCFI50:
+ 1366              		.cfi_def_cfa_offset 8
+ 1367              		.cfi_offset 7, -8
+ 1368              		.cfi_offset 14, -4
+ 1369 0002 9EB0     		sub	sp, sp, #120
+ 1370              	.LCFI51:
+ 1371              		.cfi_def_cfa_offset 128
+ 1372 0004 00AF     		add	r7, sp, #0
+ 1373              	.LCFI52:
+ARM GAS  /tmp/ccPTyFyG.s 			page 32
+
+
+ 1374              		.cfi_def_cfa_register 7
+ 411:Src/main.c    **** 
+ 412:Src/main.c    ****   RCC_OscInitTypeDef RCC_OscInitStruct;
+ 413:Src/main.c    ****   RCC_ClkInitTypeDef RCC_ClkInitStruct;
+ 414:Src/main.c    ****   RCC_PeriphCLKInitTypeDef PeriphClkInit;
+ 415:Src/main.c    **** 
+ 416:Src/main.c    ****   RCC_OscInitStruct.OscillatorType = RCC_OSCILLATORTYPE_HSE;
+ 1375              		.loc 1 416 0
+ 1376 0006 0123     		movs	r3, #1
+ 1377 0008 3B65     		str	r3, [r7, #80]
+ 417:Src/main.c    ****   RCC_OscInitStruct.HSEState = RCC_HSE_ON;
+ 1378              		.loc 1 417 0
+ 1379 000a 0123     		movs	r3, #1
+ 1380 000c 7B65     		str	r3, [r7, #84]
+ 418:Src/main.c    ****   RCC_OscInitStruct.HSEPredivValue = RCC_HSE_PREDIV_DIV1;
+ 1381              		.loc 1 418 0
+ 1382 000e 0023     		movs	r3, #0
+ 1383 0010 BB65     		str	r3, [r7, #88]
+ 419:Src/main.c    ****   RCC_OscInitStruct.PLL.PLLState = RCC_PLL_ON;
+ 1384              		.loc 1 419 0
+ 1385 0012 0223     		movs	r3, #2
+ 1386 0014 FB66     		str	r3, [r7, #108]
+ 420:Src/main.c    ****   RCC_OscInitStruct.PLL.PLLSource = RCC_PLLSOURCE_HSE;
+ 1387              		.loc 1 420 0
+ 1388 0016 4FF48033 		mov	r3, #65536
+ 1389 001a 3B67     		str	r3, [r7, #112]
+ 421:Src/main.c    ****   RCC_OscInitStruct.PLL.PLLMUL = RCC_PLL_MUL9;
+ 1390              		.loc 1 421 0
+ 1391 001c 4FF4E013 		mov	r3, #1835008
+ 1392 0020 7B67     		str	r3, [r7, #116]
+ 422:Src/main.c    ****   HAL_RCC_OscConfig(&RCC_OscInitStruct);
+ 1393              		.loc 1 422 0
+ 1394 0022 07F15003 		add	r3, r7, #80
+ 1395 0026 1846     		mov	r0, r3
+ 1396 0028 FFF7FEFF 		bl	HAL_RCC_OscConfig
+ 423:Src/main.c    **** 
+ 424:Src/main.c    ****   RCC_ClkInitStruct.ClockType = RCC_CLOCKTYPE_SYSCLK|RCC_CLOCKTYPE_PCLK1;
+ 1397              		.loc 1 424 0
+ 1398 002c 0523     		movs	r3, #5
+ 1399 002e FB63     		str	r3, [r7, #60]
+ 425:Src/main.c    ****   RCC_ClkInitStruct.SYSCLKSource = RCC_SYSCLKSOURCE_PLLCLK;
+ 1400              		.loc 1 425 0
+ 1401 0030 0223     		movs	r3, #2
+ 1402 0032 3B64     		str	r3, [r7, #64]
+ 426:Src/main.c    ****   RCC_ClkInitStruct.AHBCLKDivider = RCC_SYSCLK_DIV1;
+ 1403              		.loc 1 426 0
+ 1404 0034 0023     		movs	r3, #0
+ 1405 0036 7B64     		str	r3, [r7, #68]
+ 427:Src/main.c    ****   RCC_ClkInitStruct.APB1CLKDivider = RCC_HCLK_DIV2;
+ 1406              		.loc 1 427 0
+ 1407 0038 4FF48063 		mov	r3, #1024
+ 1408 003c BB64     		str	r3, [r7, #72]
+ 428:Src/main.c    ****   RCC_ClkInitStruct.APB2CLKDivider = RCC_HCLK_DIV1;
+ 1409              		.loc 1 428 0
+ 1410 003e 0023     		movs	r3, #0
+ 1411 0040 FB64     		str	r3, [r7, #76]
+ 429:Src/main.c    ****   HAL_RCC_ClockConfig(&RCC_ClkInitStruct, FLASH_LATENCY_2);
+ARM GAS  /tmp/ccPTyFyG.s 			page 33
+
+
+ 1412              		.loc 1 429 0
+ 1413 0042 07F13C03 		add	r3, r7, #60
+ 1414 0046 0221     		movs	r1, #2
+ 1415 0048 1846     		mov	r0, r3
+ 1416 004a FFF7FEFF 		bl	HAL_RCC_ClockConfig
+ 430:Src/main.c    **** 
+ 431:Src/main.c    ****   PeriphClkInit.PeriphClockSelection = RCC_PERIPHCLK_USB|RCC_PERIPHCLK_USART1
+ 1417              		.loc 1 431 0
+ 1418 004e 104B     		ldr	r3, .L64
+ 1419 0050 3B60     		str	r3, [r7]
+ 432:Src/main.c    ****                               |RCC_PERIPHCLK_USART3|RCC_PERIPHCLK_TIM1
+ 433:Src/main.c    ****                               |RCC_PERIPHCLK_ADC12|RCC_PERIPHCLK_ADC34;
+ 434:Src/main.c    ****   PeriphClkInit.Usart1ClockSelection = RCC_USART1CLKSOURCE_PCLK2;
+ 1420              		.loc 1 434 0
+ 1421 0052 0023     		movs	r3, #0
+ 1422 0054 BB60     		str	r3, [r7, #8]
+ 435:Src/main.c    ****   PeriphClkInit.Usart3ClockSelection = RCC_USART3CLKSOURCE_PCLK1;
+ 1423              		.loc 1 435 0
+ 1424 0056 0023     		movs	r3, #0
+ 1425 0058 3B61     		str	r3, [r7, #16]
+ 436:Src/main.c    ****   PeriphClkInit.Adc12ClockSelection = RCC_ADC12PLLCLK_DIV1;
+ 1426              		.loc 1 436 0
+ 1427 005a 4FF48073 		mov	r3, #256
+ 1428 005e 7B62     		str	r3, [r7, #36]
+ 437:Src/main.c    ****   PeriphClkInit.Adc34ClockSelection = RCC_ADC34PLLCLK_DIV1;
+ 1429              		.loc 1 437 0
+ 1430 0060 4FF40053 		mov	r3, #8192
+ 1431 0064 BB62     		str	r3, [r7, #40]
+ 438:Src/main.c    ****   PeriphClkInit.USBClockSelection = RCC_USBPLLCLK_DIV1_5;
+ 1432              		.loc 1 438 0
+ 1433 0066 0023     		movs	r3, #0
+ 1434 0068 BB63     		str	r3, [r7, #56]
+ 439:Src/main.c    ****   PeriphClkInit.Tim1ClockSelection = RCC_TIM1CLK_HCLK;
+ 1435              		.loc 1 439 0
+ 1436 006a 0023     		movs	r3, #0
+ 1437 006c 3B63     		str	r3, [r7, #48]
+ 440:Src/main.c    ****   HAL_RCCEx_PeriphCLKConfig(&PeriphClkInit);
+ 1438              		.loc 1 440 0
+ 1439 006e 3B46     		mov	r3, r7
+ 1440 0070 1846     		mov	r0, r3
+ 1441 0072 FFF7FEFF 		bl	HAL_RCCEx_PeriphCLKConfig
+ 441:Src/main.c    **** 
+ 442:Src/main.c    ****   HAL_RCC_EnableCSS();
+ 1442              		.loc 1 442 0
+ 1443 0076 FFF7FEFF 		bl	HAL_RCC_EnableCSS
+ 443:Src/main.c    **** 
+ 444:Src/main.c    ****   __SYSCFG_CLK_ENABLE();
+ 1444              		.loc 1 444 0
+ 1445 007a 064A     		ldr	r2, .L64+4
+ 1446 007c 054B     		ldr	r3, .L64+4
+ 1447 007e 9B69     		ldr	r3, [r3, #24]
+ 1448 0080 43F00103 		orr	r3, r3, #1
+ 1449 0084 9361     		str	r3, [r2, #24]
+ 445:Src/main.c    **** 
+ 446:Src/main.c    **** }
+ 1450              		.loc 1 446 0
+ 1451 0086 00BF     		nop
+ARM GAS  /tmp/ccPTyFyG.s 			page 34
+
+
+ 1452 0088 7837     		adds	r7, r7, #120
+ 1453              	.LCFI53:
+ 1454              		.cfi_def_cfa_offset 8
+ 1455 008a BD46     		mov	sp, r7
+ 1456              	.LCFI54:
+ 1457              		.cfi_def_cfa_register 13
+ 1458              		@ sp needed
+ 1459 008c 80BD     		pop	{r7, pc}
+ 1460              	.L65:
+ 1461 008e 00BF     		.align	2
+ 1462              	.L64:
+ 1463 0090 85110200 		.word	135557
+ 1464 0094 00100240 		.word	1073876992
+ 1465              		.cfi_endproc
+ 1466              	.LFE124:
+ 1468              		.text
+ 1469              	.Letext0:
+ 1470              		.file 2 "/usr/arm-none-eabi/include/machine/_default_types.h"
+ 1471              		.file 3 "/usr/arm-none-eabi/include/sys/_stdint.h"
+ 1472              		.file 4 "Drivers/CMSIS/Device/ST/STM32F3xx/Include/stm32f303xc.h"
+ 1473              		.file 5 "Drivers/STM32F3xx_HAL_Driver/Inc/stm32f3xx_hal_def.h"
+ 1474              		.file 6 "Drivers/STM32F3xx_HAL_Driver/Inc/stm32f3xx_hal_rcc.h"
+ 1475              		.file 7 "Drivers/STM32F3xx_HAL_Driver/Inc/stm32f3xx_hal_rcc_ex.h"
+ 1476              		.file 8 "Drivers/STM32F3xx_HAL_Driver/Inc/stm32f3xx_hal_gpio.h"
+ 1477              		.file 9 "Drivers/STM32F3xx_HAL_Driver/Inc/stm32f3xx_hal_dma.h"
+ 1478              		.file 10 "Drivers/STM32F3xx_HAL_Driver/Inc/stm32f3xx_hal_tim.h"
+ 1479              		.file 11 "Drivers/STM32F3xx_HAL_Driver/Inc/stm32f3xx_hal_uart.h"
+ 1480              		.file 12 "Inc/triggerchannel.h"
+ 1481              		.file 13 "Inc/hihatchannel.h"
+ 1482              		.file 14 "Inc/uartmessagebuffer.h"
+ 1483              		.file 15 "Drivers/CMSIS/Include/core_cm4.h"
+ 1484              		.file 16 "Inc/tim.h"
+ 1485              		.file 17 "Inc/usart.h"
+ 1486              		.file 18 "Inc/midi.h"
+ARM GAS  /tmp/ccPTyFyG.s 			page 35
+
+
+DEFINED SYMBOLS
+                            *ABS*:0000000000000000 main.c
+                            *COM*:0000000000000004 midiMessagebuffer
+     /tmp/ccPTyFyG.s:26     .bss.irqflag_timer1:0000000000000000 irqflag_timer1
+     /tmp/ccPTyFyG.s:23     .bss.irqflag_timer1:0000000000000000 $d
+     /tmp/ccPTyFyG.s:33     .bss.irqflag_timer2:0000000000000000 irqflag_timer2
+     /tmp/ccPTyFyG.s:30     .bss.irqflag_timer2:0000000000000000 $d
+     /tmp/ccPTyFyG.s:40     .bss.irqflag_timer3:0000000000000000 irqflag_timer3
+     /tmp/ccPTyFyG.s:37     .bss.irqflag_timer3:0000000000000000 $d
+     /tmp/ccPTyFyG.s:47     .bss.irqflag_btns:0000000000000000 irqflag_btns
+     /tmp/ccPTyFyG.s:44     .bss.irqflag_btns:0000000000000000 $d
+                            *COM*:00000000000000a0 adc1Samples
+                            *COM*:0000000000000070 adc2Samples
+                            *COM*:0000000000000030 adc3Samples
+                            *COM*:0000000000000008 adc4Samples
+                            *COM*:00000000000002f8 triggerChannelsHead
+                            *COM*:00000000000002f8 triggerChannelsRim
+                            *COM*:0000000000000088 hiHatChannels
+     /tmp/ccPTyFyG.s:57     .text.initHeadChannels:0000000000000000 $t
+     /tmp/ccPTyFyG.s:62     .text.initHeadChannels:0000000000000000 initHeadChannels
+     /tmp/ccPTyFyG.s:342    .text.initHeadChannels:00000000000001f0 $d
+     /tmp/ccPTyFyG.s:359    .text.initRimChannels:0000000000000000 $t
+     /tmp/ccPTyFyG.s:364    .text.initRimChannels:0000000000000000 initRimChannels
+     /tmp/ccPTyFyG.s:680    .text.initRimChannels:0000000000000234 $d
+     /tmp/ccPTyFyG.s:698    .text.initHiHatChannels:0000000000000000 $t
+     /tmp/ccPTyFyG.s:703    .text.initHiHatChannels:0000000000000000 initHiHatChannels
+     /tmp/ccPTyFyG.s:733    .text.initHiHatChannels:000000000000001c $d
+     /tmp/ccPTyFyG.s:747    .bss.btnDebounceIRQTimer:0000000000000000 btnDebounceIRQTimer
+     /tmp/ccPTyFyG.s:744    .bss.btnDebounceIRQTimer:0000000000000000 $d
+     /tmp/ccPTyFyG.s:750    .text.HAL_GPIO_EXTI_Callback:0000000000000000 $t
+     /tmp/ccPTyFyG.s:755    .text.HAL_GPIO_EXTI_Callback:0000000000000000 HAL_GPIO_EXTI_Callback
+     /tmp/ccPTyFyG.s:818    .text.HAL_GPIO_EXTI_Callback:0000000000000040 $d
+     /tmp/ccPTyFyG.s:823    .text.HAL_UART_TxCpltCallback:0000000000000000 $t
+     /tmp/ccPTyFyG.s:828    .text.HAL_UART_TxCpltCallback:0000000000000000 HAL_UART_TxCpltCallback
+     /tmp/ccPTyFyG.s:877    .text.HAL_UART_TxCpltCallback:0000000000000030 $d
+     /tmp/ccPTyFyG.s:882    .text.HAL_UART_ErrorCallback:0000000000000000 $t
+     /tmp/ccPTyFyG.s:887    .text.HAL_UART_ErrorCallback:0000000000000000 HAL_UART_ErrorCallback
+     /tmp/ccPTyFyG.s:936    .text.HAL_UART_ErrorCallback:0000000000000030 $d
+     /tmp/ccPTyFyG.s:941    .text.onTimer1Triggered:0000000000000000 $t
+     /tmp/ccPTyFyG.s:946    .text.onTimer1Triggered:0000000000000000 onTimer1Triggered
+     /tmp/ccPTyFyG.s:1020   .text.onTimer1Triggered:0000000000000058 $d
+     /tmp/ccPTyFyG.s:1026   .text.onTimer2Triggered:0000000000000000 $t
+     /tmp/ccPTyFyG.s:1031   .text.onTimer2Triggered:0000000000000000 onTimer2Triggered
+     /tmp/ccPTyFyG.s:1085   .text.onTimer2Triggered:0000000000000034 $d
+     /tmp/ccPTyFyG.s:1090   .text.onBtn0Triggered:0000000000000000 $t
+     /tmp/ccPTyFyG.s:1095   .text.onBtn0Triggered:0000000000000000 onBtn0Triggered
+     /tmp/ccPTyFyG.s:1121   .text.onBtn1Triggered:0000000000000000 $t
+     /tmp/ccPTyFyG.s:1126   .text.onBtn1Triggered:0000000000000000 onBtn1Triggered
+     /tmp/ccPTyFyG.s:1158   .text.onBtn1Triggered:0000000000000014 $d
+     /tmp/ccPTyFyG.s:1163   .text.onBtn2Triggered:0000000000000000 $t
+     /tmp/ccPTyFyG.s:1168   .text.onBtn2Triggered:0000000000000000 onBtn2Triggered
+     /tmp/ccPTyFyG.s:1197   .rodata:0000000000000000 $d
+     /tmp/ccPTyFyG.s:1201   .text.main:0000000000000000 $t
+     /tmp/ccPTyFyG.s:1206   .text.main:0000000000000000 main
+     /tmp/ccPTyFyG.s:1358   .text.SystemClock_Config:0000000000000000 SystemClock_Config
+     /tmp/ccPTyFyG.s:1341   .text.main:00000000000000d0 $d
+     /tmp/ccPTyFyG.s:1353   .text.SystemClock_Config:0000000000000000 $t
+ARM GAS  /tmp/ccPTyFyG.s 			page 36
+
+
+     /tmp/ccPTyFyG.s:1463   .text.SystemClock_Config:0000000000000090 $d
+                     .debug_frame:0000000000000010 $d
+
+UNDEFINED SYMBOLS
+triggerchannel_init
+HAL_GPIO_WritePin
+HAL_Delay
+triggerchannel_setWiper
+hihatchannel_init
+uartmessagebuffer_onTxComplete
+triggerchannel_process
+hihatchannel_process
+midi_sendNote
+HAL_Init
+MX_GPIO_Init
+MX_DMA_Init
+MX_ADC1_Init
+MX_ADC2_Init
+MX_ADC3_Init
+MX_ADC4_Init
+MX_SPI2_Init
+MX_TIM1_Init
+MX_TIM2_Init
+MX_TIM3_Init
+MX_USART1_UART_Init
+MX_USART3_UART_Init
+MX_USB_DEVICE_Init
+midi_init
+HAL_UART_Transmit_IT
+HAL_TIM_Base_Start_IT
+huart1
+htim1
+htim2
+htim3
+HAL_RCC_OscConfig
+HAL_RCC_ClockConfig
+HAL_RCCEx_PeriphCLKConfig
+HAL_RCC_EnableCSS

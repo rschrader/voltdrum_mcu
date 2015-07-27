@@ -1,0 +1,601 @@
+ARM GAS  /tmp/ccVJUweq.s 			page 1
+
+
+   1              		.syntax unified
+   2              		.cpu cortex-m4
+   3              		.eabi_attribute 27, 1
+   4              		.fpu fpv4-sp-d16
+   5              		.eabi_attribute 20, 1
+   6              		.eabi_attribute 21, 1
+   7              		.eabi_attribute 23, 3
+   8              		.eabi_attribute 24, 1
+   9              		.eabi_attribute 25, 1
+  10              		.eabi_attribute 26, 1
+  11              		.eabi_attribute 30, 6
+  12              		.eabi_attribute 34, 1
+  13              		.eabi_attribute 18, 4
+  14              		.thumb
+  15              		.syntax unified
+  16              		.file	"midi.c"
+  17              		.text
+  18              	.Ltext0:
+  19              		.cfi_sections	.debug_frame
+  20              		.comm	midi_TxBuffer,10,4
+  21              		.comm	midi_MessageBuffer,40,4
+  22              		.comm	midi_messageBufferReadHead,1,1
+  23              		.comm	midi_messageBufferWriteHead,1,1
+  24              		.section	.text.midi_sendNote,"ax",%progbits
+  25              		.align	2
+  26              		.global	midi_sendNote
+  27              		.thumb
+  28              		.thumb_func
+  30              	midi_sendNote:
+  31              	.LFB112:
+  32              		.file 1 "Src/midi.c"
+   1:Src/midi.c    **** /*
+   2:Src/midi.c    ****  * midi.c
+   3:Src/midi.c    ****  *
+   4:Src/midi.c    ****  *  Created on: 19.05.2015
+   5:Src/midi.c    ****  *      Author: raphael
+   6:Src/midi.c    ****  */
+   7:Src/midi.c    **** 
+   8:Src/midi.c    **** #include "midi.h"
+   9:Src/midi.c    **** #include "stm32f3xx_hal.h"
+  10:Src/midi.c    **** #include "stm32f3xx.h"
+  11:Src/midi.c    **** #include "string.h"
+  12:Src/midi.c    **** #include "stdlib.h"
+  13:Src/midi.c    **** 
+  14:Src/midi.c    **** extern UART_HandleTypeDef huart3;
+  15:Src/midi.c    **** 
+  16:Src/midi.c    **** void midi_sendNote(uint8_t channel, uint8_t note, uint8_t velocity){
+  33              		.loc 1 16 0
+  34              		.cfi_startproc
+  35              		@ args = 0, pretend = 0, frame = 16
+  36              		@ frame_needed = 1, uses_anonymous_args = 0
+  37 0000 80B5     		push	{r7, lr}
+  38              	.LCFI0:
+  39              		.cfi_def_cfa_offset 8
+  40              		.cfi_offset 7, -8
+  41              		.cfi_offset 14, -4
+  42 0002 84B0     		sub	sp, sp, #16
+ARM GAS  /tmp/ccVJUweq.s 			page 2
+
+
+  43              	.LCFI1:
+  44              		.cfi_def_cfa_offset 24
+  45 0004 00AF     		add	r7, sp, #0
+  46              	.LCFI2:
+  47              		.cfi_def_cfa_register 7
+  48 0006 0346     		mov	r3, r0
+  49 0008 FB71     		strb	r3, [r7, #7]
+  50 000a 0B46     		mov	r3, r1
+  51 000c BB71     		strb	r3, [r7, #6]
+  52 000e 1346     		mov	r3, r2
+  53 0010 7B71     		strb	r3, [r7, #5]
+  17:Src/midi.c    **** 
+  18:Src/midi.c    **** 
+  19:Src/midi.c    **** 	//note on
+  20:Src/midi.c    **** 	uint8_t bfrsize = 6;
+  54              		.loc 1 20 0
+  55 0012 0623     		movs	r3, #6
+  56 0014 FB73     		strb	r3, [r7, #15]
+  21:Src/midi.c    **** 	uint8_t* bfr = malloc(sizeof(uint8_t)*bfrsize);
+  57              		.loc 1 21 0
+  58 0016 FB7B     		ldrb	r3, [r7, #15]	@ zero_extendqisi2
+  59 0018 1846     		mov	r0, r3
+  60 001a FFF7FEFF 		bl	malloc
+  61 001e 0346     		mov	r3, r0
+  62 0020 BB60     		str	r3, [r7, #8]
+  22:Src/midi.c    **** 
+  23:Src/midi.c    **** 	bfr[0] = 0xFF & ( 0x90 | channel  & 0xF);
+  63              		.loc 1 23 0
+  64 0022 FB79     		ldrb	r3, [r7, #7]	@ zero_extendqisi2
+  65 0024 03F00F03 		and	r3, r3, #15
+  66 0028 DBB2     		uxtb	r3, r3
+  67 002a 63F06F03 		orn	r3, r3, #111
+  68 002e DBB2     		uxtb	r3, r3
+  69 0030 DAB2     		uxtb	r2, r3
+  70 0032 BB68     		ldr	r3, [r7, #8]
+  71 0034 1A70     		strb	r2, [r3]
+  24:Src/midi.c    **** 	bfr[1] = note & 0x7F;
+  72              		.loc 1 24 0
+  73 0036 BB68     		ldr	r3, [r7, #8]
+  74 0038 0133     		adds	r3, r3, #1
+  75 003a BA79     		ldrb	r2, [r7, #6]
+  76 003c 02F07F02 		and	r2, r2, #127
+  77 0040 D2B2     		uxtb	r2, r2
+  78 0042 1A70     		strb	r2, [r3]
+  25:Src/midi.c    **** 	bfr[2] = velocity & 0x7F;
+  79              		.loc 1 25 0
+  80 0044 BB68     		ldr	r3, [r7, #8]
+  81 0046 0233     		adds	r3, r3, #2
+  82 0048 7A79     		ldrb	r2, [r7, #5]
+  83 004a 02F07F02 		and	r2, r2, #127
+  84 004e D2B2     		uxtb	r2, r2
+  85 0050 1A70     		strb	r2, [r3]
+  26:Src/midi.c    **** 
+  27:Src/midi.c    **** 	//note off
+  28:Src/midi.c    **** 	bfr[3] = 0xFF & ( 0x80 | channel  & 0xF);
+  86              		.loc 1 28 0
+  87 0052 BB68     		ldr	r3, [r7, #8]
+ARM GAS  /tmp/ccVJUweq.s 			page 3
+
+
+  88 0054 0333     		adds	r3, r3, #3
+  89 0056 FA79     		ldrb	r2, [r7, #7]	@ zero_extendqisi2
+  90 0058 02F00F02 		and	r2, r2, #15
+  91 005c D2B2     		uxtb	r2, r2
+  92 005e 62F07F02 		orn	r2, r2, #127
+  93 0062 D2B2     		uxtb	r2, r2
+  94 0064 D2B2     		uxtb	r2, r2
+  95 0066 1A70     		strb	r2, [r3]
+  29:Src/midi.c    **** 	bfr[4] = note & 0x7F;
+  96              		.loc 1 29 0
+  97 0068 BB68     		ldr	r3, [r7, #8]
+  98 006a 0433     		adds	r3, r3, #4
+  99 006c BA79     		ldrb	r2, [r7, #6]
+ 100 006e 02F07F02 		and	r2, r2, #127
+ 101 0072 D2B2     		uxtb	r2, r2
+ 102 0074 1A70     		strb	r2, [r3]
+  30:Src/midi.c    **** 	bfr[5] = velocity & 0x7F;
+ 103              		.loc 1 30 0
+ 104 0076 BB68     		ldr	r3, [r7, #8]
+ 105 0078 0533     		adds	r3, r3, #5
+ 106 007a 7A79     		ldrb	r2, [r7, #5]
+ 107 007c 02F07F02 		and	r2, r2, #127
+ 108 0080 D2B2     		uxtb	r2, r2
+ 109 0082 1A70     		strb	r2, [r3]
+  31:Src/midi.c    **** 
+  32:Src/midi.c    **** 	midi_createmessage(bfrsize, bfr);
+ 110              		.loc 1 32 0
+ 111 0084 FB7B     		ldrb	r3, [r7, #15]	@ zero_extendqisi2
+ 112 0086 B968     		ldr	r1, [r7, #8]
+ 113 0088 1846     		mov	r0, r3
+ 114 008a FFF7FEFF 		bl	midi_createmessage
+  33:Src/midi.c    **** 
+  34:Src/midi.c    **** 
+  35:Src/midi.c    **** }
+ 115              		.loc 1 35 0
+ 116 008e 00BF     		nop
+ 117 0090 1037     		adds	r7, r7, #16
+ 118              	.LCFI3:
+ 119              		.cfi_def_cfa_offset 8
+ 120 0092 BD46     		mov	sp, r7
+ 121              	.LCFI4:
+ 122              		.cfi_def_cfa_register 13
+ 123              		@ sp needed
+ 124 0094 80BD     		pop	{r7, pc}
+ 125              		.cfi_endproc
+ 126              	.LFE112:
+ 128 0096 00BF     		.section	.text.midi_sendControlChange,"ax",%progbits
+ 129              		.align	2
+ 130              		.global	midi_sendControlChange
+ 131              		.thumb
+ 132              		.thumb_func
+ 134              	midi_sendControlChange:
+ 135              	.LFB113:
+  36:Src/midi.c    **** 
+  37:Src/midi.c    **** void midi_sendControlChange(uint8_t channel, uint8_t control, uint8_t value){
+ 136              		.loc 1 37 0
+ 137              		.cfi_startproc
+ARM GAS  /tmp/ccVJUweq.s 			page 4
+
+
+ 138              		@ args = 0, pretend = 0, frame = 16
+ 139              		@ frame_needed = 1, uses_anonymous_args = 0
+ 140 0000 80B5     		push	{r7, lr}
+ 141              	.LCFI5:
+ 142              		.cfi_def_cfa_offset 8
+ 143              		.cfi_offset 7, -8
+ 144              		.cfi_offset 14, -4
+ 145 0002 84B0     		sub	sp, sp, #16
+ 146              	.LCFI6:
+ 147              		.cfi_def_cfa_offset 24
+ 148 0004 00AF     		add	r7, sp, #0
+ 149              	.LCFI7:
+ 150              		.cfi_def_cfa_register 7
+ 151 0006 0346     		mov	r3, r0
+ 152 0008 FB71     		strb	r3, [r7, #7]
+ 153 000a 0B46     		mov	r3, r1
+ 154 000c BB71     		strb	r3, [r7, #6]
+ 155 000e 1346     		mov	r3, r2
+ 156 0010 7B71     		strb	r3, [r7, #5]
+  38:Src/midi.c    **** 
+  39:Src/midi.c    **** 	uint8_t bfrsize = 3;
+ 157              		.loc 1 39 0
+ 158 0012 0323     		movs	r3, #3
+ 159 0014 FB73     		strb	r3, [r7, #15]
+  40:Src/midi.c    **** 	uint8_t* bfr = malloc(sizeof(uint8_t)*bfrsize);
+ 160              		.loc 1 40 0
+ 161 0016 FB7B     		ldrb	r3, [r7, #15]	@ zero_extendqisi2
+ 162 0018 1846     		mov	r0, r3
+ 163 001a FFF7FEFF 		bl	malloc
+ 164 001e 0346     		mov	r3, r0
+ 165 0020 BB60     		str	r3, [r7, #8]
+  41:Src/midi.c    **** 
+  42:Src/midi.c    **** 	bfr[0] = 0xFF & ( 0b10110000 | channel & 0xF);
+ 166              		.loc 1 42 0
+ 167 0022 FB79     		ldrb	r3, [r7, #7]	@ zero_extendqisi2
+ 168 0024 03F00F03 		and	r3, r3, #15
+ 169 0028 DBB2     		uxtb	r3, r3
+ 170 002a 63F04F03 		orn	r3, r3, #79
+ 171 002e DBB2     		uxtb	r3, r3
+ 172 0030 DAB2     		uxtb	r2, r3
+ 173 0032 BB68     		ldr	r3, [r7, #8]
+ 174 0034 1A70     		strb	r2, [r3]
+  43:Src/midi.c    **** 	bfr[1] = control & 0x7F;
+ 175              		.loc 1 43 0
+ 176 0036 BB68     		ldr	r3, [r7, #8]
+ 177 0038 0133     		adds	r3, r3, #1
+ 178 003a BA79     		ldrb	r2, [r7, #6]
+ 179 003c 02F07F02 		and	r2, r2, #127
+ 180 0040 D2B2     		uxtb	r2, r2
+ 181 0042 1A70     		strb	r2, [r3]
+  44:Src/midi.c    **** 	bfr[2] = value & 0x7F;
+ 182              		.loc 1 44 0
+ 183 0044 BB68     		ldr	r3, [r7, #8]
+ 184 0046 0233     		adds	r3, r3, #2
+ 185 0048 7A79     		ldrb	r2, [r7, #5]
+ 186 004a 02F07F02 		and	r2, r2, #127
+ 187 004e D2B2     		uxtb	r2, r2
+ARM GAS  /tmp/ccVJUweq.s 			page 5
+
+
+ 188 0050 1A70     		strb	r2, [r3]
+  45:Src/midi.c    **** 
+  46:Src/midi.c    **** 	midi_createmessage(bfrsize, bfr);
+ 189              		.loc 1 46 0
+ 190 0052 FB7B     		ldrb	r3, [r7, #15]	@ zero_extendqisi2
+ 191 0054 B968     		ldr	r1, [r7, #8]
+ 192 0056 1846     		mov	r0, r3
+ 193 0058 FFF7FEFF 		bl	midi_createmessage
+  47:Src/midi.c    **** 
+  48:Src/midi.c    **** }
+ 194              		.loc 1 48 0
+ 195 005c 00BF     		nop
+ 196 005e 1037     		adds	r7, r7, #16
+ 197              	.LCFI8:
+ 198              		.cfi_def_cfa_offset 8
+ 199 0060 BD46     		mov	sp, r7
+ 200              	.LCFI9:
+ 201              		.cfi_def_cfa_register 13
+ 202              		@ sp needed
+ 203 0062 80BD     		pop	{r7, pc}
+ 204              		.cfi_endproc
+ 205              	.LFE113:
+ 207              		.section	.text.midi_createmessage,"ax",%progbits
+ 208              		.align	2
+ 209              		.global	midi_createmessage
+ 210              		.thumb
+ 211              		.thumb_func
+ 213              	midi_createmessage:
+ 214              	.LFB114:
+  49:Src/midi.c    **** 
+  50:Src/midi.c    **** 
+  51:Src/midi.c    **** /**
+  52:Src/midi.c    ****  * Send mecahnics
+  53:Src/midi.c    ****  */
+  54:Src/midi.c    **** 
+  55:Src/midi.c    **** 
+  56:Src/midi.c    **** void midi_createmessage (uint8_t size, uint8_t* data){
+ 215              		.loc 1 56 0
+ 216              		.cfi_startproc
+ 217              		@ args = 0, pretend = 0, frame = 16
+ 218              		@ frame_needed = 1, uses_anonymous_args = 0
+ 219 0000 80B5     		push	{r7, lr}
+ 220              	.LCFI10:
+ 221              		.cfi_def_cfa_offset 8
+ 222              		.cfi_offset 7, -8
+ 223              		.cfi_offset 14, -4
+ 224 0002 84B0     		sub	sp, sp, #16
+ 225              	.LCFI11:
+ 226              		.cfi_def_cfa_offset 24
+ 227 0004 00AF     		add	r7, sp, #0
+ 228              	.LCFI12:
+ 229              		.cfi_def_cfa_register 7
+ 230 0006 0346     		mov	r3, r0
+ 231 0008 3960     		str	r1, [r7]
+ 232 000a FB71     		strb	r3, [r7, #7]
+  57:Src/midi.c    **** 	midimessage* msg = malloc(sizeof(midimessage));
+ 233              		.loc 1 57 0
+ARM GAS  /tmp/ccVJUweq.s 			page 6
+
+
+ 234 000c 0820     		movs	r0, #8
+ 235 000e FFF7FEFF 		bl	malloc
+ 236 0012 0346     		mov	r3, r0
+ 237 0014 FB60     		str	r3, [r7, #12]
+  58:Src/midi.c    **** 	msg->data = data;
+ 238              		.loc 1 58 0
+ 239 0016 FB68     		ldr	r3, [r7, #12]
+ 240 0018 3A68     		ldr	r2, [r7]
+ 241 001a 1A60     		str	r2, [r3]
+  59:Src/midi.c    **** 	msg->size = size;
+ 242              		.loc 1 59 0
+ 243 001c FB68     		ldr	r3, [r7, #12]
+ 244 001e FA79     		ldrb	r2, [r7, #7]
+ 245 0020 1A71     		strb	r2, [r3, #4]
+  60:Src/midi.c    **** 
+  61:Src/midi.c    **** 	midi_MessageBuffer[midi_messageBufferWriteHead] = msg;
+ 246              		.loc 1 61 0
+ 247 0022 0F4B     		ldr	r3, .L4
+ 248 0024 1B78     		ldrb	r3, [r3]	@ zero_extendqisi2
+ 249 0026 1946     		mov	r1, r3
+ 250 0028 0E4A     		ldr	r2, .L4+4
+ 251 002a FB68     		ldr	r3, [r7, #12]
+ 252 002c 42F82130 		str	r3, [r2, r1, lsl #2]
+  62:Src/midi.c    **** 	midi_messageBufferWriteHead = (midi_messageBufferWriteHead+1) % MIDI_MESSAGEBUFFERSIZE;
+ 253              		.loc 1 62 0
+ 254 0030 0B4B     		ldr	r3, .L4
+ 255 0032 1B78     		ldrb	r3, [r3]	@ zero_extendqisi2
+ 256 0034 5A1C     		adds	r2, r3, #1
+ 257 0036 0C4B     		ldr	r3, .L4+8
+ 258 0038 83FB0213 		smull	r1, r3, r3, r2
+ 259 003c 9910     		asrs	r1, r3, #2
+ 260 003e D317     		asrs	r3, r2, #31
+ 261 0040 C91A     		subs	r1, r1, r3
+ 262 0042 0B46     		mov	r3, r1
+ 263 0044 9B00     		lsls	r3, r3, #2
+ 264 0046 0B44     		add	r3, r3, r1
+ 265 0048 5B00     		lsls	r3, r3, #1
+ 266 004a D11A     		subs	r1, r2, r3
+ 267 004c CAB2     		uxtb	r2, r1
+ 268 004e 044B     		ldr	r3, .L4
+ 269 0050 1A70     		strb	r2, [r3]
+  63:Src/midi.c    **** 	midi_sendNextMessage();
+ 270              		.loc 1 63 0
+ 271 0052 FFF7FEFF 		bl	midi_sendNextMessage
+  64:Src/midi.c    **** }
+ 272              		.loc 1 64 0
+ 273 0056 00BF     		nop
+ 274 0058 1037     		adds	r7, r7, #16
+ 275              	.LCFI13:
+ 276              		.cfi_def_cfa_offset 8
+ 277 005a BD46     		mov	sp, r7
+ 278              	.LCFI14:
+ 279              		.cfi_def_cfa_register 13
+ 280              		@ sp needed
+ 281 005c 80BD     		pop	{r7, pc}
+ 282              	.L5:
+ 283 005e 00BF     		.align	2
+ARM GAS  /tmp/ccVJUweq.s 			page 7
+
+
+ 284              	.L4:
+ 285 0060 00000000 		.word	midi_messageBufferWriteHead
+ 286 0064 00000000 		.word	midi_MessageBuffer
+ 287 0068 67666666 		.word	1717986919
+ 288              		.cfi_endproc
+ 289              	.LFE114:
+ 291              		.section	.text.midi_sendNextMessage,"ax",%progbits
+ 292              		.align	2
+ 293              		.global	midi_sendNextMessage
+ 294              		.thumb
+ 295              		.thumb_func
+ 297              	midi_sendNextMessage:
+ 298              	.LFB115:
+  65:Src/midi.c    **** 
+  66:Src/midi.c    **** void midi_sendNextMessage(){
+ 299              		.loc 1 66 0
+ 300              		.cfi_startproc
+ 301              		@ args = 0, pretend = 0, frame = 8
+ 302              		@ frame_needed = 1, uses_anonymous_args = 0
+ 303 0000 80B5     		push	{r7, lr}
+ 304              	.LCFI15:
+ 305              		.cfi_def_cfa_offset 8
+ 306              		.cfi_offset 7, -8
+ 307              		.cfi_offset 14, -4
+ 308 0002 82B0     		sub	sp, sp, #8
+ 309              	.LCFI16:
+ 310              		.cfi_def_cfa_offset 16
+ 311 0004 00AF     		add	r7, sp, #0
+ 312              	.LCFI17:
+ 313              		.cfi_def_cfa_register 7
+  67:Src/midi.c    **** 	//check if buffer is empty
+  68:Src/midi.c    **** 	if(midi_messageBufferReadHead == midi_messageBufferWriteHead){
+ 314              		.loc 1 68 0
+ 315 0006 254B     		ldr	r3, .L13
+ 316 0008 1A78     		ldrb	r2, [r3]	@ zero_extendqisi2
+ 317 000a 254B     		ldr	r3, .L13+4
+ 318 000c 1B78     		ldrb	r3, [r3]	@ zero_extendqisi2
+ 319 000e 9A42     		cmp	r2, r3
+ 320 0010 3DD0     		beq	.L11
+  69:Src/midi.c    **** 		return;
+  70:Src/midi.c    **** 	}
+  71:Src/midi.c    **** 
+  72:Src/midi.c    **** 	// check if uart is ready
+  73:Src/midi.c    **** 	if(HAL_UART_GetState(&huart3) != HAL_UART_STATE_READY){
+ 321              		.loc 1 73 0
+ 322 0012 2448     		ldr	r0, .L13+8
+ 323 0014 FFF7FEFF 		bl	HAL_UART_GetState
+ 324 0018 0346     		mov	r3, r0
+ 325 001a 012B     		cmp	r3, #1
+ 326 001c 39D1     		bne	.L12
+  74:Src/midi.c    **** 		return;
+  75:Src/midi.c    **** 	}
+  76:Src/midi.c    **** 
+  77:Src/midi.c    **** 	//send message
+  78:Src/midi.c    **** 	midimessage *msg = midi_MessageBuffer[midi_messageBufferReadHead];
+ 327              		.loc 1 78 0
+ 328 001e 1F4B     		ldr	r3, .L13
+ARM GAS  /tmp/ccVJUweq.s 			page 8
+
+
+ 329 0020 1B78     		ldrb	r3, [r3]	@ zero_extendqisi2
+ 330 0022 1A46     		mov	r2, r3
+ 331 0024 204B     		ldr	r3, .L13+12
+ 332 0026 53F82230 		ldr	r3, [r3, r2, lsl #2]
+ 333 002a 7B60     		str	r3, [r7, #4]
+  79:Src/midi.c    **** 	if(msg->size > 10) msg->size = 10;
+ 334              		.loc 1 79 0
+ 335 002c 7B68     		ldr	r3, [r7, #4]
+ 336 002e 1B79     		ldrb	r3, [r3, #4]	@ zero_extendqisi2
+ 337 0030 0A2B     		cmp	r3, #10
+ 338 0032 02D9     		bls	.L10
+ 339              		.loc 1 79 0 is_stmt 0 discriminator 1
+ 340 0034 7B68     		ldr	r3, [r7, #4]
+ 341 0036 0A22     		movs	r2, #10
+ 342 0038 1A71     		strb	r2, [r3, #4]
+ 343              	.L10:
+  80:Src/midi.c    **** 	memcpy(midi_TxBuffer, msg->data, msg->size);
+ 344              		.loc 1 80 0 is_stmt 1
+ 345 003a 7B68     		ldr	r3, [r7, #4]
+ 346 003c 1968     		ldr	r1, [r3]
+ 347 003e 7B68     		ldr	r3, [r7, #4]
+ 348 0040 1B79     		ldrb	r3, [r3, #4]	@ zero_extendqisi2
+ 349 0042 1A46     		mov	r2, r3
+ 350 0044 1948     		ldr	r0, .L13+16
+ 351 0046 FFF7FEFF 		bl	memcpy
+  81:Src/midi.c    ****   HAL_UART_Transmit_IT(&huart3, midi_TxBuffer, msg->size);
+ 352              		.loc 1 81 0
+ 353 004a 7B68     		ldr	r3, [r7, #4]
+ 354 004c 1B79     		ldrb	r3, [r3, #4]	@ zero_extendqisi2
+ 355 004e 9BB2     		uxth	r3, r3
+ 356 0050 1A46     		mov	r2, r3
+ 357 0052 1649     		ldr	r1, .L13+16
+ 358 0054 1348     		ldr	r0, .L13+8
+ 359 0056 FFF7FEFF 		bl	HAL_UART_Transmit_IT
+  82:Src/midi.c    **** 
+  83:Src/midi.c    ****   midi_messageBufferReadHead = (midi_messageBufferReadHead+1) % MIDI_MESSAGEBUFFERSIZE;
+ 360              		.loc 1 83 0
+ 361 005a 104B     		ldr	r3, .L13
+ 362 005c 1B78     		ldrb	r3, [r3]	@ zero_extendqisi2
+ 363 005e 5A1C     		adds	r2, r3, #1
+ 364 0060 134B     		ldr	r3, .L13+20
+ 365 0062 83FB0213 		smull	r1, r3, r3, r2
+ 366 0066 9910     		asrs	r1, r3, #2
+ 367 0068 D317     		asrs	r3, r2, #31
+ 368 006a C91A     		subs	r1, r1, r3
+ 369 006c 0B46     		mov	r3, r1
+ 370 006e 9B00     		lsls	r3, r3, #2
+ 371 0070 0B44     		add	r3, r3, r1
+ 372 0072 5B00     		lsls	r3, r3, #1
+ 373 0074 D11A     		subs	r1, r2, r3
+ 374 0076 CAB2     		uxtb	r2, r1
+ 375 0078 084B     		ldr	r3, .L13
+ 376 007a 1A70     		strb	r2, [r3]
+  84:Src/midi.c    **** 
+  85:Src/midi.c    **** 
+  86:Src/midi.c    **** 	//destroy message
+  87:Src/midi.c    **** 	free(msg->data);
+ARM GAS  /tmp/ccVJUweq.s 			page 9
+
+
+ 377              		.loc 1 87 0
+ 378 007c 7B68     		ldr	r3, [r7, #4]
+ 379 007e 1B68     		ldr	r3, [r3]
+ 380 0080 1846     		mov	r0, r3
+ 381 0082 FFF7FEFF 		bl	free
+  88:Src/midi.c    **** 	free(msg);
+ 382              		.loc 1 88 0
+ 383 0086 7868     		ldr	r0, [r7, #4]
+ 384 0088 FFF7FEFF 		bl	free
+ 385 008c 02E0     		b	.L6
+ 386              	.L11:
+  69:Src/midi.c    **** 	}
+ 387              		.loc 1 69 0
+ 388 008e 00BF     		nop
+ 389 0090 00E0     		b	.L6
+ 390              	.L12:
+  74:Src/midi.c    **** 	}
+ 391              		.loc 1 74 0
+ 392 0092 00BF     		nop
+ 393              	.L6:
+  89:Src/midi.c    **** 
+  90:Src/midi.c    **** }
+ 394              		.loc 1 90 0
+ 395 0094 0837     		adds	r7, r7, #8
+ 396              	.LCFI18:
+ 397              		.cfi_def_cfa_offset 8
+ 398 0096 BD46     		mov	sp, r7
+ 399              	.LCFI19:
+ 400              		.cfi_def_cfa_register 13
+ 401              		@ sp needed
+ 402 0098 80BD     		pop	{r7, pc}
+ 403              	.L14:
+ 404 009a 00BF     		.align	2
+ 405              	.L13:
+ 406 009c 00000000 		.word	midi_messageBufferReadHead
+ 407 00a0 00000000 		.word	midi_messageBufferWriteHead
+ 408 00a4 00000000 		.word	huart3
+ 409 00a8 00000000 		.word	midi_MessageBuffer
+ 410 00ac 00000000 		.word	midi_TxBuffer
+ 411 00b0 67666666 		.word	1717986919
+ 412              		.cfi_endproc
+ 413              	.LFE115:
+ 415              		.section	.text.midi_onTxComplete,"ax",%progbits
+ 416              		.align	2
+ 417              		.global	midi_onTxComplete
+ 418              		.thumb
+ 419              		.thumb_func
+ 421              	midi_onTxComplete:
+ 422              	.LFB116:
+  91:Src/midi.c    **** 
+  92:Src/midi.c    **** 
+  93:Src/midi.c    **** 
+  94:Src/midi.c    **** 
+  95:Src/midi.c    **** void midi_onTxComplete(){
+ 423              		.loc 1 95 0
+ 424              		.cfi_startproc
+ 425              		@ args = 0, pretend = 0, frame = 0
+ARM GAS  /tmp/ccVJUweq.s 			page 10
+
+
+ 426              		@ frame_needed = 1, uses_anonymous_args = 0
+ 427 0000 80B5     		push	{r7, lr}
+ 428              	.LCFI20:
+ 429              		.cfi_def_cfa_offset 8
+ 430              		.cfi_offset 7, -8
+ 431              		.cfi_offset 14, -4
+ 432 0002 00AF     		add	r7, sp, #0
+ 433              	.LCFI21:
+ 434              		.cfi_def_cfa_register 7
+  96:Src/midi.c    **** 	midi_sendNextMessage();
+ 435              		.loc 1 96 0
+ 436 0004 FFF7FEFF 		bl	midi_sendNextMessage
+  97:Src/midi.c    **** }
+ 437              		.loc 1 97 0
+ 438 0008 00BF     		nop
+ 439 000a 80BD     		pop	{r7, pc}
+ 440              		.cfi_endproc
+ 441              	.LFE116:
+ 443              		.text
+ 444              	.Letext0:
+ 445              		.file 2 "/usr/arm-none-eabi/include/machine/_default_types.h"
+ 446              		.file 3 "/usr/arm-none-eabi/include/sys/_stdint.h"
+ 447              		.file 4 "Inc/midi.h"
+ 448              		.file 5 "Drivers/CMSIS/Device/ST/STM32F3xx/Include/stm32f303xc.h"
+ 449              		.file 6 "Drivers/STM32F3xx_HAL_Driver/Inc/stm32f3xx_hal_def.h"
+ 450              		.file 7 "Drivers/STM32F3xx_HAL_Driver/Inc/stm32f3xx_hal_dma.h"
+ 451              		.file 8 "Drivers/STM32F3xx_HAL_Driver/Inc/stm32f3xx_hal_uart.h"
+ 452              		.file 9 "Drivers/CMSIS/Include/core_cm4.h"
+ARM GAS  /tmp/ccVJUweq.s 			page 11
+
+
+DEFINED SYMBOLS
+                            *ABS*:0000000000000000 midi.c
+                            *COM*:000000000000000a midi_TxBuffer
+                            *COM*:0000000000000028 midi_MessageBuffer
+                            *COM*:0000000000000001 midi_messageBufferReadHead
+                            *COM*:0000000000000001 midi_messageBufferWriteHead
+     /tmp/ccVJUweq.s:25     .text.midi_sendNote:0000000000000000 $t
+     /tmp/ccVJUweq.s:30     .text.midi_sendNote:0000000000000000 midi_sendNote
+     /tmp/ccVJUweq.s:213    .text.midi_createmessage:0000000000000000 midi_createmessage
+     /tmp/ccVJUweq.s:129    .text.midi_sendControlChange:0000000000000000 $t
+     /tmp/ccVJUweq.s:134    .text.midi_sendControlChange:0000000000000000 midi_sendControlChange
+     /tmp/ccVJUweq.s:208    .text.midi_createmessage:0000000000000000 $t
+     /tmp/ccVJUweq.s:297    .text.midi_sendNextMessage:0000000000000000 midi_sendNextMessage
+     /tmp/ccVJUweq.s:285    .text.midi_createmessage:0000000000000060 $d
+     /tmp/ccVJUweq.s:292    .text.midi_sendNextMessage:0000000000000000 $t
+     /tmp/ccVJUweq.s:406    .text.midi_sendNextMessage:000000000000009c $d
+     /tmp/ccVJUweq.s:416    .text.midi_onTxComplete:0000000000000000 $t
+     /tmp/ccVJUweq.s:421    .text.midi_onTxComplete:0000000000000000 midi_onTxComplete
+                     .debug_frame:0000000000000010 $d
+
+UNDEFINED SYMBOLS
+malloc
+HAL_UART_GetState
+memcpy
+HAL_UART_Transmit_IT
+free
+huart3

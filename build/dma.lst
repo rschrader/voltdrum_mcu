@@ -1,0 +1,155 @@
+ARM GAS  /tmp/ccZHOAjG.s 			page 1
+
+
+   1              		.syntax unified
+   2              		.cpu cortex-m4
+   3              		.eabi_attribute 27, 1
+   4              		.fpu fpv4-sp-d16
+   5              		.eabi_attribute 20, 1
+   6              		.eabi_attribute 21, 1
+   7              		.eabi_attribute 23, 3
+   8              		.eabi_attribute 24, 1
+   9              		.eabi_attribute 25, 1
+  10              		.eabi_attribute 26, 1
+  11              		.eabi_attribute 30, 6
+  12              		.eabi_attribute 34, 1
+  13              		.eabi_attribute 18, 4
+  14              		.thumb
+  15              		.syntax unified
+  16              		.file	"dma.c"
+  17              		.text
+  18              	.Ltext0:
+  19              		.cfi_sections	.debug_frame
+  20              		.section	.text.MX_DMA_Init,"ax",%progbits
+  21              		.align	2
+  22              		.global	MX_DMA_Init
+  23              		.thumb
+  24              		.thumb_func
+  26              	MX_DMA_Init:
+  27              	.LFB112:
+  28              		.file 1 "Src/dma.c"
+   1:Src/dma.c     **** /**
+   2:Src/dma.c     ****   ******************************************************************************
+   3:Src/dma.c     ****   * File Name          : dma.c
+   4:Src/dma.c     ****   * Date               : 26/05/2015 10:05:15
+   5:Src/dma.c     ****   * Description        : This file provides code for the configuration
+   6:Src/dma.c     ****   *                      of all the requested memory to memory DMA transfers.
+   7:Src/dma.c     ****   ******************************************************************************
+   8:Src/dma.c     ****   *
+   9:Src/dma.c     ****   * COPYRIGHT(c) 2015 STMicroelectronics
+  10:Src/dma.c     ****   *
+  11:Src/dma.c     ****   * Redistribution and use in source and binary forms, with or without modification,
+  12:Src/dma.c     ****   * are permitted provided that the following conditions are met:
+  13:Src/dma.c     ****   *   1. Redistributions of source code must retain the above copyright notice,
+  14:Src/dma.c     ****   *      this list of conditions and the following disclaimer.
+  15:Src/dma.c     ****   *   2. Redistributions in binary form must reproduce the above copyright notice,
+  16:Src/dma.c     ****   *      this list of conditions and the following disclaimer in the documentation
+  17:Src/dma.c     ****   *      and/or other materials provided with the distribution.
+  18:Src/dma.c     ****   *   3. Neither the name of STMicroelectronics nor the names of its contributors
+  19:Src/dma.c     ****   *      may be used to endorse or promote products derived from this software
+  20:Src/dma.c     ****   *      without specific prior written permission.
+  21:Src/dma.c     ****   *
+  22:Src/dma.c     ****   * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS"
+  23:Src/dma.c     ****   * AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
+  24:Src/dma.c     ****   * IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
+  25:Src/dma.c     ****   * DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE LIABLE
+  26:Src/dma.c     ****   * FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL
+  27:Src/dma.c     ****   * DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR
+  28:Src/dma.c     ****   * SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER
+  29:Src/dma.c     ****   * CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY,
+  30:Src/dma.c     ****   * OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
+ARM GAS  /tmp/ccZHOAjG.s 			page 2
+
+
+  31:Src/dma.c     ****   * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+  32:Src/dma.c     ****   *
+  33:Src/dma.c     ****   ******************************************************************************
+  34:Src/dma.c     ****   */
+  35:Src/dma.c     **** /* Includes ------------------------------------------------------------------*/
+  36:Src/dma.c     **** #include "dma.h"
+  37:Src/dma.c     **** 
+  38:Src/dma.c     **** /* USER CODE BEGIN 0 */
+  39:Src/dma.c     **** 
+  40:Src/dma.c     **** /* USER CODE END 0 */
+  41:Src/dma.c     **** 
+  42:Src/dma.c     **** /*----------------------------------------------------------------------------*/
+  43:Src/dma.c     **** /* Configure DMA                                                              */
+  44:Src/dma.c     **** /*----------------------------------------------------------------------------*/
+  45:Src/dma.c     **** 
+  46:Src/dma.c     **** /* USER CODE BEGIN 1 */
+  47:Src/dma.c     **** 
+  48:Src/dma.c     **** /* USER CODE END 1 */
+  49:Src/dma.c     **** 
+  50:Src/dma.c     **** /** 
+  51:Src/dma.c     ****   * Enable DMA controller clock
+  52:Src/dma.c     ****   */
+  53:Src/dma.c     **** void MX_DMA_Init(void) 
+  54:Src/dma.c     **** {
+  29              		.loc 1 54 0
+  30              		.cfi_startproc
+  31              		@ args = 0, pretend = 0, frame = 0
+  32              		@ frame_needed = 1, uses_anonymous_args = 0
+  33              		@ link register save eliminated.
+  34 0000 80B4     		push	{r7}
+  35              	.LCFI0:
+  36              		.cfi_def_cfa_offset 4
+  37              		.cfi_offset 7, -4
+  38 0002 00AF     		add	r7, sp, #0
+  39              	.LCFI1:
+  40              		.cfi_def_cfa_register 7
+  55:Src/dma.c     ****   /* DMA controller clock enable */
+  56:Src/dma.c     ****   __DMA1_CLK_ENABLE();
+  41              		.loc 1 56 0
+  42 0004 084A     		ldr	r2, .L2
+  43 0006 084B     		ldr	r3, .L2
+  44 0008 5B69     		ldr	r3, [r3, #20]
+  45 000a 43F00103 		orr	r3, r3, #1
+  46 000e 5361     		str	r3, [r2, #20]
+  57:Src/dma.c     ****   __DMA2_CLK_ENABLE();
+  47              		.loc 1 57 0
+  48 0010 054A     		ldr	r2, .L2
+  49 0012 054B     		ldr	r3, .L2
+  50 0014 5B69     		ldr	r3, [r3, #20]
+  51 0016 43F00203 		orr	r3, r3, #2
+  52 001a 5361     		str	r3, [r2, #20]
+  58:Src/dma.c     **** 
+  59:Src/dma.c     ****   /* DMA interrupt init */
+  60:Src/dma.c     **** 
+  61:Src/dma.c     **** }
+  53              		.loc 1 61 0
+  54 001c 00BF     		nop
+ARM GAS  /tmp/ccZHOAjG.s 			page 3
+
+
+  55 001e BD46     		mov	sp, r7
+  56              	.LCFI2:
+  57              		.cfi_def_cfa_register 13
+  58              		@ sp needed
+  59 0020 5DF8047B 		ldr	r7, [sp], #4
+  60              	.LCFI3:
+  61              		.cfi_restore 7
+  62              		.cfi_def_cfa_offset 0
+  63 0024 7047     		bx	lr
+  64              	.L3:
+  65 0026 00BF     		.align	2
+  66              	.L2:
+  67 0028 00100240 		.word	1073876992
+  68              		.cfi_endproc
+  69              	.LFE112:
+  71              		.text
+  72              	.Letext0:
+  73              		.file 2 "/usr/arm-none-eabi/include/machine/_default_types.h"
+  74              		.file 3 "/usr/arm-none-eabi/include/sys/_stdint.h"
+  75              		.file 4 "Drivers/CMSIS/Device/ST/STM32F3xx/Include/stm32f303xc.h"
+  76              		.file 5 "Drivers/CMSIS/Include/core_cm4.h"
+ARM GAS  /tmp/ccZHOAjG.s 			page 4
+
+
+DEFINED SYMBOLS
+                            *ABS*:0000000000000000 dma.c
+     /tmp/ccZHOAjG.s:21     .text.MX_DMA_Init:0000000000000000 $t
+     /tmp/ccZHOAjG.s:26     .text.MX_DMA_Init:0000000000000000 MX_DMA_Init
+     /tmp/ccZHOAjG.s:67     .text.MX_DMA_Init:0000000000000028 $d
+                     .debug_frame:0000000000000010 $d
+
+NO UNDEFINED SYMBOLS

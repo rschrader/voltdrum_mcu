@@ -1,0 +1,168 @@
+ARM GAS  /tmp/cc00vcZA.s 			page 1
+
+
+   1              		.syntax unified
+   2              		.cpu cortex-m4
+   3              		.eabi_attribute 27, 1
+   4              		.fpu fpv4-sp-d16
+   5              		.eabi_attribute 20, 1
+   6              		.eabi_attribute 21, 1
+   7              		.eabi_attribute 23, 3
+   8              		.eabi_attribute 24, 1
+   9              		.eabi_attribute 25, 1
+  10              		.eabi_attribute 26, 1
+  11              		.eabi_attribute 30, 6
+  12              		.eabi_attribute 34, 1
+  13              		.eabi_attribute 18, 4
+  14              		.thumb
+  15              		.syntax unified
+  16              		.file	"mcp4251.c"
+  17              		.text
+  18              	.Ltext0:
+  19              		.cfi_sections	.debug_frame
+  20              		.section	.text.mcp4261_setWiperPosition,"ax",%progbits
+  21              		.align	2
+  22              		.global	mcp4261_setWiperPosition
+  23              		.thumb
+  24              		.thumb_func
+  26              	mcp4261_setWiperPosition:
+  27              	.LFB112:
+  28              		.file 1 "Src/mcp4251.c"
+   1:Src/mcp4251.c **** /*
+   2:Src/mcp4251.c ****  * mcp4251.c
+   3:Src/mcp4251.c ****  *
+   4:Src/mcp4251.c ****  *  Created on: 13.04.2015
+   5:Src/mcp4251.c ****  *      Author: raphael
+   6:Src/mcp4251.c ****  */
+   7:Src/mcp4251.c **** #include "mcp4251.h"
+   8:Src/mcp4251.c **** 
+   9:Src/mcp4251.c **** void mcp4261_setWiperPosition(const GPIO_TypeDef *csGpioGroup, const uint16_t csGpioPin, const uint
+  29              		.loc 1 9 0
+  30              		.cfi_startproc
+  31              		@ args = 0, pretend = 0, frame = 16
+  32              		@ frame_needed = 1, uses_anonymous_args = 0
+  33 0000 80B5     		push	{r7, lr}
+  34              	.LCFI0:
+  35              		.cfi_def_cfa_offset 8
+  36              		.cfi_offset 7, -8
+  37              		.cfi_offset 14, -4
+  38 0002 86B0     		sub	sp, sp, #24
+  39              	.LCFI1:
+  40              		.cfi_def_cfa_offset 32
+  41 0004 02AF     		add	r7, sp, #8
+  42              	.LCFI2:
+  43              		.cfi_def_cfa 7, 24
+  44 0006 7860     		str	r0, [r7, #4]
+  45 0008 0846     		mov	r0, r1
+  46 000a 1146     		mov	r1, r2
+  47 000c 1A46     		mov	r2, r3
+  48 000e 0346     		mov	r3, r0	@ movhi
+  49 0010 7B80     		strh	r3, [r7, #2]	@ movhi
+ARM GAS  /tmp/cc00vcZA.s 			page 2
+
+
+  50 0012 0B46     		mov	r3, r1
+  51 0014 7B70     		strb	r3, [r7, #1]
+  52 0016 1346     		mov	r3, r2
+  53 0018 3B70     		strb	r3, [r7]
+  10:Src/mcp4251.c **** 
+  11:Src/mcp4251.c **** 	uint8_t tx1 = wiperId;
+  54              		.loc 1 11 0
+  55 001a 7B78     		ldrb	r3, [r7, #1]
+  56 001c FB73     		strb	r3, [r7, #15]
+  12:Src/mcp4251.c **** 	uint8_t tx2 = wiperPosition;
+  57              		.loc 1 12 0
+  58 001e 3B78     		ldrb	r3, [r7]
+  59 0020 BB73     		strb	r3, [r7, #14]
+  13:Src/mcp4251.c **** 
+  14:Src/mcp4251.c **** 	//send LSByte First
+  15:Src/mcp4251.c **** 	uint16_t tx = (tx1 << 8) | tx2;
+  60              		.loc 1 15 0
+  61 0022 FB7B     		ldrb	r3, [r7, #15]	@ zero_extendqisi2
+  62 0024 1B02     		lsls	r3, r3, #8
+  63 0026 9AB2     		uxth	r2, r3
+  64 0028 BB7B     		ldrb	r3, [r7, #14]	@ zero_extendqisi2
+  65 002a 9BB2     		uxth	r3, r3
+  66 002c 1343     		orrs	r3, r3, r2
+  67 002e 9BB2     		uxth	r3, r3
+  68 0030 9BB2     		uxth	r3, r3
+  69 0032 BB81     		strh	r3, [r7, #12]	@ movhi
+  16:Src/mcp4251.c **** 	uint16_t rx = 0x0000;
+  70              		.loc 1 16 0
+  71 0034 0023     		movs	r3, #0
+  72 0036 7B81     		strh	r3, [r7, #10]	@ movhi
+  17:Src/mcp4251.c **** 
+  18:Src/mcp4251.c **** 	// set chipselect pin
+  19:Src/mcp4251.c **** 	HAL_GPIO_WritePin(csGpioGroup,csGpioPin,GPIO_PIN_RESET);
+  73              		.loc 1 19 0
+  74 0038 7B88     		ldrh	r3, [r7, #2]
+  75 003a 0022     		movs	r2, #0
+  76 003c 1946     		mov	r1, r3
+  77 003e 7868     		ldr	r0, [r7, #4]
+  78 0040 FFF7FEFF 		bl	HAL_GPIO_WritePin
+  20:Src/mcp4251.c **** 
+  21:Src/mcp4251.c **** 	//transmit data
+  22:Src/mcp4251.c **** 	HAL_SPI_TransmitReceive(&hspi2,&tx,&rx,2,100);
+  79              		.loc 1 22 0
+  80 0044 07F10A02 		add	r2, r7, #10
+  81 0048 07F10C01 		add	r1, r7, #12
+  82 004c 6423     		movs	r3, #100
+  83 004e 0093     		str	r3, [sp]
+  84 0050 0223     		movs	r3, #2
+  85 0052 0648     		ldr	r0, .L2
+  86 0054 FFF7FEFF 		bl	HAL_SPI_TransmitReceive
+  23:Src/mcp4251.c **** 
+  24:Src/mcp4251.c **** 	// release chipselect pin
+  25:Src/mcp4251.c **** 	HAL_GPIO_WritePin(csGpioGroup,csGpioPin,GPIO_PIN_SET);
+  87              		.loc 1 25 0
+  88 0058 7B88     		ldrh	r3, [r7, #2]
+  89 005a 0122     		movs	r2, #1
+  90 005c 1946     		mov	r1, r3
+ARM GAS  /tmp/cc00vcZA.s 			page 3
+
+
+  91 005e 7868     		ldr	r0, [r7, #4]
+  92 0060 FFF7FEFF 		bl	HAL_GPIO_WritePin
+  26:Src/mcp4251.c **** 
+  27:Src/mcp4251.c **** }
+  93              		.loc 1 27 0
+  94 0064 00BF     		nop
+  95 0066 1037     		adds	r7, r7, #16
+  96              	.LCFI3:
+  97              		.cfi_def_cfa_offset 8
+  98 0068 BD46     		mov	sp, r7
+  99              	.LCFI4:
+ 100              		.cfi_def_cfa_register 13
+ 101              		@ sp needed
+ 102 006a 80BD     		pop	{r7, pc}
+ 103              	.L3:
+ 104              		.align	2
+ 105              	.L2:
+ 106 006c 00000000 		.word	hspi2
+ 107              		.cfi_endproc
+ 108              	.LFE112:
+ 110              		.text
+ 111              	.Letext0:
+ 112              		.file 2 "/usr/arm-none-eabi/include/machine/_default_types.h"
+ 113              		.file 3 "/usr/arm-none-eabi/include/sys/_stdint.h"
+ 114              		.file 4 "Drivers/CMSIS/Device/ST/STM32F3xx/Include/stm32f303xc.h"
+ 115              		.file 5 "Drivers/STM32F3xx_HAL_Driver/Inc/stm32f3xx_hal_def.h"
+ 116              		.file 6 "Drivers/STM32F3xx_HAL_Driver/Inc/stm32f3xx_hal_gpio.h"
+ 117              		.file 7 "Drivers/STM32F3xx_HAL_Driver/Inc/stm32f3xx_hal_dma.h"
+ 118              		.file 8 "Drivers/STM32F3xx_HAL_Driver/Inc/stm32f3xx_hal_spi.h"
+ 119              		.file 9 "Drivers/CMSIS/Include/core_cm4.h"
+ 120              		.file 10 "Inc/spi.h"
+ARM GAS  /tmp/cc00vcZA.s 			page 4
+
+
+DEFINED SYMBOLS
+                            *ABS*:0000000000000000 mcp4251.c
+     /tmp/cc00vcZA.s:21     .text.mcp4261_setWiperPosition:0000000000000000 $t
+     /tmp/cc00vcZA.s:26     .text.mcp4261_setWiperPosition:0000000000000000 mcp4261_setWiperPosition
+     /tmp/cc00vcZA.s:106    .text.mcp4261_setWiperPosition:000000000000006c $d
+                     .debug_frame:0000000000000010 $d
+
+UNDEFINED SYMBOLS
+HAL_GPIO_WritePin
+HAL_SPI_TransmitReceive
+hspi2

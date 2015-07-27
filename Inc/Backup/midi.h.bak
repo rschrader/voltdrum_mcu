@@ -1,0 +1,20 @@
+/*
+ * midi.h
+ *
+ *  Created on: 19.05.2015
+ *      Author: raphael
+ */
+
+#ifndef INC_MIDI_H_
+#define INC_MIDI_H_
+
+#include "inttypes.h"
+
+uint8_t midibuffer[10];
+
+void midi_sendNote(uint8_t channel, uint8_t note, uint8_t velocity);
+void midi_sendControlChange(uint8_t channel, uint8_t control, uint8_t value);
+
+
+
+#endif /* INC_MIDI_H_ */

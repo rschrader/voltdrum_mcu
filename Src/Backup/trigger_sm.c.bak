@@ -1,0 +1,31 @@
+/*
+ * trigger_sm.c
+ *
+ *  Created on: 19.05.2015
+ *      Author: raphael
+ */
+
+#include "trigger_sm.h"
+
+
+//dispatcher for process methods
+void triggersm_process (TriggerSM *sm){
+
+}
+
+//process methods for different states
+void triggersm_process_triggerevent (TriggerSM *sm){
+
+}
+void triggersm_process_monitor (TriggerSM *sm){
+
+}
+
+//State transition methods
+void triggersm_transition_triggerevent_monitor (TriggerSM *sm){
+
+}
+void triggersm_transition_monitor_triggerevent (TriggerSM *sm){
+
+}
+

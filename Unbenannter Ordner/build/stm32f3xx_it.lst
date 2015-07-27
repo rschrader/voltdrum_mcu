@@ -1,0 +1,807 @@
+ARM GAS  /tmp/cczAnjdU.s 			page 1
+
+
+   1              		.syntax unified
+   2              		.cpu cortex-m4
+   3              		.eabi_attribute 27, 1
+   4              		.fpu fpv4-sp-d16
+   5              		.eabi_attribute 20, 1
+   6              		.eabi_attribute 21, 1
+   7              		.eabi_attribute 23, 3
+   8              		.eabi_attribute 24, 1
+   9              		.eabi_attribute 25, 1
+  10              		.eabi_attribute 26, 1
+  11              		.eabi_attribute 30, 6
+  12              		.eabi_attribute 34, 1
+  13              		.eabi_attribute 18, 4
+  14              		.thumb
+  15              		.syntax unified
+  16              		.file	"stm32f3xx_it.c"
+  17              		.text
+  18              	.Ltext0:
+  19              		.cfi_sections	.debug_frame
+  20              		.section	.text.TIM2_IRQHandler,"ax",%progbits
+  21              		.align	2
+  22              		.global	TIM2_IRQHandler
+  23              		.thumb
+  24              		.thumb_func
+  26              	TIM2_IRQHandler:
+  27              	.LFB112:
+  28              		.file 1 "Src/stm32f3xx_it.c"
+   1:Src/stm32f3xx_it.c **** /**
+   2:Src/stm32f3xx_it.c ****   ******************************************************************************
+   3:Src/stm32f3xx_it.c ****   * @file    stm32f3xx_it.c
+   4:Src/stm32f3xx_it.c ****   * @date    26/05/2015 10:05:17
+   5:Src/stm32f3xx_it.c ****   * @brief   Interrupt Service Routines.
+   6:Src/stm32f3xx_it.c ****   ******************************************************************************
+   7:Src/stm32f3xx_it.c ****   *
+   8:Src/stm32f3xx_it.c ****   * COPYRIGHT(c) 2015 STMicroelectronics
+   9:Src/stm32f3xx_it.c ****   *
+  10:Src/stm32f3xx_it.c ****   * Redistribution and use in source and binary forms, with or without modification,
+  11:Src/stm32f3xx_it.c ****   * are permitted provided that the following conditions are met:
+  12:Src/stm32f3xx_it.c ****   *   1. Redistributions of source code must retain the above copyright notice,
+  13:Src/stm32f3xx_it.c ****   *      this list of conditions and the following disclaimer.
+  14:Src/stm32f3xx_it.c ****   *   2. Redistributions in binary form must reproduce the above copyright notice,
+  15:Src/stm32f3xx_it.c ****   *      this list of conditions and the following disclaimer in the documentation
+  16:Src/stm32f3xx_it.c ****   *      and/or other materials provided with the distribution.
+  17:Src/stm32f3xx_it.c ****   *   3. Neither the name of STMicroelectronics nor the names of its contributors
+  18:Src/stm32f3xx_it.c ****   *      may be used to endorse or promote products derived from this software
+  19:Src/stm32f3xx_it.c ****   *      without specific prior written permission.
+  20:Src/stm32f3xx_it.c ****   *
+  21:Src/stm32f3xx_it.c ****   * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS"
+  22:Src/stm32f3xx_it.c ****   * AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
+  23:Src/stm32f3xx_it.c ****   * IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
+  24:Src/stm32f3xx_it.c ****   * DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE LIABLE
+  25:Src/stm32f3xx_it.c ****   * FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL
+  26:Src/stm32f3xx_it.c ****   * DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR
+  27:Src/stm32f3xx_it.c ****   * SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER
+  28:Src/stm32f3xx_it.c ****   * CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY,
+  29:Src/stm32f3xx_it.c ****   * OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
+  30:Src/stm32f3xx_it.c ****   * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+ARM GAS  /tmp/cczAnjdU.s 			page 2
+
+
+  31:Src/stm32f3xx_it.c ****   *
+  32:Src/stm32f3xx_it.c ****   ******************************************************************************
+  33:Src/stm32f3xx_it.c ****   */
+  34:Src/stm32f3xx_it.c **** /* Includes ------------------------------------------------------------------*/
+  35:Src/stm32f3xx_it.c **** #include "stm32f3xx_hal.h"
+  36:Src/stm32f3xx_it.c **** #include "stm32f3xx.h"
+  37:Src/stm32f3xx_it.c **** #include "stm32f3xx_it.h"
+  38:Src/stm32f3xx_it.c **** /* USER CODE BEGIN 0 */
+  39:Src/stm32f3xx_it.c **** 
+  40:Src/stm32f3xx_it.c **** 
+  41:Src/stm32f3xx_it.c **** 
+  42:Src/stm32f3xx_it.c **** 
+  43:Src/stm32f3xx_it.c **** #define debounceDelay 5
+  44:Src/stm32f3xx_it.c **** 
+  45:Src/stm32f3xx_it.c **** extern int irqflag_timer1;
+  46:Src/stm32f3xx_it.c **** extern int irqflag_timer2;
+  47:Src/stm32f3xx_it.c **** extern int irqflag_btns[3];
+  48:Src/stm32f3xx_it.c **** extern int btnDebounceIRQTimer[3];
+  49:Src/stm32f3xx_it.c **** 
+  50:Src/stm32f3xx_it.c **** extern volatile uint32_t adc1Samples[4*10];
+  51:Src/stm32f3xx_it.c **** extern volatile uint32_t adc2Samples[4*7];
+  52:Src/stm32f3xx_it.c **** extern volatile uint32_t adc3Samples[4*3];
+  53:Src/stm32f3xx_it.c **** extern volatile uint32_t adc4Samples[2];
+  54:Src/stm32f3xx_it.c **** 
+  55:Src/stm32f3xx_it.c **** extern ADC_HandleTypeDef hadc1;
+  56:Src/stm32f3xx_it.c **** extern ADC_HandleTypeDef hadc2;
+  57:Src/stm32f3xx_it.c **** extern ADC_HandleTypeDef hadc3;
+  58:Src/stm32f3xx_it.c **** extern ADC_HandleTypeDef hadc4;
+  59:Src/stm32f3xx_it.c **** /* USER CODE END 0 */
+  60:Src/stm32f3xx_it.c **** /* External variables --------------------------------------------------------*/
+  61:Src/stm32f3xx_it.c **** 
+  62:Src/stm32f3xx_it.c **** extern PCD_HandleTypeDef hpcd_USB_FS;
+  63:Src/stm32f3xx_it.c **** extern TIM_HandleTypeDef htim1;
+  64:Src/stm32f3xx_it.c **** extern TIM_HandleTypeDef htim2;
+  65:Src/stm32f3xx_it.c **** extern TIM_HandleTypeDef htim3;
+  66:Src/stm32f3xx_it.c **** extern UART_HandleTypeDef huart1;
+  67:Src/stm32f3xx_it.c **** extern UART_HandleTypeDef huart3;
+  68:Src/stm32f3xx_it.c **** 
+  69:Src/stm32f3xx_it.c **** /******************************************************************************/
+  70:Src/stm32f3xx_it.c **** /*            Cortex-M4 Processor Interruption and Exception Handlers         */ 
+  71:Src/stm32f3xx_it.c **** /******************************************************************************/
+  72:Src/stm32f3xx_it.c **** 
+  73:Src/stm32f3xx_it.c **** /**
+  74:Src/stm32f3xx_it.c **** * @brief This function handles TIM2 global interrupt.
+  75:Src/stm32f3xx_it.c **** */
+  76:Src/stm32f3xx_it.c **** void TIM2_IRQHandler(void)
+  77:Src/stm32f3xx_it.c **** {
+  29              		.loc 1 77 0
+  30              		.cfi_startproc
+  31              		@ args = 0, pretend = 0, frame = 0
+  32              		@ frame_needed = 1, uses_anonymous_args = 0
+  33 0000 80B5     		push	{r7, lr}
+  34              	.LCFI0:
+  35              		.cfi_def_cfa_offset 8
+  36              		.cfi_offset 7, -8
+  37              		.cfi_offset 14, -4
+  38 0002 00AF     		add	r7, sp, #0
+ARM GAS  /tmp/cczAnjdU.s 			page 3
+
+
+  39              	.LCFI1:
+  40              		.cfi_def_cfa_register 7
+  78:Src/stm32f3xx_it.c ****   /* USER CODE BEGIN TIM2_IRQn 0 */
+  79:Src/stm32f3xx_it.c **** 
+  80:Src/stm32f3xx_it.c ****   irqflag_timer2 = 1;
+  41              		.loc 1 80 0
+  42 0004 064B     		ldr	r3, .L2
+  43 0006 0122     		movs	r2, #1
+  44 0008 1A60     		str	r2, [r3]
+  81:Src/stm32f3xx_it.c **** 
+  82:Src/stm32f3xx_it.c ****   HAL_ADC_Start_DMA(&hadc4, adc4Samples, 2);
+  45              		.loc 1 82 0
+  46 000a 0222     		movs	r2, #2
+  47 000c 0549     		ldr	r1, .L2+4
+  48 000e 0648     		ldr	r0, .L2+8
+  49 0010 FFF7FEFF 		bl	HAL_ADC_Start_DMA
+  83:Src/stm32f3xx_it.c ****   /* USER CODE END TIM2_IRQn 0 */
+  84:Src/stm32f3xx_it.c ****   HAL_TIM_IRQHandler(&htim2);
+  50              		.loc 1 84 0
+  51 0014 0548     		ldr	r0, .L2+12
+  52 0016 FFF7FEFF 		bl	HAL_TIM_IRQHandler
+  85:Src/stm32f3xx_it.c ****   /* USER CODE BEGIN TIM2_IRQn 1 */
+  86:Src/stm32f3xx_it.c **** 
+  87:Src/stm32f3xx_it.c ****   /* USER CODE END TIM2_IRQn 1 */
+  88:Src/stm32f3xx_it.c **** }
+  53              		.loc 1 88 0
+  54 001a 00BF     		nop
+  55 001c 80BD     		pop	{r7, pc}
+  56              	.L3:
+  57 001e 00BF     		.align	2
+  58              	.L2:
+  59 0020 00000000 		.word	irqflag_timer2
+  60 0024 00000000 		.word	adc4Samples
+  61 0028 00000000 		.word	hadc4
+  62 002c 00000000 		.word	htim2
+  63              		.cfi_endproc
+  64              	.LFE112:
+  66              		.section	.text.SysTick_Handler,"ax",%progbits
+  67              		.align	2
+  68              		.global	SysTick_Handler
+  69              		.thumb
+  70              		.thumb_func
+  72              	SysTick_Handler:
+  73              	.LFB113:
+  89:Src/stm32f3xx_it.c **** 
+  90:Src/stm32f3xx_it.c **** /**
+  91:Src/stm32f3xx_it.c **** * @brief This function handles System tick timer.
+  92:Src/stm32f3xx_it.c **** */
+  93:Src/stm32f3xx_it.c **** void SysTick_Handler(void)
+  94:Src/stm32f3xx_it.c **** {
+  74              		.loc 1 94 0
+  75              		.cfi_startproc
+  76              		@ args = 0, pretend = 0, frame = 0
+  77              		@ frame_needed = 1, uses_anonymous_args = 0
+  78 0000 80B5     		push	{r7, lr}
+  79              	.LCFI2:
+  80              		.cfi_def_cfa_offset 8
+ARM GAS  /tmp/cczAnjdU.s 			page 4
+
+
+  81              		.cfi_offset 7, -8
+  82              		.cfi_offset 14, -4
+  83 0002 00AF     		add	r7, sp, #0
+  84              	.LCFI3:
+  85              		.cfi_def_cfa_register 7
+  95:Src/stm32f3xx_it.c ****   /* USER CODE BEGIN SysTick_IRQn 0 */
+  96:Src/stm32f3xx_it.c **** 
+  97:Src/stm32f3xx_it.c ****   /* USER CODE END SysTick_IRQn 0 */
+  98:Src/stm32f3xx_it.c ****   HAL_IncTick();
+  86              		.loc 1 98 0
+  87 0004 FFF7FEFF 		bl	HAL_IncTick
+  99:Src/stm32f3xx_it.c ****   HAL_SYSTICK_IRQHandler();
+  88              		.loc 1 99 0
+  89 0008 FFF7FEFF 		bl	HAL_SYSTICK_IRQHandler
+ 100:Src/stm32f3xx_it.c ****   /* USER CODE BEGIN SysTick_IRQn 1 */
+ 101:Src/stm32f3xx_it.c **** 
+ 102:Src/stm32f3xx_it.c ****   /* USER CODE END SysTick_IRQn 1 */
+ 103:Src/stm32f3xx_it.c **** }
+  90              		.loc 1 103 0
+  91 000c 00BF     		nop
+  92 000e 80BD     		pop	{r7, pc}
+  93              		.cfi_endproc
+  94              	.LFE113:
+  96              		.section	.text.USART1_IRQHandler,"ax",%progbits
+  97              		.align	2
+  98              		.global	USART1_IRQHandler
+  99              		.thumb
+ 100              		.thumb_func
+ 102              	USART1_IRQHandler:
+ 103              	.LFB114:
+ 104:Src/stm32f3xx_it.c **** 
+ 105:Src/stm32f3xx_it.c **** /**
+ 106:Src/stm32f3xx_it.c **** * @brief This function handles USART1 global interrupt.
+ 107:Src/stm32f3xx_it.c **** */
+ 108:Src/stm32f3xx_it.c **** void USART1_IRQHandler(void)
+ 109:Src/stm32f3xx_it.c **** {
+ 104              		.loc 1 109 0
+ 105              		.cfi_startproc
+ 106              		@ args = 0, pretend = 0, frame = 0
+ 107              		@ frame_needed = 1, uses_anonymous_args = 0
+ 108 0000 80B5     		push	{r7, lr}
+ 109              	.LCFI4:
+ 110              		.cfi_def_cfa_offset 8
+ 111              		.cfi_offset 7, -8
+ 112              		.cfi_offset 14, -4
+ 113 0002 00AF     		add	r7, sp, #0
+ 114              	.LCFI5:
+ 115              		.cfi_def_cfa_register 7
+ 110:Src/stm32f3xx_it.c ****   /* USER CODE BEGIN USART1_IRQn 0 */
+ 111:Src/stm32f3xx_it.c **** 
+ 112:Src/stm32f3xx_it.c ****   /* USER CODE END USART1_IRQn 0 */
+ 113:Src/stm32f3xx_it.c ****   HAL_UART_IRQHandler(&huart1);
+ 116              		.loc 1 113 0
+ 117 0004 0248     		ldr	r0, .L6
+ 118 0006 FFF7FEFF 		bl	HAL_UART_IRQHandler
+ 114:Src/stm32f3xx_it.c ****   /* USER CODE BEGIN USART1_IRQn 1 */
+ 115:Src/stm32f3xx_it.c **** 
+ARM GAS  /tmp/cczAnjdU.s 			page 5
+
+
+ 116:Src/stm32f3xx_it.c ****   /* USER CODE END USART1_IRQn 1 */
+ 117:Src/stm32f3xx_it.c **** }
+ 119              		.loc 1 117 0
+ 120 000a 00BF     		nop
+ 121 000c 80BD     		pop	{r7, pc}
+ 122              	.L7:
+ 123 000e 00BF     		.align	2
+ 124              	.L6:
+ 125 0010 00000000 		.word	huart1
+ 126              		.cfi_endproc
+ 127              	.LFE114:
+ 129              		.section	.text.EXTI15_10_IRQHandler,"ax",%progbits
+ 130              		.align	2
+ 131              		.global	EXTI15_10_IRQHandler
+ 132              		.thumb
+ 133              		.thumb_func
+ 135              	EXTI15_10_IRQHandler:
+ 136              	.LFB115:
+ 118:Src/stm32f3xx_it.c **** 
+ 119:Src/stm32f3xx_it.c **** /**
+ 120:Src/stm32f3xx_it.c **** * @brief This function handles EXTI Line[15:10] interrupts.
+ 121:Src/stm32f3xx_it.c **** */
+ 122:Src/stm32f3xx_it.c **** void EXTI15_10_IRQHandler(void)
+ 123:Src/stm32f3xx_it.c **** {
+ 137              		.loc 1 123 0
+ 138              		.cfi_startproc
+ 139              		@ args = 0, pretend = 0, frame = 0
+ 140              		@ frame_needed = 1, uses_anonymous_args = 0
+ 141 0000 80B5     		push	{r7, lr}
+ 142              	.LCFI6:
+ 143              		.cfi_def_cfa_offset 8
+ 144              		.cfi_offset 7, -8
+ 145              		.cfi_offset 14, -4
+ 146 0002 00AF     		add	r7, sp, #0
+ 147              	.LCFI7:
+ 148              		.cfi_def_cfa_register 7
+ 124:Src/stm32f3xx_it.c ****   /* USER CODE BEGIN EXTI15_10_IRQn 0 */
+ 125:Src/stm32f3xx_it.c **** 
+ 126:Src/stm32f3xx_it.c **** 
+ 127:Src/stm32f3xx_it.c ****   /* USER CODE END EXTI15_10_IRQn 0 */
+ 128:Src/stm32f3xx_it.c ****   HAL_GPIO_EXTI_IRQHandler(GPIO_PIN_10);
+ 149              		.loc 1 128 0
+ 150 0004 4FF48060 		mov	r0, #1024
+ 151 0008 FFF7FEFF 		bl	HAL_GPIO_EXTI_IRQHandler
+ 129:Src/stm32f3xx_it.c ****   HAL_GPIO_EXTI_IRQHandler(GPIO_PIN_11);
+ 152              		.loc 1 129 0
+ 153 000c 4FF40060 		mov	r0, #2048
+ 154 0010 FFF7FEFF 		bl	HAL_GPIO_EXTI_IRQHandler
+ 130:Src/stm32f3xx_it.c ****   /* USER CODE BEGIN EXTI15_10_IRQn 1 */
+ 131:Src/stm32f3xx_it.c **** 
+ 132:Src/stm32f3xx_it.c ****   /* USER CODE END EXTI15_10_IRQn 1 */
+ 133:Src/stm32f3xx_it.c **** }
+ 155              		.loc 1 133 0
+ 156 0014 00BF     		nop
+ 157 0016 80BD     		pop	{r7, pc}
+ 158              		.cfi_endproc
+ 159              	.LFE115:
+ARM GAS  /tmp/cczAnjdU.s 			page 6
+
+
+ 161              		.section	.text.TIM3_IRQHandler,"ax",%progbits
+ 162              		.align	2
+ 163              		.global	TIM3_IRQHandler
+ 164              		.thumb
+ 165              		.thumb_func
+ 167              	TIM3_IRQHandler:
+ 168              	.LFB116:
+ 134:Src/stm32f3xx_it.c **** 
+ 135:Src/stm32f3xx_it.c **** /**
+ 136:Src/stm32f3xx_it.c **** * @brief This function handles TIM3 global interrupt.
+ 137:Src/stm32f3xx_it.c **** */
+ 138:Src/stm32f3xx_it.c **** void TIM3_IRQHandler(void)
+ 139:Src/stm32f3xx_it.c **** {
+ 169              		.loc 1 139 0
+ 170              		.cfi_startproc
+ 171              		@ args = 0, pretend = 0, frame = 0
+ 172              		@ frame_needed = 1, uses_anonymous_args = 0
+ 173 0000 80B5     		push	{r7, lr}
+ 174              	.LCFI8:
+ 175              		.cfi_def_cfa_offset 8
+ 176              		.cfi_offset 7, -8
+ 177              		.cfi_offset 14, -4
+ 178 0002 00AF     		add	r7, sp, #0
+ 179              	.LCFI9:
+ 180              		.cfi_def_cfa_register 7
+ 140:Src/stm32f3xx_it.c ****   /* USER CODE BEGIN TIM3_IRQn 0 */
+ 141:Src/stm32f3xx_it.c **** 
+ 142:Src/stm32f3xx_it.c **** 
+ 143:Src/stm32f3xx_it.c **** 	int i;
+ 144:Src/stm32f3xx_it.c **** 	if(btnDebounceIRQTimer[0]>debounceDelay){
+ 181              		.loc 1 144 0
+ 182 0004 2C4B     		ldr	r3, .L19
+ 183 0006 1B68     		ldr	r3, [r3]
+ 184 0008 052B     		cmp	r3, #5
+ 185 000a 0EDD     		ble	.L10
+ 145:Src/stm32f3xx_it.c **** 		btnDebounceIRQTimer[0] = 0;
+ 186              		.loc 1 145 0
+ 187 000c 2A4B     		ldr	r3, .L19
+ 188 000e 0022     		movs	r2, #0
+ 189 0010 1A60     		str	r2, [r3]
+ 146:Src/stm32f3xx_it.c **** 		if(HAL_GPIO_ReadPin(GPIOE,GPIO_PIN_10)) irqflag_btns[0] = 1;
+ 190              		.loc 1 146 0
+ 191 0012 4FF48061 		mov	r1, #1024
+ 192 0016 2948     		ldr	r0, .L19+4
+ 193 0018 FFF7FEFF 		bl	HAL_GPIO_ReadPin
+ 194 001c 0346     		mov	r3, r0
+ 195 001e 002B     		cmp	r3, #0
+ 196 0020 0CD0     		beq	.L12
+ 197              		.loc 1 146 0 is_stmt 0 discriminator 1
+ 198 0022 274B     		ldr	r3, .L19+8
+ 199 0024 0122     		movs	r2, #1
+ 200 0026 1A60     		str	r2, [r3]
+ 201 0028 08E0     		b	.L12
+ 202              	.L10:
+ 147:Src/stm32f3xx_it.c **** 	}
+ 148:Src/stm32f3xx_it.c **** 	else if(btnDebounceIRQTimer[0] > 0) btnDebounceIRQTimer[0] ++;
+ 203              		.loc 1 148 0 is_stmt 1
+ARM GAS  /tmp/cczAnjdU.s 			page 7
+
+
+ 204 002a 234B     		ldr	r3, .L19
+ 205 002c 1B68     		ldr	r3, [r3]
+ 206 002e 002B     		cmp	r3, #0
+ 207 0030 04DD     		ble	.L12
+ 208              		.loc 1 148 0 is_stmt 0 discriminator 1
+ 209 0032 214B     		ldr	r3, .L19
+ 210 0034 1B68     		ldr	r3, [r3]
+ 211 0036 0133     		adds	r3, r3, #1
+ 212 0038 1F4A     		ldr	r2, .L19
+ 213 003a 1360     		str	r3, [r2]
+ 214              	.L12:
+ 149:Src/stm32f3xx_it.c **** 
+ 150:Src/stm32f3xx_it.c **** 	if(btnDebounceIRQTimer[1]>debounceDelay){
+ 215              		.loc 1 150 0 is_stmt 1
+ 216 003c 1E4B     		ldr	r3, .L19
+ 217 003e 5B68     		ldr	r3, [r3, #4]
+ 218 0040 052B     		cmp	r3, #5
+ 219 0042 0EDD     		ble	.L13
+ 151:Src/stm32f3xx_it.c **** 			btnDebounceIRQTimer[1] = 0;
+ 220              		.loc 1 151 0
+ 221 0044 1C4B     		ldr	r3, .L19
+ 222 0046 0022     		movs	r2, #0
+ 223 0048 5A60     		str	r2, [r3, #4]
+ 152:Src/stm32f3xx_it.c **** 			if(HAL_GPIO_ReadPin(GPIOE,GPIO_PIN_11)) irqflag_btns[1] = 1;
+ 224              		.loc 1 152 0
+ 225 004a 4FF40061 		mov	r1, #2048
+ 226 004e 1B48     		ldr	r0, .L19+4
+ 227 0050 FFF7FEFF 		bl	HAL_GPIO_ReadPin
+ 228 0054 0346     		mov	r3, r0
+ 229 0056 002B     		cmp	r3, #0
+ 230 0058 0CD0     		beq	.L15
+ 231              		.loc 1 152 0 is_stmt 0 discriminator 1
+ 232 005a 194B     		ldr	r3, .L19+8
+ 233 005c 0122     		movs	r2, #1
+ 234 005e 5A60     		str	r2, [r3, #4]
+ 235 0060 08E0     		b	.L15
+ 236              	.L13:
+ 153:Src/stm32f3xx_it.c **** 		}
+ 154:Src/stm32f3xx_it.c **** 		else if(btnDebounceIRQTimer[1] > 0) btnDebounceIRQTimer[1] ++;
+ 237              		.loc 1 154 0 is_stmt 1
+ 238 0062 154B     		ldr	r3, .L19
+ 239 0064 5B68     		ldr	r3, [r3, #4]
+ 240 0066 002B     		cmp	r3, #0
+ 241 0068 04DD     		ble	.L15
+ 242              		.loc 1 154 0 is_stmt 0 discriminator 1
+ 243 006a 134B     		ldr	r3, .L19
+ 244 006c 5B68     		ldr	r3, [r3, #4]
+ 245 006e 0133     		adds	r3, r3, #1
+ 246 0070 114A     		ldr	r2, .L19
+ 247 0072 5360     		str	r3, [r2, #4]
+ 248              	.L15:
+ 155:Src/stm32f3xx_it.c **** 
+ 156:Src/stm32f3xx_it.c **** 	if(btnDebounceIRQTimer[2]>debounceDelay){
+ 249              		.loc 1 156 0 is_stmt 1
+ 250 0074 104B     		ldr	r3, .L19
+ 251 0076 9B68     		ldr	r3, [r3, #8]
+ 252 0078 052B     		cmp	r3, #5
+ARM GAS  /tmp/cczAnjdU.s 			page 8
+
+
+ 253 007a 0EDD     		ble	.L16
+ 157:Src/stm32f3xx_it.c **** 			btnDebounceIRQTimer[2] = 0;
+ 254              		.loc 1 157 0
+ 255 007c 0E4B     		ldr	r3, .L19
+ 256 007e 0022     		movs	r2, #0
+ 257 0080 9A60     		str	r2, [r3, #8]
+ 158:Src/stm32f3xx_it.c **** 			if(HAL_GPIO_ReadPin(GPIOE,GPIO_PIN_12)) irqflag_btns[2] = 1;
+ 258              		.loc 1 158 0
+ 259 0082 4FF48051 		mov	r1, #4096
+ 260 0086 0D48     		ldr	r0, .L19+4
+ 261 0088 FFF7FEFF 		bl	HAL_GPIO_ReadPin
+ 262 008c 0346     		mov	r3, r0
+ 263 008e 002B     		cmp	r3, #0
+ 264 0090 0CD0     		beq	.L18
+ 265              		.loc 1 158 0 is_stmt 0 discriminator 1
+ 266 0092 0B4B     		ldr	r3, .L19+8
+ 267 0094 0122     		movs	r2, #1
+ 268 0096 9A60     		str	r2, [r3, #8]
+ 269 0098 08E0     		b	.L18
+ 270              	.L16:
+ 159:Src/stm32f3xx_it.c **** 		}
+ 160:Src/stm32f3xx_it.c **** 		else if(btnDebounceIRQTimer[2] > 0) btnDebounceIRQTimer[2] ++;
+ 271              		.loc 1 160 0 is_stmt 1
+ 272 009a 074B     		ldr	r3, .L19
+ 273 009c 9B68     		ldr	r3, [r3, #8]
+ 274 009e 002B     		cmp	r3, #0
+ 275 00a0 04DD     		ble	.L18
+ 276              		.loc 1 160 0 is_stmt 0 discriminator 1
+ 277 00a2 054B     		ldr	r3, .L19
+ 278 00a4 9B68     		ldr	r3, [r3, #8]
+ 279 00a6 0133     		adds	r3, r3, #1
+ 280 00a8 034A     		ldr	r2, .L19
+ 281 00aa 9360     		str	r3, [r2, #8]
+ 282              	.L18:
+ 161:Src/stm32f3xx_it.c **** 
+ 162:Src/stm32f3xx_it.c **** 
+ 163:Src/stm32f3xx_it.c **** 
+ 164:Src/stm32f3xx_it.c ****   /* USER CODE END TIM3_IRQn 0 */
+ 165:Src/stm32f3xx_it.c ****   HAL_TIM_IRQHandler(&htim3);
+ 283              		.loc 1 165 0 is_stmt 1
+ 284 00ac 0548     		ldr	r0, .L19+12
+ 285 00ae FFF7FEFF 		bl	HAL_TIM_IRQHandler
+ 166:Src/stm32f3xx_it.c ****   /* USER CODE BEGIN TIM3_IRQn 1 */
+ 167:Src/stm32f3xx_it.c ****   /* USER CODE END TIM3_IRQn 1 */
+ 168:Src/stm32f3xx_it.c **** }
+ 286              		.loc 1 168 0
+ 287 00b2 00BF     		nop
+ 288 00b4 80BD     		pop	{r7, pc}
+ 289              	.L20:
+ 290 00b6 00BF     		.align	2
+ 291              	.L19:
+ 292 00b8 00000000 		.word	btnDebounceIRQTimer
+ 293 00bc 00100048 		.word	1207963648
+ 294 00c0 00000000 		.word	irqflag_btns
+ 295 00c4 00000000 		.word	htim3
+ 296              		.cfi_endproc
+ 297              	.LFE116:
+ARM GAS  /tmp/cczAnjdU.s 			page 9
+
+
+ 299              		.section	.text.TIM1_UP_TIM16_IRQHandler,"ax",%progbits
+ 300              		.align	2
+ 301              		.global	TIM1_UP_TIM16_IRQHandler
+ 302              		.thumb
+ 303              		.thumb_func
+ 305              	TIM1_UP_TIM16_IRQHandler:
+ 306              	.LFB117:
+ 169:Src/stm32f3xx_it.c **** 
+ 170:Src/stm32f3xx_it.c **** /**
+ 171:Src/stm32f3xx_it.c **** * @brief This function handles TIM1 up and TIM16 interrupts.
+ 172:Src/stm32f3xx_it.c **** */
+ 173:Src/stm32f3xx_it.c **** void TIM1_UP_TIM16_IRQHandler(void)
+ 174:Src/stm32f3xx_it.c **** {
+ 307              		.loc 1 174 0
+ 308              		.cfi_startproc
+ 309              		@ args = 0, pretend = 0, frame = 0
+ 310              		@ frame_needed = 1, uses_anonymous_args = 0
+ 311 0000 80B5     		push	{r7, lr}
+ 312              	.LCFI10:
+ 313              		.cfi_def_cfa_offset 8
+ 314              		.cfi_offset 7, -8
+ 315              		.cfi_offset 14, -4
+ 316 0002 00AF     		add	r7, sp, #0
+ 317              	.LCFI11:
+ 318              		.cfi_def_cfa_register 7
+ 175:Src/stm32f3xx_it.c ****   /* USER CODE BEGIN TIM1_UP_TIM16_IRQn 0 */
+ 176:Src/stm32f3xx_it.c **** 	static int irqcounter = 0;
+ 177:Src/stm32f3xx_it.c **** 
+ 178:Src/stm32f3xx_it.c **** 
+ 179:Src/stm32f3xx_it.c **** 
+ 180:Src/stm32f3xx_it.c **** 	HAL_ADC_Start_DMA(&hadc1,&adc1Samples, 10 *4 );
+ 319              		.loc 1 180 0
+ 320 0004 2822     		movs	r2, #40
+ 321 0006 1149     		ldr	r1, .L23
+ 322 0008 1148     		ldr	r0, .L23+4
+ 323 000a FFF7FEFF 		bl	HAL_ADC_Start_DMA
+ 181:Src/stm32f3xx_it.c **** 	HAL_ADC_Start_DMA(&hadc2,&adc2Samples, 7 *4 );
+ 324              		.loc 1 181 0
+ 325 000e 1C22     		movs	r2, #28
+ 326 0010 1049     		ldr	r1, .L23+8
+ 327 0012 1148     		ldr	r0, .L23+12
+ 328 0014 FFF7FEFF 		bl	HAL_ADC_Start_DMA
+ 182:Src/stm32f3xx_it.c **** 	HAL_ADC_Start_DMA(&hadc3,&adc3Samples, 3 *4);
+ 329              		.loc 1 182 0
+ 330 0018 0C22     		movs	r2, #12
+ 331 001a 1049     		ldr	r1, .L23+16
+ 332 001c 1048     		ldr	r0, .L23+20
+ 333 001e FFF7FEFF 		bl	HAL_ADC_Start_DMA
+ 183:Src/stm32f3xx_it.c **** 
+ 184:Src/stm32f3xx_it.c **** 	irqcounter++;
+ 334              		.loc 1 184 0
+ 335 0022 104B     		ldr	r3, .L23+24
+ 336 0024 1B68     		ldr	r3, [r3]
+ 337 0026 0133     		adds	r3, r3, #1
+ 338 0028 0E4A     		ldr	r2, .L23+24
+ 339 002a 1360     		str	r3, [r2]
+ 185:Src/stm32f3xx_it.c **** 	if(irqcounter == 4){
+ARM GAS  /tmp/cczAnjdU.s 			page 10
+
+
+ 340              		.loc 1 185 0
+ 341 002c 0D4B     		ldr	r3, .L23+24
+ 342 002e 1B68     		ldr	r3, [r3]
+ 343 0030 042B     		cmp	r3, #4
+ 344 0032 05D1     		bne	.L22
+ 186:Src/stm32f3xx_it.c **** 		irqflag_timer1 = 1;
+ 345              		.loc 1 186 0
+ 346 0034 0C4B     		ldr	r3, .L23+28
+ 347 0036 0122     		movs	r2, #1
+ 348 0038 1A60     		str	r2, [r3]
+ 187:Src/stm32f3xx_it.c **** 		irqcounter = 0;
+ 349              		.loc 1 187 0
+ 350 003a 0A4B     		ldr	r3, .L23+24
+ 351 003c 0022     		movs	r2, #0
+ 352 003e 1A60     		str	r2, [r3]
+ 353              	.L22:
+ 188:Src/stm32f3xx_it.c **** 	}
+ 189:Src/stm32f3xx_it.c **** 
+ 190:Src/stm32f3xx_it.c ****   /* USER CODE END TIM1_UP_TIM16_IRQn 0 */
+ 191:Src/stm32f3xx_it.c ****   HAL_TIM_IRQHandler(&htim1);
+ 354              		.loc 1 191 0
+ 355 0040 0A48     		ldr	r0, .L23+32
+ 356 0042 FFF7FEFF 		bl	HAL_TIM_IRQHandler
+ 192:Src/stm32f3xx_it.c ****   /* USER CODE BEGIN TIM1_UP_TIM16_IRQn 1 */
+ 193:Src/stm32f3xx_it.c **** 
+ 194:Src/stm32f3xx_it.c ****   /* USER CODE END TIM1_UP_TIM16_IRQn 1 */
+ 195:Src/stm32f3xx_it.c **** }
+ 357              		.loc 1 195 0
+ 358 0046 00BF     		nop
+ 359 0048 80BD     		pop	{r7, pc}
+ 360              	.L24:
+ 361 004a 00BF     		.align	2
+ 362              	.L23:
+ 363 004c 00000000 		.word	adc1Samples
+ 364 0050 00000000 		.word	hadc1
+ 365 0054 00000000 		.word	adc2Samples
+ 366 0058 00000000 		.word	hadc2
+ 367 005c 00000000 		.word	adc3Samples
+ 368 0060 00000000 		.word	hadc3
+ 369 0064 00000000 		.word	irqcounter.6901
+ 370 0068 00000000 		.word	irqflag_timer1
+ 371 006c 00000000 		.word	htim1
+ 372              		.cfi_endproc
+ 373              	.LFE117:
+ 375              		.section	.text.NMI_Handler,"ax",%progbits
+ 376              		.align	2
+ 377              		.global	NMI_Handler
+ 378              		.thumb
+ 379              		.thumb_func
+ 381              	NMI_Handler:
+ 382              	.LFB118:
+ 196:Src/stm32f3xx_it.c **** 
+ 197:Src/stm32f3xx_it.c **** /**
+ 198:Src/stm32f3xx_it.c **** * @brief This function handles Non Maskable Interrupt.
+ 199:Src/stm32f3xx_it.c **** */
+ 200:Src/stm32f3xx_it.c **** void NMI_Handler(void)
+ 201:Src/stm32f3xx_it.c **** {
+ARM GAS  /tmp/cczAnjdU.s 			page 11
+
+
+ 383              		.loc 1 201 0
+ 384              		.cfi_startproc
+ 385              		@ args = 0, pretend = 0, frame = 0
+ 386              		@ frame_needed = 1, uses_anonymous_args = 0
+ 387 0000 80B5     		push	{r7, lr}
+ 388              	.LCFI12:
+ 389              		.cfi_def_cfa_offset 8
+ 390              		.cfi_offset 7, -8
+ 391              		.cfi_offset 14, -4
+ 392 0002 00AF     		add	r7, sp, #0
+ 393              	.LCFI13:
+ 394              		.cfi_def_cfa_register 7
+ 202:Src/stm32f3xx_it.c ****   /* USER CODE BEGIN NonMaskableInt_IRQn 0 */
+ 203:Src/stm32f3xx_it.c **** 
+ 204:Src/stm32f3xx_it.c ****   /* USER CODE END NonMaskableInt_IRQn 0 */
+ 205:Src/stm32f3xx_it.c ****   HAL_RCC_NMI_IRQHandler();
+ 395              		.loc 1 205 0
+ 396 0004 FFF7FEFF 		bl	HAL_RCC_NMI_IRQHandler
+ 206:Src/stm32f3xx_it.c ****   /* USER CODE BEGIN NonMaskableInt_IRQn 1 */
+ 207:Src/stm32f3xx_it.c **** 
+ 208:Src/stm32f3xx_it.c ****   /* USER CODE END NonMaskableInt_IRQn 1 */
+ 209:Src/stm32f3xx_it.c **** }
+ 397              		.loc 1 209 0
+ 398 0008 00BF     		nop
+ 399 000a 80BD     		pop	{r7, pc}
+ 400              		.cfi_endproc
+ 401              	.LFE118:
+ 403              		.section	.text.USB_LP_CAN_RX0_IRQHandler,"ax",%progbits
+ 404              		.align	2
+ 405              		.global	USB_LP_CAN_RX0_IRQHandler
+ 406              		.thumb
+ 407              		.thumb_func
+ 409              	USB_LP_CAN_RX0_IRQHandler:
+ 410              	.LFB119:
+ 210:Src/stm32f3xx_it.c **** 
+ 211:Src/stm32f3xx_it.c **** /**
+ 212:Src/stm32f3xx_it.c **** * @brief This function handles USB Low Priority or CAN_RX0 interrupts.
+ 213:Src/stm32f3xx_it.c **** */
+ 214:Src/stm32f3xx_it.c **** void USB_LP_CAN_RX0_IRQHandler(void)
+ 215:Src/stm32f3xx_it.c **** {
+ 411              		.loc 1 215 0
+ 412              		.cfi_startproc
+ 413              		@ args = 0, pretend = 0, frame = 0
+ 414              		@ frame_needed = 1, uses_anonymous_args = 0
+ 415 0000 80B5     		push	{r7, lr}
+ 416              	.LCFI14:
+ 417              		.cfi_def_cfa_offset 8
+ 418              		.cfi_offset 7, -8
+ 419              		.cfi_offset 14, -4
+ 420 0002 00AF     		add	r7, sp, #0
+ 421              	.LCFI15:
+ 422              		.cfi_def_cfa_register 7
+ 216:Src/stm32f3xx_it.c ****   /* USER CODE BEGIN USB_LP_CAN_RX0_IRQn 0 */
+ 217:Src/stm32f3xx_it.c **** 
+ 218:Src/stm32f3xx_it.c ****   /* USER CODE END USB_LP_CAN_RX0_IRQn 0 */
+ 219:Src/stm32f3xx_it.c ****   HAL_PCD_IRQHandler(&hpcd_USB_FS);
+ 423              		.loc 1 219 0
+ARM GAS  /tmp/cczAnjdU.s 			page 12
+
+
+ 424 0004 0248     		ldr	r0, .L27
+ 425 0006 FFF7FEFF 		bl	HAL_PCD_IRQHandler
+ 220:Src/stm32f3xx_it.c ****   /* USER CODE BEGIN USB_LP_CAN_RX0_IRQn 1 */
+ 221:Src/stm32f3xx_it.c **** 
+ 222:Src/stm32f3xx_it.c ****   /* USER CODE END USB_LP_CAN_RX0_IRQn 1 */
+ 223:Src/stm32f3xx_it.c **** }
+ 426              		.loc 1 223 0
+ 427 000a 00BF     		nop
+ 428 000c 80BD     		pop	{r7, pc}
+ 429              	.L28:
+ 430 000e 00BF     		.align	2
+ 431              	.L27:
+ 432 0010 00000000 		.word	hpcd_USB_FS
+ 433              		.cfi_endproc
+ 434              	.LFE119:
+ 436              		.section	.text.USART3_IRQHandler,"ax",%progbits
+ 437              		.align	2
+ 438              		.global	USART3_IRQHandler
+ 439              		.thumb
+ 440              		.thumb_func
+ 442              	USART3_IRQHandler:
+ 443              	.LFB120:
+ 224:Src/stm32f3xx_it.c **** 
+ 225:Src/stm32f3xx_it.c **** /**
+ 226:Src/stm32f3xx_it.c **** * @brief This function handles USART3 global interrupt.
+ 227:Src/stm32f3xx_it.c **** */
+ 228:Src/stm32f3xx_it.c **** void USART3_IRQHandler(void)
+ 229:Src/stm32f3xx_it.c **** {
+ 444              		.loc 1 229 0
+ 445              		.cfi_startproc
+ 446              		@ args = 0, pretend = 0, frame = 0
+ 447              		@ frame_needed = 1, uses_anonymous_args = 0
+ 448 0000 80B5     		push	{r7, lr}
+ 449              	.LCFI16:
+ 450              		.cfi_def_cfa_offset 8
+ 451              		.cfi_offset 7, -8
+ 452              		.cfi_offset 14, -4
+ 453 0002 00AF     		add	r7, sp, #0
+ 454              	.LCFI17:
+ 455              		.cfi_def_cfa_register 7
+ 230:Src/stm32f3xx_it.c ****   /* USER CODE BEGIN USART3_IRQn 0 */
+ 231:Src/stm32f3xx_it.c **** 
+ 232:Src/stm32f3xx_it.c ****   /* USER CODE END USART3_IRQn 0 */
+ 233:Src/stm32f3xx_it.c ****   HAL_UART_IRQHandler(&huart3);
+ 456              		.loc 1 233 0
+ 457 0004 0248     		ldr	r0, .L30
+ 458 0006 FFF7FEFF 		bl	HAL_UART_IRQHandler
+ 234:Src/stm32f3xx_it.c ****   /* USER CODE BEGIN USART3_IRQn 1 */
+ 235:Src/stm32f3xx_it.c **** 
+ 236:Src/stm32f3xx_it.c ****   /* USER CODE END USART3_IRQn 1 */
+ 237:Src/stm32f3xx_it.c **** }
+ 459              		.loc 1 237 0
+ 460 000a 00BF     		nop
+ 461 000c 80BD     		pop	{r7, pc}
+ 462              	.L31:
+ 463 000e 00BF     		.align	2
+ 464              	.L30:
+ARM GAS  /tmp/cczAnjdU.s 			page 13
+
+
+ 465 0010 00000000 		.word	huart3
+ 466              		.cfi_endproc
+ 467              	.LFE120:
+ 469              		.section	.bss.irqcounter.6901,"aw",%nobits
+ 470              		.align	2
+ 473              	irqcounter.6901:
+ 474 0000 00000000 		.space	4
+ 475              		.text
+ 476              	.Letext0:
+ 477              		.file 2 "/usr/arm-none-eabi/include/machine/_default_types.h"
+ 478              		.file 3 "/usr/arm-none-eabi/include/sys/_stdint.h"
+ 479              		.file 4 "Drivers/CMSIS/Device/ST/STM32F3xx/Include/stm32f303xc.h"
+ 480              		.file 5 "Drivers/STM32F3xx_HAL_Driver/Inc/stm32f3xx_hal_def.h"
+ 481              		.file 6 "Drivers/STM32F3xx_HAL_Driver/Inc/stm32f3xx_hal_dma.h"
+ 482              		.file 7 "Drivers/STM32F3xx_HAL_Driver/Inc/stm32f3xx_hal_adc_ex.h"
+ 483              		.file 8 "Drivers/STM32F3xx_HAL_Driver/Inc/stm32f3xx_hal_adc.h"
+ 484              		.file 9 "Drivers/STM32F3xx_HAL_Driver/Inc/stm32f3xx_hal_pcd.h"
+ 485              		.file 10 "Drivers/STM32F3xx_HAL_Driver/Inc/stm32f3xx_hal_tim.h"
+ 486              		.file 11 "Drivers/STM32F3xx_HAL_Driver/Inc/stm32f3xx_hal_uart.h"
+ 487              		.file 12 "Drivers/CMSIS/Include/core_cm4.h"
+ARM GAS  /tmp/cczAnjdU.s 			page 14
+
+
+DEFINED SYMBOLS
+                            *ABS*:0000000000000000 stm32f3xx_it.c
+     /tmp/cczAnjdU.s:21     .text.TIM2_IRQHandler:0000000000000000 $t
+     /tmp/cczAnjdU.s:26     .text.TIM2_IRQHandler:0000000000000000 TIM2_IRQHandler
+     /tmp/cczAnjdU.s:59     .text.TIM2_IRQHandler:0000000000000020 $d
+     /tmp/cczAnjdU.s:67     .text.SysTick_Handler:0000000000000000 $t
+     /tmp/cczAnjdU.s:72     .text.SysTick_Handler:0000000000000000 SysTick_Handler
+     /tmp/cczAnjdU.s:97     .text.USART1_IRQHandler:0000000000000000 $t
+     /tmp/cczAnjdU.s:102    .text.USART1_IRQHandler:0000000000000000 USART1_IRQHandler
+     /tmp/cczAnjdU.s:125    .text.USART1_IRQHandler:0000000000000010 $d
+     /tmp/cczAnjdU.s:130    .text.EXTI15_10_IRQHandler:0000000000000000 $t
+     /tmp/cczAnjdU.s:135    .text.EXTI15_10_IRQHandler:0000000000000000 EXTI15_10_IRQHandler
+     /tmp/cczAnjdU.s:162    .text.TIM3_IRQHandler:0000000000000000 $t
+     /tmp/cczAnjdU.s:167    .text.TIM3_IRQHandler:0000000000000000 TIM3_IRQHandler
+     /tmp/cczAnjdU.s:292    .text.TIM3_IRQHandler:00000000000000b8 $d
+     /tmp/cczAnjdU.s:300    .text.TIM1_UP_TIM16_IRQHandler:0000000000000000 $t
+     /tmp/cczAnjdU.s:305    .text.TIM1_UP_TIM16_IRQHandler:0000000000000000 TIM1_UP_TIM16_IRQHandler
+     /tmp/cczAnjdU.s:363    .text.TIM1_UP_TIM16_IRQHandler:000000000000004c $d
+     /tmp/cczAnjdU.s:473    .bss.irqcounter.6901:0000000000000000 irqcounter.6901
+     /tmp/cczAnjdU.s:376    .text.NMI_Handler:0000000000000000 $t
+     /tmp/cczAnjdU.s:381    .text.NMI_Handler:0000000000000000 NMI_Handler
+     /tmp/cczAnjdU.s:404    .text.USB_LP_CAN_RX0_IRQHandler:0000000000000000 $t
+     /tmp/cczAnjdU.s:409    .text.USB_LP_CAN_RX0_IRQHandler:0000000000000000 USB_LP_CAN_RX0_IRQHandler
+     /tmp/cczAnjdU.s:432    .text.USB_LP_CAN_RX0_IRQHandler:0000000000000010 $d
+     /tmp/cczAnjdU.s:437    .text.USART3_IRQHandler:0000000000000000 $t
+     /tmp/cczAnjdU.s:442    .text.USART3_IRQHandler:0000000000000000 USART3_IRQHandler
+     /tmp/cczAnjdU.s:465    .text.USART3_IRQHandler:0000000000000010 $d
+     /tmp/cczAnjdU.s:470    .bss.irqcounter.6901:0000000000000000 $d
+                     .debug_frame:0000000000000010 $d
+
+UNDEFINED SYMBOLS
+HAL_ADC_Start_DMA
+HAL_TIM_IRQHandler
+irqflag_timer2
+adc4Samples
+hadc4
+htim2
+HAL_IncTick
+HAL_SYSTICK_IRQHandler
+HAL_UART_IRQHandler
+huart1
+HAL_GPIO_EXTI_IRQHandler
+HAL_GPIO_ReadPin
+btnDebounceIRQTimer
+irqflag_btns
+htim3
+adc1Samples
+hadc1
+adc2Samples
+hadc2
+adc3Samples
+hadc3
+irqflag_timer1
+htim1
+HAL_RCC_NMI_IRQHandler
+HAL_PCD_IRQHandler
+hpcd_USB_FS
+ARM GAS  /tmp/cczAnjdU.s 			page 15
+
+
+huart3

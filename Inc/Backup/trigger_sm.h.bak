@@ -1,0 +1,38 @@
+/*
+ * trigger_sm.h
+ *
+ *  Created on: 19.05.2015
+ *      Author: raphael
+ */
+
+#ifndef INC_TRIGGER_SM_H_
+#define INC_TRIGGER_SM_H_
+
+#include "inttypes.h"
+
+typedef enum{
+	triggerevent,
+	monitor
+}TriggerSM_State;
+
+typedef struct{
+	uint32_t samples_since_trans;
+	uint32_t last_lowering_value;
+	uint32_t max_value;
+	TriggerSM_State state;
+
+}TriggerSM;
+
+//dispatcher for process methods
+void triggersm_process (TriggerSM *sm);
+
+//process methods for different states
+void triggersm_process_triggerevent (TriggerSM *sm);
+void triggersm_process_monitor (TriggerSM *sm);
+
+//State transition methods
+void triggersm_transition_triggerevent_monitor (TriggerSM *sm);
+void triggersm_transition_monitor_triggerevent (TriggerSM *sm);
+
+
+#endif /* INC_TRIGGER_SM_H_ */

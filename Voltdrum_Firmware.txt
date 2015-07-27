@@ -1,0 +1,136 @@
+Configuration	Voltdrum_Firmware
+STM32CubeMX 	4.6.0
+Date	05/27/2015
+MCU	STM32F303VCTx
+
+
+
+PERIPHERALS	MODES	FUNCTIONS	PINS
+ADC1	IN1 Single-ended	ADC1_IN1	PA0
+ADC1	IN2 Single-ended	ADC1_IN2	PA1
+ADC1	IN3 Single-ended	ADC1_IN3	PA2
+ADC1	IN4 Single-ended	ADC1_IN4	PA3
+ADC1	IN5 Single-ended	ADC1_IN5	PF4
+ADC1	IN6 Single-ended	ADC1_IN6	PC0
+ADC1	IN7 Single-ended	ADC1_IN7	PC1
+ADC1	IN8 Single-ended	ADC1_IN8	PC2
+ADC1	IN9 Single-ended	ADC1_IN9	PC3
+ADC1	IN10 Single-ended	ADC1_IN10	PF2
+ADC2	IN1 Single-ended	ADC2_IN1	PA4
+ADC2	IN2 Single-ended	ADC2_IN2	PA5
+ADC2	IN3 Single-ended	ADC2_IN3	PA6
+ADC2	IN4 Single-ended	ADC2_IN4	PA7
+ADC2	IN5 Single-ended	ADC2_IN5	PC4
+ADC2	IN11 Single-ended	ADC2_IN11	PC5
+ADC2	IN12 Single-ended	ADC2_IN12	PB2
+ADC3	IN1 Single-ended	ADC3_IN1	PB1
+ADC3	IN2 Single-ended	ADC3_IN2	PE9
+ADC3	IN3 Single-ended	ADC3_IN3	PE13
+ADC4	IN1 Single-ended	ADC4_IN1	PE14
+ADC4	IN2 Single-ended	ADC4_IN2	PE15
+RCC	Crystal/Ceramic Resonator	RCC_OSC_IN	PF0-OSC_IN
+RCC	Crystal/Ceramic Resonator	RCC_OSC_OUT	PF1-OSC_OUT
+RCC	Crystal/Ceramic Resonator	RCC_OSC32_IN	PC14-OSC32_IN
+RCC	Crystal/Ceramic Resonator	RCC_OSC32_OUT	PC15-OSC32_OUT
+SPI2	Full-Duplex Master	SPI2_MISO	PB14
+SPI2	Full-Duplex Master	SPI2_MOSI	PB15
+SPI2	Full-Duplex Master	SPI2_SCK	PF9
+SYS	JTAG (5 pins)	SYS_JTCK-SWCLK	PA14
+SYS	JTAG (5 pins)	SYS_JTDI	PA15
+SYS	JTAG (5 pins)	SYS_JTDO-TRACESWO	PB3
+SYS	JTAG (5 pins)	SYS_JTMS-SWDIO	PA13
+SYS	JTAG (5 pins)	SYS_NJTRST	PB4
+TIM1	Internal Clock	TIM1_VS_ClockSourceINT	VP_TIM1_VS_ClockSourceINT
+TIM2	Internal Clock	TIM2_VS_ClockSourceINT	VP_TIM2_VS_ClockSourceINT
+TIM3	Internal Clock	TIM3_VS_ClockSourceINT	VP_TIM3_VS_ClockSourceINT
+USART1	Asynchronous	USART1_RX	PA10
+USART1	Asynchronous	USART1_TX	PA9
+USART3	Asynchronous	USART3_RX	PB11
+USART3	Asynchronous	USART3_TX	PB10
+USB	Device (FS)	USB_DM	PA11
+USB	Device (FS)	USB_DP	PA12
+
+
+
+Pin Nb	PINs	FUNCTIONs	LABELs
+8	PC14-OSC32_IN	RCC_OSC32_IN	
+9	PC15-OSC32_OUT	RCC_OSC32_OUT	
+10	PF9	SPI2_SCK	
+12	PF0-OSC_IN	RCC_OSC_IN	
+13	PF1-OSC_OUT	RCC_OSC_OUT	
+15	PC0	ADC1_IN6	HEAD_5
+16	PC1	ADC1_IN7	HEAD_6
+17	PC2	ADC1_IN8	HEAD_7
+18	PC3	ADC1_IN9	HEAD_8
+19	PF2	ADC1_IN10	HEAD_9
+23	PA0	ADC1_IN1	HEAD_0
+24	PA1	ADC1_IN2	HEAD_1
+25	PA2	ADC1_IN3	HEAD_2
+26	PA3	ADC1_IN4	HEAD_3
+27	PF4	ADC1_IN5	HEAD_4
+29	PA4	ADC2_IN1	RIM_0
+30	PA5	ADC2_IN2	RIM_1
+31	PA6	ADC2_IN3	RIM_2
+32	PA7	ADC2_IN4	RIM_3
+33	PC4	ADC2_IN5	RIM_4
+34	PC5	ADC2_IN11	RIM_5
+36	PB1	ADC3_IN1	RIM_6
+37	PB2	ADC2_IN12	RIM_7
+40	PE9	ADC3_IN2	RIM_8
+41	PE10	GPIO_EXTI10	BTN0
+42	PE11	GPIO_EXTI11	BTN1
+43	PE12	GPIO_Output	BTN3
+44	PE13	ADC3_IN3	RIM_9
+45	PE14	ADC4_IN1	PEDAL_2
+46	PE15	ADC4_IN2	PEDAL_1
+47	PB10	USART3_TX	MIDI_OUT
+48	PB11	USART3_RX	MIDI_IN
+53	PB14	SPI2_MISO	
+54	PB15	SPI2_MOSI	
+68	PA9	USART1_TX	
+69	PA10	USART1_RX	
+70	PA11	USB_DM	
+71	PA12	USB_DP	
+72	PA13	SYS_JTMS-SWDIO	
+76	PA14	SYS_JTCK-SWCLK	
+77	PA15	SYS_JTDI	
+79	PC11	GPIO_Output	CS_0
+80	PC12	GPIO_Output	CS_1
+81	PD0	GPIO_Output	CS_2
+82	PD1	GPIO_Output	CS_3
+83	PD2	GPIO_Output	CS_4
+84	PD3	GPIO_Output	CS_5
+85	PD4	GPIO_Output	CS_6
+86	PD5	GPIO_Output	CS_7
+87	PD6	GPIO_Output	CS_8
+88	PD7	GPIO_Output	CS_9
+89	PB3	SYS_JTDO-TRACESWO	
+90	PB4	SYS_NJTRST	
+
+
+
+SOFTWARE PROJECT
+
+Project Settings : 
+Project Name : Voltdrum_Firmware
+Project Folder : E:\bachelor thesis\drumtrigger_firmware\Voltdrum_Firmware
+Toolchain / IDE : TrueSTUDIO 4.3.1
+Firmware Package Name and Version : STM32Cube FW_F3 V1.1.1
+
+
+Code Generation Settings : 
+STM32Cube Firmware Library Package : Copy only the necessary library files
+Generate peripheral initialization as a pair of '.c/.h' files per IP : Yes
+Backup previously generated files when re-generating : Yes
+Delete previously generated files when not re-generated : Yes
+Set all free pins as analog (to optimize the power consumption) : No
+
+
+Toolchains Settings : 
+Compiler Optimizations : Balanced Size/Speed
+
+
+
+
+
+
