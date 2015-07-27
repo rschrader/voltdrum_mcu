@@ -60,8 +60,6 @@ void hihatchannel_process(HiHatChannel *chan){
 	chan->intervalls_since_last_controlChange++;
 
 
-	sprintf(buffer, "%i / %i \n\r", value, chan->max_value);
-	HAL_UART_Transmit_IT(&huart1, buffer, 20);
 }
 
 void hihatchannel_onChange(HiHatChannel *chan, uint32_t value){

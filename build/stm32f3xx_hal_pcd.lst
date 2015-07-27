@@ -1,4 +1,4 @@
-ARM GAS  /tmp/ccG5qlnI.s 			page 1
+ARM GAS  /tmp/ccTlZiUi.s 			page 1
 
 
    1              		.syntax unified
@@ -58,7 +58,7 @@ ARM GAS  /tmp/ccG5qlnI.s 			page 1
   28:Drivers/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_pcd.c **** 
   29:Drivers/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_pcd.c ****      (#) Initialize the PCD low level resources through the HAL_PCD_MspInit() API:
   30:Drivers/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_pcd.c ****          (##) Enable the PCD/USB Low Level interface clock using 
-ARM GAS  /tmp/ccG5qlnI.s 			page 2
+ARM GAS  /tmp/ccTlZiUi.s 			page 2
 
 
   31:Drivers/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_pcd.c ****               (+++) __USB_CLK_ENABLE);
@@ -118,7 +118,7 @@ ARM GAS  /tmp/ccG5qlnI.s 			page 1
   85:Drivers/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_pcd.c **** 
   86:Drivers/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_pcd.c **** #ifdef HAL_PCD_MODULE_ENABLED
   87:Drivers/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_pcd.c **** 
-ARM GAS  /tmp/ccG5qlnI.s 			page 3
+ARM GAS  /tmp/ccTlZiUi.s 			page 3
 
 
   88:Drivers/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_pcd.c **** #if defined(STM32F302xE) || defined(STM32F303xE) || \
@@ -178,7 +178,7 @@ ARM GAS  /tmp/ccG5qlnI.s 			page 1
   30              		.cfi_startproc
   31              		@ args = 0, pretend = 0, frame = 16
   32              		@ frame_needed = 1, uses_anonymous_args = 0
-ARM GAS  /tmp/ccG5qlnI.s 			page 4
+ARM GAS  /tmp/ccTlZiUi.s 			page 4
 
 
   33 0000 80B5     		push	{r7, lr}
@@ -238,7 +238,7 @@ ARM GAS  /tmp/ccG5qlnI.s 			page 1
   67 0028 0023     		movs	r3, #0
   68 002a FB60     		str	r3, [r7, #12]
   69 002c 40E0     		b	.L4
-ARM GAS  /tmp/ccG5qlnI.s 			page 5
+ARM GAS  /tmp/ccTlZiUi.s 			page 5
 
 
   70              	.L5:
@@ -298,7 +298,7 @@ ARM GAS  /tmp/ccG5qlnI.s 			page 1
  168:Drivers/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_pcd.c ****    hpcd->IN_ep[i].xfer_buff = 0;
  117              		.loc 1 168 0 discriminator 3
  118 0082 7968     		ldr	r1, [r7, #4]
-ARM GAS  /tmp/ccG5qlnI.s 			page 6
+ARM GAS  /tmp/ccTlZiUi.s 			page 6
 
 
  119 0084 FA68     		ldr	r2, [r7, #12]
@@ -358,7 +358,7 @@ ARM GAS  /tmp/ccG5qlnI.s 			page 1
  165 00d4 1A70     		strb	r2, [r3]
  175:Drivers/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_pcd.c ****    hpcd->OUT_ep[i].num = i;
  166              		.loc 1 175 0 discriminator 3
-ARM GAS  /tmp/ccG5qlnI.s 			page 7
+ARM GAS  /tmp/ccTlZiUi.s 			page 7
 
 
  167 00d6 FB68     		ldr	r3, [r7, #12]
@@ -418,7 +418,7 @@ ARM GAS  /tmp/ccG5qlnI.s 			page 1
  216 0138 DB00     		lsls	r3, r3, #3
  217 013a 9B1A     		subs	r3, r3, r2
  218 013c 9B00     		lsls	r3, r3, #2
-ARM GAS  /tmp/ccG5qlnI.s 			page 8
+ARM GAS  /tmp/ccTlZiUi.s 			page 8
 
 
  219 013e 0B44     		add	r3, r3, r1
@@ -478,7 +478,7 @@ ARM GAS  /tmp/ccG5qlnI.s 			page 1
  254              		.loc 1 197 0
  255 0180 4FF43D43 		mov	r3, #48384
  256 0184 BB60     		str	r3, [r7, #8]
-ARM GAS  /tmp/ccG5qlnI.s 			page 9
+ARM GAS  /tmp/ccTlZiUi.s 			page 9
 
 
  198:Drivers/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_pcd.c ****     | USB_CNTR_ESOFM | USB_CNTR_RESETM;
@@ -538,7 +538,7 @@ ARM GAS  /tmp/ccG5qlnI.s 			page 1
  295              		.loc 1 215 0
  296              		.cfi_startproc
  297              		@ args = 0, pretend = 0, frame = 8
-ARM GAS  /tmp/ccG5qlnI.s 			page 10
+ARM GAS  /tmp/ccTlZiUi.s 			page 10
 
 
  298              		@ frame_needed = 1, uses_anonymous_args = 0
@@ -598,7 +598,7 @@ ARM GAS  /tmp/ccG5qlnI.s 			page 1
  335              	.L10:
  233:Drivers/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_pcd.c **** }
  336              		.loc 1 233 0
-ARM GAS  /tmp/ccG5qlnI.s 			page 11
+ARM GAS  /tmp/ccTlZiUi.s 			page 11
 
 
  337 0030 1846     		mov	r0, r3
@@ -658,7 +658,7 @@ ARM GAS  /tmp/ccG5qlnI.s 			page 1
  381              		@ sp needed
  382 000e 5DF8047B 		ldr	r7, [sp], #4
  383              	.LCFI15:
-ARM GAS  /tmp/ccG5qlnI.s 			page 12
+ARM GAS  /tmp/ccTlZiUi.s 			page 12
 
 
  384              		.cfi_restore 7
@@ -718,7 +718,7 @@ ARM GAS  /tmp/ccG5qlnI.s 			page 1
  428              		.cfi_endproc
  429              	.LFE115:
  431              		.section	.text.HAL_PCD_Start,"ax",%progbits
-ARM GAS  /tmp/ccG5qlnI.s 			page 13
+ARM GAS  /tmp/ccTlZiUi.s 			page 13
 
 
  432              		.align	2
@@ -778,7 +778,7 @@ ARM GAS  /tmp/ccG5qlnI.s 			page 1
  458 000c FFF7FEFF 		bl	HAL_PCDEx_SetConnectionState
  287:Drivers/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_pcd.c ****   
  288:Drivers/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_pcd.c ****   return HAL_OK;
-ARM GAS  /tmp/ccG5qlnI.s 			page 14
+ARM GAS  /tmp/ccTlZiUi.s 			page 14
 
 
  459              		.loc 1 288 0
@@ -838,7 +838,7 @@ ARM GAS  /tmp/ccG5qlnI.s 			page 1
  505 0014 17E0     		b	.L17
  506              	.L16:
  507              		.loc 1 298 0 discriminator 2
-ARM GAS  /tmp/ccG5qlnI.s 			page 15
+ARM GAS  /tmp/ccTlZiUi.s 			page 15
 
 
  508 0016 7B68     		ldr	r3, [r7, #4]
@@ -898,7 +898,7 @@ ARM GAS  /tmp/ccG5qlnI.s 			page 1
  550 0052 00BF     		.section	.text.PCD_EP_ISR_Handler,"ax",%progbits
  551              		.align	2
  552              		.thumb
-ARM GAS  /tmp/ccG5qlnI.s 			page 16
+ARM GAS  /tmp/ccTlZiUi.s 			page 16
 
 
  553              		.thumb_func
@@ -958,7 +958,7 @@ ARM GAS  /tmp/ccG5qlnI.s 			page 1
  582              	.L46:
  338:Drivers/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_pcd.c ****   {
  339:Drivers/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_pcd.c ****     /* extract highest priority endpoint number */
-ARM GAS  /tmp/ccG5qlnI.s 			page 17
+ARM GAS  /tmp/ccTlZiUi.s 			page 17
 
 
  340:Drivers/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_pcd.c ****     EPindex = (uint8_t)(wIstr & USB_ISTR_EP_ID);
@@ -1018,7 +1018,7 @@ ARM GAS  /tmp/ccG5qlnI.s 			page 1
  620 005c 7B69     		ldr	r3, [r7, #20]
  621 005e 1B78     		ldrb	r3, [r3]	@ zero_extendqisi2
  622 0060 DB00     		lsls	r3, r3, #3
-ARM GAS  /tmp/ccG5qlnI.s 			page 18
+ARM GAS  /tmp/ccTlZiUi.s 			page 18
 
 
  623 0062 1344     		add	r3, r3, r2
@@ -1078,7 +1078,7 @@ ARM GAS  /tmp/ccG5qlnI.s 			page 1
  366:Drivers/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_pcd.c ****           hpcd->USB_Address = 0;
  668              		.loc 1 366 0
  669 00c4 7B68     		ldr	r3, [r7, #4]
-ARM GAS  /tmp/ccG5qlnI.s 			page 19
+ARM GAS  /tmp/ccTlZiUi.s 			page 19
 
 
  670 00c6 0022     		movs	r2, #0
@@ -1138,7 +1138,7 @@ ARM GAS  /tmp/ccG5qlnI.s 			page 1
  708 0112 C3F30902 		ubfx	r2, r3, #0, #10
  709 0116 7B69     		ldr	r3, [r7, #20]
  710 0118 9A61     		str	r2, [r3, #24]
-ARM GAS  /tmp/ccG5qlnI.s 			page 20
+ARM GAS  /tmp/ccTlZiUi.s 			page 20
 
 
  383:Drivers/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_pcd.c ****           PCD_ReadPMA(hpcd->Instance, (uint8_t*)hpcd->Setup ,ep->pmaadress , ep->xfer_count);      
@@ -1198,7 +1198,7 @@ ARM GAS  /tmp/ccG5qlnI.s 			page 1
  754 0170 9BB2     		uxth	r3, r3
  755 0172 1380     		strh	r3, [r2]	@ movhi
  394:Drivers/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_pcd.c ****           /* Get Control Data OUT Packet*/
-ARM GAS  /tmp/ccG5qlnI.s 			page 21
+ARM GAS  /tmp/ccTlZiUi.s 			page 21
 
 
  395:Drivers/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_pcd.c ****           ep->xfer_count = PCD_GET_EP_RX_CNT(hpcd->Instance, ep->num);
@@ -1258,7 +1258,7 @@ ARM GAS  /tmp/ccG5qlnI.s 			page 1
  403:Drivers/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_pcd.c ****           /* Process Control Data OUT Packet*/
  404:Drivers/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_pcd.c ****            HAL_PCD_DataOutStageCallback(hpcd, 0);
  802              		.loc 1 404 0
-ARM GAS  /tmp/ccG5qlnI.s 			page 22
+ARM GAS  /tmp/ccTlZiUi.s 			page 22
 
 
  803 01ce 0021     		movs	r1, #0
@@ -1318,7 +1318,7 @@ ARM GAS  /tmp/ccG5qlnI.s 			page 1
  855 0230 DB68     		ldr	r3, [r3, #12]
  856 0232 5B08     		lsrs	r3, r3, #1
  857 0234 BB83     		strh	r3, [r7, #28]	@ movhi
-ARM GAS  /tmp/ccG5qlnI.s 			page 23
+ARM GAS  /tmp/ccTlZiUi.s 			page 23
 
 
  858 0236 7B69     		ldr	r3, [r7, #20]
@@ -1378,7 +1378,7 @@ ARM GAS  /tmp/ccG5qlnI.s 			page 1
  901 0280 7B68     		ldr	r3, [r7, #4]
  902 0282 1B68     		ldr	r3, [r3]
  903 0284 1A46     		mov	r2, r3
-ARM GAS  /tmp/ccG5qlnI.s 			page 24
+ARM GAS  /tmp/ccTlZiUi.s 			page 24
 
 
  904 0286 FB7E     		ldrb	r3, [r7, #27]	@ zero_extendqisi2
@@ -1438,7 +1438,7 @@ ARM GAS  /tmp/ccG5qlnI.s 			page 1
  950 02e0 23D1     		bne	.L31
  426:Drivers/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_pcd.c ****         {
  427:Drivers/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_pcd.c ****           count = PCD_GET_EP_RX_CNT(hpcd->Instance, ep->num);
-ARM GAS  /tmp/ccG5qlnI.s 			page 25
+ARM GAS  /tmp/ccTlZiUi.s 			page 25
 
 
  951              		.loc 1 427 0
@@ -1498,7 +1498,7 @@ ARM GAS  /tmp/ccG5qlnI.s 			page 1
  997 033c 03F48043 		and	r3, r3, #16384
  998 0340 002B     		cmp	r3, #0
  999 0342 23D0     		beq	.L34
-ARM GAS  /tmp/ccG5qlnI.s 			page 26
+ARM GAS  /tmp/ccTlZiUi.s 			page 26
 
 
  436:Drivers/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_pcd.c ****           {
@@ -1558,7 +1558,7 @@ ARM GAS  /tmp/ccG5qlnI.s 			page 1
  1042 0398 7B69     		ldr	r3, [r7, #20]
  1043 039a 1B78     		ldrb	r3, [r3]	@ zero_extendqisi2
  1044 039c DB00     		lsls	r3, r3, #3
-ARM GAS  /tmp/ccG5qlnI.s 			page 27
+ARM GAS  /tmp/ccTlZiUi.s 			page 27
 
 
  1045 039e 1344     		add	r3, r3, r2
@@ -1618,7 +1618,7 @@ ARM GAS  /tmp/ccG5qlnI.s 			page 1
  1093 03fe 43F07F43 		orr	r3, r3, #-16777216
  1094 0402 43F47F03 		orr	r3, r3, #16711680
  1095 0406 43F40043 		orr	r3, r3, #32768
-ARM GAS  /tmp/ccG5qlnI.s 			page 28
+ARM GAS  /tmp/ccTlZiUi.s 			page 28
 
 
  1096 040a 43F0C003 		orr	r3, r3, #192
@@ -1678,7 +1678,7 @@ ARM GAS  /tmp/ccG5qlnI.s 			page 1
  1137 044e 1978     		ldrb	r1, [r3]	@ zero_extendqisi2
  1138 0450 7B69     		ldr	r3, [r7, #20]
  1139 0452 1A69     		ldr	r2, [r3, #16]
-ARM GAS  /tmp/ccG5qlnI.s 			page 29
+ARM GAS  /tmp/ccTlZiUi.s 			page 29
 
 
  1140 0454 7B69     		ldr	r3, [r7, #20]
@@ -1738,7 +1738,7 @@ ARM GAS  /tmp/ccG5qlnI.s 			page 1
  1181 04a6 7B69     		ldr	r3, [r7, #20]
  1182 04a8 9B7A     		ldrb	r3, [r3, #10]	@ zero_extendqisi2
  1183 04aa 002B     		cmp	r3, #0
-ARM GAS  /tmp/ccG5qlnI.s 			page 30
+ARM GAS  /tmp/ccTlZiUi.s 			page 30
 
 
  1184 04ac 2AD1     		bne	.L39
@@ -1798,7 +1798,7 @@ ARM GAS  /tmp/ccG5qlnI.s 			page 1
  1228              		.loc 1 489 0
  1229 0504 7B68     		ldr	r3, [r7, #4]
  1230 0506 1B68     		ldr	r3, [r3]
-ARM GAS  /tmp/ccG5qlnI.s 			page 31
+ARM GAS  /tmp/ccTlZiUi.s 			page 31
 
 
  1231 0508 1A46     		mov	r2, r3
@@ -1858,7 +1858,7 @@ ARM GAS  /tmp/ccG5qlnI.s 			page 1
  1279              	.L42:
  496:Drivers/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_pcd.c ****             }
  497:Drivers/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_pcd.c ****           }
-ARM GAS  /tmp/ccG5qlnI.s 			page 32
+ARM GAS  /tmp/ccTlZiUi.s 			page 32
 
 
  498:Drivers/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_pcd.c ****           else
@@ -1918,7 +1918,7 @@ ARM GAS  /tmp/ccG5qlnI.s 			page 1
  1324 05c2 9B00     		lsls	r3, r3, #2
  1325 05c4 1A44     		add	r2, r2, r3
  1326 05c6 7B68     		ldr	r3, [r7, #4]
-ARM GAS  /tmp/ccG5qlnI.s 			page 33
+ARM GAS  /tmp/ccTlZiUi.s 			page 33
 
 
  1327 05c8 1B68     		ldr	r3, [r3]
@@ -1978,7 +1978,7 @@ ARM GAS  /tmp/ccG5qlnI.s 			page 1
  512:Drivers/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_pcd.c ****        
  513:Drivers/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_pcd.c ****         /* Zero Length Packet? */
  514:Drivers/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_pcd.c ****         if (ep->xfer_len == 0)
-ARM GAS  /tmp/ccG5qlnI.s 			page 34
+ARM GAS  /tmp/ccTlZiUi.s 			page 34
 
 
  1377              		.loc 1 514 0
@@ -2038,7 +2038,7 @@ ARM GAS  /tmp/ccG5qlnI.s 			page 1
  1417              		.cfi_def_cfa_offset 12
  1418 067c BD46     		mov	sp, r7
  1419              	.LCFI37:
-ARM GAS  /tmp/ccG5qlnI.s 			page 35
+ARM GAS  /tmp/ccTlZiUi.s 			page 35
 
 
  1420              		.cfi_def_cfa_register 13
@@ -2098,7 +2098,7 @@ ARM GAS  /tmp/ccG5qlnI.s 			page 1
  1454 000c 7B68     		ldr	r3, [r7, #4]
  1455 000e 1B68     		ldr	r3, [r3]
  1456 0010 B3F84430 		ldrh	r3, [r3, #68]	@ movhi
-ARM GAS  /tmp/ccG5qlnI.s 			page 36
+ARM GAS  /tmp/ccTlZiUi.s 			page 36
 
 
  1457 0014 9BB2     		uxth	r3, r3
@@ -2158,7 +2158,7 @@ ARM GAS  /tmp/ccG5qlnI.s 			page 1
  1495              		.loc 1 565 0
  1496 0062 7B68     		ldr	r3, [r7, #4]
  1497 0064 1B68     		ldr	r3, [r3]
-ARM GAS  /tmp/ccG5qlnI.s 			page 37
+ARM GAS  /tmp/ccTlZiUi.s 			page 37
 
 
  1498 0066 4BF6FF72 		movw	r2, #49151
@@ -2218,7 +2218,7 @@ ARM GAS  /tmp/ccG5qlnI.s 			page 1
  1536              		.loc 1 581 0
  1537 00bc 7B68     		ldr	r3, [r7, #4]
  1538 00be 1B68     		ldr	r3, [r3]
-ARM GAS  /tmp/ccG5qlnI.s 			page 38
+ARM GAS  /tmp/ccTlZiUi.s 			page 38
 
 
  1539 00c0 FA68     		ldr	r2, [r7, #12]
@@ -2278,7 +2278,7 @@ ARM GAS  /tmp/ccG5qlnI.s 			page 1
  1579 0118 B2F84020 		ldrh	r2, [r2, #64]	@ movhi
  1580 011c 92B2     		uxth	r2, r2
  1581 011e 42F00402 		orr	r2, r2, #4
-ARM GAS  /tmp/ccG5qlnI.s 			page 39
+ARM GAS  /tmp/ccTlZiUi.s 			page 39
 
 
  1582 0122 92B2     		uxth	r2, r2
@@ -2338,7 +2338,7 @@ ARM GAS  /tmp/ccG5qlnI.s 			page 1
  611:Drivers/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_pcd.c ****     __HAL_PCD_CLEAR_FLAG(hpcd, USB_ISTR_ESOF); 
  1621              		.loc 1 611 0
  1622 0176 7B68     		ldr	r3, [r7, #4]
-ARM GAS  /tmp/ccG5qlnI.s 			page 40
+ARM GAS  /tmp/ccTlZiUi.s 			page 40
 
 
  1623 0178 1B68     		ldr	r3, [r3]
@@ -2398,7 +2398,7 @@ ARM GAS  /tmp/ccG5qlnI.s 			page 1
  625:Drivers/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_pcd.c ****    */ 
  626:Drivers/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_pcd.c **** }
  1666              		.loc 1 626 0
-ARM GAS  /tmp/ccG5qlnI.s 			page 41
+ARM GAS  /tmp/ccTlZiUi.s 			page 41
 
 
  1667 000c 00BF     		nop
@@ -2458,7 +2458,7 @@ ARM GAS  /tmp/ccG5qlnI.s 			page 1
  1710 000c 00BF     		nop
  1711 000e 0C37     		adds	r7, r7, #12
  1712              	.LCFI52:
-ARM GAS  /tmp/ccG5qlnI.s 			page 42
+ARM GAS  /tmp/ccTlZiUi.s 			page 42
 
 
  1713              		.cfi_def_cfa_offset 4
@@ -2518,7 +2518,7 @@ ARM GAS  /tmp/ccG5qlnI.s 			page 1
  1758              		@ sp needed
  1759 000e 5DF8047B 		ldr	r7, [sp], #4
  1760              	.LCFI60:
-ARM GAS  /tmp/ccG5qlnI.s 			page 43
+ARM GAS  /tmp/ccTlZiUi.s 			page 43
 
 
  1761              		.cfi_restore 7
@@ -2578,7 +2578,7 @@ ARM GAS  /tmp/ccG5qlnI.s 			page 1
  1805              		.cfi_endproc
  1806              	.LFE123:
  1808              		.section	.text.HAL_PCD_ResetCallback,"ax",%progbits
-ARM GAS  /tmp/ccG5qlnI.s 			page 44
+ARM GAS  /tmp/ccTlZiUi.s 			page 44
 
 
  1809              		.align	2
@@ -2638,7 +2638,7 @@ ARM GAS  /tmp/ccG5qlnI.s 			page 1
  1853              		.thumb_func
  1855              	HAL_PCD_SuspendCallback:
  1856              	.LFB125:
-ARM GAS  /tmp/ccG5qlnI.s 			page 45
+ARM GAS  /tmp/ccTlZiUi.s 			page 45
 
 
  675:Drivers/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_pcd.c **** 
@@ -2698,7 +2698,7 @@ ARM GAS  /tmp/ccG5qlnI.s 			page 1
  690:Drivers/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_pcd.c ****   * @param  hpcd: PCD handle
  691:Drivers/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_pcd.c ****   * @retval None
  692:Drivers/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_pcd.c ****   */
-ARM GAS  /tmp/ccG5qlnI.s 			page 46
+ARM GAS  /tmp/ccTlZiUi.s 			page 46
 
 
  693:Drivers/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_pcd.c ****  __weak void HAL_PCD_ResumeCallback(PCD_HandleTypeDef *hpcd)
@@ -2758,7 +2758,7 @@ ARM GAS  /tmp/ccG5qlnI.s 			page 1
  1939              		.loc 1 707 0
  1940              		.cfi_startproc
  1941              		@ args = 0, pretend = 0, frame = 8
-ARM GAS  /tmp/ccG5qlnI.s 			page 47
+ARM GAS  /tmp/ccTlZiUi.s 			page 47
 
 
  1942              		@ frame_needed = 1, uses_anonymous_args = 0
@@ -2818,7 +2818,7 @@ ARM GAS  /tmp/ccG5qlnI.s 			page 1
  1985              		@ frame_needed = 1, uses_anonymous_args = 0
  1986              		@ link register save eliminated.
  1987 0000 80B4     		push	{r7}
-ARM GAS  /tmp/ccG5qlnI.s 			page 48
+ARM GAS  /tmp/ccTlZiUi.s 			page 48
 
 
  1988              	.LCFI91:
@@ -2878,7 +2878,7 @@ ARM GAS  /tmp/ccG5qlnI.s 			page 1
  2032              		.cfi_def_cfa_offset 4
  2033              		.cfi_offset 7, -4
  2034 0002 83B0     		sub	sp, sp, #12
-ARM GAS  /tmp/ccG5qlnI.s 			page 49
+ARM GAS  /tmp/ccTlZiUi.s 			page 49
 
 
  2035              	.LCFI98:
@@ -2938,7 +2938,7 @@ ARM GAS  /tmp/ccG5qlnI.s 			page 1
  2079              	.LCFI105:
  2080              		.cfi_def_cfa_register 7
  2081 0006 7860     		str	r0, [r7, #4]
-ARM GAS  /tmp/ccG5qlnI.s 			page 50
+ARM GAS  /tmp/ccTlZiUi.s 			page 50
 
 
  745:Drivers/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_pcd.c ****   /* NOTE : This function Should not be modified, when the callback is needed,
@@ -2998,7 +2998,7 @@ ARM GAS  /tmp/ccG5qlnI.s 			page 1
  2108              		.cfi_startproc
  2109              		@ args = 0, pretend = 0, frame = 8
  2110              		@ frame_needed = 1, uses_anonymous_args = 0
-ARM GAS  /tmp/ccG5qlnI.s 			page 51
+ARM GAS  /tmp/ccTlZiUi.s 			page 51
 
 
  2111 0000 80B5     		push	{r7, lr}
@@ -3058,7 +3058,7 @@ ARM GAS  /tmp/ccG5qlnI.s 			page 1
  2157              		.cfi_endproc
  2158              	.LFE131:
  2160              		.section	.text.HAL_PCD_DevDisconnect,"ax",%progbits
-ARM GAS  /tmp/ccG5qlnI.s 			page 52
+ARM GAS  /tmp/ccTlZiUi.s 			page 52
 
 
  2161              		.align	2
@@ -3118,7 +3118,7 @@ ARM GAS  /tmp/ccG5qlnI.s 			page 1
  2202 0026 7B68     		ldr	r3, [r7, #4]
  2203 0028 0022     		movs	r2, #0
  2204 002a 83F8E821 		strb	r2, [r3, #488]
-ARM GAS  /tmp/ccG5qlnI.s 			page 53
+ARM GAS  /tmp/ccTlZiUi.s 			page 53
 
 
  797:Drivers/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_pcd.c ****   return HAL_OK;
@@ -3178,7 +3178,7 @@ ARM GAS  /tmp/ccG5qlnI.s 			page 1
  2249 000e 93F8E831 		ldrb	r3, [r3, #488]	@ zero_extendqisi2
  2250 0012 012B     		cmp	r3, #1
  2251 0014 01D1     		bne	.L80
-ARM GAS  /tmp/ccG5qlnI.s 			page 54
+ARM GAS  /tmp/ccTlZiUi.s 			page 54
 
 
  2252              		.loc 1 808 0 is_stmt 0 discriminator 1
@@ -3238,7 +3238,7 @@ ARM GAS  /tmp/ccG5qlnI.s 			page 1
  2292 004c 5DF8047B 		ldr	r7, [sp], #4
  2293              	.LCFI124:
  2294              		.cfi_restore 7
-ARM GAS  /tmp/ccG5qlnI.s 			page 55
+ARM GAS  /tmp/ccTlZiUi.s 			page 55
 
 
  2295              		.cfi_def_cfa_offset 0
@@ -3298,7 +3298,7 @@ ARM GAS  /tmp/ccG5qlnI.s 			page 1
  2337              		.loc 1 836 0
  2338 001e FB78     		ldrb	r3, [r7, #3]	@ zero_extendqisi2
  2339 0020 5BB2     		sxtb	r3, r3
-ARM GAS  /tmp/ccG5qlnI.s 			page 56
+ARM GAS  /tmp/ccTlZiUi.s 			page 56
 
 
  2340 0022 002B     		cmp	r3, #0
@@ -3358,7 +3358,7 @@ ARM GAS  /tmp/ccG5qlnI.s 			page 1
  2383 0072 DA60     		str	r2, [r3, #12]
  848:Drivers/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_pcd.c ****   ep->type = ep_type;
  2384              		.loc 1 848 0
-ARM GAS  /tmp/ccG5qlnI.s 			page 57
+ARM GAS  /tmp/ccTlZiUi.s 			page 57
 
 
  2385 0074 7B69     		ldr	r3, [r7, #20]
@@ -3418,7 +3418,7 @@ ARM GAS  /tmp/ccG5qlnI.s 			page 1
  2431 00cc 1B88     		ldrh	r3, [r3]	@ movhi
  2432 00ce 9BB2     		uxth	r3, r3
  2433 00d0 9BB2     		uxth	r3, r3
-ARM GAS  /tmp/ccG5qlnI.s 			page 58
+ARM GAS  /tmp/ccTlZiUi.s 			page 58
 
 
  2434 00d2 23F4EC43 		bic	r3, r3, #30208
@@ -3478,7 +3478,7 @@ ARM GAS  /tmp/ccG5qlnI.s 			page 1
  2482 0130 0B44     		add	r3, r3, r1
  2483 0132 1B88     		ldrh	r3, [r3]	@ movhi
  2484 0134 9BB2     		uxth	r3, r3
-ARM GAS  /tmp/ccG5qlnI.s 			page 59
+ARM GAS  /tmp/ccTlZiUi.s 			page 59
 
 
  2485 0136 9BB2     		uxth	r3, r3
@@ -3538,7 +3538,7 @@ ARM GAS  /tmp/ccG5qlnI.s 			page 1
  2532 0194 7B68     		ldr	r3, [r7, #4]
  2533 0196 1B68     		ldr	r3, [r3]
  2534 0198 1946     		mov	r1, r3
-ARM GAS  /tmp/ccG5qlnI.s 			page 60
+ARM GAS  /tmp/ccTlZiUi.s 			page 60
 
 
  2535 019a 7B69     		ldr	r3, [r7, #20]
@@ -3598,7 +3598,7 @@ ARM GAS  /tmp/ccG5qlnI.s 			page 1
  2582 0200 1344     		add	r3, r3, r2
  2583 0202 03F58063 		add	r3, r3, #1024
  2584 0206 1A46     		mov	r2, r3
-ARM GAS  /tmp/ccG5qlnI.s 			page 61
+ARM GAS  /tmp/ccTlZiUi.s 			page 61
 
 
  2585 0208 7B69     		ldr	r3, [r7, #20]
@@ -3658,7 +3658,7 @@ ARM GAS  /tmp/ccG5qlnI.s 			page 1
  2636 0270 7B68     		ldr	r3, [r7, #4]
  2637 0272 1B68     		ldr	r3, [r3]
  2638 0274 1A46     		mov	r2, r3
-ARM GAS  /tmp/ccG5qlnI.s 			page 62
+ARM GAS  /tmp/ccTlZiUi.s 			page 62
 
 
  2639 0276 7B69     		ldr	r3, [r7, #20]
@@ -3718,7 +3718,7 @@ ARM GAS  /tmp/ccG5qlnI.s 			page 1
  2688              	.LBB6:
  885:Drivers/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_pcd.c ****       /*Set the endpoint Receive buffer counter*/
  886:Drivers/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_pcd.c ****       PCD_SET_EP_RX_CNT(hpcd->Instance, ep->num, ep->maxpacket);
-ARM GAS  /tmp/ccG5qlnI.s 			page 63
+ARM GAS  /tmp/ccTlZiUi.s 			page 63
 
 
  2689              		.loc 1 886 0
@@ -3778,7 +3778,7 @@ ARM GAS  /tmp/ccG5qlnI.s 			page 1
  2743 0342 5B08     		lsrs	r3, r3, #1
  2744 0344 7B82     		strh	r3, [r7, #18]	@ movhi
  2745 0346 7B69     		ldr	r3, [r7, #20]
-ARM GAS  /tmp/ccG5qlnI.s 			page 64
+ARM GAS  /tmp/ccTlZiUi.s 			page 64
 
 
  2746 0348 DB68     		ldr	r3, [r3, #12]
@@ -3838,7 +3838,7 @@ ARM GAS  /tmp/ccG5qlnI.s 			page 1
  2799 03a8 9BB2     		uxth	r3, r3
  2800 03aa 43F07F43 		orr	r3, r3, #-16777216
  2801 03ae 43F47F03 		orr	r3, r3, #16711680
-ARM GAS  /tmp/ccG5qlnI.s 			page 65
+ARM GAS  /tmp/ccTlZiUi.s 			page 65
 
 
  2802 03b2 43F44043 		orr	r3, r3, #49152
@@ -3898,7 +3898,7 @@ ARM GAS  /tmp/ccG5qlnI.s 			page 1
  2847 0408 1A46     		mov	r2, r3
  2848 040a 7B69     		ldr	r3, [r7, #20]
  2849 040c 1B78     		ldrb	r3, [r3]	@ zero_extendqisi2
-ARM GAS  /tmp/ccG5qlnI.s 			page 66
+ARM GAS  /tmp/ccTlZiUi.s 			page 66
 
 
  2850 040e 9B00     		lsls	r3, r3, #2
@@ -3958,7 +3958,7 @@ ARM GAS  /tmp/ccG5qlnI.s 			page 1
  2902 0486 1A46     		mov	r2, r3
  2903 0488 7B69     		ldr	r3, [r7, #20]
  2904 048a 1B78     		ldrb	r3, [r3]	@ zero_extendqisi2
-ARM GAS  /tmp/ccG5qlnI.s 			page 67
+ARM GAS  /tmp/ccTlZiUi.s 			page 67
 
 
  2905 048c DB00     		lsls	r3, r3, #3
@@ -4018,7 +4018,7 @@ ARM GAS  /tmp/ccG5qlnI.s 			page 1
  2954 04ee 1B88     		ldrh	r3, [r3]	@ movhi
  2955 04f0 9BB2     		uxth	r3, r3
  2956 04f2 9BB2     		uxth	r3, r3
-ARM GAS  /tmp/ccG5qlnI.s 			page 68
+ARM GAS  /tmp/ccTlZiUi.s 			page 68
 
 
  2957 04f4 23F0F003 		bic	r3, r3, #240
@@ -4078,7 +4078,7 @@ ARM GAS  /tmp/ccG5qlnI.s 			page 1
  3010 056e 1380     		strh	r3, [r2]	@ movhi
  3011              	.L107:
  905:Drivers/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_pcd.c ****       
-ARM GAS  /tmp/ccG5qlnI.s 			page 69
+ARM GAS  /tmp/ccTlZiUi.s 			page 69
 
 
  906:Drivers/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_pcd.c ****       /* Reset value of the data toggle bits for the endpoint out*/
@@ -4138,7 +4138,7 @@ ARM GAS  /tmp/ccG5qlnI.s 			page 1
  3062 05e0 7B69     		ldr	r3, [r7, #20]
  3063 05e2 1B78     		ldrb	r3, [r3]	@ zero_extendqisi2
  3064 05e4 9B00     		lsls	r3, r3, #2
-ARM GAS  /tmp/ccG5qlnI.s 			page 70
+ARM GAS  /tmp/ccTlZiUi.s 			page 70
 
 
  3065 05e6 1A44     		add	r2, r2, r3
@@ -4198,7 +4198,7 @@ ARM GAS  /tmp/ccG5qlnI.s 			page 1
  3113 063e 7B68     		ldr	r3, [r7, #4]
  3114 0640 1B68     		ldr	r3, [r3]
  3115 0642 1A46     		mov	r2, r3
-ARM GAS  /tmp/ccG5qlnI.s 			page 71
+ARM GAS  /tmp/ccTlZiUi.s 			page 71
 
 
  3116 0644 7B69     		ldr	r3, [r7, #20]
@@ -4258,7 +4258,7 @@ ARM GAS  /tmp/ccG5qlnI.s 			page 1
  3169 06b4 0B44     		add	r3, r3, r1
  3170 06b6 1B88     		ldrh	r3, [r3]	@ movhi
  3171 06b8 9BB2     		uxth	r3, r3
-ARM GAS  /tmp/ccG5qlnI.s 			page 72
+ARM GAS  /tmp/ccTlZiUi.s 			page 72
 
 
  3172 06ba 9BB2     		uxth	r3, r3
@@ -4318,7 +4318,7 @@ ARM GAS  /tmp/ccG5qlnI.s 			page 1
  3223 072c 1B88     		ldrh	r3, [r3]	@ movhi
  3224 072e 9BB2     		uxth	r3, r3
  3225 0730 23F4E043 		bic	r3, r3, #28672
-ARM GAS  /tmp/ccG5qlnI.s 			page 73
+ARM GAS  /tmp/ccTlZiUi.s 			page 73
 
 
  3226 0734 23F04003 		bic	r3, r3, #64
@@ -4378,7 +4378,7 @@ ARM GAS  /tmp/ccG5qlnI.s 			page 1
  926:Drivers/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_pcd.c **** }
  3274              		.loc 1 926 0
  3275 078c 1846     		mov	r0, r3
-ARM GAS  /tmp/ccG5qlnI.s 			page 74
+ARM GAS  /tmp/ccTlZiUi.s 			page 74
 
 
  3276 078e 1837     		adds	r7, r7, #24
@@ -4438,7 +4438,7 @@ ARM GAS  /tmp/ccG5qlnI.s 			page 1
  3322 000a FB70     		strb	r3, [r7, #3]
  937:Drivers/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_pcd.c ****   PCD_EPTypeDef *ep;
  938:Drivers/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_pcd.c ****   
-ARM GAS  /tmp/ccG5qlnI.s 			page 75
+ARM GAS  /tmp/ccTlZiUi.s 			page 75
 
 
  939:Drivers/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_pcd.c ****   if ((ep_addr & 0x80) == 0x80)
@@ -4498,7 +4498,7 @@ ARM GAS  /tmp/ccG5qlnI.s 			page 1
  950:Drivers/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_pcd.c ****   
  951:Drivers/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_pcd.c ****   __HAL_LOCK(hpcd); 
  3366              		.loc 1 951 0
-ARM GAS  /tmp/ccG5qlnI.s 			page 76
+ARM GAS  /tmp/ccTlZiUi.s 			page 76
 
 
  3367 005c 7B68     		ldr	r3, [r7, #4]
@@ -4558,7 +4558,7 @@ ARM GAS  /tmp/ccG5qlnI.s 			page 1
  3415 00b6 9B00     		lsls	r3, r3, #2
  3416 00b8 0B44     		add	r3, r3, r1
  3417 00ba 1B88     		ldrh	r3, [r3]	@ movhi
-ARM GAS  /tmp/ccG5qlnI.s 			page 77
+ARM GAS  /tmp/ccTlZiUi.s 			page 77
 
 
  3418 00bc 9BB2     		uxth	r3, r3
@@ -4618,7 +4618,7 @@ ARM GAS  /tmp/ccG5qlnI.s 			page 1
  3466 011e 9B00     		lsls	r3, r3, #2
  3467 0120 1344     		add	r3, r3, r2
  3468 0122 1B88     		ldrh	r3, [r3]	@ movhi
-ARM GAS  /tmp/ccG5qlnI.s 			page 78
+ARM GAS  /tmp/ccTlZiUi.s 			page 78
 
 
  3469 0124 9BB2     		uxth	r3, r3
@@ -4678,7 +4678,7 @@ ARM GAS  /tmp/ccG5qlnI.s 			page 1
  3521 0194 1B78     		ldrb	r3, [r3]	@ zero_extendqisi2
  3522 0196 9B00     		lsls	r3, r3, #2
  3523 0198 1A44     		add	r2, r2, r3
-ARM GAS  /tmp/ccG5qlnI.s 			page 79
+ARM GAS  /tmp/ccTlZiUi.s 			page 79
 
 
  3524 019a 5D4B     		ldr	r3, .L130
@@ -4738,7 +4738,7 @@ ARM GAS  /tmp/ccG5qlnI.s 			page 1
  3569 01f0 1B0D     		lsrs	r3, r3, #20
  3570 01f2 9BB2     		uxth	r3, r3
  3571 01f4 43F07F43 		orr	r3, r3, #-16777216
-ARM GAS  /tmp/ccG5qlnI.s 			page 80
+ARM GAS  /tmp/ccTlZiUi.s 			page 80
 
 
  3572 01f8 43F47F03 		orr	r3, r3, #16711680
@@ -4798,7 +4798,7 @@ ARM GAS  /tmp/ccG5qlnI.s 			page 1
  3622              		.loc 1 978 0 is_stmt 1
  3623 0266 7B68     		ldr	r3, [r7, #4]
  3624 0268 1B68     		ldr	r3, [r3]
-ARM GAS  /tmp/ccG5qlnI.s 			page 81
+ARM GAS  /tmp/ccTlZiUi.s 			page 81
 
 
  3625 026a 1A46     		mov	r2, r3
@@ -4858,7 +4858,7 @@ ARM GAS  /tmp/ccG5qlnI.s 			page 1
  3677              	.LBB16:
  981:Drivers/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_pcd.c ****       PCD_SET_EP_TX_STATUS(hpcd->Instance, ep->num, USB_EP_TX_DIS);
  3678              		.loc 1 981 0
-ARM GAS  /tmp/ccG5qlnI.s 			page 82
+ARM GAS  /tmp/ccTlZiUi.s 			page 82
 
 
  3679 02da 7B68     		ldr	r3, [r7, #4]
@@ -4918,7 +4918,7 @@ ARM GAS  /tmp/ccG5qlnI.s 			page 1
  3728 0338 9B00     		lsls	r3, r3, #2
  3729 033a 1A44     		add	r2, r2, r3
  3730 033c 7B68     		ldr	r3, [r7, #4]
-ARM GAS  /tmp/ccG5qlnI.s 			page 83
+ARM GAS  /tmp/ccTlZiUi.s 			page 83
 
 
  3731 033e 1B68     		ldr	r3, [r3]
@@ -4978,7 +4978,7 @@ ARM GAS  /tmp/ccG5qlnI.s 			page 1
  3784 03b0 1B05     		lsls	r3, r3, #20
  3785 03b2 1B0D     		lsrs	r3, r3, #20
  3786 03b4 9BB2     		uxth	r3, r3
-ARM GAS  /tmp/ccG5qlnI.s 			page 84
+ARM GAS  /tmp/ccTlZiUi.s 			page 84
 
 
  3787 03b6 43F07F43 		orr	r3, r3, #-16777216
@@ -5038,7 +5038,7 @@ ARM GAS  /tmp/ccG5qlnI.s 			page 1
  3838 042a 7B68     		ldr	r3, [r7, #4]
  3839 042c 1B68     		ldr	r3, [r3]
  3840 042e 1A46     		mov	r2, r3
-ARM GAS  /tmp/ccG5qlnI.s 			page 85
+ARM GAS  /tmp/ccTlZiUi.s 			page 85
 
 
  3841 0430 FB68     		ldr	r3, [r7, #12]
@@ -5098,7 +5098,7 @@ ARM GAS  /tmp/ccG5qlnI.s 			page 1
  3888              		.cfi_def_cfa_offset 8
  3889 0480 BD46     		mov	sp, r7
  3890              	.LCFI135:
-ARM GAS  /tmp/ccG5qlnI.s 			page 86
+ARM GAS  /tmp/ccTlZiUi.s 			page 86
 
 
  3891              		.cfi_def_cfa_register 13
@@ -5158,7 +5158,7 @@ ARM GAS  /tmp/ccG5qlnI.s 			page 1
 1010:Drivers/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_pcd.c ****   
 1011:Drivers/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_pcd.c ****  PCD_EPTypeDef *ep;
 1012:Drivers/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_pcd.c ****   
-ARM GAS  /tmp/ccG5qlnI.s 			page 87
+ARM GAS  /tmp/ccTlZiUi.s 			page 87
 
 
 1013:Drivers/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_pcd.c ****   ep = &hpcd->OUT_ep[ep_addr & 0x7F];
@@ -5218,7 +5218,7 @@ ARM GAS  /tmp/ccG5qlnI.s 			page 1
  3979 005c 0122     		movs	r2, #1
  3980 005e 83F8E821 		strb	r2, [r3, #488]
 1023:Drivers/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_pcd.c ****    
-ARM GAS  /tmp/ccG5qlnI.s 			page 88
+ARM GAS  /tmp/ccTlZiUi.s 			page 88
 
 
 1024:Drivers/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_pcd.c ****   /* Multi packet transfer*/
@@ -5278,7 +5278,7 @@ ARM GAS  /tmp/ccG5qlnI.s 			page 1
  4018 0098 1B68     		ldr	r3, [r3]
  4019 009a B3F85030 		ldrh	r3, [r3, #80]	@ movhi
  4020 009e 9BB2     		uxth	r3, r3
-ARM GAS  /tmp/ccG5qlnI.s 			page 89
+ARM GAS  /tmp/ccTlZiUi.s 			page 89
 
 
  4021 00a0 1A46     		mov	r2, r3
@@ -5338,7 +5338,7 @@ ARM GAS  /tmp/ccG5qlnI.s 			page 1
  4075 0106 FB83     		strh	r3, [r7, #30]	@ movhi
  4076              	.L143:
  4077              		.loc 1 1040 0 discriminator 8
-ARM GAS  /tmp/ccG5qlnI.s 			page 90
+ARM GAS  /tmp/ccTlZiUi.s 			page 90
 
 
  4078 0108 FB8B     		ldrh	r3, [r7, #30]	@ movhi
@@ -5398,7 +5398,7 @@ ARM GAS  /tmp/ccG5qlnI.s 			page 1
  4127 015e BB83     		strh	r3, [r7, #28]	@ movhi
  4128              	.L147:
  4129              		.loc 1 1045 0 discriminator 7
-ARM GAS  /tmp/ccG5qlnI.s 			page 91
+ARM GAS  /tmp/ccTlZiUi.s 			page 91
 
 
  4130 0160 BB8B     		ldrh	r3, [r7, #28]
@@ -5458,7 +5458,7 @@ ARM GAS  /tmp/ccG5qlnI.s 			page 1
  4184 01c0 FB68     		ldr	r3, [r7, #12]
  4185 01c2 1B68     		ldr	r3, [r3]
  4186 01c4 1344     		add	r3, r3, r2
-ARM GAS  /tmp/ccG5qlnI.s 			page 92
+ARM GAS  /tmp/ccTlZiUi.s 			page 92
 
 
  4187 01c6 03F58063 		add	r3, r3, #1024
@@ -5518,7 +5518,7 @@ ARM GAS  /tmp/ccG5qlnI.s 			page 1
  4233              		.cfi_def_cfa_offset 8
  4234 021c BD46     		mov	sp, r7
  4235              	.LCFI141:
-ARM GAS  /tmp/ccG5qlnI.s 			page 93
+ARM GAS  /tmp/ccTlZiUi.s 			page 93
 
 
  4236              		.cfi_def_cfa_register 13
@@ -5578,7 +5578,7 @@ ARM GAS  /tmp/ccG5qlnI.s 			page 1
  4282 0016 DB00     		lsls	r3, r3, #3
  4283 0018 9B1A     		subs	r3, r3, r2
  4284 001a 9B00     		lsls	r3, r3, #2
-ARM GAS  /tmp/ccG5qlnI.s 			page 94
+ARM GAS  /tmp/ccTlZiUi.s 			page 94
 
 
  4285 001c 0B44     		add	r3, r3, r1
@@ -5638,7 +5638,7 @@ ARM GAS  /tmp/ccG5qlnI.s 			page 1
  4330 0006 F860     		str	r0, [r7, #12]
  4331 0008 7A60     		str	r2, [r7, #4]
  4332 000a 3B60     		str	r3, [r7]
-ARM GAS  /tmp/ccG5qlnI.s 			page 95
+ARM GAS  /tmp/ccTlZiUi.s 			page 95
 
 
  4333 000c 0B46     		mov	r3, r1
@@ -5698,7 +5698,7 @@ ARM GAS  /tmp/ccG5qlnI.s 			page 1
  4374 0054 012B     		cmp	r3, #1
  4375 0056 01D1     		bne	.L155
  4376              		.loc 1 1087 0 is_stmt 0 discriminator 1
-ARM GAS  /tmp/ccG5qlnI.s 			page 96
+ARM GAS  /tmp/ccTlZiUi.s 			page 96
 
 
  4377 0058 0223     		movs	r3, #2
@@ -5758,7 +5758,7 @@ ARM GAS  /tmp/ccG5qlnI.s 			page 1
  4416 0094 002B     		cmp	r3, #0
  4417 0096 1FD1     		bne	.L159
 1103:Drivers/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_pcd.c ****   {
-ARM GAS  /tmp/ccG5qlnI.s 			page 97
+ARM GAS  /tmp/ccTlZiUi.s 			page 97
 
 
 1104:Drivers/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_pcd.c ****     PCD_WritePMA(hpcd->Instance, ep->xfer_buff, ep->pmaadress, len);
@@ -5818,7 +5818,7 @@ ARM GAS  /tmp/ccG5qlnI.s 			page 1
  4465 00f2 1344     		add	r3, r3, r2
  4466 00f4 0633     		adds	r3, r3, #6
  4467 00f6 5B00     		lsls	r3, r3, #1
-ARM GAS  /tmp/ccG5qlnI.s 			page 98
+ARM GAS  /tmp/ccTlZiUi.s 			page 98
 
 
  4468 00f8 1A46     		mov	r2, r3
@@ -5878,7 +5878,7 @@ ARM GAS  /tmp/ccG5qlnI.s 			page 1
  4522 015a 7B69     		ldr	r3, [r7, #20]
  4523 015c 1A60     		str	r2, [r3]
  4524 015e 18E0     		b	.L166
-ARM GAS  /tmp/ccG5qlnI.s 			page 99
+ARM GAS  /tmp/ccTlZiUi.s 			page 99
 
 
  4525              	.L161:
@@ -5938,7 +5938,7 @@ ARM GAS  /tmp/ccG5qlnI.s 			page 1
 1117:Drivers/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_pcd.c ****     else
 1118:Drivers/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_pcd.c ****     {
 1119:Drivers/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_pcd.c ****       pmabuffer = ep->pmaaddr0;
-ARM GAS  /tmp/ccG5qlnI.s 			page 100
+ARM GAS  /tmp/ccTlZiUi.s 			page 100
 
 
  4573              		.loc 1 1119 0
@@ -5998,7 +5998,7 @@ ARM GAS  /tmp/ccG5qlnI.s 			page 1
  4624 0218 BB69     		ldr	r3, [r7, #24]
  4625 021a 5B78     		ldrb	r3, [r3, #1]	@ zero_extendqisi2
  4626 021c 012B     		cmp	r3, #1
-ARM GAS  /tmp/ccG5qlnI.s 			page 101
+ARM GAS  /tmp/ccTlZiUi.s 			page 101
 
 
  4627 021e 20D1     		bne	.L160
@@ -6058,7 +6058,7 @@ ARM GAS  /tmp/ccG5qlnI.s 			page 1
  4678 028e 1A46     		mov	r2, r3
  4679 0290 BB69     		ldr	r3, [r7, #24]
  4680 0292 1B78     		ldrb	r3, [r3]	@ zero_extendqisi2
-ARM GAS  /tmp/ccG5qlnI.s 			page 102
+ARM GAS  /tmp/ccTlZiUi.s 			page 102
 
 
  4681 0294 9B00     		lsls	r3, r3, #2
@@ -6118,7 +6118,7 @@ ARM GAS  /tmp/ccG5qlnI.s 			page 1
  4723              		@ frame_needed = 1, uses_anonymous_args = 0
  4724              		@ link register save eliminated.
  4725 0000 90B4     		push	{r4, r7}
-ARM GAS  /tmp/ccG5qlnI.s 			page 103
+ARM GAS  /tmp/ccTlZiUi.s 			page 103
 
 
  4726              	.LCFI154:
@@ -6178,7 +6178,7 @@ ARM GAS  /tmp/ccG5qlnI.s 			page 1
 1150:Drivers/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_pcd.c ****     ep = &hpcd->OUT_ep[ep_addr];
  4770              		.loc 1 1150 0
  4771 0042 FA78     		ldrb	r2, [r7, #3]	@ zero_extendqisi2
-ARM GAS  /tmp/ccG5qlnI.s 			page 104
+ARM GAS  /tmp/ccTlZiUi.s 			page 104
 
 
  4772 0044 1346     		mov	r3, r2
@@ -6238,7 +6238,7 @@ ARM GAS  /tmp/ccG5qlnI.s 			page 1
  4816 0094 84F48054 		eor	r4, r4, #4096
  4817 0098 84F01004 		eor	r4, r4, #16
  4818 009c 7B68     		ldr	r3, [r7, #4]
-ARM GAS  /tmp/ccG5qlnI.s 			page 105
+ARM GAS  /tmp/ccTlZiUi.s 			page 105
 
 
  4819 009e 1B68     		ldr	r3, [r3]
@@ -6298,7 +6298,7 @@ ARM GAS  /tmp/ccG5qlnI.s 			page 1
  4867 0102 1380     		strh	r3, [r2]	@ movhi
  4868              	.LBE28:
  4869 0104 1BE0     		b	.L178
-ARM GAS  /tmp/ccG5qlnI.s 			page 106
+ARM GAS  /tmp/ccTlZiUi.s 			page 106
 
 
  4870              	.L179:
@@ -6358,7 +6358,7 @@ ARM GAS  /tmp/ccG5qlnI.s 			page 1
  4914              		.cfi_def_cfa_register 13
  4915              		@ sp needed
  4916 014e 90BC     		pop	{r4, r7}
-ARM GAS  /tmp/ccG5qlnI.s 			page 107
+ARM GAS  /tmp/ccTlZiUi.s 			page 107
 
 
  4917              	.LCFI159:
@@ -6418,7 +6418,7 @@ ARM GAS  /tmp/ccG5qlnI.s 			page 1
 1189:Drivers/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_pcd.c ****   {
 1190:Drivers/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_pcd.c ****     ep = &hpcd->IN_ep[ep_addr & 0x7F];
  4961              		.loc 1 1190 0
-ARM GAS  /tmp/ccG5qlnI.s 			page 108
+ARM GAS  /tmp/ccTlZiUi.s 			page 108
 
 
  4962 0014 FB78     		ldrb	r3, [r7, #3]	@ zero_extendqisi2
@@ -6478,7 +6478,7 @@ ARM GAS  /tmp/ccG5qlnI.s 			page 1
  5005 0064 012B     		cmp	r3, #1
  5006 0066 01D1     		bne	.L185
  5007              		.loc 1 1201 0 is_stmt 0 discriminator 1
-ARM GAS  /tmp/ccG5qlnI.s 			page 109
+ARM GAS  /tmp/ccTlZiUi.s 			page 109
 
 
  5008 0068 0223     		movs	r3, #2
@@ -6538,7 +6538,7 @@ ARM GAS  /tmp/ccG5qlnI.s 			page 1
  5058 00ce 43F0C003 		orr	r3, r3, #192
  5059 00d2 9BB2     		uxth	r3, r3
  5060 00d4 9BB2     		uxth	r3, r3
-ARM GAS  /tmp/ccG5qlnI.s 			page 110
+ARM GAS  /tmp/ccTlZiUi.s 			page 110
 
 
  5061 00d6 1380     		strh	r3, [r2]	@ movhi
@@ -6598,7 +6598,7 @@ ARM GAS  /tmp/ccG5qlnI.s 			page 1
  5110 0134 1B68     		ldr	r3, [r3]
  5111 0136 1A46     		mov	r2, r3
  5112 0138 FB68     		ldr	r3, [r7, #12]
-ARM GAS  /tmp/ccG5qlnI.s 			page 111
+ARM GAS  /tmp/ccTlZiUi.s 			page 111
 
 
  5113 013a 1B78     		ldrb	r3, [r3]	@ zero_extendqisi2
@@ -6658,7 +6658,7 @@ ARM GAS  /tmp/ccG5qlnI.s 			page 1
  5166 01b0 1380     		strh	r3, [r2]	@ movhi
  5167              	.L189:
  5168              	.LBE31:
-ARM GAS  /tmp/ccG5qlnI.s 			page 112
+ARM GAS  /tmp/ccTlZiUi.s 			page 112
 
 
 1212:Drivers/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_pcd.c ****   }
@@ -6718,7 +6718,7 @@ ARM GAS  /tmp/ccG5qlnI.s 			page 1
  5211 0000 80B4     		push	{r7}
  5212              	.LCFI166:
  5213              		.cfi_def_cfa_offset 4
-ARM GAS  /tmp/ccG5qlnI.s 			page 113
+ARM GAS  /tmp/ccTlZiUi.s 			page 113
 
 
  5214              		.cfi_offset 7, -4
@@ -6778,7 +6778,7 @@ ARM GAS  /tmp/ccG5qlnI.s 			page 1
  5260 0002 83B0     		sub	sp, sp, #12
  5261              	.LCFI173:
  5262              		.cfi_def_cfa_offset 16
-ARM GAS  /tmp/ccG5qlnI.s 			page 114
+ARM GAS  /tmp/ccTlZiUi.s 			page 114
 
 
  5263 0004 00AF     		add	r7, sp, #0
@@ -6838,7 +6838,7 @@ ARM GAS  /tmp/ccG5qlnI.s 			page 1
  5308              		@ link register save eliminated.
  5309 0000 80B4     		push	{r7}
  5310              	.LCFI178:
-ARM GAS  /tmp/ccG5qlnI.s 			page 115
+ARM GAS  /tmp/ccTlZiUi.s 			page 115
 
 
  5311              		.cfi_def_cfa_offset 4
@@ -6898,7 +6898,7 @@ ARM GAS  /tmp/ccG5qlnI.s 			page 1
 1257:Drivers/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_pcd.c ****  *
 1258:Drivers/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_pcd.c **** @verbatim   
 1259:Drivers/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_pcd.c ****  ===============================================================================
-ARM GAS  /tmp/ccG5qlnI.s 			page 116
+ARM GAS  /tmp/ccTlZiUi.s 			page 116
 
 
 1260:Drivers/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_pcd.c ****                       ##### Peripheral State functions #####
@@ -6958,7 +6958,7 @@ ARM GAS  /tmp/ccG5qlnI.s 			page 1
  5392              	.LFE144:
  5394              		.weak	HAL_PCDEx_SetConnectionState
  5395              		.text
-ARM GAS  /tmp/ccG5qlnI.s 			page 117
+ARM GAS  /tmp/ccTlZiUi.s 			page 117
 
 
  5396              	.Letext0:
@@ -6968,94 +6968,94 @@ ARM GAS  /tmp/ccG5qlnI.s 			page 1
  5400              		.file 5 "Drivers/STM32F3xx_HAL_Driver/Inc/stm32f3xx_hal_def.h"
  5401              		.file 6 "Drivers/STM32F3xx_HAL_Driver/Inc/stm32f3xx_hal_pcd.h"
  5402              		.file 7 "Drivers/CMSIS/Include/core_cm4.h"
-ARM GAS  /tmp/ccG5qlnI.s 			page 118
+ARM GAS  /tmp/ccTlZiUi.s 			page 118
 
 
 DEFINED SYMBOLS
                             *ABS*:0000000000000000 stm32f3xx_hal_pcd.c
-     /tmp/ccG5qlnI.s:21     .text.HAL_PCD_Init:0000000000000000 $t
-     /tmp/ccG5qlnI.s:26     .text.HAL_PCD_Init:0000000000000000 HAL_PCD_Init
-     /tmp/ccG5qlnI.s:355    .text.HAL_PCD_MspInit:0000000000000000 HAL_PCD_MspInit
-     /tmp/ccG5qlnI.s:288    .text.HAL_PCD_DeInit:0000000000000000 $t
-     /tmp/ccG5qlnI.s:293    .text.HAL_PCD_DeInit:0000000000000000 HAL_PCD_DeInit
-     /tmp/ccG5qlnI.s:480    .text.HAL_PCD_Stop:0000000000000000 HAL_PCD_Stop
-     /tmp/ccG5qlnI.s:396    .text.HAL_PCD_MspDeInit:0000000000000000 HAL_PCD_MspDeInit
-     /tmp/ccG5qlnI.s:350    .text.HAL_PCD_MspInit:0000000000000000 $t
-     /tmp/ccG5qlnI.s:391    .text.HAL_PCD_MspDeInit:0000000000000000 $t
-     /tmp/ccG5qlnI.s:432    .text.HAL_PCD_Start:0000000000000000 $t
-     /tmp/ccG5qlnI.s:437    .text.HAL_PCD_Start:0000000000000000 HAL_PCD_Start
-     /tmp/ccG5qlnI.s:475    .text.HAL_PCD_Stop:0000000000000000 $t
-     /tmp/ccG5qlnI.s:551    .text.PCD_EP_ISR_Handler:0000000000000000 $t
-     /tmp/ccG5qlnI.s:555    .text.PCD_EP_ISR_Handler:0000000000000000 PCD_EP_ISR_Handler
-     /tmp/ccG5qlnI.s:1689   .text.HAL_PCD_DataInStageCallback:0000000000000000 HAL_PCD_DataInStageCallback
-     /tmp/ccG5qlnI.s:1732   .text.HAL_PCD_SetupStageCallback:0000000000000000 HAL_PCD_SetupStageCallback
-     /tmp/ccG5qlnI.s:1646   .text.HAL_PCD_DataOutStageCallback:0000000000000000 HAL_PCD_DataOutStageCallback
-     /tmp/ccG5qlnI.s:3912   .text.HAL_PCD_EP_Receive:0000000000000000 HAL_PCD_EP_Receive
-     /tmp/ccG5qlnI.s:1226   .text.PCD_EP_ISR_Handler:0000000000000500 $d
-     /tmp/ccG5qlnI.s:1229   .text.PCD_EP_ISR_Handler:0000000000000504 $t
-     /tmp/ccG5qlnI.s:4312   .text.HAL_PCD_EP_Transmit:0000000000000000 HAL_PCD_EP_Transmit
-     /tmp/ccG5qlnI.s:1427   .text.HAL_PCD_IRQHandler:0000000000000000 $t
-     /tmp/ccG5qlnI.s:1432   .text.HAL_PCD_IRQHandler:0000000000000000 HAL_PCD_IRQHandler
-     /tmp/ccG5qlnI.s:1814   .text.HAL_PCD_ResetCallback:0000000000000000 HAL_PCD_ResetCallback
-     /tmp/ccG5qlnI.s:2227   .text.HAL_PCD_SetAddress:0000000000000000 HAL_PCD_SetAddress
-     /tmp/ccG5qlnI.s:1896   .text.HAL_PCD_ResumeCallback:0000000000000000 HAL_PCD_ResumeCallback
-     /tmp/ccG5qlnI.s:1855   .text.HAL_PCD_SuspendCallback:0000000000000000 HAL_PCD_SuspendCallback
-     /tmp/ccG5qlnI.s:1773   .text.HAL_PCD_SOFCallback:0000000000000000 HAL_PCD_SOFCallback
-     /tmp/ccG5qlnI.s:1641   .text.HAL_PCD_DataOutStageCallback:0000000000000000 $t
-     /tmp/ccG5qlnI.s:1684   .text.HAL_PCD_DataInStageCallback:0000000000000000 $t
-     /tmp/ccG5qlnI.s:1727   .text.HAL_PCD_SetupStageCallback:0000000000000000 $t
-     /tmp/ccG5qlnI.s:1768   .text.HAL_PCD_SOFCallback:0000000000000000 $t
-     /tmp/ccG5qlnI.s:1809   .text.HAL_PCD_ResetCallback:0000000000000000 $t
-     /tmp/ccG5qlnI.s:1850   .text.HAL_PCD_SuspendCallback:0000000000000000 $t
-     /tmp/ccG5qlnI.s:1891   .text.HAL_PCD_ResumeCallback:0000000000000000 $t
-     /tmp/ccG5qlnI.s:1932   .text.HAL_PCD_ISOOUTIncompleteCallback:0000000000000000 $t
-     /tmp/ccG5qlnI.s:1937   .text.HAL_PCD_ISOOUTIncompleteCallback:0000000000000000 HAL_PCD_ISOOUTIncompleteCallback
-     /tmp/ccG5qlnI.s:1975   .text.HAL_PCD_ISOINIncompleteCallback:0000000000000000 $t
-     /tmp/ccG5qlnI.s:1980   .text.HAL_PCD_ISOINIncompleteCallback:0000000000000000 HAL_PCD_ISOINIncompleteCallback
-     /tmp/ccG5qlnI.s:2018   .text.HAL_PCD_ConnectCallback:0000000000000000 $t
-     /tmp/ccG5qlnI.s:2023   .text.HAL_PCD_ConnectCallback:0000000000000000 HAL_PCD_ConnectCallback
-     /tmp/ccG5qlnI.s:2059   .text.HAL_PCD_DisconnectCallback:0000000000000000 $t
-     /tmp/ccG5qlnI.s:2064   .text.HAL_PCD_DisconnectCallback:0000000000000000 HAL_PCD_DisconnectCallback
-     /tmp/ccG5qlnI.s:2100   .text.HAL_PCD_DevConnect:0000000000000000 $t
-     /tmp/ccG5qlnI.s:2105   .text.HAL_PCD_DevConnect:0000000000000000 HAL_PCD_DevConnect
-     /tmp/ccG5qlnI.s:2161   .text.HAL_PCD_DevDisconnect:0000000000000000 $t
-     /tmp/ccG5qlnI.s:2166   .text.HAL_PCD_DevDisconnect:0000000000000000 HAL_PCD_DevDisconnect
-     /tmp/ccG5qlnI.s:2222   .text.HAL_PCD_SetAddress:0000000000000000 $t
-     /tmp/ccG5qlnI.s:2301   .text.HAL_PCD_EP_Open:0000000000000000 $t
-     /tmp/ccG5qlnI.s:2306   .text.HAL_PCD_EP_Open:0000000000000000 HAL_PCD_EP_Open
-     /tmp/ccG5qlnI.s:2410   .text.HAL_PCD_EP_Open:00000000000000a0 $d
-     /tmp/ccG5qlnI.s:2414   .text.HAL_PCD_EP_Open:00000000000000b0 $t
-     /tmp/ccG5qlnI.s:2841   .text.HAL_PCD_EP_Open:0000000000000400 $d
-     /tmp/ccG5qlnI.s:2845   .text.HAL_PCD_EP_Open:0000000000000404 $t
-     /tmp/ccG5qlnI.s:3292   .text.HAL_PCD_EP_Open:0000000000000798 $d
-ARM GAS  /tmp/ccG5qlnI.s 			page 119
+     /tmp/ccTlZiUi.s:21     .text.HAL_PCD_Init:0000000000000000 $t
+     /tmp/ccTlZiUi.s:26     .text.HAL_PCD_Init:0000000000000000 HAL_PCD_Init
+     /tmp/ccTlZiUi.s:355    .text.HAL_PCD_MspInit:0000000000000000 HAL_PCD_MspInit
+     /tmp/ccTlZiUi.s:288    .text.HAL_PCD_DeInit:0000000000000000 $t
+     /tmp/ccTlZiUi.s:293    .text.HAL_PCD_DeInit:0000000000000000 HAL_PCD_DeInit
+     /tmp/ccTlZiUi.s:480    .text.HAL_PCD_Stop:0000000000000000 HAL_PCD_Stop
+     /tmp/ccTlZiUi.s:396    .text.HAL_PCD_MspDeInit:0000000000000000 HAL_PCD_MspDeInit
+     /tmp/ccTlZiUi.s:350    .text.HAL_PCD_MspInit:0000000000000000 $t
+     /tmp/ccTlZiUi.s:391    .text.HAL_PCD_MspDeInit:0000000000000000 $t
+     /tmp/ccTlZiUi.s:432    .text.HAL_PCD_Start:0000000000000000 $t
+     /tmp/ccTlZiUi.s:437    .text.HAL_PCD_Start:0000000000000000 HAL_PCD_Start
+     /tmp/ccTlZiUi.s:475    .text.HAL_PCD_Stop:0000000000000000 $t
+     /tmp/ccTlZiUi.s:551    .text.PCD_EP_ISR_Handler:0000000000000000 $t
+     /tmp/ccTlZiUi.s:555    .text.PCD_EP_ISR_Handler:0000000000000000 PCD_EP_ISR_Handler
+     /tmp/ccTlZiUi.s:1689   .text.HAL_PCD_DataInStageCallback:0000000000000000 HAL_PCD_DataInStageCallback
+     /tmp/ccTlZiUi.s:1732   .text.HAL_PCD_SetupStageCallback:0000000000000000 HAL_PCD_SetupStageCallback
+     /tmp/ccTlZiUi.s:1646   .text.HAL_PCD_DataOutStageCallback:0000000000000000 HAL_PCD_DataOutStageCallback
+     /tmp/ccTlZiUi.s:3912   .text.HAL_PCD_EP_Receive:0000000000000000 HAL_PCD_EP_Receive
+     /tmp/ccTlZiUi.s:1226   .text.PCD_EP_ISR_Handler:0000000000000500 $d
+     /tmp/ccTlZiUi.s:1229   .text.PCD_EP_ISR_Handler:0000000000000504 $t
+     /tmp/ccTlZiUi.s:4312   .text.HAL_PCD_EP_Transmit:0000000000000000 HAL_PCD_EP_Transmit
+     /tmp/ccTlZiUi.s:1427   .text.HAL_PCD_IRQHandler:0000000000000000 $t
+     /tmp/ccTlZiUi.s:1432   .text.HAL_PCD_IRQHandler:0000000000000000 HAL_PCD_IRQHandler
+     /tmp/ccTlZiUi.s:1814   .text.HAL_PCD_ResetCallback:0000000000000000 HAL_PCD_ResetCallback
+     /tmp/ccTlZiUi.s:2227   .text.HAL_PCD_SetAddress:0000000000000000 HAL_PCD_SetAddress
+     /tmp/ccTlZiUi.s:1896   .text.HAL_PCD_ResumeCallback:0000000000000000 HAL_PCD_ResumeCallback
+     /tmp/ccTlZiUi.s:1855   .text.HAL_PCD_SuspendCallback:0000000000000000 HAL_PCD_SuspendCallback
+     /tmp/ccTlZiUi.s:1773   .text.HAL_PCD_SOFCallback:0000000000000000 HAL_PCD_SOFCallback
+     /tmp/ccTlZiUi.s:1641   .text.HAL_PCD_DataOutStageCallback:0000000000000000 $t
+     /tmp/ccTlZiUi.s:1684   .text.HAL_PCD_DataInStageCallback:0000000000000000 $t
+     /tmp/ccTlZiUi.s:1727   .text.HAL_PCD_SetupStageCallback:0000000000000000 $t
+     /tmp/ccTlZiUi.s:1768   .text.HAL_PCD_SOFCallback:0000000000000000 $t
+     /tmp/ccTlZiUi.s:1809   .text.HAL_PCD_ResetCallback:0000000000000000 $t
+     /tmp/ccTlZiUi.s:1850   .text.HAL_PCD_SuspendCallback:0000000000000000 $t
+     /tmp/ccTlZiUi.s:1891   .text.HAL_PCD_ResumeCallback:0000000000000000 $t
+     /tmp/ccTlZiUi.s:1932   .text.HAL_PCD_ISOOUTIncompleteCallback:0000000000000000 $t
+     /tmp/ccTlZiUi.s:1937   .text.HAL_PCD_ISOOUTIncompleteCallback:0000000000000000 HAL_PCD_ISOOUTIncompleteCallback
+     /tmp/ccTlZiUi.s:1975   .text.HAL_PCD_ISOINIncompleteCallback:0000000000000000 $t
+     /tmp/ccTlZiUi.s:1980   .text.HAL_PCD_ISOINIncompleteCallback:0000000000000000 HAL_PCD_ISOINIncompleteCallback
+     /tmp/ccTlZiUi.s:2018   .text.HAL_PCD_ConnectCallback:0000000000000000 $t
+     /tmp/ccTlZiUi.s:2023   .text.HAL_PCD_ConnectCallback:0000000000000000 HAL_PCD_ConnectCallback
+     /tmp/ccTlZiUi.s:2059   .text.HAL_PCD_DisconnectCallback:0000000000000000 $t
+     /tmp/ccTlZiUi.s:2064   .text.HAL_PCD_DisconnectCallback:0000000000000000 HAL_PCD_DisconnectCallback
+     /tmp/ccTlZiUi.s:2100   .text.HAL_PCD_DevConnect:0000000000000000 $t
+     /tmp/ccTlZiUi.s:2105   .text.HAL_PCD_DevConnect:0000000000000000 HAL_PCD_DevConnect
+     /tmp/ccTlZiUi.s:2161   .text.HAL_PCD_DevDisconnect:0000000000000000 $t
+     /tmp/ccTlZiUi.s:2166   .text.HAL_PCD_DevDisconnect:0000000000000000 HAL_PCD_DevDisconnect
+     /tmp/ccTlZiUi.s:2222   .text.HAL_PCD_SetAddress:0000000000000000 $t
+     /tmp/ccTlZiUi.s:2301   .text.HAL_PCD_EP_Open:0000000000000000 $t
+     /tmp/ccTlZiUi.s:2306   .text.HAL_PCD_EP_Open:0000000000000000 HAL_PCD_EP_Open
+     /tmp/ccTlZiUi.s:2410   .text.HAL_PCD_EP_Open:00000000000000a0 $d
+     /tmp/ccTlZiUi.s:2414   .text.HAL_PCD_EP_Open:00000000000000b0 $t
+     /tmp/ccTlZiUi.s:2841   .text.HAL_PCD_EP_Open:0000000000000400 $d
+     /tmp/ccTlZiUi.s:2845   .text.HAL_PCD_EP_Open:0000000000000404 $t
+     /tmp/ccTlZiUi.s:3292   .text.HAL_PCD_EP_Open:0000000000000798 $d
+ARM GAS  /tmp/ccTlZiUi.s 			page 119
 
 
-     /tmp/ccG5qlnI.s:3297   .text.HAL_PCD_EP_Close:0000000000000000 $t
-     /tmp/ccG5qlnI.s:3302   .text.HAL_PCD_EP_Close:0000000000000000 HAL_PCD_EP_Close
-     /tmp/ccG5qlnI.s:3707   .text.HAL_PCD_EP_Close:0000000000000310 $d
-     /tmp/ccG5qlnI.s:3710   .text.HAL_PCD_EP_Close:0000000000000314 $t
-     /tmp/ccG5qlnI.s:3902   .text.HAL_PCD_EP_Close:0000000000000488 $d
-     /tmp/ccG5qlnI.s:3907   .text.HAL_PCD_EP_Receive:0000000000000000 $t
-     /tmp/ccG5qlnI.s:4247   .text.HAL_PCD_EP_Receive:0000000000000224 $d
-     /tmp/ccG5qlnI.s:4252   .text.HAL_PCD_EP_GetRxCount:0000000000000000 $t
-     /tmp/ccG5qlnI.s:4257   .text.HAL_PCD_EP_GetRxCount:0000000000000000 HAL_PCD_EP_GetRxCount
-     /tmp/ccG5qlnI.s:4307   .text.HAL_PCD_EP_Transmit:0000000000000000 $t
-     /tmp/ccG5qlnI.s:4708   .text.HAL_PCD_EP_Transmit:00000000000002b4 $d
-     /tmp/ccG5qlnI.s:4713   .text.HAL_PCD_EP_SetStall:0000000000000000 $t
-     /tmp/ccG5qlnI.s:4718   .text.HAL_PCD_EP_SetStall:0000000000000000 HAL_PCD_EP_SetStall
-     /tmp/ccG5qlnI.s:4925   .text.HAL_PCD_EP_SetStall:0000000000000154 $d
-     /tmp/ccG5qlnI.s:4930   .text.HAL_PCD_EP_ClrStall:0000000000000000 $t
-     /tmp/ccG5qlnI.s:4935   .text.HAL_PCD_EP_ClrStall:0000000000000000 HAL_PCD_EP_ClrStall
-     /tmp/ccG5qlnI.s:5194   .text.HAL_PCD_EP_ClrStall:00000000000001c8 $d
-     /tmp/ccG5qlnI.s:5199   .text.HAL_PCD_EP_Flush:0000000000000000 $t
-     /tmp/ccG5qlnI.s:5204   .text.HAL_PCD_EP_Flush:0000000000000000 HAL_PCD_EP_Flush
-     /tmp/ccG5qlnI.s:5244   .text.HAL_PCD_ActiveRemoteWakeup:0000000000000000 $t
-     /tmp/ccG5qlnI.s:5249   .text.HAL_PCD_ActiveRemoteWakeup:0000000000000000 HAL_PCD_ActiveRemoteWakeup
-     /tmp/ccG5qlnI.s:5297   .text.HAL_PCD_DeActiveRemoteWakeup:0000000000000000 $t
-     /tmp/ccG5qlnI.s:5302   .text.HAL_PCD_DeActiveRemoteWakeup:0000000000000000 HAL_PCD_DeActiveRemoteWakeup
-     /tmp/ccG5qlnI.s:5350   .text.HAL_PCD_GetState:0000000000000000 $t
-     /tmp/ccG5qlnI.s:5355   .text.HAL_PCD_GetState:0000000000000000 HAL_PCD_GetState
+     /tmp/ccTlZiUi.s:3297   .text.HAL_PCD_EP_Close:0000000000000000 $t
+     /tmp/ccTlZiUi.s:3302   .text.HAL_PCD_EP_Close:0000000000000000 HAL_PCD_EP_Close
+     /tmp/ccTlZiUi.s:3707   .text.HAL_PCD_EP_Close:0000000000000310 $d
+     /tmp/ccTlZiUi.s:3710   .text.HAL_PCD_EP_Close:0000000000000314 $t
+     /tmp/ccTlZiUi.s:3902   .text.HAL_PCD_EP_Close:0000000000000488 $d
+     /tmp/ccTlZiUi.s:3907   .text.HAL_PCD_EP_Receive:0000000000000000 $t
+     /tmp/ccTlZiUi.s:4247   .text.HAL_PCD_EP_Receive:0000000000000224 $d
+     /tmp/ccTlZiUi.s:4252   .text.HAL_PCD_EP_GetRxCount:0000000000000000 $t
+     /tmp/ccTlZiUi.s:4257   .text.HAL_PCD_EP_GetRxCount:0000000000000000 HAL_PCD_EP_GetRxCount
+     /tmp/ccTlZiUi.s:4307   .text.HAL_PCD_EP_Transmit:0000000000000000 $t
+     /tmp/ccTlZiUi.s:4708   .text.HAL_PCD_EP_Transmit:00000000000002b4 $d
+     /tmp/ccTlZiUi.s:4713   .text.HAL_PCD_EP_SetStall:0000000000000000 $t
+     /tmp/ccTlZiUi.s:4718   .text.HAL_PCD_EP_SetStall:0000000000000000 HAL_PCD_EP_SetStall
+     /tmp/ccTlZiUi.s:4925   .text.HAL_PCD_EP_SetStall:0000000000000154 $d
+     /tmp/ccTlZiUi.s:4930   .text.HAL_PCD_EP_ClrStall:0000000000000000 $t
+     /tmp/ccTlZiUi.s:4935   .text.HAL_PCD_EP_ClrStall:0000000000000000 HAL_PCD_EP_ClrStall
+     /tmp/ccTlZiUi.s:5194   .text.HAL_PCD_EP_ClrStall:00000000000001c8 $d
+     /tmp/ccTlZiUi.s:5199   .text.HAL_PCD_EP_Flush:0000000000000000 $t
+     /tmp/ccTlZiUi.s:5204   .text.HAL_PCD_EP_Flush:0000000000000000 HAL_PCD_EP_Flush
+     /tmp/ccTlZiUi.s:5244   .text.HAL_PCD_ActiveRemoteWakeup:0000000000000000 $t
+     /tmp/ccTlZiUi.s:5249   .text.HAL_PCD_ActiveRemoteWakeup:0000000000000000 HAL_PCD_ActiveRemoteWakeup
+     /tmp/ccTlZiUi.s:5297   .text.HAL_PCD_DeActiveRemoteWakeup:0000000000000000 $t
+     /tmp/ccTlZiUi.s:5302   .text.HAL_PCD_DeActiveRemoteWakeup:0000000000000000 HAL_PCD_DeActiveRemoteWakeup
+     /tmp/ccTlZiUi.s:5350   .text.HAL_PCD_GetState:0000000000000000 $t
+     /tmp/ccTlZiUi.s:5355   .text.HAL_PCD_GetState:0000000000000000 HAL_PCD_GetState
                      .debug_frame:0000000000000010 $d
 
 UNDEFINED SYMBOLS

@@ -1,4 +1,4 @@
-ARM GAS  /tmp/cc1am2lr.s 			page 1
+ARM GAS  /tmp/ccK0LnE1.s 			page 1
 
 
    1              		.syntax unified
@@ -20,14 +20,16 @@ ARM GAS  /tmp/cc1am2lr.s 			page 1
   17              		.text
   18              	.Ltext0:
   19              		.cfi_sections	.debug_frame
-  20              		.section	.text.triggerchannel_init,"ax",%progbits
-  21              		.align	2
-  22              		.global	triggerchannel_init
-  23              		.thumb
-  24              		.thumb_func
-  26              	triggerchannel_init:
-  27              	.LFB112:
-  28              		.file 1 "Src/triggerchannel.c"
+  20              		.comm	midiMessagebuffer,4,4
+  21              		.comm	voltdrumMessagebuffer,4,4
+  22              		.section	.text.triggerchannel_init,"ax",%progbits
+  23              		.align	2
+  24              		.global	triggerchannel_init
+  25              		.thumb
+  26              		.thumb_func
+  28              	triggerchannel_init:
+  29              	.LFB112:
+  30              		.file 1 "Src/triggerchannel.c"
    1:Src/triggerchannel.c **** /*
    2:Src/triggerchannel.c ****  * trigger_sm.c
    3:Src/triggerchannel.c ****  *
@@ -36,967 +38,992 @@ ARM GAS  /tmp/cc1am2lr.s 			page 1
    6:Src/triggerchannel.c ****  */
    7:Src/triggerchannel.c **** 
    8:Src/triggerchannel.c **** #include "../Inc/triggerchannel.h"
-   9:Src/triggerchannel.c **** 
+   9:Src/triggerchannel.c **** #include "stdlib.h"
   10:Src/triggerchannel.c **** #include "mcp4251.h"
-  11:Src/triggerchannel.c **** 
-  12:Src/triggerchannel.c **** void triggerchannel_init (TriggerChannel *sm, uint32_t* dma_adress0, uint32_t* dma_adress1,uint32_t
-  29              		.loc 1 12 0
-  30              		.cfi_startproc
-  31              		@ args = 4, pretend = 0, frame = 24
-  32              		@ frame_needed = 1, uses_anonymous_args = 0
-  33 0000 80B5     		push	{r7, lr}
-  34              	.LCFI0:
-  35              		.cfi_def_cfa_offset 8
-  36              		.cfi_offset 7, -8
-  37              		.cfi_offset 14, -4
-  38 0002 86B0     		sub	sp, sp, #24
-  39              	.LCFI1:
-  40              		.cfi_def_cfa_offset 32
-  41 0004 00AF     		add	r7, sp, #0
-  42              	.LCFI2:
-  43              		.cfi_def_cfa_register 7
-  44 0006 F860     		str	r0, [r7, #12]
-  45 0008 B960     		str	r1, [r7, #8]
-  46 000a 7A60     		str	r2, [r7, #4]
-ARM GAS  /tmp/cc1am2lr.s 			page 2
-
-
-  47 000c 3B60     		str	r3, [r7]
+  11:Src/triggerchannel.c **** #include "midi.h"
+  12:Src/triggerchannel.c **** #include "voltdrum_interface.h"
   13:Src/triggerchannel.c **** 
-  14:Src/triggerchannel.c **** 	//editable values
-  15:Src/triggerchannel.c **** 	sm->midinote = 38;
-  48              		.loc 1 15 0
-  49 000e FB68     		ldr	r3, [r7, #12]
-  50 0010 2622     		movs	r2, #38
-  51 0012 1A64     		str	r2, [r3, #64]
-  16:Src/triggerchannel.c **** 	sm->threshhold_static = 10;
-  52              		.loc 1 16 0
-  53 0014 FB68     		ldr	r3, [r7, #12]
-  54 0016 0A22     		movs	r2, #10
-  55 0018 1A63     		str	r2, [r3, #48]
-  17:Src/triggerchannel.c **** 	sm->threshhold_dynamic = 0.8;
-  56              		.loc 1 17 0
-  57 001a FB68     		ldr	r3, [r7, #12]
-  58 001c 224A     		ldr	r2, .L4
-  59 001e 5A63     		str	r2, [r3, #52]	@ float
-  18:Src/triggerchannel.c **** 	sm->samples_to_take = 5;							//15
-  60              		.loc 1 18 0
-  61 0020 FB68     		ldr	r3, [r7, #12]
-  62 0022 0522     		movs	r2, #5
-  63 0024 9A63     		str	r2, [r3, #56]
-  19:Src/triggerchannel.c **** 	sm->time_offset = 100;									//400us
-  64              		.loc 1 19 0
-  65 0026 FB68     		ldr	r3, [r7, #12]
-  66 0028 6422     		movs	r2, #100
-  67 002a DA63     		str	r2, [r3, #60]
-  20:Src/triggerchannel.c **** 	sm->lastProcessedSamples_size = 15;							//400us
-  68              		.loc 1 20 0
-  69 002c FB68     		ldr	r3, [r7, #12]
-  70 002e 0F22     		movs	r2, #15
-  71 0030 1A62     		str	r2, [r3, #32]
-  21:Src/triggerchannel.c **** 
-  22:Src/triggerchannel.c **** 
-  23:Src/triggerchannel.c **** 	//sm->wiperPosition = 60;
+  14:Src/triggerchannel.c **** void triggerchannel_init (TriggerChannel *sm, uint32_t* dma_adress0, uint32_t* dma_adress1,uint32_t
+  31              		.loc 1 14 0
+  32              		.cfi_startproc
+  33              		@ args = 4, pretend = 0, frame = 24
+  34              		@ frame_needed = 1, uses_anonymous_args = 0
+  35 0000 80B5     		push	{r7, lr}
+  36              	.LCFI0:
+  37              		.cfi_def_cfa_offset 8
+  38              		.cfi_offset 7, -8
+  39              		.cfi_offset 14, -4
+  40 0002 86B0     		sub	sp, sp, #24
+  41              	.LCFI1:
+  42              		.cfi_def_cfa_offset 32
+  43 0004 00AF     		add	r7, sp, #0
+  44              	.LCFI2:
+ARM GAS  /tmp/ccK0LnE1.s 			page 2
+
+
+  45              		.cfi_def_cfa_register 7
+  46 0006 F860     		str	r0, [r7, #12]
+  47 0008 B960     		str	r1, [r7, #8]
+  48 000a 7A60     		str	r2, [r7, #4]
+  49 000c 3B60     		str	r3, [r7]
+  15:Src/triggerchannel.c **** 
+  16:Src/triggerchannel.c **** 	//editable values
+  17:Src/triggerchannel.c **** 	sm->midinote = 38;
+  50              		.loc 1 17 0
+  51 000e FB68     		ldr	r3, [r7, #12]
+  52 0010 2622     		movs	r2, #38
+  53 0012 1A64     		str	r2, [r3, #64]
+  18:Src/triggerchannel.c **** 	sm->threshhold_static = 10;
+  54              		.loc 1 18 0
+  55 0014 FB68     		ldr	r3, [r7, #12]
+  56 0016 0A22     		movs	r2, #10
+  57 0018 1A63     		str	r2, [r3, #48]
+  19:Src/triggerchannel.c **** 	sm->threshhold_dynamic = 0.8;
+  58              		.loc 1 19 0
+  59 001a FB68     		ldr	r3, [r7, #12]
+  60 001c 244A     		ldr	r2, .L4
+  61 001e 5A63     		str	r2, [r3, #52]	@ float
+  20:Src/triggerchannel.c **** 	sm->samples_to_take = 5;							//15
+  62              		.loc 1 20 0
+  63 0020 FB68     		ldr	r3, [r7, #12]
+  64 0022 0522     		movs	r2, #5
+  65 0024 9A63     		str	r2, [r3, #56]
+  21:Src/triggerchannel.c **** 	sm->time_offset = 100;									//400us
+  66              		.loc 1 21 0
+  67 0026 FB68     		ldr	r3, [r7, #12]
+  68 0028 6422     		movs	r2, #100
+  69 002a DA63     		str	r2, [r3, #60]
+  22:Src/triggerchannel.c **** 	sm->lastProcessedSamples_size = 15;							//400us
+  70              		.loc 1 22 0
+  71 002c FB68     		ldr	r3, [r7, #12]
+  72 002e 0F22     		movs	r2, #15
+  73 0030 1A62     		str	r2, [r3, #32]
+  23:Src/triggerchannel.c **** 	sm->voltdrumChannel = 0;
+  74              		.loc 1 23 0
+  75 0032 FB68     		ldr	r3, [r7, #12]
+  76 0034 0022     		movs	r2, #0
+  77 0036 5A64     		str	r2, [r3, #68]
   24:Src/triggerchannel.c **** 
-  25:Src/triggerchannel.c **** 	//not editable values
-  26:Src/triggerchannel.c **** 	sm->state = TRIGGERSM_MONITOR;
-  72              		.loc 1 26 0
-  73 0032 FB68     		ldr	r3, [r7, #12]
-  74 0034 0122     		movs	r2, #1
-  75 0036 1A76     		strb	r2, [r3, #24]
-  27:Src/triggerchannel.c **** 	sm->max_velocity = 0;
-  76              		.loc 1 27 0
-  77 0038 FB68     		ldr	r3, [r7, #12]
-  78 003a 0022     		movs	r2, #0
-  79 003c 5A61     		str	r2, [r3, #20]
-  28:Src/triggerchannel.c **** 	sm->dma_value_ptr[0] = dma_adress0;
-  80              		.loc 1 28 0
-  81 003e FB68     		ldr	r3, [r7, #12]
-  82 0040 BA68     		ldr	r2, [r7, #8]
-  83 0042 1A60     		str	r2, [r3]
-  29:Src/triggerchannel.c **** 	sm->dma_value_ptr[1] = dma_adress1;
-  84              		.loc 1 29 0
-  85 0044 FB68     		ldr	r3, [r7, #12]
-  86 0046 7A68     		ldr	r2, [r7, #4]
-ARM GAS  /tmp/cc1am2lr.s 			page 3
+  25:Src/triggerchannel.c **** 
+  26:Src/triggerchannel.c **** 	//sm->wiperPosition = 60;
+  27:Src/triggerchannel.c **** 
+  28:Src/triggerchannel.c **** 	//not editable values
+  29:Src/triggerchannel.c **** 	sm->state = TRIGGERSM_MONITOR;
+  78              		.loc 1 29 0
+  79 0038 FB68     		ldr	r3, [r7, #12]
+  80 003a 0122     		movs	r2, #1
+  81 003c 1A76     		strb	r2, [r3, #24]
+  30:Src/triggerchannel.c **** 	sm->max_velocity = 0;
+  82              		.loc 1 30 0
+  83 003e FB68     		ldr	r3, [r7, #12]
+  84 0040 0022     		movs	r2, #0
+  85 0042 5A61     		str	r2, [r3, #20]
+ARM GAS  /tmp/ccK0LnE1.s 			page 3
 
 
-  87 0048 5A60     		str	r2, [r3, #4]
-  30:Src/triggerchannel.c **** 	sm->dma_value_ptr[2] = dma_adress2;
-  88              		.loc 1 30 0
-  89 004a FB68     		ldr	r3, [r7, #12]
-  90 004c 3A68     		ldr	r2, [r7]
-  91 004e 9A60     		str	r2, [r3, #8]
-  31:Src/triggerchannel.c **** 	sm->dma_value_ptr[3] = dma_adress3;
-  92              		.loc 1 31 0
-  93 0050 FB68     		ldr	r3, [r7, #12]
-  94 0052 3A6A     		ldr	r2, [r7, #32]
-  95 0054 DA60     		str	r2, [r3, #12]
-  32:Src/triggerchannel.c **** 	sm->intervallcount_since_trans = 0;
-  96              		.loc 1 32 0
-  97 0056 FB68     		ldr	r3, [r7, #12]
-  98 0058 0022     		movs	r2, #0
-  99 005a 1A61     		str	r2, [r3, #16]
-  33:Src/triggerchannel.c **** 	sm->storeSampleFlag = 0;
- 100              		.loc 1 33 0
- 101 005c FB68     		ldr	r3, [r7, #12]
- 102 005e 0022     		movs	r2, #0
- 103 0060 9A62     		str	r2, [r3, #40]
-  34:Src/triggerchannel.c **** 
-  35:Src/triggerchannel.c **** 
-  36:Src/triggerchannel.c **** 	//set buffer
-  37:Src/triggerchannel.c **** 	sm->lastProcessedSamples = malloc(sizeof(uint32_t) * sm->lastProcessedSamples_size);
- 104              		.loc 1 37 0
- 105 0062 FB68     		ldr	r3, [r7, #12]
- 106 0064 1B6A     		ldr	r3, [r3, #32]
- 107 0066 9B00     		lsls	r3, r3, #2
- 108 0068 1846     		mov	r0, r3
- 109 006a FFF7FEFF 		bl	malloc
- 110 006e 0346     		mov	r3, r0
- 111 0070 1A46     		mov	r2, r3
- 112 0072 FB68     		ldr	r3, [r7, #12]
- 113 0074 DA61     		str	r2, [r3, #28]
-  38:Src/triggerchannel.c **** 	sm->lastProcessedSamples_head = 0;
- 114              		.loc 1 38 0
- 115 0076 FB68     		ldr	r3, [r7, #12]
- 116 0078 0022     		movs	r2, #0
- 117 007a 5A62     		str	r2, [r3, #36]
-  39:Src/triggerchannel.c **** 	int i;
-  40:Src/triggerchannel.c **** 	for(i = 0; i < sm->lastProcessedSamples_size; i++){
- 118              		.loc 1 40 0
- 119 007c 0023     		movs	r3, #0
- 120 007e 7B61     		str	r3, [r7, #20]
- 121 0080 09E0     		b	.L2
- 122              	.L3:
-  41:Src/triggerchannel.c **** 		sm->lastProcessedSamples[i] = 0;
- 123              		.loc 1 41 0 discriminator 3
- 124 0082 FB68     		ldr	r3, [r7, #12]
- 125 0084 DA69     		ldr	r2, [r3, #28]
- 126 0086 7B69     		ldr	r3, [r7, #20]
- 127 0088 9B00     		lsls	r3, r3, #2
- 128 008a 1344     		add	r3, r3, r2
- 129 008c 0022     		movs	r2, #0
- 130 008e 1A60     		str	r2, [r3]
-  40:Src/triggerchannel.c **** 		sm->lastProcessedSamples[i] = 0;
-ARM GAS  /tmp/cc1am2lr.s 			page 4
+  31:Src/triggerchannel.c **** 	sm->dma_value_ptr[0] = dma_adress0;
+  86              		.loc 1 31 0
+  87 0044 FB68     		ldr	r3, [r7, #12]
+  88 0046 BA68     		ldr	r2, [r7, #8]
+  89 0048 1A60     		str	r2, [r3]
+  32:Src/triggerchannel.c **** 	sm->dma_value_ptr[1] = dma_adress1;
+  90              		.loc 1 32 0
+  91 004a FB68     		ldr	r3, [r7, #12]
+  92 004c 7A68     		ldr	r2, [r7, #4]
+  93 004e 5A60     		str	r2, [r3, #4]
+  33:Src/triggerchannel.c **** 	sm->dma_value_ptr[2] = dma_adress2;
+  94              		.loc 1 33 0
+  95 0050 FB68     		ldr	r3, [r7, #12]
+  96 0052 3A68     		ldr	r2, [r7]
+  97 0054 9A60     		str	r2, [r3, #8]
+  34:Src/triggerchannel.c **** 	sm->dma_value_ptr[3] = dma_adress3;
+  98              		.loc 1 34 0
+  99 0056 FB68     		ldr	r3, [r7, #12]
+ 100 0058 3A6A     		ldr	r2, [r7, #32]
+ 101 005a DA60     		str	r2, [r3, #12]
+  35:Src/triggerchannel.c **** 	sm->intervallcount_since_trans = 0;
+ 102              		.loc 1 35 0
+ 103 005c FB68     		ldr	r3, [r7, #12]
+ 104 005e 0022     		movs	r2, #0
+ 105 0060 1A61     		str	r2, [r3, #16]
+  36:Src/triggerchannel.c **** 	sm->storeSampleFlag = 0;
+ 106              		.loc 1 36 0
+ 107 0062 FB68     		ldr	r3, [r7, #12]
+ 108 0064 0022     		movs	r2, #0
+ 109 0066 9A62     		str	r2, [r3, #40]
+  37:Src/triggerchannel.c **** 
+  38:Src/triggerchannel.c **** 
+  39:Src/triggerchannel.c **** 	//set buffer
+  40:Src/triggerchannel.c **** 	sm->lastProcessedSamples = malloc(sizeof(uint32_t) * sm->lastProcessedSamples_size);
+ 110              		.loc 1 40 0
+ 111 0068 FB68     		ldr	r3, [r7, #12]
+ 112 006a 1B6A     		ldr	r3, [r3, #32]
+ 113 006c 9B00     		lsls	r3, r3, #2
+ 114 006e 1846     		mov	r0, r3
+ 115 0070 FFF7FEFF 		bl	malloc
+ 116 0074 0346     		mov	r3, r0
+ 117 0076 1A46     		mov	r2, r3
+ 118 0078 FB68     		ldr	r3, [r7, #12]
+ 119 007a DA61     		str	r2, [r3, #28]
+  41:Src/triggerchannel.c **** 	sm->lastProcessedSamples_head = 0;
+ 120              		.loc 1 41 0
+ 121 007c FB68     		ldr	r3, [r7, #12]
+ 122 007e 0022     		movs	r2, #0
+ 123 0080 5A62     		str	r2, [r3, #36]
+  42:Src/triggerchannel.c **** 	int i;
+  43:Src/triggerchannel.c **** 	for(i = 0; i < sm->lastProcessedSamples_size; i++){
+ 124              		.loc 1 43 0
+ 125 0082 0023     		movs	r3, #0
+ 126 0084 7B61     		str	r3, [r7, #20]
+ 127 0086 09E0     		b	.L2
+ 128              	.L3:
+  44:Src/triggerchannel.c **** 		sm->lastProcessedSamples[i] = 0;
+ARM GAS  /tmp/ccK0LnE1.s 			page 4
 
 
- 131              		.loc 1 40 0 discriminator 3
- 132 0090 7B69     		ldr	r3, [r7, #20]
- 133 0092 0133     		adds	r3, r3, #1
- 134 0094 7B61     		str	r3, [r7, #20]
- 135              	.L2:
-  40:Src/triggerchannel.c **** 		sm->lastProcessedSamples[i] = 0;
- 136              		.loc 1 40 0 is_stmt 0 discriminator 1
- 137 0096 FB68     		ldr	r3, [r7, #12]
- 138 0098 1A6A     		ldr	r2, [r3, #32]
- 139 009a 7B69     		ldr	r3, [r7, #20]
- 140 009c 9A42     		cmp	r2, r3
- 141 009e F0D8     		bhi	.L3
-  42:Src/triggerchannel.c **** 	}
-  43:Src/triggerchannel.c **** }
- 142              		.loc 1 43 0 is_stmt 1
- 143 00a0 00BF     		nop
- 144 00a2 1837     		adds	r7, r7, #24
- 145              	.LCFI3:
- 146              		.cfi_def_cfa_offset 8
- 147 00a4 BD46     		mov	sp, r7
- 148              	.LCFI4:
- 149              		.cfi_def_cfa_register 13
- 150              		@ sp needed
- 151 00a6 80BD     		pop	{r7, pc}
- 152              	.L5:
- 153              		.align	2
- 154              	.L4:
- 155 00a8 CDCC4C3F 		.word	1061997773
- 156              		.cfi_endproc
- 157              	.LFE112:
- 159              		.section	.text.triggerchannel_setWiper,"ax",%progbits
- 160              		.align	2
- 161              		.global	triggerchannel_setWiper
- 162              		.thumb
- 163              		.thumb_func
- 165              	triggerchannel_setWiper:
- 166              	.LFB113:
-  44:Src/triggerchannel.c **** 
-  45:Src/triggerchannel.c **** void triggerchannel_setWiper(TriggerChannel *chan, uint8_t wiper){
- 167              		.loc 1 45 0
- 168              		.cfi_startproc
- 169              		@ args = 0, pretend = 0, frame = 8
- 170              		@ frame_needed = 1, uses_anonymous_args = 0
- 171 0000 80B5     		push	{r7, lr}
- 172              	.LCFI5:
- 173              		.cfi_def_cfa_offset 8
- 174              		.cfi_offset 7, -8
- 175              		.cfi_offset 14, -4
- 176 0002 82B0     		sub	sp, sp, #8
- 177              	.LCFI6:
- 178              		.cfi_def_cfa_offset 16
- 179 0004 00AF     		add	r7, sp, #0
- 180              	.LCFI7:
- 181              		.cfi_def_cfa_register 7
- 182 0006 7860     		str	r0, [r7, #4]
- 183 0008 0B46     		mov	r3, r1
- 184 000a FB70     		strb	r3, [r7, #3]
-ARM GAS  /tmp/cc1am2lr.s 			page 5
+ 129              		.loc 1 44 0 discriminator 3
+ 130 0088 FB68     		ldr	r3, [r7, #12]
+ 131 008a DA69     		ldr	r2, [r3, #28]
+ 132 008c 7B69     		ldr	r3, [r7, #20]
+ 133 008e 9B00     		lsls	r3, r3, #2
+ 134 0090 1344     		add	r3, r3, r2
+ 135 0092 0022     		movs	r2, #0
+ 136 0094 1A60     		str	r2, [r3]
+  43:Src/triggerchannel.c **** 		sm->lastProcessedSamples[i] = 0;
+ 137              		.loc 1 43 0 discriminator 3
+ 138 0096 7B69     		ldr	r3, [r7, #20]
+ 139 0098 0133     		adds	r3, r3, #1
+ 140 009a 7B61     		str	r3, [r7, #20]
+ 141              	.L2:
+  43:Src/triggerchannel.c **** 		sm->lastProcessedSamples[i] = 0;
+ 142              		.loc 1 43 0 is_stmt 0 discriminator 1
+ 143 009c FB68     		ldr	r3, [r7, #12]
+ 144 009e 1A6A     		ldr	r2, [r3, #32]
+ 145 00a0 7B69     		ldr	r3, [r7, #20]
+ 146 00a2 9A42     		cmp	r2, r3
+ 147 00a4 F0D8     		bhi	.L3
+  45:Src/triggerchannel.c **** 	}
+  46:Src/triggerchannel.c **** }
+ 148              		.loc 1 46 0 is_stmt 1
+ 149 00a6 00BF     		nop
+ 150 00a8 1837     		adds	r7, r7, #24
+ 151              	.LCFI3:
+ 152              		.cfi_def_cfa_offset 8
+ 153 00aa BD46     		mov	sp, r7
+ 154              	.LCFI4:
+ 155              		.cfi_def_cfa_register 13
+ 156              		@ sp needed
+ 157 00ac 80BD     		pop	{r7, pc}
+ 158              	.L5:
+ 159 00ae 00BF     		.align	2
+ 160              	.L4:
+ 161 00b0 CDCC4C3F 		.word	1061997773
+ 162              		.cfi_endproc
+ 163              	.LFE112:
+ 165              		.section	.text.triggerchannel_setWiper,"ax",%progbits
+ 166              		.align	2
+ 167              		.global	triggerchannel_setWiper
+ 168              		.thumb
+ 169              		.thumb_func
+ 171              	triggerchannel_setWiper:
+ 172              	.LFB113:
+  47:Src/triggerchannel.c **** 
+  48:Src/triggerchannel.c **** void triggerchannel_setWiper(TriggerChannel *chan, uint8_t wiper){
+ 173              		.loc 1 48 0
+ 174              		.cfi_startproc
+ 175              		@ args = 0, pretend = 0, frame = 8
+ 176              		@ frame_needed = 1, uses_anonymous_args = 0
+ 177 0000 80B5     		push	{r7, lr}
+ 178              	.LCFI5:
+ 179              		.cfi_def_cfa_offset 8
+ 180              		.cfi_offset 7, -8
+ 181              		.cfi_offset 14, -4
+ARM GAS  /tmp/ccK0LnE1.s 			page 5
 
 
-  46:Src/triggerchannel.c **** 	chan->wiperPosition = wiper;
- 185              		.loc 1 46 0
- 186 000c 7B68     		ldr	r3, [r7, #4]
- 187 000e FA78     		ldrb	r2, [r7, #3]
- 188 0010 83F84B20 		strb	r2, [r3, #75]
-  47:Src/triggerchannel.c **** 	mcp4261_setWiperPosition(chan->potiCsPort,chan->potiCsPin,chan->potiWiperId,wiper);
- 189              		.loc 1 47 0
- 190 0014 7B68     		ldr	r3, [r7, #4]
- 191 0016 586C     		ldr	r0, [r3, #68]
- 192 0018 7B68     		ldr	r3, [r7, #4]
- 193 001a B3F84810 		ldrh	r1, [r3, #72]
- 194 001e 7B68     		ldr	r3, [r7, #4]
- 195 0020 93F84A20 		ldrb	r2, [r3, #74]	@ zero_extendqisi2
- 196 0024 FB78     		ldrb	r3, [r7, #3]	@ zero_extendqisi2
- 197 0026 FFF7FEFF 		bl	mcp4261_setWiperPosition
-  48:Src/triggerchannel.c **** }
- 198              		.loc 1 48 0
- 199 002a 00BF     		nop
- 200 002c 0837     		adds	r7, r7, #8
- 201              	.LCFI8:
- 202              		.cfi_def_cfa_offset 8
- 203 002e BD46     		mov	sp, r7
- 204              	.LCFI9:
- 205              		.cfi_def_cfa_register 13
- 206              		@ sp needed
- 207 0030 80BD     		pop	{r7, pc}
- 208              		.cfi_endproc
- 209              	.LFE113:
- 211 0032 00BF     		.section	.text.triggerchannel_process,"ax",%progbits
- 212              		.align	2
- 213              		.global	triggerchannel_process
- 214              		.thumb
- 215              		.thumb_func
- 217              	triggerchannel_process:
- 218              	.LFB114:
-  49:Src/triggerchannel.c **** 
-  50:Src/triggerchannel.c **** //dispatcher for process methods
-  51:Src/triggerchannel.c **** void triggerchannel_process (TriggerChannel *sm){
- 219              		.loc 1 51 0
- 220              		.cfi_startproc
- 221              		@ args = 0, pretend = 0, frame = 16
- 222              		@ frame_needed = 1, uses_anonymous_args = 0
- 223 0000 80B5     		push	{r7, lr}
- 224              	.LCFI10:
- 225              		.cfi_def_cfa_offset 8
- 226              		.cfi_offset 7, -8
- 227              		.cfi_offset 14, -4
- 228 0002 84B0     		sub	sp, sp, #16
- 229              	.LCFI11:
- 230              		.cfi_def_cfa_offset 24
- 231 0004 00AF     		add	r7, sp, #0
- 232              	.LCFI12:
- 233              		.cfi_def_cfa_register 7
- 234 0006 7860     		str	r0, [r7, #4]
+ 182 0002 82B0     		sub	sp, sp, #8
+ 183              	.LCFI6:
+ 184              		.cfi_def_cfa_offset 16
+ 185 0004 00AF     		add	r7, sp, #0
+ 186              	.LCFI7:
+ 187              		.cfi_def_cfa_register 7
+ 188 0006 7860     		str	r0, [r7, #4]
+ 189 0008 0B46     		mov	r3, r1
+ 190 000a FB70     		strb	r3, [r7, #3]
+  49:Src/triggerchannel.c **** 	chan->wiperPosition = wiper;
+ 191              		.loc 1 49 0
+ 192 000c 7B68     		ldr	r3, [r7, #4]
+ 193 000e FA78     		ldrb	r2, [r7, #3]
+ 194 0010 83F84F20 		strb	r2, [r3, #79]
+  50:Src/triggerchannel.c **** 	mcp4261_setWiperPosition(chan->potiCsPort,chan->potiCsPin,chan->potiWiperId,wiper);
+ 195              		.loc 1 50 0
+ 196 0014 7B68     		ldr	r3, [r7, #4]
+ 197 0016 986C     		ldr	r0, [r3, #72]
+ 198 0018 7B68     		ldr	r3, [r7, #4]
+ 199 001a B3F84C10 		ldrh	r1, [r3, #76]
+ 200 001e 7B68     		ldr	r3, [r7, #4]
+ 201 0020 93F84E20 		ldrb	r2, [r3, #78]	@ zero_extendqisi2
+ 202 0024 FB78     		ldrb	r3, [r7, #3]	@ zero_extendqisi2
+ 203 0026 FFF7FEFF 		bl	mcp4261_setWiperPosition
+  51:Src/triggerchannel.c **** }
+ 204              		.loc 1 51 0
+ 205 002a 00BF     		nop
+ 206 002c 0837     		adds	r7, r7, #8
+ 207              	.LCFI8:
+ 208              		.cfi_def_cfa_offset 8
+ 209 002e BD46     		mov	sp, r7
+ 210              	.LCFI9:
+ 211              		.cfi_def_cfa_register 13
+ 212              		@ sp needed
+ 213 0030 80BD     		pop	{r7, pc}
+ 214              		.cfi_endproc
+ 215              	.LFE113:
+ 217 0032 00BF     		.section	.text.triggerchannel_process,"ax",%progbits
+ 218              		.align	2
+ 219              		.global	triggerchannel_process
+ 220              		.thumb
+ 221              		.thumb_func
+ 223              	triggerchannel_process:
+ 224              	.LFB114:
   52:Src/triggerchannel.c **** 
-  53:Src/triggerchannel.c **** 	//get the highest value of the last 4 samples to process
-  54:Src/triggerchannel.c **** 	sm->current_value =  *(sm->dma_value_ptr[0]);
-ARM GAS  /tmp/cc1am2lr.s 			page 6
+  53:Src/triggerchannel.c **** //dispatcher for process methods
+  54:Src/triggerchannel.c **** void triggerchannel_process (TriggerChannel *sm){
+ 225              		.loc 1 54 0
+ 226              		.cfi_startproc
+ 227              		@ args = 0, pretend = 0, frame = 16
+ 228              		@ frame_needed = 1, uses_anonymous_args = 0
+ 229 0000 80B5     		push	{r7, lr}
+ 230              	.LCFI10:
+ 231              		.cfi_def_cfa_offset 8
+ 232              		.cfi_offset 7, -8
+ 233              		.cfi_offset 14, -4
+ 234 0002 84B0     		sub	sp, sp, #16
+ARM GAS  /tmp/ccK0LnE1.s 			page 6
 
 
- 235              		.loc 1 54 0
- 236 0008 7B68     		ldr	r3, [r7, #4]
- 237 000a 1B68     		ldr	r3, [r3]
- 238 000c 1A68     		ldr	r2, [r3]
- 239 000e 7B68     		ldr	r3, [r7, #4]
- 240 0010 DA62     		str	r2, [r3, #44]
-  55:Src/triggerchannel.c **** 	uint32_t currentdmaval, i;
-  56:Src/triggerchannel.c **** 	for(i=1; i<4; i++){
- 241              		.loc 1 56 0
- 242 0012 0123     		movs	r3, #1
- 243 0014 FB60     		str	r3, [r7, #12]
- 244 0016 10E0     		b	.L8
- 245              	.L10:
-  57:Src/triggerchannel.c **** 		currentdmaval = *sm->dma_value_ptr[i];
- 246              		.loc 1 57 0
- 247 0018 7B68     		ldr	r3, [r7, #4]
- 248 001a FA68     		ldr	r2, [r7, #12]
- 249 001c 53F82230 		ldr	r3, [r3, r2, lsl #2]
- 250 0020 1B68     		ldr	r3, [r3]
- 251 0022 BB60     		str	r3, [r7, #8]
-  58:Src/triggerchannel.c **** 		if(currentdmaval > sm->current_value) sm->current_value = currentdmaval;
- 252              		.loc 1 58 0
- 253 0024 7B68     		ldr	r3, [r7, #4]
- 254 0026 DA6A     		ldr	r2, [r3, #44]
- 255 0028 BB68     		ldr	r3, [r7, #8]
- 256 002a 9A42     		cmp	r2, r3
- 257 002c 02D2     		bcs	.L9
- 258              		.loc 1 58 0 is_stmt 0 discriminator 1
- 259 002e 7B68     		ldr	r3, [r7, #4]
- 260 0030 BA68     		ldr	r2, [r7, #8]
- 261 0032 DA62     		str	r2, [r3, #44]
- 262              	.L9:
-  56:Src/triggerchannel.c **** 		currentdmaval = *sm->dma_value_ptr[i];
- 263              		.loc 1 56 0 is_stmt 1 discriminator 2
- 264 0034 FB68     		ldr	r3, [r7, #12]
- 265 0036 0133     		adds	r3, r3, #1
- 266 0038 FB60     		str	r3, [r7, #12]
- 267              	.L8:
-  56:Src/triggerchannel.c **** 		currentdmaval = *sm->dma_value_ptr[i];
- 268              		.loc 1 56 0 is_stmt 0 discriminator 1
- 269 003a FB68     		ldr	r3, [r7, #12]
- 270 003c 032B     		cmp	r3, #3
- 271 003e EBD9     		bls	.L10
-  59:Src/triggerchannel.c **** 	}
-  60:Src/triggerchannel.c **** 
-  61:Src/triggerchannel.c **** 	if(sm->current_value > 500){
- 272              		.loc 1 61 0 is_stmt 1
- 273 0040 7B68     		ldr	r3, [r7, #4]
- 274 0042 DB6A     		ldr	r3, [r3, #44]
- 275 0044 B3F5FA7F 		cmp	r3, #500
- 276 0048 01D9     		bls	.L11
-  62:Src/triggerchannel.c **** 		i =0;
- 277              		.loc 1 62 0
- 278 004a 0023     		movs	r3, #0
- 279 004c FB60     		str	r3, [r7, #12]
- 280              	.L11:
-  63:Src/triggerchannel.c **** 	}
-ARM GAS  /tmp/cc1am2lr.s 			page 7
+ 235              	.LCFI11:
+ 236              		.cfi_def_cfa_offset 24
+ 237 0004 00AF     		add	r7, sp, #0
+ 238              	.LCFI12:
+ 239              		.cfi_def_cfa_register 7
+ 240 0006 7860     		str	r0, [r7, #4]
+  55:Src/triggerchannel.c **** 
+  56:Src/triggerchannel.c **** 	//get the highest value of the last 4 samples to process
+  57:Src/triggerchannel.c **** 	sm->current_value =  *(sm->dma_value_ptr[0]);
+ 241              		.loc 1 57 0
+ 242 0008 7B68     		ldr	r3, [r7, #4]
+ 243 000a 1B68     		ldr	r3, [r3]
+ 244 000c 1A68     		ldr	r2, [r3]
+ 245 000e 7B68     		ldr	r3, [r7, #4]
+ 246 0010 DA62     		str	r2, [r3, #44]
+  58:Src/triggerchannel.c **** 	uint32_t currentdmaval, i;
+  59:Src/triggerchannel.c **** 	for(i=1; i<4; i++){
+ 247              		.loc 1 59 0
+ 248 0012 0123     		movs	r3, #1
+ 249 0014 FB60     		str	r3, [r7, #12]
+ 250 0016 10E0     		b	.L8
+ 251              	.L10:
+  60:Src/triggerchannel.c **** 		currentdmaval = *sm->dma_value_ptr[i];
+ 252              		.loc 1 60 0
+ 253 0018 7B68     		ldr	r3, [r7, #4]
+ 254 001a FA68     		ldr	r2, [r7, #12]
+ 255 001c 53F82230 		ldr	r3, [r3, r2, lsl #2]
+ 256 0020 1B68     		ldr	r3, [r3]
+ 257 0022 BB60     		str	r3, [r7, #8]
+  61:Src/triggerchannel.c **** 		if(currentdmaval > sm->current_value) sm->current_value = currentdmaval;
+ 258              		.loc 1 61 0
+ 259 0024 7B68     		ldr	r3, [r7, #4]
+ 260 0026 DA6A     		ldr	r2, [r3, #44]
+ 261 0028 BB68     		ldr	r3, [r7, #8]
+ 262 002a 9A42     		cmp	r2, r3
+ 263 002c 02D2     		bcs	.L9
+ 264              		.loc 1 61 0 is_stmt 0 discriminator 1
+ 265 002e 7B68     		ldr	r3, [r7, #4]
+ 266 0030 BA68     		ldr	r2, [r7, #8]
+ 267 0032 DA62     		str	r2, [r3, #44]
+ 268              	.L9:
+  59:Src/triggerchannel.c **** 		currentdmaval = *sm->dma_value_ptr[i];
+ 269              		.loc 1 59 0 is_stmt 1 discriminator 2
+ 270 0034 FB68     		ldr	r3, [r7, #12]
+ 271 0036 0133     		adds	r3, r3, #1
+ 272 0038 FB60     		str	r3, [r7, #12]
+ 273              	.L8:
+  59:Src/triggerchannel.c **** 		currentdmaval = *sm->dma_value_ptr[i];
+ 274              		.loc 1 59 0 is_stmt 0 discriminator 1
+ 275 003a FB68     		ldr	r3, [r7, #12]
+ 276 003c 032B     		cmp	r3, #3
+ 277 003e EBD9     		bls	.L10
+  62:Src/triggerchannel.c **** 	}
+  63:Src/triggerchannel.c **** 
+  64:Src/triggerchannel.c **** 	if(sm->current_value > 500){
+ 278              		.loc 1 64 0 is_stmt 1
+ 279 0040 7B68     		ldr	r3, [r7, #4]
+ARM GAS  /tmp/ccK0LnE1.s 			page 7
 
 
-  64:Src/triggerchannel.c **** 
-  65:Src/triggerchannel.c **** 	//process common tasks before dispatch
-  66:Src/triggerchannel.c **** 	sm->intervallcount_since_trans++;
- 281              		.loc 1 66 0
- 282 004e 7B68     		ldr	r3, [r7, #4]
- 283 0050 1B69     		ldr	r3, [r3, #16]
- 284 0052 5A1C     		adds	r2, r3, #1
- 285 0054 7B68     		ldr	r3, [r7, #4]
- 286 0056 1A61     		str	r2, [r3, #16]
+ 280 0042 DB6A     		ldr	r3, [r3, #44]
+ 281 0044 B3F5FA7F 		cmp	r3, #500
+ 282 0048 01D9     		bls	.L11
+  65:Src/triggerchannel.c **** 		i =0;
+ 283              		.loc 1 65 0
+ 284 004a 0023     		movs	r3, #0
+ 285 004c FB60     		str	r3, [r7, #12]
+ 286              	.L11:
+  66:Src/triggerchannel.c **** 	}
   67:Src/triggerchannel.c **** 
-  68:Src/triggerchannel.c **** 	//dispatch by state
-  69:Src/triggerchannel.c **** 	if(sm->state == TRIGGERSM_MONITOR) triggerchannel_process_monitor(sm);
+  68:Src/triggerchannel.c **** 	//process common tasks before dispatch
+  69:Src/triggerchannel.c **** 	sm->intervallcount_since_trans++;
  287              		.loc 1 69 0
- 288 0058 7B68     		ldr	r3, [r7, #4]
- 289 005a 1B7E     		ldrb	r3, [r3, #24]	@ zero_extendqisi2
- 290 005c 012B     		cmp	r3, #1
- 291 005e 03D1     		bne	.L12
- 292              		.loc 1 69 0 is_stmt 0 discriminator 1
- 293 0060 7868     		ldr	r0, [r7, #4]
- 294 0062 FFF7FEFF 		bl	triggerchannel_process_monitor
- 295 0066 06E0     		b	.L13
- 296              	.L12:
-  70:Src/triggerchannel.c **** 	else if(sm->state == TRIGGERSM_EVENT) triggerchannel_process_triggerevent(sm);
- 297              		.loc 1 70 0 is_stmt 1
- 298 0068 7B68     		ldr	r3, [r7, #4]
- 299 006a 1B7E     		ldrb	r3, [r3, #24]	@ zero_extendqisi2
- 300 006c 002B     		cmp	r3, #0
- 301 006e 02D1     		bne	.L13
- 302              		.loc 1 70 0 is_stmt 0 discriminator 1
- 303 0070 7868     		ldr	r0, [r7, #4]
- 304 0072 FFF7FEFF 		bl	triggerchannel_process_triggerevent
- 305              	.L13:
-  71:Src/triggerchannel.c **** 
-  72:Src/triggerchannel.c **** 	//process common tasks after dispatch
-  73:Src/triggerchannel.c **** 	triggerchannel_addSample(sm, sm->current_value);
- 306              		.loc 1 73 0 is_stmt 1
- 307 0076 7B68     		ldr	r3, [r7, #4]
- 308 0078 DB6A     		ldr	r3, [r3, #44]
- 309 007a 1946     		mov	r1, r3
- 310 007c 7868     		ldr	r0, [r7, #4]
- 311 007e FFF7FEFF 		bl	triggerchannel_addSample
-  74:Src/triggerchannel.c **** }
- 312              		.loc 1 74 0
- 313 0082 00BF     		nop
- 314 0084 1037     		adds	r7, r7, #16
- 315              	.LCFI13:
- 316              		.cfi_def_cfa_offset 8
- 317 0086 BD46     		mov	sp, r7
- 318              	.LCFI14:
- 319              		.cfi_def_cfa_register 13
- 320              		@ sp needed
- 321 0088 80BD     		pop	{r7, pc}
- 322              		.cfi_endproc
- 323              	.LFE114:
- 325 008a 00BF     		.section	.text.triggerchannel_process_triggerevent,"ax",%progbits
- 326              		.align	2
- 327              		.global	triggerchannel_process_triggerevent
-ARM GAS  /tmp/cc1am2lr.s 			page 8
+ 288 004e 7B68     		ldr	r3, [r7, #4]
+ 289 0050 1B69     		ldr	r3, [r3, #16]
+ 290 0052 5A1C     		adds	r2, r3, #1
+ 291 0054 7B68     		ldr	r3, [r7, #4]
+ 292 0056 1A61     		str	r2, [r3, #16]
+  70:Src/triggerchannel.c **** 
+  71:Src/triggerchannel.c **** 	//dispatch by state
+  72:Src/triggerchannel.c **** 	if(sm->state == TRIGGERSM_MONITOR) triggerchannel_process_monitor(sm);
+ 293              		.loc 1 72 0
+ 294 0058 7B68     		ldr	r3, [r7, #4]
+ 295 005a 1B7E     		ldrb	r3, [r3, #24]	@ zero_extendqisi2
+ 296 005c 012B     		cmp	r3, #1
+ 297 005e 03D1     		bne	.L12
+ 298              		.loc 1 72 0 is_stmt 0 discriminator 1
+ 299 0060 7868     		ldr	r0, [r7, #4]
+ 300 0062 FFF7FEFF 		bl	triggerchannel_process_monitor
+ 301 0066 06E0     		b	.L13
+ 302              	.L12:
+  73:Src/triggerchannel.c **** 	else if(sm->state == TRIGGERSM_EVENT) triggerchannel_process_triggerevent(sm);
+ 303              		.loc 1 73 0 is_stmt 1
+ 304 0068 7B68     		ldr	r3, [r7, #4]
+ 305 006a 1B7E     		ldrb	r3, [r3, #24]	@ zero_extendqisi2
+ 306 006c 002B     		cmp	r3, #0
+ 307 006e 02D1     		bne	.L13
+ 308              		.loc 1 73 0 is_stmt 0 discriminator 1
+ 309 0070 7868     		ldr	r0, [r7, #4]
+ 310 0072 FFF7FEFF 		bl	triggerchannel_process_triggerevent
+ 311              	.L13:
+  74:Src/triggerchannel.c **** 
+  75:Src/triggerchannel.c **** 	//process common tasks after dispatch
+  76:Src/triggerchannel.c **** 	triggerchannel_addSample(sm, sm->current_value);
+ 312              		.loc 1 76 0 is_stmt 1
+ 313 0076 7B68     		ldr	r3, [r7, #4]
+ 314 0078 DB6A     		ldr	r3, [r3, #44]
+ 315 007a 1946     		mov	r1, r3
+ 316 007c 7868     		ldr	r0, [r7, #4]
+ 317 007e FFF7FEFF 		bl	triggerchannel_addSample
+  77:Src/triggerchannel.c **** }
+ 318              		.loc 1 77 0
+ 319 0082 00BF     		nop
+ 320 0084 1037     		adds	r7, r7, #16
+ 321              	.LCFI13:
+ 322              		.cfi_def_cfa_offset 8
+ 323 0086 BD46     		mov	sp, r7
+ARM GAS  /tmp/ccK0LnE1.s 			page 8
 
 
- 328              		.thumb
- 329              		.thumb_func
- 331              	triggerchannel_process_triggerevent:
- 332              	.LFB115:
-  75:Src/triggerchannel.c **** 
-  76:Src/triggerchannel.c **** //process methods for different states
-  77:Src/triggerchannel.c **** void triggerchannel_process_triggerevent (TriggerChannel *sm){
- 333              		.loc 1 77 0
- 334              		.cfi_startproc
- 335              		@ args = 0, pretend = 0, frame = 8
- 336              		@ frame_needed = 1, uses_anonymous_args = 0
- 337 0000 80B5     		push	{r7, lr}
- 338              	.LCFI15:
- 339              		.cfi_def_cfa_offset 8
- 340              		.cfi_offset 7, -8
- 341              		.cfi_offset 14, -4
- 342 0002 82B0     		sub	sp, sp, #8
- 343              	.LCFI16:
- 344              		.cfi_def_cfa_offset 16
- 345 0004 00AF     		add	r7, sp, #0
- 346              	.LCFI17:
- 347              		.cfi_def_cfa_register 7
- 348 0006 7860     		str	r0, [r7, #4]
+ 324              	.LCFI14:
+ 325              		.cfi_def_cfa_register 13
+ 326              		@ sp needed
+ 327 0088 80BD     		pop	{r7, pc}
+ 328              		.cfi_endproc
+ 329              	.LFE114:
+ 331 008a 00BF     		.section	.text.triggerchannel_process_triggerevent,"ax",%progbits
+ 332              		.align	2
+ 333              		.global	triggerchannel_process_triggerevent
+ 334              		.thumb
+ 335              		.thumb_func
+ 337              	triggerchannel_process_triggerevent:
+ 338              	.LFB115:
   78:Src/triggerchannel.c **** 
-  79:Src/triggerchannel.c **** 	if(sm->current_value > sm->max_velocity) 								//check max value
- 349              		.loc 1 79 0
- 350 0008 7B68     		ldr	r3, [r7, #4]
- 351 000a DA6A     		ldr	r2, [r3, #44]
- 352 000c 7B68     		ldr	r3, [r7, #4]
- 353 000e 5B69     		ldr	r3, [r3, #20]
- 354 0010 9A42     		cmp	r2, r3
- 355 0012 03D9     		bls	.L15
-  80:Src/triggerchannel.c **** 		sm->max_velocity = sm->current_value;
- 356              		.loc 1 80 0
- 357 0014 7B68     		ldr	r3, [r7, #4]
- 358 0016 DA6A     		ldr	r2, [r3, #44]
- 359 0018 7B68     		ldr	r3, [r7, #4]
- 360 001a 5A61     		str	r2, [r3, #20]
- 361              	.L15:
+  79:Src/triggerchannel.c **** //process methods for different states
+  80:Src/triggerchannel.c **** void triggerchannel_process_triggerevent (TriggerChannel *sm){
+ 339              		.loc 1 80 0
+ 340              		.cfi_startproc
+ 341              		@ args = 0, pretend = 0, frame = 8
+ 342              		@ frame_needed = 1, uses_anonymous_args = 0
+ 343 0000 80B5     		push	{r7, lr}
+ 344              	.LCFI15:
+ 345              		.cfi_def_cfa_offset 8
+ 346              		.cfi_offset 7, -8
+ 347              		.cfi_offset 14, -4
+ 348 0002 82B0     		sub	sp, sp, #8
+ 349              	.LCFI16:
+ 350              		.cfi_def_cfa_offset 16
+ 351 0004 00AF     		add	r7, sp, #0
+ 352              	.LCFI17:
+ 353              		.cfi_def_cfa_register 7
+ 354 0006 7860     		str	r0, [r7, #4]
   81:Src/triggerchannel.c **** 
-  82:Src/triggerchannel.c **** 	//check transition to monitor
-  83:Src/triggerchannel.c **** 	if(sm->intervallcount_since_trans >= sm->samples_to_take){
+  82:Src/triggerchannel.c **** 	if(sm->current_value > sm->max_velocity) 								//check max value
+ 355              		.loc 1 82 0
+ 356 0008 7B68     		ldr	r3, [r7, #4]
+ 357 000a DA6A     		ldr	r2, [r3, #44]
+ 358 000c 7B68     		ldr	r3, [r7, #4]
+ 359 000e 5B69     		ldr	r3, [r3, #20]
+ 360 0010 9A42     		cmp	r2, r3
+ 361 0012 03D9     		bls	.L15
+  83:Src/triggerchannel.c **** 		sm->max_velocity = sm->current_value;
  362              		.loc 1 83 0
- 363 001c 7B68     		ldr	r3, [r7, #4]
- 364 001e 1A69     		ldr	r2, [r3, #16]
- 365 0020 7B68     		ldr	r3, [r7, #4]
- 366 0022 9B6B     		ldr	r3, [r3, #56]
- 367 0024 9A42     		cmp	r2, r3
- 368 0026 02D3     		bcc	.L17
-  84:Src/triggerchannel.c **** 		triggerchannel_transition_triggerevent_monitor(sm);
- 369              		.loc 1 84 0
- 370 0028 7868     		ldr	r0, [r7, #4]
- 371 002a FFF7FEFF 		bl	triggerchannel_transition_triggerevent_monitor
- 372              	.L17:
-  85:Src/triggerchannel.c **** 	}
-  86:Src/triggerchannel.c **** 
-  87:Src/triggerchannel.c **** }
-ARM GAS  /tmp/cc1am2lr.s 			page 9
+ 363 0014 7B68     		ldr	r3, [r7, #4]
+ 364 0016 DA6A     		ldr	r2, [r3, #44]
+ 365 0018 7B68     		ldr	r3, [r7, #4]
+ 366 001a 5A61     		str	r2, [r3, #20]
+ 367              	.L15:
+  84:Src/triggerchannel.c **** 
+  85:Src/triggerchannel.c **** 	//check transition to monitor
+  86:Src/triggerchannel.c **** 	if(sm->intervallcount_since_trans >= sm->samples_to_take){
+ 368              		.loc 1 86 0
+ 369 001c 7B68     		ldr	r3, [r7, #4]
+ 370 001e 1A69     		ldr	r2, [r3, #16]
+ 371 0020 7B68     		ldr	r3, [r7, #4]
+ 372 0022 9B6B     		ldr	r3, [r3, #56]
+ 373 0024 9A42     		cmp	r2, r3
+ARM GAS  /tmp/ccK0LnE1.s 			page 9
 
 
- 373              		.loc 1 87 0
- 374 002e 00BF     		nop
- 375 0030 0837     		adds	r7, r7, #8
- 376              	.LCFI18:
- 377              		.cfi_def_cfa_offset 8
- 378 0032 BD46     		mov	sp, r7
- 379              	.LCFI19:
- 380              		.cfi_def_cfa_register 13
- 381              		@ sp needed
- 382 0034 80BD     		pop	{r7, pc}
- 383              		.cfi_endproc
- 384              	.LFE115:
- 386              		.section	.text.triggerchannel_process_monitor,"ax",%progbits
- 387              		.align	2
- 388              		.global	triggerchannel_process_monitor
- 389              		.thumb
- 390              		.thumb_func
- 392              	triggerchannel_process_monitor:
- 393              	.LFB116:
-  88:Src/triggerchannel.c **** 
+ 374 0026 02D3     		bcc	.L17
+  87:Src/triggerchannel.c **** 		triggerchannel_transition_triggerevent_monitor(sm);
+ 375              		.loc 1 87 0
+ 376 0028 7868     		ldr	r0, [r7, #4]
+ 377 002a FFF7FEFF 		bl	triggerchannel_transition_triggerevent_monitor
+ 378              	.L17:
+  88:Src/triggerchannel.c **** 	}
   89:Src/triggerchannel.c **** 
-  90:Src/triggerchannel.c **** void triggerchannel_process_monitor (TriggerChannel *sm){
- 394              		.loc 1 90 0
- 395              		.cfi_startproc
- 396              		@ args = 0, pretend = 0, frame = 16
- 397              		@ frame_needed = 1, uses_anonymous_args = 0
- 398 0000 80B5     		push	{r7, lr}
- 399              	.LCFI20:
- 400              		.cfi_def_cfa_offset 8
- 401              		.cfi_offset 7, -8
- 402              		.cfi_offset 14, -4
- 403 0002 84B0     		sub	sp, sp, #16
- 404              	.LCFI21:
- 405              		.cfi_def_cfa_offset 24
- 406 0004 00AF     		add	r7, sp, #0
- 407              	.LCFI22:
- 408              		.cfi_def_cfa_register 7
- 409 0006 7860     		str	r0, [r7, #4]
+  90:Src/triggerchannel.c **** }
+ 379              		.loc 1 90 0
+ 380 002e 00BF     		nop
+ 381 0030 0837     		adds	r7, r7, #8
+ 382              	.LCFI18:
+ 383              		.cfi_def_cfa_offset 8
+ 384 0032 BD46     		mov	sp, r7
+ 385              	.LCFI19:
+ 386              		.cfi_def_cfa_register 13
+ 387              		@ sp needed
+ 388 0034 80BD     		pop	{r7, pc}
+ 389              		.cfi_endproc
+ 390              	.LFE115:
+ 392              		.section	.text.triggerchannel_process_monitor,"ax",%progbits
+ 393              		.align	2
+ 394              		.global	triggerchannel_process_monitor
+ 395              		.thumb
+ 396              		.thumb_func
+ 398              	triggerchannel_process_monitor:
+ 399              	.LFB116:
   91:Src/triggerchannel.c **** 
-  92:Src/triggerchannel.c **** 	//check transition
-  93:Src/triggerchannel.c **** 	uint32_t lastSamplesMax = triggerchannel_getLastSamplesMax(sm);
- 410              		.loc 1 93 0
- 411 0008 7868     		ldr	r0, [r7, #4]
- 412 000a FFF7FEFF 		bl	triggerchannel_getLastSamplesMax
- 413 000e F860     		str	r0, [r7, #12]
-  94:Src/triggerchannel.c **** 	uint32_t threshhold =  sm->threshhold_static + lastSamplesMax * sm->threshhold_dynamic;
- 414              		.loc 1 94 0
- 415 0010 7B68     		ldr	r3, [r7, #4]
- 416 0012 1B6B     		ldr	r3, [r3, #48]
- 417 0014 07EE903A 		vmov	s15, r3	@ int
- 418 0018 B8EE677A 		vcvt.f32.u32	s14, s15
- 419 001c FB68     		ldr	r3, [r7, #12]
- 420 001e 07EE903A 		vmov	s15, r3	@ int
- 421 0022 F8EE676A 		vcvt.f32.u32	s13, s15
- 422 0026 7B68     		ldr	r3, [r7, #4]
- 423 0028 D3ED0D7A 		vldr.32	s15, [r3, #52]
- 424 002c 66EEA77A 		vmul.f32	s15, s13, s15
-ARM GAS  /tmp/cc1am2lr.s 			page 10
+  92:Src/triggerchannel.c **** 
+  93:Src/triggerchannel.c **** void triggerchannel_process_monitor (TriggerChannel *sm){
+ 400              		.loc 1 93 0
+ 401              		.cfi_startproc
+ 402              		@ args = 0, pretend = 0, frame = 16
+ 403              		@ frame_needed = 1, uses_anonymous_args = 0
+ 404 0000 80B5     		push	{r7, lr}
+ 405              	.LCFI20:
+ 406              		.cfi_def_cfa_offset 8
+ 407              		.cfi_offset 7, -8
+ 408              		.cfi_offset 14, -4
+ 409 0002 84B0     		sub	sp, sp, #16
+ 410              	.LCFI21:
+ 411              		.cfi_def_cfa_offset 24
+ 412 0004 00AF     		add	r7, sp, #0
+ 413              	.LCFI22:
+ 414              		.cfi_def_cfa_register 7
+ 415 0006 7860     		str	r0, [r7, #4]
+  94:Src/triggerchannel.c **** 
+  95:Src/triggerchannel.c **** 	//check transition
+  96:Src/triggerchannel.c **** 	uint32_t lastSamplesMax = triggerchannel_getLastSamplesMax(sm);
+ 416              		.loc 1 96 0
+ 417 0008 7868     		ldr	r0, [r7, #4]
+ 418 000a FFF7FEFF 		bl	triggerchannel_getLastSamplesMax
+ 419 000e F860     		str	r0, [r7, #12]
+  97:Src/triggerchannel.c **** 	uint32_t threshhold =  sm->threshhold_static + lastSamplesMax * sm->threshhold_dynamic;
+ 420              		.loc 1 97 0
+ 421 0010 7B68     		ldr	r3, [r7, #4]
+ARM GAS  /tmp/ccK0LnE1.s 			page 10
 
 
- 425 0030 77EE277A 		vadd.f32	s15, s14, s15
- 426 0034 FCEEE77A 		vcvt.u32.f32	s15, s15
- 427 0038 17EE903A 		vmov	r3, s15	@ int
- 428 003c BB60     		str	r3, [r7, #8]
-  95:Src/triggerchannel.c **** 
-  96:Src/triggerchannel.c **** 	if( lastSamplesMax + threshhold <= sm->current_value
- 429              		.loc 1 96 0
- 430 003e FA68     		ldr	r2, [r7, #12]
- 431 0040 BB68     		ldr	r3, [r7, #8]
- 432 0042 1A44     		add	r2, r2, r3
- 433 0044 7B68     		ldr	r3, [r7, #4]
- 434 0046 DB6A     		ldr	r3, [r3, #44]
- 435 0048 9A42     		cmp	r2, r3
- 436 004a 08D8     		bhi	.L20
-  97:Src/triggerchannel.c **** 			&& sm->time_offset < sm->intervallcount_since_trans){
- 437              		.loc 1 97 0
- 438 004c 7B68     		ldr	r3, [r7, #4]
- 439 004e DA6B     		ldr	r2, [r3, #60]
- 440 0050 7B68     		ldr	r3, [r7, #4]
- 441 0052 1B69     		ldr	r3, [r3, #16]
- 442 0054 9A42     		cmp	r2, r3
- 443 0056 02D2     		bcs	.L20
+ 422 0012 1B6B     		ldr	r3, [r3, #48]
+ 423 0014 07EE903A 		vmov	s15, r3	@ int
+ 424 0018 B8EE677A 		vcvt.f32.u32	s14, s15
+ 425 001c FB68     		ldr	r3, [r7, #12]
+ 426 001e 07EE903A 		vmov	s15, r3	@ int
+ 427 0022 F8EE676A 		vcvt.f32.u32	s13, s15
+ 428 0026 7B68     		ldr	r3, [r7, #4]
+ 429 0028 D3ED0D7A 		vldr.32	s15, [r3, #52]
+ 430 002c 66EEA77A 		vmul.f32	s15, s13, s15
+ 431 0030 77EE277A 		vadd.f32	s15, s14, s15
+ 432 0034 FCEEE77A 		vcvt.u32.f32	s15, s15
+ 433 0038 17EE903A 		vmov	r3, s15	@ int
+ 434 003c BB60     		str	r3, [r7, #8]
   98:Src/triggerchannel.c **** 
-  99:Src/triggerchannel.c **** 		triggerchannel_transition_monitor_triggerevent(sm);
- 444              		.loc 1 99 0
- 445 0058 7868     		ldr	r0, [r7, #4]
- 446 005a FFF7FEFF 		bl	triggerchannel_transition_monitor_triggerevent
- 447              	.L20:
- 100:Src/triggerchannel.c **** 	}
+  99:Src/triggerchannel.c **** 	if( lastSamplesMax + threshhold <= sm->current_value
+ 435              		.loc 1 99 0
+ 436 003e FA68     		ldr	r2, [r7, #12]
+ 437 0040 BB68     		ldr	r3, [r7, #8]
+ 438 0042 1A44     		add	r2, r2, r3
+ 439 0044 7B68     		ldr	r3, [r7, #4]
+ 440 0046 DB6A     		ldr	r3, [r3, #44]
+ 441 0048 9A42     		cmp	r2, r3
+ 442 004a 08D8     		bhi	.L20
+ 100:Src/triggerchannel.c **** 			&& sm->time_offset < sm->intervallcount_since_trans){
+ 443              		.loc 1 100 0
+ 444 004c 7B68     		ldr	r3, [r7, #4]
+ 445 004e DA6B     		ldr	r2, [r3, #60]
+ 446 0050 7B68     		ldr	r3, [r7, #4]
+ 447 0052 1B69     		ldr	r3, [r3, #16]
+ 448 0054 9A42     		cmp	r2, r3
+ 449 0056 02D2     		bcs	.L20
  101:Src/triggerchannel.c **** 
- 102:Src/triggerchannel.c **** }
- 448              		.loc 1 102 0
- 449 005e 00BF     		nop
- 450 0060 1037     		adds	r7, r7, #16
- 451              	.LCFI23:
- 452              		.cfi_def_cfa_offset 8
- 453 0062 BD46     		mov	sp, r7
- 454              	.LCFI24:
- 455              		.cfi_def_cfa_register 13
- 456              		@ sp needed
- 457 0064 80BD     		pop	{r7, pc}
- 458              		.cfi_endproc
- 459              	.LFE116:
- 461 0066 00BF     		.section	.text.triggerchannel_transition_triggerevent_monitor,"ax",%progbits
- 462              		.align	2
- 463              		.global	triggerchannel_transition_triggerevent_monitor
- 464              		.thumb
- 465              		.thumb_func
- 467              	triggerchannel_transition_triggerevent_monitor:
- 468              	.LFB117:
- 103:Src/triggerchannel.c **** 
- 104:Src/triggerchannel.c **** //State transition methods
- 105:Src/triggerchannel.c **** void triggerchannel_transition_triggerevent_monitor (TriggerChannel *sm){
- 469              		.loc 1 105 0
- 470              		.cfi_startproc
- 471              		@ args = 0, pretend = 0, frame = 8
- 472              		@ frame_needed = 1, uses_anonymous_args = 0
-ARM GAS  /tmp/cc1am2lr.s 			page 11
+ 102:Src/triggerchannel.c **** 		triggerchannel_transition_monitor_triggerevent(sm);
+ 450              		.loc 1 102 0
+ 451 0058 7868     		ldr	r0, [r7, #4]
+ 452 005a FFF7FEFF 		bl	triggerchannel_transition_monitor_triggerevent
+ 453              	.L20:
+ 103:Src/triggerchannel.c **** 	}
+ 104:Src/triggerchannel.c **** 
+ 105:Src/triggerchannel.c **** }
+ 454              		.loc 1 105 0
+ 455 005e 00BF     		nop
+ 456 0060 1037     		adds	r7, r7, #16
+ 457              	.LCFI23:
+ 458              		.cfi_def_cfa_offset 8
+ 459 0062 BD46     		mov	sp, r7
+ 460              	.LCFI24:
+ 461              		.cfi_def_cfa_register 13
+ 462              		@ sp needed
+ 463 0064 80BD     		pop	{r7, pc}
+ 464              		.cfi_endproc
+ 465              	.LFE116:
+ 467 0066 00BF     		.section	.text.triggerchannel_transition_triggerevent_monitor,"ax",%progbits
+ 468              		.align	2
+ 469              		.global	triggerchannel_transition_triggerevent_monitor
+ 470              		.thumb
+ 471              		.thumb_func
+ARM GAS  /tmp/ccK0LnE1.s 			page 11
 
 
- 473 0000 80B5     		push	{r7, lr}
- 474              	.LCFI25:
- 475              		.cfi_def_cfa_offset 8
- 476              		.cfi_offset 7, -8
- 477              		.cfi_offset 14, -4
- 478 0002 82B0     		sub	sp, sp, #8
- 479              	.LCFI26:
- 480              		.cfi_def_cfa_offset 16
- 481 0004 00AF     		add	r7, sp, #0
- 482              	.LCFI27:
- 483              		.cfi_def_cfa_register 7
- 484 0006 7860     		str	r0, [r7, #4]
- 106:Src/triggerchannel.c **** 	sm->state = TRIGGERSM_MONITOR;
- 485              		.loc 1 106 0
- 486 0008 7B68     		ldr	r3, [r7, #4]
- 487 000a 0122     		movs	r2, #1
- 488 000c 1A76     		strb	r2, [r3, #24]
- 107:Src/triggerchannel.c **** 	sm->intervallcount_since_trans = 0;
- 489              		.loc 1 107 0
- 490 000e 7B68     		ldr	r3, [r7, #4]
- 491 0010 0022     		movs	r2, #0
- 492 0012 1A61     		str	r2, [r3, #16]
- 108:Src/triggerchannel.c **** 
- 109:Src/triggerchannel.c **** 
- 110:Src/triggerchannel.c **** 	//note detected
- 111:Src/triggerchannel.c **** 	midi_sendNote(10,sm->midinote, sm->max_velocity >> 5);
- 493              		.loc 1 111 0
- 494 0014 7B68     		ldr	r3, [r7, #4]
- 495 0016 196C     		ldr	r1, [r3, #64]
- 496 0018 7B68     		ldr	r3, [r7, #4]
- 497 001a 5B69     		ldr	r3, [r3, #20]
- 498 001c 5B09     		lsrs	r3, r3, #5
- 499 001e 1A46     		mov	r2, r3
- 500 0020 0A20     		movs	r0, #10
- 501 0022 FFF7FEFF 		bl	midi_sendNote
+ 473              	triggerchannel_transition_triggerevent_monitor:
+ 474              	.LFB117:
+ 106:Src/triggerchannel.c **** 
+ 107:Src/triggerchannel.c **** //State transition methods
+ 108:Src/triggerchannel.c **** void triggerchannel_transition_triggerevent_monitor (TriggerChannel *sm){
+ 475              		.loc 1 108 0
+ 476              		.cfi_startproc
+ 477              		@ args = 0, pretend = 0, frame = 8
+ 478              		@ frame_needed = 1, uses_anonymous_args = 0
+ 479 0000 80B5     		push	{r7, lr}
+ 480              	.LCFI25:
+ 481              		.cfi_def_cfa_offset 8
+ 482              		.cfi_offset 7, -8
+ 483              		.cfi_offset 14, -4
+ 484 0002 82B0     		sub	sp, sp, #8
+ 485              	.LCFI26:
+ 486              		.cfi_def_cfa_offset 16
+ 487 0004 00AF     		add	r7, sp, #0
+ 488              	.LCFI27:
+ 489              		.cfi_def_cfa_register 7
+ 490 0006 7860     		str	r0, [r7, #4]
+ 109:Src/triggerchannel.c **** 	sm->state = TRIGGERSM_MONITOR;
+ 491              		.loc 1 109 0
+ 492 0008 7B68     		ldr	r3, [r7, #4]
+ 493 000a 0122     		movs	r2, #1
+ 494 000c 1A76     		strb	r2, [r3, #24]
+ 110:Src/triggerchannel.c **** 	sm->intervallcount_since_trans = 0;
+ 495              		.loc 1 110 0
+ 496 000e 7B68     		ldr	r3, [r7, #4]
+ 497 0010 0022     		movs	r2, #0
+ 498 0012 1A61     		str	r2, [r3, #16]
+ 111:Src/triggerchannel.c **** 
  112:Src/triggerchannel.c **** 
- 113:Src/triggerchannel.c **** 
- 114:Src/triggerchannel.c **** 
- 115:Src/triggerchannel.c **** }
- 502              		.loc 1 115 0
- 503 0026 00BF     		nop
- 504 0028 0837     		adds	r7, r7, #8
- 505              	.LCFI28:
- 506              		.cfi_def_cfa_offset 8
- 507 002a BD46     		mov	sp, r7
- 508              	.LCFI29:
- 509              		.cfi_def_cfa_register 13
- 510              		@ sp needed
- 511 002c 80BD     		pop	{r7, pc}
- 512              		.cfi_endproc
- 513              	.LFE117:
- 515 002e 00BF     		.section	.text.triggerchannel_transition_monitor_triggerevent,"ax",%progbits
- 516              		.align	2
- 517              		.global	triggerchannel_transition_monitor_triggerevent
- 518              		.thumb
- 519              		.thumb_func
- 521              	triggerchannel_transition_monitor_triggerevent:
-ARM GAS  /tmp/cc1am2lr.s 			page 12
+ 113:Src/triggerchannel.c **** 	//note detected
+ 114:Src/triggerchannel.c **** 	midi_sendNote(10,sm->midinote, sm->max_velocity >> 5);
+ 499              		.loc 1 114 0
+ 500 0014 7B68     		ldr	r3, [r7, #4]
+ 501 0016 1B6C     		ldr	r3, [r3, #64]
+ 502 0018 D9B2     		uxtb	r1, r3
+ 503 001a 7B68     		ldr	r3, [r7, #4]
+ 504 001c 5B69     		ldr	r3, [r3, #20]
+ 505 001e 5B09     		lsrs	r3, r3, #5
+ 506 0020 DBB2     		uxtb	r3, r3
+ 507 0022 1A46     		mov	r2, r3
+ 508 0024 0A20     		movs	r0, #10
+ 509 0026 FFF7FEFF 		bl	midi_sendNote
+ 115:Src/triggerchannel.c **** 	voltdrum_sendDrumtriggerEvent(sm, sm->max_velocity >> 5);
+ 510              		.loc 1 115 0
+ 511 002a 7B68     		ldr	r3, [r7, #4]
+ 512 002c 5B69     		ldr	r3, [r3, #20]
+ 513 002e 5B09     		lsrs	r3, r3, #5
+ 514 0030 DBB2     		uxtb	r3, r3
+ 515 0032 1946     		mov	r1, r3
+ 516 0034 7868     		ldr	r0, [r7, #4]
+ 517 0036 FFF7FEFF 		bl	voltdrum_sendDrumtriggerEvent
+ 116:Src/triggerchannel.c **** 
+ 117:Src/triggerchannel.c **** 
+ARM GAS  /tmp/ccK0LnE1.s 			page 12
 
 
- 522              	.LFB118:
- 116:Src/triggerchannel.c **** void triggerchannel_transition_monitor_triggerevent (TriggerChannel *sm){
- 523              		.loc 1 116 0
- 524              		.cfi_startproc
- 525              		@ args = 0, pretend = 0, frame = 8
- 526              		@ frame_needed = 1, uses_anonymous_args = 0
- 527              		@ link register save eliminated.
- 528 0000 80B4     		push	{r7}
- 529              	.LCFI30:
- 530              		.cfi_def_cfa_offset 4
- 531              		.cfi_offset 7, -4
- 532 0002 83B0     		sub	sp, sp, #12
- 533              	.LCFI31:
- 534              		.cfi_def_cfa_offset 16
- 535 0004 00AF     		add	r7, sp, #0
- 536              	.LCFI32:
- 537              		.cfi_def_cfa_register 7
- 538 0006 7860     		str	r0, [r7, #4]
- 117:Src/triggerchannel.c **** 	sm->state = TRIGGERSM_EVENT;
- 539              		.loc 1 117 0
- 540 0008 7B68     		ldr	r3, [r7, #4]
- 541 000a 0022     		movs	r2, #0
- 542 000c 1A76     		strb	r2, [r3, #24]
- 118:Src/triggerchannel.c **** 	sm->intervallcount_since_trans = 0;
- 543              		.loc 1 118 0
- 544 000e 7B68     		ldr	r3, [r7, #4]
- 545 0010 0022     		movs	r2, #0
- 546 0012 1A61     		str	r2, [r3, #16]
- 119:Src/triggerchannel.c **** 	sm->max_velocity = sm->current_value;
- 547              		.loc 1 119 0
- 548 0014 7B68     		ldr	r3, [r7, #4]
- 549 0016 DA6A     		ldr	r2, [r3, #44]
- 550 0018 7B68     		ldr	r3, [r7, #4]
- 551 001a 5A61     		str	r2, [r3, #20]
- 120:Src/triggerchannel.c **** }
- 552              		.loc 1 120 0
- 553 001c 00BF     		nop
- 554 001e 0C37     		adds	r7, r7, #12
- 555              	.LCFI33:
- 556              		.cfi_def_cfa_offset 4
- 557 0020 BD46     		mov	sp, r7
- 558              	.LCFI34:
- 559              		.cfi_def_cfa_register 13
- 560              		@ sp needed
- 561 0022 5DF8047B 		ldr	r7, [sp], #4
- 562              	.LCFI35:
- 563              		.cfi_restore 7
- 564              		.cfi_def_cfa_offset 0
- 565 0026 7047     		bx	lr
- 566              		.cfi_endproc
- 567              	.LFE118:
- 569              		.section	.text.triggerchannel_addSample,"ax",%progbits
- 570              		.align	2
- 571              		.global	triggerchannel_addSample
- 572              		.thumb
- 573              		.thumb_func
- 575              	triggerchannel_addSample:
-ARM GAS  /tmp/cc1am2lr.s 			page 13
+ 118:Src/triggerchannel.c **** }
+ 518              		.loc 1 118 0
+ 519 003a 00BF     		nop
+ 520 003c 0837     		adds	r7, r7, #8
+ 521              	.LCFI28:
+ 522              		.cfi_def_cfa_offset 8
+ 523 003e BD46     		mov	sp, r7
+ 524              	.LCFI29:
+ 525              		.cfi_def_cfa_register 13
+ 526              		@ sp needed
+ 527 0040 80BD     		pop	{r7, pc}
+ 528              		.cfi_endproc
+ 529              	.LFE117:
+ 531 0042 00BF     		.section	.text.triggerchannel_transition_monitor_triggerevent,"ax",%progbits
+ 532              		.align	2
+ 533              		.global	triggerchannel_transition_monitor_triggerevent
+ 534              		.thumb
+ 535              		.thumb_func
+ 537              	triggerchannel_transition_monitor_triggerevent:
+ 538              	.LFB118:
+ 119:Src/triggerchannel.c **** void triggerchannel_transition_monitor_triggerevent (TriggerChannel *sm){
+ 539              		.loc 1 119 0
+ 540              		.cfi_startproc
+ 541              		@ args = 0, pretend = 0, frame = 8
+ 542              		@ frame_needed = 1, uses_anonymous_args = 0
+ 543              		@ link register save eliminated.
+ 544 0000 80B4     		push	{r7}
+ 545              	.LCFI30:
+ 546              		.cfi_def_cfa_offset 4
+ 547              		.cfi_offset 7, -4
+ 548 0002 83B0     		sub	sp, sp, #12
+ 549              	.LCFI31:
+ 550              		.cfi_def_cfa_offset 16
+ 551 0004 00AF     		add	r7, sp, #0
+ 552              	.LCFI32:
+ 553              		.cfi_def_cfa_register 7
+ 554 0006 7860     		str	r0, [r7, #4]
+ 120:Src/triggerchannel.c **** 	sm->state = TRIGGERSM_EVENT;
+ 555              		.loc 1 120 0
+ 556 0008 7B68     		ldr	r3, [r7, #4]
+ 557 000a 0022     		movs	r2, #0
+ 558 000c 1A76     		strb	r2, [r3, #24]
+ 121:Src/triggerchannel.c **** 	sm->intervallcount_since_trans = 0;
+ 559              		.loc 1 121 0
+ 560 000e 7B68     		ldr	r3, [r7, #4]
+ 561 0010 0022     		movs	r2, #0
+ 562 0012 1A61     		str	r2, [r3, #16]
+ 122:Src/triggerchannel.c **** 	sm->max_velocity = sm->current_value;
+ 563              		.loc 1 122 0
+ 564 0014 7B68     		ldr	r3, [r7, #4]
+ 565 0016 DA6A     		ldr	r2, [r3, #44]
+ 566 0018 7B68     		ldr	r3, [r7, #4]
+ 567 001a 5A61     		str	r2, [r3, #20]
+ 123:Src/triggerchannel.c **** }
+ 568              		.loc 1 123 0
+ 569 001c 00BF     		nop
+ 570 001e 0C37     		adds	r7, r7, #12
+ARM GAS  /tmp/ccK0LnE1.s 			page 13
 
 
- 576              	.LFB119:
- 121:Src/triggerchannel.c **** 
- 122:Src/triggerchannel.c **** void triggerchannel_addSample(TriggerChannel *sm,uint32_t sample){
- 577              		.loc 1 122 0
- 578              		.cfi_startproc
- 579              		@ args = 0, pretend = 0, frame = 8
- 580              		@ frame_needed = 1, uses_anonymous_args = 0
- 581              		@ link register save eliminated.
- 582 0000 80B4     		push	{r7}
- 583              	.LCFI36:
- 584              		.cfi_def_cfa_offset 4
- 585              		.cfi_offset 7, -4
- 586 0002 83B0     		sub	sp, sp, #12
- 587              	.LCFI37:
- 588              		.cfi_def_cfa_offset 16
- 589 0004 00AF     		add	r7, sp, #0
- 590              	.LCFI38:
- 591              		.cfi_def_cfa_register 7
- 592 0006 7860     		str	r0, [r7, #4]
- 593 0008 3960     		str	r1, [r7]
- 123:Src/triggerchannel.c **** 
- 124:Src/triggerchannel.c **** 	if(sm->storeSampleFlag <= 0){
- 594              		.loc 1 124 0
- 595 000a 7B68     		ldr	r3, [r7, #4]
- 596 000c 9B6A     		ldr	r3, [r3, #40]
- 597 000e 002B     		cmp	r3, #0
- 598 0010 03D1     		bne	.L24
- 125:Src/triggerchannel.c **** 		sm->storeSampleFlag = 2;
- 599              		.loc 1 125 0
- 600 0012 7B68     		ldr	r3, [r7, #4]
- 601 0014 0222     		movs	r2, #2
- 602 0016 9A62     		str	r2, [r3, #40]
- 126:Src/triggerchannel.c **** 		return;
- 603              		.loc 1 126 0
- 604 0018 18E0     		b	.L23
- 605              	.L24:
- 127:Src/triggerchannel.c **** 	}
- 128:Src/triggerchannel.c **** 	sm->storeSampleFlag--;
- 606              		.loc 1 128 0
- 607 001a 7B68     		ldr	r3, [r7, #4]
- 608 001c 9B6A     		ldr	r3, [r3, #40]
- 609 001e 5A1E     		subs	r2, r3, #1
- 610 0020 7B68     		ldr	r3, [r7, #4]
- 611 0022 9A62     		str	r2, [r3, #40]
- 129:Src/triggerchannel.c **** 
- 130:Src/triggerchannel.c **** 
- 131:Src/triggerchannel.c **** 	sm->lastProcessedSamples_head = (sm->lastProcessedSamples_head+1) % sm->lastProcessedSamples_size;
- 612              		.loc 1 131 0
- 613 0024 7B68     		ldr	r3, [r7, #4]
- 614 0026 5B6A     		ldr	r3, [r3, #36]
- 615 0028 0133     		adds	r3, r3, #1
- 616 002a 7A68     		ldr	r2, [r7, #4]
- 617 002c 126A     		ldr	r2, [r2, #32]
- 618 002e B3FBF2F1 		udiv	r1, r3, r2
- 619 0032 02FB01F2 		mul	r2, r2, r1
- 620 0036 9A1A     		subs	r2, r3, r2
- 621 0038 7B68     		ldr	r3, [r7, #4]
-ARM GAS  /tmp/cc1am2lr.s 			page 14
+ 571              	.LCFI33:
+ 572              		.cfi_def_cfa_offset 4
+ 573 0020 BD46     		mov	sp, r7
+ 574              	.LCFI34:
+ 575              		.cfi_def_cfa_register 13
+ 576              		@ sp needed
+ 577 0022 5DF8047B 		ldr	r7, [sp], #4
+ 578              	.LCFI35:
+ 579              		.cfi_restore 7
+ 580              		.cfi_def_cfa_offset 0
+ 581 0026 7047     		bx	lr
+ 582              		.cfi_endproc
+ 583              	.LFE118:
+ 585              		.section	.text.triggerchannel_addSample,"ax",%progbits
+ 586              		.align	2
+ 587              		.global	triggerchannel_addSample
+ 588              		.thumb
+ 589              		.thumb_func
+ 591              	triggerchannel_addSample:
+ 592              	.LFB119:
+ 124:Src/triggerchannel.c **** 
+ 125:Src/triggerchannel.c **** void triggerchannel_addSample(TriggerChannel *sm,uint32_t sample){
+ 593              		.loc 1 125 0
+ 594              		.cfi_startproc
+ 595              		@ args = 0, pretend = 0, frame = 8
+ 596              		@ frame_needed = 1, uses_anonymous_args = 0
+ 597              		@ link register save eliminated.
+ 598 0000 80B4     		push	{r7}
+ 599              	.LCFI36:
+ 600              		.cfi_def_cfa_offset 4
+ 601              		.cfi_offset 7, -4
+ 602 0002 83B0     		sub	sp, sp, #12
+ 603              	.LCFI37:
+ 604              		.cfi_def_cfa_offset 16
+ 605 0004 00AF     		add	r7, sp, #0
+ 606              	.LCFI38:
+ 607              		.cfi_def_cfa_register 7
+ 608 0006 7860     		str	r0, [r7, #4]
+ 609 0008 3960     		str	r1, [r7]
+ 126:Src/triggerchannel.c **** 
+ 127:Src/triggerchannel.c **** 	if(sm->storeSampleFlag <= 0){
+ 610              		.loc 1 127 0
+ 611 000a 7B68     		ldr	r3, [r7, #4]
+ 612 000c 9B6A     		ldr	r3, [r3, #40]
+ 613 000e 002B     		cmp	r3, #0
+ 614 0010 03D1     		bne	.L24
+ 128:Src/triggerchannel.c **** 		sm->storeSampleFlag = 2;
+ 615              		.loc 1 128 0
+ 616 0012 7B68     		ldr	r3, [r7, #4]
+ 617 0014 0222     		movs	r2, #2
+ 618 0016 9A62     		str	r2, [r3, #40]
+ 129:Src/triggerchannel.c **** 		return;
+ 619              		.loc 1 129 0
+ 620 0018 18E0     		b	.L23
+ 621              	.L24:
+ 130:Src/triggerchannel.c **** 	}
+ 131:Src/triggerchannel.c **** 	sm->storeSampleFlag--;
+ARM GAS  /tmp/ccK0LnE1.s 			page 14
 
 
- 622 003a 5A62     		str	r2, [r3, #36]
- 132:Src/triggerchannel.c **** 	sm->lastProcessedSamples[sm->lastProcessedSamples_head] = sample;
- 623              		.loc 1 132 0
- 624 003c 7B68     		ldr	r3, [r7, #4]
- 625 003e DA69     		ldr	r2, [r3, #28]
- 626 0040 7B68     		ldr	r3, [r7, #4]
- 627 0042 5B6A     		ldr	r3, [r3, #36]
- 628 0044 9B00     		lsls	r3, r3, #2
- 629 0046 1344     		add	r3, r3, r2
- 630 0048 3A68     		ldr	r2, [r7]
- 631 004a 1A60     		str	r2, [r3]
- 632              	.L23:
+ 622              		.loc 1 131 0
+ 623 001a 7B68     		ldr	r3, [r7, #4]
+ 624 001c 9B6A     		ldr	r3, [r3, #40]
+ 625 001e 5A1E     		subs	r2, r3, #1
+ 626 0020 7B68     		ldr	r3, [r7, #4]
+ 627 0022 9A62     		str	r2, [r3, #40]
+ 132:Src/triggerchannel.c **** 
  133:Src/triggerchannel.c **** 
- 134:Src/triggerchannel.c **** }
- 633              		.loc 1 134 0
- 634 004c 0C37     		adds	r7, r7, #12
- 635              	.LCFI39:
- 636              		.cfi_def_cfa_offset 4
- 637 004e BD46     		mov	sp, r7
- 638              	.LCFI40:
- 639              		.cfi_def_cfa_register 13
- 640              		@ sp needed
- 641 0050 5DF8047B 		ldr	r7, [sp], #4
- 642              	.LCFI41:
- 643              		.cfi_restore 7
- 644              		.cfi_def_cfa_offset 0
- 645 0054 7047     		bx	lr
- 646              		.cfi_endproc
- 647              	.LFE119:
- 649 0056 00BF     		.section	.text.triggerchannel_getLastSample,"ax",%progbits
- 650              		.align	2
- 651              		.global	triggerchannel_getLastSample
- 652              		.thumb
- 653              		.thumb_func
- 655              	triggerchannel_getLastSample:
- 656              	.LFB120:
- 135:Src/triggerchannel.c **** 
- 136:Src/triggerchannel.c **** uint32_t triggerchannel_getLastSample(TriggerChannel *sm){
- 657              		.loc 1 136 0
- 658              		.cfi_startproc
- 659              		@ args = 0, pretend = 0, frame = 8
- 660              		@ frame_needed = 1, uses_anonymous_args = 0
- 661              		@ link register save eliminated.
- 662 0000 80B4     		push	{r7}
- 663              	.LCFI42:
- 664              		.cfi_def_cfa_offset 4
- 665              		.cfi_offset 7, -4
- 666 0002 83B0     		sub	sp, sp, #12
- 667              	.LCFI43:
- 668              		.cfi_def_cfa_offset 16
- 669 0004 00AF     		add	r7, sp, #0
- 670              	.LCFI44:
- 671              		.cfi_def_cfa_register 7
- 672 0006 7860     		str	r0, [r7, #4]
- 137:Src/triggerchannel.c **** 	return sm->lastProcessedSamples[sm->lastProcessedSamples_head];
- 673              		.loc 1 137 0
- 674 0008 7B68     		ldr	r3, [r7, #4]
-ARM GAS  /tmp/cc1am2lr.s 			page 15
+ 134:Src/triggerchannel.c **** 	sm->lastProcessedSamples_head = (sm->lastProcessedSamples_head+1) % sm->lastProcessedSamples_size;
+ 628              		.loc 1 134 0
+ 629 0024 7B68     		ldr	r3, [r7, #4]
+ 630 0026 5B6A     		ldr	r3, [r3, #36]
+ 631 0028 0133     		adds	r3, r3, #1
+ 632 002a 7A68     		ldr	r2, [r7, #4]
+ 633 002c 126A     		ldr	r2, [r2, #32]
+ 634 002e B3FBF2F1 		udiv	r1, r3, r2
+ 635 0032 02FB01F2 		mul	r2, r2, r1
+ 636 0036 9A1A     		subs	r2, r3, r2
+ 637 0038 7B68     		ldr	r3, [r7, #4]
+ 638 003a 5A62     		str	r2, [r3, #36]
+ 135:Src/triggerchannel.c **** 	sm->lastProcessedSamples[sm->lastProcessedSamples_head] = sample;
+ 639              		.loc 1 135 0
+ 640 003c 7B68     		ldr	r3, [r7, #4]
+ 641 003e DA69     		ldr	r2, [r3, #28]
+ 642 0040 7B68     		ldr	r3, [r7, #4]
+ 643 0042 5B6A     		ldr	r3, [r3, #36]
+ 644 0044 9B00     		lsls	r3, r3, #2
+ 645 0046 1344     		add	r3, r3, r2
+ 646 0048 3A68     		ldr	r2, [r7]
+ 647 004a 1A60     		str	r2, [r3]
+ 648              	.L23:
+ 136:Src/triggerchannel.c **** 
+ 137:Src/triggerchannel.c **** }
+ 649              		.loc 1 137 0
+ 650 004c 0C37     		adds	r7, r7, #12
+ 651              	.LCFI39:
+ 652              		.cfi_def_cfa_offset 4
+ 653 004e BD46     		mov	sp, r7
+ 654              	.LCFI40:
+ 655              		.cfi_def_cfa_register 13
+ 656              		@ sp needed
+ 657 0050 5DF8047B 		ldr	r7, [sp], #4
+ 658              	.LCFI41:
+ 659              		.cfi_restore 7
+ 660              		.cfi_def_cfa_offset 0
+ 661 0054 7047     		bx	lr
+ 662              		.cfi_endproc
+ 663              	.LFE119:
+ 665 0056 00BF     		.section	.text.triggerchannel_getLastSample,"ax",%progbits
+ 666              		.align	2
+ 667              		.global	triggerchannel_getLastSample
+ 668              		.thumb
+ 669              		.thumb_func
+ 671              	triggerchannel_getLastSample:
+ 672              	.LFB120:
+ 138:Src/triggerchannel.c **** 
+ 139:Src/triggerchannel.c **** uint32_t triggerchannel_getLastSample(TriggerChannel *sm){
+ARM GAS  /tmp/ccK0LnE1.s 			page 15
 
 
- 675 000a DA69     		ldr	r2, [r3, #28]
- 676 000c 7B68     		ldr	r3, [r7, #4]
- 677 000e 5B6A     		ldr	r3, [r3, #36]
- 678 0010 9B00     		lsls	r3, r3, #2
- 679 0012 1344     		add	r3, r3, r2
- 680 0014 1B68     		ldr	r3, [r3]
- 138:Src/triggerchannel.c **** }
- 681              		.loc 1 138 0
- 682 0016 1846     		mov	r0, r3
- 683 0018 0C37     		adds	r7, r7, #12
- 684              	.LCFI45:
- 685              		.cfi_def_cfa_offset 4
- 686 001a BD46     		mov	sp, r7
- 687              	.LCFI46:
- 688              		.cfi_def_cfa_register 13
- 689              		@ sp needed
- 690 001c 5DF8047B 		ldr	r7, [sp], #4
- 691              	.LCFI47:
- 692              		.cfi_restore 7
- 693              		.cfi_def_cfa_offset 0
- 694 0020 7047     		bx	lr
- 695              		.cfi_endproc
- 696              	.LFE120:
- 698 0022 00BF     		.section	.text.triggerchannel_getLastSamplesMax,"ax",%progbits
- 699              		.align	2
- 700              		.global	triggerchannel_getLastSamplesMax
- 701              		.thumb
- 702              		.thumb_func
- 704              	triggerchannel_getLastSamplesMax:
- 705              	.LFB121:
- 139:Src/triggerchannel.c **** 
- 140:Src/triggerchannel.c **** uint32_t triggerchannel_getLastSamplesMax(TriggerChannel *sm){
- 706              		.loc 1 140 0
- 707              		.cfi_startproc
- 708              		@ args = 0, pretend = 0, frame = 16
- 709              		@ frame_needed = 1, uses_anonymous_args = 0
- 710              		@ link register save eliminated.
- 711 0000 80B4     		push	{r7}
- 712              	.LCFI48:
- 713              		.cfi_def_cfa_offset 4
- 714              		.cfi_offset 7, -4
- 715 0002 85B0     		sub	sp, sp, #20
- 716              	.LCFI49:
- 717              		.cfi_def_cfa_offset 24
- 718 0004 00AF     		add	r7, sp, #0
- 719              	.LCFI50:
- 720              		.cfi_def_cfa_register 7
- 721 0006 7860     		str	r0, [r7, #4]
- 141:Src/triggerchannel.c **** 	uint32_t i,max = 0;
- 722              		.loc 1 141 0
- 723 0008 0023     		movs	r3, #0
- 724 000a BB60     		str	r3, [r7, #8]
- 142:Src/triggerchannel.c **** 	for(i = 0; i < sm->lastProcessedSamples_size; i++){
- 725              		.loc 1 142 0
- 726 000c 0023     		movs	r3, #0
- 727 000e FB60     		str	r3, [r7, #12]
- 728 0010 12E0     		b	.L29
-ARM GAS  /tmp/cc1am2lr.s 			page 16
+ 673              		.loc 1 139 0
+ 674              		.cfi_startproc
+ 675              		@ args = 0, pretend = 0, frame = 8
+ 676              		@ frame_needed = 1, uses_anonymous_args = 0
+ 677              		@ link register save eliminated.
+ 678 0000 80B4     		push	{r7}
+ 679              	.LCFI42:
+ 680              		.cfi_def_cfa_offset 4
+ 681              		.cfi_offset 7, -4
+ 682 0002 83B0     		sub	sp, sp, #12
+ 683              	.LCFI43:
+ 684              		.cfi_def_cfa_offset 16
+ 685 0004 00AF     		add	r7, sp, #0
+ 686              	.LCFI44:
+ 687              		.cfi_def_cfa_register 7
+ 688 0006 7860     		str	r0, [r7, #4]
+ 140:Src/triggerchannel.c **** 	return sm->lastProcessedSamples[sm->lastProcessedSamples_head];
+ 689              		.loc 1 140 0
+ 690 0008 7B68     		ldr	r3, [r7, #4]
+ 691 000a DA69     		ldr	r2, [r3, #28]
+ 692 000c 7B68     		ldr	r3, [r7, #4]
+ 693 000e 5B6A     		ldr	r3, [r3, #36]
+ 694 0010 9B00     		lsls	r3, r3, #2
+ 695 0012 1344     		add	r3, r3, r2
+ 696 0014 1B68     		ldr	r3, [r3]
+ 141:Src/triggerchannel.c **** }
+ 697              		.loc 1 141 0
+ 698 0016 1846     		mov	r0, r3
+ 699 0018 0C37     		adds	r7, r7, #12
+ 700              	.LCFI45:
+ 701              		.cfi_def_cfa_offset 4
+ 702 001a BD46     		mov	sp, r7
+ 703              	.LCFI46:
+ 704              		.cfi_def_cfa_register 13
+ 705              		@ sp needed
+ 706 001c 5DF8047B 		ldr	r7, [sp], #4
+ 707              	.LCFI47:
+ 708              		.cfi_restore 7
+ 709              		.cfi_def_cfa_offset 0
+ 710 0020 7047     		bx	lr
+ 711              		.cfi_endproc
+ 712              	.LFE120:
+ 714 0022 00BF     		.section	.text.triggerchannel_getLastSamplesMax,"ax",%progbits
+ 715              		.align	2
+ 716              		.global	triggerchannel_getLastSamplesMax
+ 717              		.thumb
+ 718              		.thumb_func
+ 720              	triggerchannel_getLastSamplesMax:
+ 721              	.LFB121:
+ 142:Src/triggerchannel.c **** 
+ 143:Src/triggerchannel.c **** uint32_t triggerchannel_getLastSamplesMax(TriggerChannel *sm){
+ 722              		.loc 1 143 0
+ 723              		.cfi_startproc
+ 724              		@ args = 0, pretend = 0, frame = 16
+ 725              		@ frame_needed = 1, uses_anonymous_args = 0
+ 726              		@ link register save eliminated.
+ 727 0000 80B4     		push	{r7}
+ARM GAS  /tmp/ccK0LnE1.s 			page 16
 
 
- 729              	.L31:
- 143:Src/triggerchannel.c **** 		if(sm->lastProcessedSamples[i] > max)
- 730              		.loc 1 143 0
- 731 0012 7B68     		ldr	r3, [r7, #4]
- 732 0014 DA69     		ldr	r2, [r3, #28]
- 733 0016 FB68     		ldr	r3, [r7, #12]
- 734 0018 9B00     		lsls	r3, r3, #2
- 735 001a 1344     		add	r3, r3, r2
- 736 001c 1A68     		ldr	r2, [r3]
- 737 001e BB68     		ldr	r3, [r7, #8]
- 738 0020 9A42     		cmp	r2, r3
- 739 0022 06D9     		bls	.L30
- 144:Src/triggerchannel.c **** 			max = sm->lastProcessedSamples[i];
- 740              		.loc 1 144 0
- 741 0024 7B68     		ldr	r3, [r7, #4]
- 742 0026 DA69     		ldr	r2, [r3, #28]
- 743 0028 FB68     		ldr	r3, [r7, #12]
- 744 002a 9B00     		lsls	r3, r3, #2
- 745 002c 1344     		add	r3, r3, r2
- 746 002e 1B68     		ldr	r3, [r3]
- 747 0030 BB60     		str	r3, [r7, #8]
- 748              	.L30:
- 142:Src/triggerchannel.c **** 	for(i = 0; i < sm->lastProcessedSamples_size; i++){
- 749              		.loc 1 142 0 discriminator 2
- 750 0032 FB68     		ldr	r3, [r7, #12]
- 751 0034 0133     		adds	r3, r3, #1
- 752 0036 FB60     		str	r3, [r7, #12]
- 753              	.L29:
- 142:Src/triggerchannel.c **** 	for(i = 0; i < sm->lastProcessedSamples_size; i++){
- 754              		.loc 1 142 0 is_stmt 0 discriminator 1
- 755 0038 7B68     		ldr	r3, [r7, #4]
- 756 003a 1A6A     		ldr	r2, [r3, #32]
- 757 003c FB68     		ldr	r3, [r7, #12]
- 758 003e 9A42     		cmp	r2, r3
- 759 0040 E7D8     		bhi	.L31
- 145:Src/triggerchannel.c **** 	}
- 146:Src/triggerchannel.c **** 	return max;
- 760              		.loc 1 146 0 is_stmt 1
- 761 0042 BB68     		ldr	r3, [r7, #8]
- 147:Src/triggerchannel.c **** }
- 762              		.loc 1 147 0
- 763 0044 1846     		mov	r0, r3
- 764 0046 1437     		adds	r7, r7, #20
- 765              	.LCFI51:
- 766              		.cfi_def_cfa_offset 4
- 767 0048 BD46     		mov	sp, r7
- 768              	.LCFI52:
- 769              		.cfi_def_cfa_register 13
- 770              		@ sp needed
- 771 004a 5DF8047B 		ldr	r7, [sp], #4
- 772              	.LCFI53:
- 773              		.cfi_restore 7
- 774              		.cfi_def_cfa_offset 0
- 775 004e 7047     		bx	lr
- 776              		.cfi_endproc
- 777              	.LFE121:
- 779              		.text
-ARM GAS  /tmp/cc1am2lr.s 			page 17
+ 728              	.LCFI48:
+ 729              		.cfi_def_cfa_offset 4
+ 730              		.cfi_offset 7, -4
+ 731 0002 85B0     		sub	sp, sp, #20
+ 732              	.LCFI49:
+ 733              		.cfi_def_cfa_offset 24
+ 734 0004 00AF     		add	r7, sp, #0
+ 735              	.LCFI50:
+ 736              		.cfi_def_cfa_register 7
+ 737 0006 7860     		str	r0, [r7, #4]
+ 144:Src/triggerchannel.c **** 	uint32_t i,max = 0;
+ 738              		.loc 1 144 0
+ 739 0008 0023     		movs	r3, #0
+ 740 000a BB60     		str	r3, [r7, #8]
+ 145:Src/triggerchannel.c **** 	for(i = 0; i < sm->lastProcessedSamples_size; i++){
+ 741              		.loc 1 145 0
+ 742 000c 0023     		movs	r3, #0
+ 743 000e FB60     		str	r3, [r7, #12]
+ 744 0010 12E0     		b	.L29
+ 745              	.L31:
+ 146:Src/triggerchannel.c **** 		if(sm->lastProcessedSamples[i] > max)
+ 746              		.loc 1 146 0
+ 747 0012 7B68     		ldr	r3, [r7, #4]
+ 748 0014 DA69     		ldr	r2, [r3, #28]
+ 749 0016 FB68     		ldr	r3, [r7, #12]
+ 750 0018 9B00     		lsls	r3, r3, #2
+ 751 001a 1344     		add	r3, r3, r2
+ 752 001c 1A68     		ldr	r2, [r3]
+ 753 001e BB68     		ldr	r3, [r7, #8]
+ 754 0020 9A42     		cmp	r2, r3
+ 755 0022 06D9     		bls	.L30
+ 147:Src/triggerchannel.c **** 			max = sm->lastProcessedSamples[i];
+ 756              		.loc 1 147 0
+ 757 0024 7B68     		ldr	r3, [r7, #4]
+ 758 0026 DA69     		ldr	r2, [r3, #28]
+ 759 0028 FB68     		ldr	r3, [r7, #12]
+ 760 002a 9B00     		lsls	r3, r3, #2
+ 761 002c 1344     		add	r3, r3, r2
+ 762 002e 1B68     		ldr	r3, [r3]
+ 763 0030 BB60     		str	r3, [r7, #8]
+ 764              	.L30:
+ 145:Src/triggerchannel.c **** 	for(i = 0; i < sm->lastProcessedSamples_size; i++){
+ 765              		.loc 1 145 0 discriminator 2
+ 766 0032 FB68     		ldr	r3, [r7, #12]
+ 767 0034 0133     		adds	r3, r3, #1
+ 768 0036 FB60     		str	r3, [r7, #12]
+ 769              	.L29:
+ 145:Src/triggerchannel.c **** 	for(i = 0; i < sm->lastProcessedSamples_size; i++){
+ 770              		.loc 1 145 0 is_stmt 0 discriminator 1
+ 771 0038 7B68     		ldr	r3, [r7, #4]
+ 772 003a 1A6A     		ldr	r2, [r3, #32]
+ 773 003c FB68     		ldr	r3, [r7, #12]
+ 774 003e 9A42     		cmp	r2, r3
+ 775 0040 E7D8     		bhi	.L31
+ 148:Src/triggerchannel.c **** 	}
+ 149:Src/triggerchannel.c **** 	return max;
+ 776              		.loc 1 149 0 is_stmt 1
+ARM GAS  /tmp/ccK0LnE1.s 			page 17
 
 
- 780              	.Letext0:
- 781              		.file 2 "/usr/arm-none-eabi/include/machine/_default_types.h"
- 782              		.file 3 "/usr/arm-none-eabi/include/sys/_stdint.h"
- 783              		.file 4 "Drivers/CMSIS/Device/ST/STM32F3xx/Include/stm32f303xc.h"
- 784              		.file 5 "Src/../Inc/triggerchannel.h"
- 785              		.file 6 "<built-in>"
- 786              		.file 7 "Drivers/CMSIS/Include/core_cm4.h"
-ARM GAS  /tmp/cc1am2lr.s 			page 18
+ 777 0042 BB68     		ldr	r3, [r7, #8]
+ 150:Src/triggerchannel.c **** }
+ 778              		.loc 1 150 0
+ 779 0044 1846     		mov	r0, r3
+ 780 0046 1437     		adds	r7, r7, #20
+ 781              	.LCFI51:
+ 782              		.cfi_def_cfa_offset 4
+ 783 0048 BD46     		mov	sp, r7
+ 784              	.LCFI52:
+ 785              		.cfi_def_cfa_register 13
+ 786              		@ sp needed
+ 787 004a 5DF8047B 		ldr	r7, [sp], #4
+ 788              	.LCFI53:
+ 789              		.cfi_restore 7
+ 790              		.cfi_def_cfa_offset 0
+ 791 004e 7047     		bx	lr
+ 792              		.cfi_endproc
+ 793              	.LFE121:
+ 795              		.text
+ 796              	.Letext0:
+ 797              		.file 2 "/usr/arm-none-eabi/include/machine/_default_types.h"
+ 798              		.file 3 "/usr/arm-none-eabi/include/sys/_stdint.h"
+ 799              		.file 4 "Drivers/CMSIS/Device/ST/STM32F3xx/Include/stm32f303xc.h"
+ 800              		.file 5 "Drivers/STM32F3xx_HAL_Driver/Inc/stm32f3xx_hal_def.h"
+ 801              		.file 6 "Drivers/STM32F3xx_HAL_Driver/Inc/stm32f3xx_hal_dma.h"
+ 802              		.file 7 "Drivers/STM32F3xx_HAL_Driver/Inc/stm32f3xx_hal_uart.h"
+ 803              		.file 8 "Src/../Inc/triggerchannel.h"
+ 804              		.file 9 "Inc/uartmessagebuffer.h"
+ 805              		.file 10 "Drivers/CMSIS/Include/core_cm4.h"
+ 806              		.file 11 "Inc/midi.h"
+ 807              		.file 12 "Inc/voltdrum_interface.h"
+ARM GAS  /tmp/ccK0LnE1.s 			page 18
 
 
 DEFINED SYMBOLS
                             *ABS*:0000000000000000 triggerchannel.c
-     /tmp/cc1am2lr.s:21     .text.triggerchannel_init:0000000000000000 $t
-     /tmp/cc1am2lr.s:26     .text.triggerchannel_init:0000000000000000 triggerchannel_init
-     /tmp/cc1am2lr.s:155    .text.triggerchannel_init:00000000000000a8 $d
-     /tmp/cc1am2lr.s:160    .text.triggerchannel_setWiper:0000000000000000 $t
-     /tmp/cc1am2lr.s:165    .text.triggerchannel_setWiper:0000000000000000 triggerchannel_setWiper
-     /tmp/cc1am2lr.s:212    .text.triggerchannel_process:0000000000000000 $t
-     /tmp/cc1am2lr.s:217    .text.triggerchannel_process:0000000000000000 triggerchannel_process
-     /tmp/cc1am2lr.s:392    .text.triggerchannel_process_monitor:0000000000000000 triggerchannel_process_monitor
-     /tmp/cc1am2lr.s:331    .text.triggerchannel_process_triggerevent:0000000000000000 triggerchannel_process_triggerevent
-     /tmp/cc1am2lr.s:575    .text.triggerchannel_addSample:0000000000000000 triggerchannel_addSample
-     /tmp/cc1am2lr.s:326    .text.triggerchannel_process_triggerevent:0000000000000000 $t
-     /tmp/cc1am2lr.s:467    .text.triggerchannel_transition_triggerevent_monitor:0000000000000000 triggerchannel_transition_triggerevent_monitor
-     /tmp/cc1am2lr.s:387    .text.triggerchannel_process_monitor:0000000000000000 $t
-     /tmp/cc1am2lr.s:704    .text.triggerchannel_getLastSamplesMax:0000000000000000 triggerchannel_getLastSamplesMax
-     /tmp/cc1am2lr.s:521    .text.triggerchannel_transition_monitor_triggerevent:0000000000000000 triggerchannel_transition_monitor_triggerevent
-     /tmp/cc1am2lr.s:462    .text.triggerchannel_transition_triggerevent_monitor:0000000000000000 $t
-     /tmp/cc1am2lr.s:516    .text.triggerchannel_transition_monitor_triggerevent:0000000000000000 $t
-     /tmp/cc1am2lr.s:570    .text.triggerchannel_addSample:0000000000000000 $t
-     /tmp/cc1am2lr.s:650    .text.triggerchannel_getLastSample:0000000000000000 $t
-     /tmp/cc1am2lr.s:655    .text.triggerchannel_getLastSample:0000000000000000 triggerchannel_getLastSample
-     /tmp/cc1am2lr.s:699    .text.triggerchannel_getLastSamplesMax:0000000000000000 $t
+                            *COM*:0000000000000004 midiMessagebuffer
+                            *COM*:0000000000000004 voltdrumMessagebuffer
+     /tmp/ccK0LnE1.s:23     .text.triggerchannel_init:0000000000000000 $t
+     /tmp/ccK0LnE1.s:28     .text.triggerchannel_init:0000000000000000 triggerchannel_init
+     /tmp/ccK0LnE1.s:161    .text.triggerchannel_init:00000000000000b0 $d
+     /tmp/ccK0LnE1.s:166    .text.triggerchannel_setWiper:0000000000000000 $t
+     /tmp/ccK0LnE1.s:171    .text.triggerchannel_setWiper:0000000000000000 triggerchannel_setWiper
+     /tmp/ccK0LnE1.s:218    .text.triggerchannel_process:0000000000000000 $t
+     /tmp/ccK0LnE1.s:223    .text.triggerchannel_process:0000000000000000 triggerchannel_process
+     /tmp/ccK0LnE1.s:398    .text.triggerchannel_process_monitor:0000000000000000 triggerchannel_process_monitor
+     /tmp/ccK0LnE1.s:337    .text.triggerchannel_process_triggerevent:0000000000000000 triggerchannel_process_triggerevent
+     /tmp/ccK0LnE1.s:591    .text.triggerchannel_addSample:0000000000000000 triggerchannel_addSample
+     /tmp/ccK0LnE1.s:332    .text.triggerchannel_process_triggerevent:0000000000000000 $t
+     /tmp/ccK0LnE1.s:473    .text.triggerchannel_transition_triggerevent_monitor:0000000000000000 triggerchannel_transition_triggerevent_monitor
+     /tmp/ccK0LnE1.s:393    .text.triggerchannel_process_monitor:0000000000000000 $t
+     /tmp/ccK0LnE1.s:720    .text.triggerchannel_getLastSamplesMax:0000000000000000 triggerchannel_getLastSamplesMax
+     /tmp/ccK0LnE1.s:537    .text.triggerchannel_transition_monitor_triggerevent:0000000000000000 triggerchannel_transition_monitor_triggerevent
+     /tmp/ccK0LnE1.s:468    .text.triggerchannel_transition_triggerevent_monitor:0000000000000000 $t
+     /tmp/ccK0LnE1.s:532    .text.triggerchannel_transition_monitor_triggerevent:0000000000000000 $t
+     /tmp/ccK0LnE1.s:586    .text.triggerchannel_addSample:0000000000000000 $t
+     /tmp/ccK0LnE1.s:666    .text.triggerchannel_getLastSample:0000000000000000 $t
+     /tmp/ccK0LnE1.s:671    .text.triggerchannel_getLastSample:0000000000000000 triggerchannel_getLastSample
+     /tmp/ccK0LnE1.s:715    .text.triggerchannel_getLastSamplesMax:0000000000000000 $t
                      .debug_frame:0000000000000010 $d
 
 UNDEFINED SYMBOLS
 malloc
 mcp4261_setWiperPosition
 midi_sendNote
+voltdrum_sendDrumtriggerEvent

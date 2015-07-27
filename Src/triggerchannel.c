@@ -6,8 +6,10 @@
  */
 
 #include "../Inc/triggerchannel.h"
-
+#include "stdlib.h"
 #include "mcp4251.h"
+#include "midi.h"
+#include "voltdrum_interface.h"
 
 void triggerchannel_init (TriggerChannel *sm, uint32_t* dma_adress0, uint32_t* dma_adress1,uint32_t* dma_adress2,uint32_t* dma_adress3){
 
@@ -18,6 +20,7 @@ void triggerchannel_init (TriggerChannel *sm, uint32_t* dma_adress0, uint32_t* d
 	sm->samples_to_take = 5;							//15
 	sm->time_offset = 100;									//400us
 	sm->lastProcessedSamples_size = 15;							//400us
+	sm->voltdrumChannel = 0;
 
 
 	//sm->wiperPosition = 60;
@@ -109,7 +112,7 @@ void triggerchannel_transition_triggerevent_monitor (TriggerChannel *sm){
 
 	//note detected
 	midi_sendNote(10,sm->midinote, sm->max_velocity >> 5);
-
+	voltdrum_sendDrumtriggerEvent(sm, sm->max_velocity >> 5);
 
 
 }

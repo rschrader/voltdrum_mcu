@@ -1,4 +1,4 @@
-ARM GAS  /tmp/cc8B5qt7.s 			page 1
+ARM GAS  /tmp/ccvAPtVH.s 			page 1
 
 
    1              		.syntax unified
@@ -58,7 +58,7 @@ ARM GAS  /tmp/cc8B5qt7.s 			page 1
   24:Drivers/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal.c ****   * @attention
   25:Drivers/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal.c ****   *
   26:Drivers/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal.c ****   * <h2><center>&copy; COPYRIGHT(c) 2014 STMicroelectronics</center></h2>
-ARM GAS  /tmp/cc8B5qt7.s 			page 2
+ARM GAS  /tmp/ccvAPtVH.s 			page 2
 
 
   27:Drivers/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal.c ****   *
@@ -118,7 +118,7 @@ ARM GAS  /tmp/cc8B5qt7.s 			page 1
   81:Drivers/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal.c ****                                         |(__STM32F3xx_HAL_VERSION_SUB2 << 8 )\
   82:Drivers/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal.c ****                                         |(__STM32F3xx_HAL_VERSION_RC))
   83:Drivers/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal.c **** 
-ARM GAS  /tmp/cc8B5qt7.s 			page 3
+ARM GAS  /tmp/ccvAPtVH.s 			page 3
 
 
   84:Drivers/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal.c **** #define IDCODE_DEVID_MASK    ((uint32_t)0x00000FFF)
@@ -178,7 +178,7 @@ ARM GAS  /tmp/cc8B5qt7.s 			page 1
  138:Drivers/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal.c ****   *         the clock configuration
  139:Drivers/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal.c ****   *             
  140:Drivers/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal.c ****   * @note   The Systick configuration is based on HSI clock, as HSI is the clock
-ARM GAS  /tmp/cc8B5qt7.s 			page 4
+ARM GAS  /tmp/ccvAPtVH.s 			page 4
 
 
  141:Drivers/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal.c ****   *         used after a system Reset and the NVIC configuration is set to Priority group 4 
@@ -238,7 +238,7 @@ ARM GAS  /tmp/cc8B5qt7.s 			page 1
   61              		.loc 1 168 0
   62 0020 0023     		movs	r3, #0
  169:Drivers/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal.c **** }
-ARM GAS  /tmp/cc8B5qt7.s 			page 5
+ARM GAS  /tmp/ccvAPtVH.s 			page 5
 
 
   63              		.loc 1 169 0
@@ -298,7 +298,7 @@ ARM GAS  /tmp/cc8B5qt7.s 			page 1
  184:Drivers/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal.c ****   __APB2_RELEASE_RESET();
  105              		.loc 1 184 0
  106 001a 074B     		ldr	r3, .L7
-ARM GAS  /tmp/cc8B5qt7.s 			page 6
+ARM GAS  /tmp/ccvAPtVH.s 			page 6
 
 
  107 001c 0022     		movs	r2, #0
@@ -358,7 +358,7 @@ ARM GAS  /tmp/cc8B5qt7.s 			page 1
  146              		.cfi_def_cfa_offset 4
  147              		.cfi_offset 7, -4
  148 0002 00AF     		add	r7, sp, #0
-ARM GAS  /tmp/cc8B5qt7.s 			page 7
+ARM GAS  /tmp/ccvAPtVH.s 			page 7
 
 
  149              	.LCFI5:
@@ -418,7 +418,7 @@ ARM GAS  /tmp/cc8B5qt7.s 			page 1
  190              		@ sp needed
  191 0008 5DF8047B 		ldr	r7, [sp], #4
  192              	.LCFI11:
-ARM GAS  /tmp/cc8B5qt7.s 			page 8
+ARM GAS  /tmp/ccvAPtVH.s 			page 8
 
 
  193              		.cfi_restore 7
@@ -478,7 +478,7 @@ ARM GAS  /tmp/cc8B5qt7.s 			page 1
  227 0010 A3FB0223 		umull	r2, r3, r3, r2
  228 0014 9B09     		lsrs	r3, r3, #6
  229 0016 1846     		mov	r0, r3
-ARM GAS  /tmp/cc8B5qt7.s 			page 9
+ARM GAS  /tmp/ccvAPtVH.s 			page 9
 
 
  230 0018 FFF7FEFF 		bl	HAL_SYSTICK_Config
@@ -538,7 +538,7 @@ ARM GAS  /tmp/cc8B5qt7.s 			page 1
  262:Drivers/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal.c ****       (+) Resume the time base source interrupt
  263:Drivers/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal.c ****       (+) Get the HAL API driver version
  264:Drivers/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal.c ****       (+) Get the device identifier
-ARM GAS  /tmp/cc8B5qt7.s 			page 10
+ARM GAS  /tmp/ccvAPtVH.s 			page 10
 
 
  265:Drivers/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal.c ****       (+) Get the device revision identifier
@@ -598,7 +598,7 @@ ARM GAS  /tmp/cc8B5qt7.s 			page 1
  294              	.L16:
  295 0018 00000000 		.word	uwTick
  296              		.cfi_endproc
-ARM GAS  /tmp/cc8B5qt7.s 			page 11
+ARM GAS  /tmp/ccvAPtVH.s 			page 11
 
 
  297              	.LFE117:
@@ -658,7 +658,7 @@ ARM GAS  /tmp/cc8B5qt7.s 			page 1
  343              		.thumb
  344              		.thumb_func
  346              	HAL_Delay:
-ARM GAS  /tmp/cc8B5qt7.s 			page 12
+ARM GAS  /tmp/ccvAPtVH.s 			page 12
 
 
  347              	.LFB119:
@@ -718,7 +718,7 @@ ARM GAS  /tmp/cc8B5qt7.s 			page 1
  382              		.cfi_def_cfa_offset 8
  383 0024 BD46     		mov	sp, r7
  384              	.LCFI29:
-ARM GAS  /tmp/cc8B5qt7.s 			page 13
+ARM GAS  /tmp/ccvAPtVH.s 			page 13
 
 
  385              		.cfi_def_cfa_register 13
@@ -778,7 +778,7 @@ ARM GAS  /tmp/cc8B5qt7.s 			page 1
  423 0014 5DF8047B 		ldr	r7, [sp], #4
  424              	.LCFI33:
  425              		.cfi_restore 7
-ARM GAS  /tmp/cc8B5qt7.s 			page 14
+ARM GAS  /tmp/ccvAPtVH.s 			page 14
 
 
  426              		.cfi_def_cfa_offset 0
@@ -838,7 +838,7 @@ ARM GAS  /tmp/cc8B5qt7.s 			page 1
  465              		.cfi_def_cfa_register 13
  466              		@ sp needed
  467 0014 5DF8047B 		ldr	r7, [sp], #4
-ARM GAS  /tmp/cc8B5qt7.s 			page 15
+ARM GAS  /tmp/ccvAPtVH.s 			page 15
 
 
  468              	.LCFI37:
@@ -898,7 +898,7 @@ ARM GAS  /tmp/cc8B5qt7.s 			page 1
  515 0010 00000101 		.word	16842752
  516              		.cfi_endproc
  517              	.LFE122:
-ARM GAS  /tmp/cc8B5qt7.s 			page 16
+ARM GAS  /tmp/ccvAPtVH.s 			page 16
 
 
  519              		.section	.text.HAL_GetREVID,"ax",%progbits
@@ -958,7 +958,7 @@ ARM GAS  /tmp/cc8B5qt7.s 			page 1
  567              	HAL_GetDEVID:
  568              	.LFB124:
  371:Drivers/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal.c **** 
-ARM GAS  /tmp/cc8B5qt7.s 			page 17
+ARM GAS  /tmp/ccvAPtVH.s 			page 17
 
 
  372:Drivers/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal.c **** /**
@@ -1018,7 +1018,7 @@ ARM GAS  /tmp/cc8B5qt7.s 			page 1
  386:Drivers/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal.c **** {
  611              		.loc 1 386 0
  612              		.cfi_startproc
-ARM GAS  /tmp/cc8B5qt7.s 			page 18
+ARM GAS  /tmp/ccvAPtVH.s 			page 18
 
 
  613              		@ args = 0, pretend = 0, frame = 0
@@ -1078,7 +1078,7 @@ ARM GAS  /tmp/cc8B5qt7.s 			page 1
  660 0000 80B4     		push	{r7}
  661              	.LCFI54:
  662              		.cfi_def_cfa_offset 4
-ARM GAS  /tmp/cc8B5qt7.s 			page 19
+ARM GAS  /tmp/ccvAPtVH.s 			page 19
 
 
  663              		.cfi_offset 7, -4
@@ -1138,7 +1138,7 @@ ARM GAS  /tmp/cc8B5qt7.s 			page 1
  710              		.cfi_def_cfa_register 7
  405:Drivers/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal.c ****   SET_BIT(DBGMCU->CR, DBGMCU_CR_DBG_STOP);
  711              		.loc 1 405 0
-ARM GAS  /tmp/cc8B5qt7.s 			page 20
+ARM GAS  /tmp/ccvAPtVH.s 			page 20
 
 
  712 0004 054A     		ldr	r2, .L49
@@ -1198,7 +1198,7 @@ ARM GAS  /tmp/cc8B5qt7.s 			page 1
  759 000a 23F00203 		bic	r3, r3, #2
  760 000e 5360     		str	r3, [r2, #4]
  415:Drivers/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal.c **** }
-ARM GAS  /tmp/cc8B5qt7.s 			page 21
+ARM GAS  /tmp/ccvAPtVH.s 			page 21
 
 
  761              		.loc 1 415 0
@@ -1258,7 +1258,7 @@ ARM GAS  /tmp/cc8B5qt7.s 			page 1
  808              	.LCFI68:
  809              		.cfi_def_cfa_register 13
  810              		@ sp needed
-ARM GAS  /tmp/cc8B5qt7.s 			page 22
+ARM GAS  /tmp/ccvAPtVH.s 			page 22
 
 
  811 0014 5DF8047B 		ldr	r7, [sp], #4
@@ -1318,7 +1318,7 @@ ARM GAS  /tmp/cc8B5qt7.s 			page 1
  858              		.cfi_def_cfa_offset 0
  859 0018 7047     		bx	lr
  860              	.L59:
-ARM GAS  /tmp/cc8B5qt7.s 			page 23
+ARM GAS  /tmp/ccvAPtVH.s 			page 23
 
 
  861 001a 00BF     		.align	2
@@ -1333,70 +1333,70 @@ ARM GAS  /tmp/cc8B5qt7.s 			page 1
  871              		.file 4 "Drivers/CMSIS/Include/core_cm4.h"
  872              		.file 5 "Drivers/CMSIS/Device/ST/STM32F3xx/Include/stm32f303xc.h"
  873              		.file 6 "Drivers/STM32F3xx_HAL_Driver/Inc/stm32f3xx_hal_def.h"
-ARM GAS  /tmp/cc8B5qt7.s 			page 24
+ARM GAS  /tmp/ccvAPtVH.s 			page 24
 
 
 DEFINED SYMBOLS
                             *ABS*:0000000000000000 stm32f3xx_hal.c
-     /tmp/cc8B5qt7.s:21     .bss.uwTick:0000000000000000 $d
-     /tmp/cc8B5qt7.s:24     .bss.uwTick:0000000000000000 uwTick
-     /tmp/cc8B5qt7.s:27     .text.HAL_Init:0000000000000000 $t
-     /tmp/cc8B5qt7.s:32     .text.HAL_Init:0000000000000000 HAL_Init
-     /tmp/cc8B5qt7.s:205    .text.HAL_InitTick:0000000000000000 HAL_InitTick
-     /tmp/cc8B5qt7.s:137    .text.HAL_MspInit:0000000000000000 HAL_MspInit
-     /tmp/cc8B5qt7.s:69     .text.HAL_Init:0000000000000028 $d
-     /tmp/cc8B5qt7.s:74     .text.HAL_DeInit:0000000000000000 $t
-     /tmp/cc8B5qt7.s:79     .text.HAL_DeInit:0000000000000000 HAL_DeInit
-     /tmp/cc8B5qt7.s:171    .text.HAL_MspDeInit:0000000000000000 HAL_MspDeInit
-     /tmp/cc8B5qt7.s:127    .text.HAL_DeInit:0000000000000038 $d
-     /tmp/cc8B5qt7.s:132    .text.HAL_MspInit:0000000000000000 $t
-     /tmp/cc8B5qt7.s:166    .text.HAL_MspDeInit:0000000000000000 $t
-     /tmp/cc8B5qt7.s:200    .text.HAL_InitTick:0000000000000000 $t
-     /tmp/cc8B5qt7.s:251    .text.HAL_InitTick:0000000000000034 $d
-     /tmp/cc8B5qt7.s:256    .text.HAL_IncTick:0000000000000000 $t
-     /tmp/cc8B5qt7.s:261    .text.HAL_IncTick:0000000000000000 HAL_IncTick
-     /tmp/cc8B5qt7.s:295    .text.HAL_IncTick:0000000000000018 $d
-     /tmp/cc8B5qt7.s:300    .text.HAL_GetTick:0000000000000000 $t
-     /tmp/cc8B5qt7.s:305    .text.HAL_GetTick:0000000000000000 HAL_GetTick
-     /tmp/cc8B5qt7.s:336    .text.HAL_GetTick:0000000000000014 $d
-     /tmp/cc8B5qt7.s:341    .text.HAL_Delay:0000000000000000 $t
-     /tmp/cc8B5qt7.s:346    .text.HAL_Delay:0000000000000000 HAL_Delay
-     /tmp/cc8B5qt7.s:392    .text.HAL_SuspendTick:0000000000000000 $t
-     /tmp/cc8B5qt7.s:397    .text.HAL_SuspendTick:0000000000000000 HAL_SuspendTick
-     /tmp/cc8B5qt7.s:431    .text.HAL_SuspendTick:000000000000001c $d
-     /tmp/cc8B5qt7.s:436    .text.HAL_ResumeTick:0000000000000000 $t
-     /tmp/cc8B5qt7.s:441    .text.HAL_ResumeTick:0000000000000000 HAL_ResumeTick
-     /tmp/cc8B5qt7.s:475    .text.HAL_ResumeTick:000000000000001c $d
-     /tmp/cc8B5qt7.s:480    .text.HAL_GetHalVersion:0000000000000000 $t
-     /tmp/cc8B5qt7.s:485    .text.HAL_GetHalVersion:0000000000000000 HAL_GetHalVersion
-     /tmp/cc8B5qt7.s:515    .text.HAL_GetHalVersion:0000000000000010 $d
-     /tmp/cc8B5qt7.s:520    .text.HAL_GetREVID:0000000000000000 $t
-     /tmp/cc8B5qt7.s:525    .text.HAL_GetREVID:0000000000000000 HAL_GetREVID
-     /tmp/cc8B5qt7.s:557    .text.HAL_GetREVID:0000000000000014 $d
-     /tmp/cc8B5qt7.s:562    .text.HAL_GetDEVID:0000000000000000 $t
-     /tmp/cc8B5qt7.s:567    .text.HAL_GetDEVID:0000000000000000 HAL_GetDEVID
-     /tmp/cc8B5qt7.s:599    .text.HAL_GetDEVID:0000000000000018 $d
-     /tmp/cc8B5qt7.s:604    .text.HAL_EnableDBGSleepMode:0000000000000000 $t
-     /tmp/cc8B5qt7.s:609    .text.HAL_EnableDBGSleepMode:0000000000000000 HAL_EnableDBGSleepMode
-     /tmp/cc8B5qt7.s:643    .text.HAL_EnableDBGSleepMode:000000000000001c $d
-     /tmp/cc8B5qt7.s:648    .text.HAL_DisableDBGSleepMode:0000000000000000 $t
-     /tmp/cc8B5qt7.s:653    .text.HAL_DisableDBGSleepMode:0000000000000000 HAL_DisableDBGSleepMode
-     /tmp/cc8B5qt7.s:687    .text.HAL_DisableDBGSleepMode:000000000000001c $d
-     /tmp/cc8B5qt7.s:692    .text.HAL_EnableDBGStopMode:0000000000000000 $t
-     /tmp/cc8B5qt7.s:697    .text.HAL_EnableDBGStopMode:0000000000000000 HAL_EnableDBGStopMode
-     /tmp/cc8B5qt7.s:731    .text.HAL_EnableDBGStopMode:000000000000001c $d
-     /tmp/cc8B5qt7.s:736    .text.HAL_DisableDBGStopMode:0000000000000000 $t
-     /tmp/cc8B5qt7.s:741    .text.HAL_DisableDBGStopMode:0000000000000000 HAL_DisableDBGStopMode
-     /tmp/cc8B5qt7.s:775    .text.HAL_DisableDBGStopMode:000000000000001c $d
-     /tmp/cc8B5qt7.s:780    .text.HAL_EnableDBGStandbyMode:0000000000000000 $t
-     /tmp/cc8B5qt7.s:785    .text.HAL_EnableDBGStandbyMode:0000000000000000 HAL_EnableDBGStandbyMode
-     /tmp/cc8B5qt7.s:819    .text.HAL_EnableDBGStandbyMode:000000000000001c $d
-     /tmp/cc8B5qt7.s:824    .text.HAL_DisableDBGStandbyMode:0000000000000000 $t
-     /tmp/cc8B5qt7.s:829    .text.HAL_DisableDBGStandbyMode:0000000000000000 HAL_DisableDBGStandbyMode
-ARM GAS  /tmp/cc8B5qt7.s 			page 25
+     /tmp/ccvAPtVH.s:21     .bss.uwTick:0000000000000000 $d
+     /tmp/ccvAPtVH.s:24     .bss.uwTick:0000000000000000 uwTick
+     /tmp/ccvAPtVH.s:27     .text.HAL_Init:0000000000000000 $t
+     /tmp/ccvAPtVH.s:32     .text.HAL_Init:0000000000000000 HAL_Init
+     /tmp/ccvAPtVH.s:205    .text.HAL_InitTick:0000000000000000 HAL_InitTick
+     /tmp/ccvAPtVH.s:137    .text.HAL_MspInit:0000000000000000 HAL_MspInit
+     /tmp/ccvAPtVH.s:69     .text.HAL_Init:0000000000000028 $d
+     /tmp/ccvAPtVH.s:74     .text.HAL_DeInit:0000000000000000 $t
+     /tmp/ccvAPtVH.s:79     .text.HAL_DeInit:0000000000000000 HAL_DeInit
+     /tmp/ccvAPtVH.s:171    .text.HAL_MspDeInit:0000000000000000 HAL_MspDeInit
+     /tmp/ccvAPtVH.s:127    .text.HAL_DeInit:0000000000000038 $d
+     /tmp/ccvAPtVH.s:132    .text.HAL_MspInit:0000000000000000 $t
+     /tmp/ccvAPtVH.s:166    .text.HAL_MspDeInit:0000000000000000 $t
+     /tmp/ccvAPtVH.s:200    .text.HAL_InitTick:0000000000000000 $t
+     /tmp/ccvAPtVH.s:251    .text.HAL_InitTick:0000000000000034 $d
+     /tmp/ccvAPtVH.s:256    .text.HAL_IncTick:0000000000000000 $t
+     /tmp/ccvAPtVH.s:261    .text.HAL_IncTick:0000000000000000 HAL_IncTick
+     /tmp/ccvAPtVH.s:295    .text.HAL_IncTick:0000000000000018 $d
+     /tmp/ccvAPtVH.s:300    .text.HAL_GetTick:0000000000000000 $t
+     /tmp/ccvAPtVH.s:305    .text.HAL_GetTick:0000000000000000 HAL_GetTick
+     /tmp/ccvAPtVH.s:336    .text.HAL_GetTick:0000000000000014 $d
+     /tmp/ccvAPtVH.s:341    .text.HAL_Delay:0000000000000000 $t
+     /tmp/ccvAPtVH.s:346    .text.HAL_Delay:0000000000000000 HAL_Delay
+     /tmp/ccvAPtVH.s:392    .text.HAL_SuspendTick:0000000000000000 $t
+     /tmp/ccvAPtVH.s:397    .text.HAL_SuspendTick:0000000000000000 HAL_SuspendTick
+     /tmp/ccvAPtVH.s:431    .text.HAL_SuspendTick:000000000000001c $d
+     /tmp/ccvAPtVH.s:436    .text.HAL_ResumeTick:0000000000000000 $t
+     /tmp/ccvAPtVH.s:441    .text.HAL_ResumeTick:0000000000000000 HAL_ResumeTick
+     /tmp/ccvAPtVH.s:475    .text.HAL_ResumeTick:000000000000001c $d
+     /tmp/ccvAPtVH.s:480    .text.HAL_GetHalVersion:0000000000000000 $t
+     /tmp/ccvAPtVH.s:485    .text.HAL_GetHalVersion:0000000000000000 HAL_GetHalVersion
+     /tmp/ccvAPtVH.s:515    .text.HAL_GetHalVersion:0000000000000010 $d
+     /tmp/ccvAPtVH.s:520    .text.HAL_GetREVID:0000000000000000 $t
+     /tmp/ccvAPtVH.s:525    .text.HAL_GetREVID:0000000000000000 HAL_GetREVID
+     /tmp/ccvAPtVH.s:557    .text.HAL_GetREVID:0000000000000014 $d
+     /tmp/ccvAPtVH.s:562    .text.HAL_GetDEVID:0000000000000000 $t
+     /tmp/ccvAPtVH.s:567    .text.HAL_GetDEVID:0000000000000000 HAL_GetDEVID
+     /tmp/ccvAPtVH.s:599    .text.HAL_GetDEVID:0000000000000018 $d
+     /tmp/ccvAPtVH.s:604    .text.HAL_EnableDBGSleepMode:0000000000000000 $t
+     /tmp/ccvAPtVH.s:609    .text.HAL_EnableDBGSleepMode:0000000000000000 HAL_EnableDBGSleepMode
+     /tmp/ccvAPtVH.s:643    .text.HAL_EnableDBGSleepMode:000000000000001c $d
+     /tmp/ccvAPtVH.s:648    .text.HAL_DisableDBGSleepMode:0000000000000000 $t
+     /tmp/ccvAPtVH.s:653    .text.HAL_DisableDBGSleepMode:0000000000000000 HAL_DisableDBGSleepMode
+     /tmp/ccvAPtVH.s:687    .text.HAL_DisableDBGSleepMode:000000000000001c $d
+     /tmp/ccvAPtVH.s:692    .text.HAL_EnableDBGStopMode:0000000000000000 $t
+     /tmp/ccvAPtVH.s:697    .text.HAL_EnableDBGStopMode:0000000000000000 HAL_EnableDBGStopMode
+     /tmp/ccvAPtVH.s:731    .text.HAL_EnableDBGStopMode:000000000000001c $d
+     /tmp/ccvAPtVH.s:736    .text.HAL_DisableDBGStopMode:0000000000000000 $t
+     /tmp/ccvAPtVH.s:741    .text.HAL_DisableDBGStopMode:0000000000000000 HAL_DisableDBGStopMode
+     /tmp/ccvAPtVH.s:775    .text.HAL_DisableDBGStopMode:000000000000001c $d
+     /tmp/ccvAPtVH.s:780    .text.HAL_EnableDBGStandbyMode:0000000000000000 $t
+     /tmp/ccvAPtVH.s:785    .text.HAL_EnableDBGStandbyMode:0000000000000000 HAL_EnableDBGStandbyMode
+     /tmp/ccvAPtVH.s:819    .text.HAL_EnableDBGStandbyMode:000000000000001c $d
+     /tmp/ccvAPtVH.s:824    .text.HAL_DisableDBGStandbyMode:0000000000000000 $t
+     /tmp/ccvAPtVH.s:829    .text.HAL_DisableDBGStandbyMode:0000000000000000 HAL_DisableDBGStandbyMode
+ARM GAS  /tmp/ccvAPtVH.s 			page 25
 
 
-     /tmp/cc8B5qt7.s:863    .text.HAL_DisableDBGStandbyMode:000000000000001c $d
+     /tmp/ccvAPtVH.s:863    .text.HAL_DisableDBGStandbyMode:000000000000001c $d
                      .debug_frame:0000000000000010 $d
 
 UNDEFINED SYMBOLS

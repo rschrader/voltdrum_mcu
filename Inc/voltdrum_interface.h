@@ -11,9 +11,15 @@
 #include "inttypes.h"
 #include "triggerchannel.h"
 #include "hihatchannel.h"
+#include "uartmessagebuffer.h"
 
 
+#define VOLTDRUM_TXMESSAGEBUFFERSIZE 10
+#define VOLTDRUM_TXBUFFERSIZE 10
 
+UartMessageBuffer *voltdrumMessagebuffer;
+
+void voltdrum_init();
 void voltdrum_sendDrumtriggerEvent(TriggerChannel *triggerChannel, uint8_t velocity);
 void voltdrum_sendHiHatChange(HiHatChannel * hihatChannel, uint8_t value);
 

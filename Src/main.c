@@ -45,6 +45,7 @@
 /* USER CODE BEGIN Includes */
 #include "uartmessagebuffer.h"
 #include "midi.h"
+#include "voltdrum_interface.h"
 #include "mcp4251.h"
 #include "triggerchannel.h"
 #include "hihatchannel.h"
@@ -367,6 +368,7 @@ int main(void)
 
   //initializes the datastructure and amplifiing of the triggerchannels
   midi_init();
+  voltdrum_init();
   initHeadChannels();
   initRimChannels();
   initHiHatChannels();

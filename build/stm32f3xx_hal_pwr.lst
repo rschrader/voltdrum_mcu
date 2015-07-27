@@ -1,4 +1,4 @@
-ARM GAS  /tmp/cc4B8ORR.s 			page 1
+ARM GAS  /tmp/ccbM82fg.s 			page 1
 
 
    1              		.syntax unified
@@ -58,7 +58,7 @@ ARM GAS  /tmp/cc4B8ORR.s 			page 1
   28:Drivers/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_pwr.c ****   *      may be used to endorse or promote products derived from this software
   29:Drivers/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_pwr.c ****   *      without specific prior written permission.
   30:Drivers/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_pwr.c ****   *
-ARM GAS  /tmp/cc4B8ORR.s 			page 2
+ARM GAS  /tmp/ccbM82fg.s 			page 2
 
 
   31:Drivers/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_pwr.c ****   * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS"
@@ -118,7 +118,7 @@ ARM GAS  /tmp/cc4B8ORR.s 			page 1
   85:Drivers/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_pwr.c **** 
   86:Drivers/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_pwr.c **** @endverbatim
   87:Drivers/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_pwr.c ****   * @{
-ARM GAS  /tmp/cc4B8ORR.s 			page 3
+ARM GAS  /tmp/ccbM82fg.s 			page 3
 
 
   88:Drivers/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_pwr.c ****   */
@@ -178,7 +178,7 @@ ARM GAS  /tmp/cc4B8ORR.s 			page 1
   73              		.global	HAL_PWR_EnableBkUpAccess
   74              		.thumb
   75              		.thumb_func
-ARM GAS  /tmp/cc4B8ORR.s 			page 4
+ARM GAS  /tmp/ccbM82fg.s 			page 4
 
 
   77              	HAL_PWR_EnableBkUpAccess:
@@ -238,7 +238,7 @@ ARM GAS  /tmp/cc4B8ORR.s 			page 1
   23:Drivers/CMSIS/Include/core_cmInstr.h ****    *
   24:Drivers/CMSIS/Include/core_cmInstr.h ****    THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS"
   25:Drivers/CMSIS/Include/core_cmInstr.h ****    AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
-ARM GAS  /tmp/cc4B8ORR.s 			page 5
+ARM GAS  /tmp/ccbM82fg.s 			page 5
 
 
   26:Drivers/CMSIS/Include/core_cmInstr.h ****    IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE
@@ -298,7 +298,7 @@ ARM GAS  /tmp/cc4B8ORR.s 			page 1
   80:Drivers/CMSIS/Include/core_cmInstr.h **** 
   81:Drivers/CMSIS/Include/core_cmInstr.h ****     Send Event is a hint instruction. It causes an event to be signaled to the CPU.
   82:Drivers/CMSIS/Include/core_cmInstr.h ****  */
-ARM GAS  /tmp/cc4B8ORR.s 			page 6
+ARM GAS  /tmp/ccbM82fg.s 			page 6
 
 
   83:Drivers/CMSIS/Include/core_cmInstr.h **** #define __SEV                             __sev
@@ -358,7 +358,7 @@ ARM GAS  /tmp/cc4B8ORR.s 			page 1
  137:Drivers/CMSIS/Include/core_cmInstr.h **** 
  138:Drivers/CMSIS/Include/core_cmInstr.h ****     This function reverses the byte order in a signed short value with sign extension to integer.
  139:Drivers/CMSIS/Include/core_cmInstr.h **** 
-ARM GAS  /tmp/cc4B8ORR.s 			page 7
+ARM GAS  /tmp/ccbM82fg.s 			page 7
 
 
  140:Drivers/CMSIS/Include/core_cmInstr.h ****     \param [in]    value  Value to reverse
@@ -418,7 +418,7 @@ ARM GAS  /tmp/cc4B8ORR.s 			page 1
  194:Drivers/CMSIS/Include/core_cmInstr.h **** 
  195:Drivers/CMSIS/Include/core_cmInstr.h **** 
  196:Drivers/CMSIS/Include/core_cmInstr.h **** /** \brief  LDR Exclusive (16 bit)
-ARM GAS  /tmp/cc4B8ORR.s 			page 8
+ARM GAS  /tmp/ccbM82fg.s 			page 8
 
 
  197:Drivers/CMSIS/Include/core_cmInstr.h **** 
@@ -478,7 +478,7 @@ ARM GAS  /tmp/cc4B8ORR.s 			page 1
  251:Drivers/CMSIS/Include/core_cmInstr.h **** 
  252:Drivers/CMSIS/Include/core_cmInstr.h **** /** \brief  Remove the exclusive lock
  253:Drivers/CMSIS/Include/core_cmInstr.h **** 
-ARM GAS  /tmp/cc4B8ORR.s 			page 9
+ARM GAS  /tmp/ccbM82fg.s 			page 9
 
 
  254:Drivers/CMSIS/Include/core_cmInstr.h ****     This function removes the exclusive lock which is created by LDREX.
@@ -538,7 +538,7 @@ ARM GAS  /tmp/cc4B8ORR.s 			page 1
  308:Drivers/CMSIS/Include/core_cmInstr.h **** /* GNU gcc specific functions */
  309:Drivers/CMSIS/Include/core_cmInstr.h **** 
  310:Drivers/CMSIS/Include/core_cmInstr.h **** /* Define macros for porting to both thumb1 and thumb2.
-ARM GAS  /tmp/cc4B8ORR.s 			page 10
+ARM GAS  /tmp/ccbM82fg.s 			page 10
 
 
  311:Drivers/CMSIS/Include/core_cmInstr.h ****  * For thumb1, use low register (r0-r7), specified by constrant "l"
@@ -598,7 +598,7 @@ ARM GAS  /tmp/cc4B8ORR.s 			page 1
  365:Drivers/CMSIS/Include/core_cmInstr.h ****     Instruction Synchronization Barrier flushes the pipeline in the processor,
  366:Drivers/CMSIS/Include/core_cmInstr.h ****     so that all instructions following the ISB are fetched from cache or
  367:Drivers/CMSIS/Include/core_cmInstr.h ****     memory, after the instruction has been completed.
-ARM GAS  /tmp/cc4B8ORR.s 			page 11
+ARM GAS  /tmp/ccbM82fg.s 			page 11
 
 
  368:Drivers/CMSIS/Include/core_cmInstr.h ****  */
@@ -658,7 +658,7 @@ ARM GAS  /tmp/cc4B8ORR.s 			page 1
  422:Drivers/CMSIS/Include/core_cmInstr.h ****     \return               Reversed value
  423:Drivers/CMSIS/Include/core_cmInstr.h ****  */
  424:Drivers/CMSIS/Include/core_cmInstr.h **** __attribute__( ( always_inline ) ) __STATIC_INLINE uint32_t __REV16(uint32_t value)
-ARM GAS  /tmp/cc4B8ORR.s 			page 12
+ARM GAS  /tmp/ccbM82fg.s 			page 12
 
 
  425:Drivers/CMSIS/Include/core_cmInstr.h **** {
@@ -718,7 +718,7 @@ ARM GAS  /tmp/cc4B8ORR.s 			page 1
  479:Drivers/CMSIS/Include/core_cmInstr.h **** 
  480:Drivers/CMSIS/Include/core_cmInstr.h **** /** \brief  Reverse bit order of value
  481:Drivers/CMSIS/Include/core_cmInstr.h **** 
-ARM GAS  /tmp/cc4B8ORR.s 			page 13
+ARM GAS  /tmp/ccbM82fg.s 			page 13
 
 
  482:Drivers/CMSIS/Include/core_cmInstr.h ****     This function reverses the bit order of the given value.
@@ -778,7 +778,7 @@ ARM GAS  /tmp/cc4B8ORR.s 			page 1
  520:Drivers/CMSIS/Include/core_cmInstr.h **** 
  521:Drivers/CMSIS/Include/core_cmInstr.h ****     This function performs a exclusive LDR command for 16 bit values.
  522:Drivers/CMSIS/Include/core_cmInstr.h **** 
-ARM GAS  /tmp/cc4B8ORR.s 			page 14
+ARM GAS  /tmp/ccbM82fg.s 			page 14
 
 
  523:Drivers/CMSIS/Include/core_cmInstr.h ****     \param [in]    ptr  Pointer to data
@@ -838,7 +838,7 @@ ARM GAS  /tmp/cc4B8ORR.s 			page 1
  577:Drivers/CMSIS/Include/core_cmInstr.h **** 
  578:Drivers/CMSIS/Include/core_cmInstr.h ****     This function performs a exclusive STR command for 16 bit values.
  579:Drivers/CMSIS/Include/core_cmInstr.h **** 
-ARM GAS  /tmp/cc4B8ORR.s 			page 15
+ARM GAS  /tmp/ccbM82fg.s 			page 15
 
 
  580:Drivers/CMSIS/Include/core_cmInstr.h ****     \param [in]  value  Value to store
@@ -898,7 +898,7 @@ ARM GAS  /tmp/cc4B8ORR.s 			page 1
  634:Drivers/CMSIS/Include/core_cmInstr.h ****   __ASM ("ssat %0, %1, %2" : "=r" (__RES) :  "I" (ARG2), "r" (__ARG1) ); \
  635:Drivers/CMSIS/Include/core_cmInstr.h ****   __RES; \
  636:Drivers/CMSIS/Include/core_cmInstr.h ****  })
-ARM GAS  /tmp/cc4B8ORR.s 			page 16
+ARM GAS  /tmp/ccbM82fg.s 			page 16
 
 
  637:Drivers/CMSIS/Include/core_cmInstr.h **** 
@@ -958,7 +958,7 @@ ARM GAS  /tmp/cc4B8ORR.s 			page 1
  136              		.loc 1 110 0
  137 0034 00BF     		nop
  138 0036 1437     		adds	r7, r7, #20
-ARM GAS  /tmp/cc4B8ORR.s 			page 17
+ARM GAS  /tmp/ccbM82fg.s 			page 17
 
 
  139              	.LCFI7:
@@ -1018,7 +1018,7 @@ ARM GAS  /tmp/cc4B8ORR.s 			page 1
  184 000e 93FAA3F3 		rbit r3, r3
  185              	@ 0 "" 2
  186              		.thumb
-ARM GAS  /tmp/cc4B8ORR.s 			page 18
+ARM GAS  /tmp/ccbM82fg.s 			page 18
 
 
  187              		.syntax unified
@@ -1078,7 +1078,7 @@ ARM GAS  /tmp/cc4B8ORR.s 			page 1
  238              		.thumb_func
  240              	HAL_PWR_EnableWakeUpPin:
  241              	.LFB115:
-ARM GAS  /tmp/cc4B8ORR.s 			page 19
+ARM GAS  /tmp/ccbM82fg.s 			page 19
 
 
  123:Drivers/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_pwr.c **** 
@@ -1138,7 +1138,7 @@ ARM GAS  /tmp/cc4B8ORR.s 			page 1
  177:Drivers/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_pwr.c ****               functions with
  178:Drivers/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_pwr.c ****           (++) PWR_SLEEPENTRY_WFI: enter SLEEP mode with WFI instruction
  179:Drivers/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_pwr.c ****           (++) PWR_SLEEPENTRY_WFE: enter SLEEP mode with WFE instruction
-ARM GAS  /tmp/cc4B8ORR.s 			page 20
+ARM GAS  /tmp/ccbM82fg.s 			page 20
 
 
  180:Drivers/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_pwr.c ****      
@@ -1198,7 +1198,7 @@ ARM GAS  /tmp/cc4B8ORR.s 			page 1
  234:Drivers/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_pwr.c ****       (++) To wake up from the Stop mode with an RTC alarm event, it is necessary to
  235:Drivers/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_pwr.c ****             configure the RTC to generate the RTC alarm using the HAL_RTC_SetAlarm_IT() function.
  236:Drivers/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_pwr.c **** 
-ARM GAS  /tmp/cc4B8ORR.s 			page 21
+ARM GAS  /tmp/ccbM82fg.s 			page 21
 
 
  237:Drivers/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_pwr.c ****       (++) To wake up from the Stop mode with an RTC Tamper or time stamp event, it
@@ -1258,7 +1258,7 @@ ARM GAS  /tmp/cc4B8ORR.s 			page 1
  267              		.syntax unified
  268              	@ 491 "Drivers/CMSIS/Include/core_cmInstr.h" 1
  269 0014 93FAA3F3 		rbit r3, r3
-ARM GAS  /tmp/cc4B8ORR.s 			page 22
+ARM GAS  /tmp/ccbM82fg.s 			page 22
 
 
  270              	@ 0 "" 2
@@ -1318,7 +1318,7 @@ ARM GAS  /tmp/cc4B8ORR.s 			page 1
  316              		.cfi_def_cfa_register 13
  317              		@ sp needed
  318 0048 5DF8047B 		ldr	r7, [sp], #4
-ARM GAS  /tmp/cc4B8ORR.s 			page 23
+ARM GAS  /tmp/ccbM82fg.s 			page 23
 
 
  319              	.LCFI21:
@@ -1378,7 +1378,7 @@ ARM GAS  /tmp/cc4B8ORR.s 			page 1
  363              		.syntax unified
  364              	@ 491 "Drivers/CMSIS/Include/core_cmInstr.h" 1
  365 0014 93FAA3F3 		rbit r3, r3
-ARM GAS  /tmp/cc4B8ORR.s 			page 24
+ARM GAS  /tmp/ccbM82fg.s 			page 24
 
 
  366              	@ 0 "" 2
@@ -1438,7 +1438,7 @@ ARM GAS  /tmp/cc4B8ORR.s 			page 1
  412              		.cfi_def_cfa_register 13
  413              		@ sp needed
  414 0048 5DF8047B 		ldr	r7, [sp], #4
-ARM GAS  /tmp/cc4B8ORR.s 			page 25
+ARM GAS  /tmp/ccbM82fg.s 			page 25
 
 
  415              	.LCFI27:
@@ -1498,7 +1498,7 @@ ARM GAS  /tmp/cc4B8ORR.s 			page 1
  452              		.loc 1 306 0
  453 000c 0023     		movs	r3, #0
  454 000e FB60     		str	r3, [r7, #12]
-ARM GAS  /tmp/cc4B8ORR.s 			page 26
+ARM GAS  /tmp/ccbM82fg.s 			page 26
 
 
  307:Drivers/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_pwr.c **** 
@@ -1558,7 +1558,7 @@ ARM GAS  /tmp/cc4B8ORR.s 			page 1
  486              	@ 338 "Drivers/CMSIS/Include/core_cmInstr.h" 1
  487 003e 30BF     		wfi
  488              	@ 0 "" 2
-ARM GAS  /tmp/cc4B8ORR.s 			page 27
+ARM GAS  /tmp/ccbM82fg.s 			page 27
 
 
  489              		.thumb
@@ -1618,7 +1618,7 @@ ARM GAS  /tmp/cc4B8ORR.s 			page 1
  529              		.loc 1 340 0
  530 0048 00BF     		nop
  531 004a 1437     		adds	r7, r7, #20
-ARM GAS  /tmp/cc4B8ORR.s 			page 28
+ARM GAS  /tmp/ccbM82fg.s 			page 28
 
 
  532              	.LCFI31:
@@ -1678,7 +1678,7 @@ ARM GAS  /tmp/cc4B8ORR.s 			page 1
  566              		.cfi_def_cfa_offset 4
  567              		.cfi_offset 7, -4
  568 0002 85B0     		sub	sp, sp, #20
-ARM GAS  /tmp/cc4B8ORR.s 			page 29
+ARM GAS  /tmp/ccbM82fg.s 			page 29
 
 
  569              	.LCFI35:
@@ -1738,7 +1738,7 @@ ARM GAS  /tmp/cc4B8ORR.s 			page 1
  383:Drivers/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_pwr.c **** 
  384:Drivers/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_pwr.c ****   /* Select STOP mode entry --------------------------------------------------*/
  385:Drivers/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_pwr.c ****   if(STOPEntry == PWR_STOPENTRY_WFI)
-ARM GAS  /tmp/cc4B8ORR.s 			page 30
+ARM GAS  /tmp/ccbM82fg.s 			page 30
 
 
  603              		.loc 1 385 0
@@ -1798,7 +1798,7 @@ ARM GAS  /tmp/cc4B8ORR.s 			page 1
  387:Drivers/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_pwr.c ****     /* Request Wait For Interrupt */
  388:Drivers/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_pwr.c ****     __WFI();
  389:Drivers/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_pwr.c ****   }
-ARM GAS  /tmp/cc4B8ORR.s 			page 31
+ARM GAS  /tmp/ccbM82fg.s 			page 31
 
 
  390:Drivers/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_pwr.c ****   else
@@ -1858,7 +1858,7 @@ ARM GAS  /tmp/cc4B8ORR.s 			page 1
  410:Drivers/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_pwr.c ****   * @retval None
  411:Drivers/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_pwr.c ****   */
  412:Drivers/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_pwr.c **** void HAL_PWR_EnterSTANDBYMode(void)
-ARM GAS  /tmp/cc4B8ORR.s 			page 32
+ARM GAS  /tmp/ccbM82fg.s 			page 32
 
 
  413:Drivers/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_pwr.c **** {
@@ -1918,7 +1918,7 @@ ARM GAS  /tmp/cc4B8ORR.s 			page 1
  728              		.cfi_def_cfa_register 13
  729              		@ sp needed
  730 0022 5DF8047B 		ldr	r7, [sp], #4
-ARM GAS  /tmp/cc4B8ORR.s 			page 33
+ARM GAS  /tmp/ccbM82fg.s 			page 33
 
 
  731              	.LCFI43:
@@ -1939,33 +1939,33 @@ ARM GAS  /tmp/cc4B8ORR.s 			page 1
  747              		.file 5 "Drivers/CMSIS/Include/core_cm4.h"
  748              		.file 6 "Drivers/CMSIS/Device/ST/STM32F3xx/Include/stm32f303xc.h"
  749              		.file 7 "Drivers/CMSIS/Device/ST/STM32F3xx/Include/stm32f3xx.h"
-ARM GAS  /tmp/cc4B8ORR.s 			page 34
+ARM GAS  /tmp/ccbM82fg.s 			page 34
 
 
 DEFINED SYMBOLS
                             *ABS*:0000000000000000 stm32f3xx_hal_pwr.c
-     /tmp/cc4B8ORR.s:21     .text.HAL_PWR_DeInit:0000000000000000 $t
-     /tmp/cc4B8ORR.s:26     .text.HAL_PWR_DeInit:0000000000000000 HAL_PWR_DeInit
-     /tmp/cc4B8ORR.s:67     .text.HAL_PWR_DeInit:0000000000000028 $d
-     /tmp/cc4B8ORR.s:72     .text.HAL_PWR_EnableBkUpAccess:0000000000000000 $t
-     /tmp/cc4B8ORR.s:77     .text.HAL_PWR_EnableBkUpAccess:0000000000000000 HAL_PWR_EnableBkUpAccess
-     /tmp/cc4B8ORR.s:154    .text.HAL_PWR_DisableBkUpAccess:0000000000000000 $t
-     /tmp/cc4B8ORR.s:159    .text.HAL_PWR_DisableBkUpAccess:0000000000000000 HAL_PWR_DisableBkUpAccess
-     /tmp/cc4B8ORR.s:235    .text.HAL_PWR_EnableWakeUpPin:0000000000000000 $t
-     /tmp/cc4B8ORR.s:240    .text.HAL_PWR_EnableWakeUpPin:0000000000000000 HAL_PWR_EnableWakeUpPin
-     /tmp/cc4B8ORR.s:326    .text.HAL_PWR_EnableWakeUpPin:0000000000000050 $d
-     /tmp/cc4B8ORR.s:331    .text.HAL_PWR_DisableWakeUpPin:0000000000000000 $t
-     /tmp/cc4B8ORR.s:336    .text.HAL_PWR_DisableWakeUpPin:0000000000000000 HAL_PWR_DisableWakeUpPin
-     /tmp/cc4B8ORR.s:422    .text.HAL_PWR_DisableWakeUpPin:0000000000000050 $d
-     /tmp/cc4B8ORR.s:427    .text.HAL_PWR_EnterSLEEPMode:0000000000000000 $t
-     /tmp/cc4B8ORR.s:432    .text.HAL_PWR_EnterSLEEPMode:0000000000000000 HAL_PWR_EnterSLEEPMode
-     /tmp/cc4B8ORR.s:546    .text.HAL_PWR_EnterSLEEPMode:0000000000000054 $d
-     /tmp/cc4B8ORR.s:552    .text.HAL_PWR_EnterSTOPMode:0000000000000000 $t
-     /tmp/cc4B8ORR.s:557    .text.HAL_PWR_EnterSTOPMode:0000000000000000 HAL_PWR_EnterSTOPMode
-     /tmp/cc4B8ORR.s:676    .text.HAL_PWR_EnterSTOPMode:0000000000000060 $d
-     /tmp/cc4B8ORR.s:682    .text.HAL_PWR_EnterSTANDBYMode:0000000000000000 $t
-     /tmp/cc4B8ORR.s:687    .text.HAL_PWR_EnterSTANDBYMode:0000000000000000 HAL_PWR_EnterSTANDBYMode
-     /tmp/cc4B8ORR.s:738    .text.HAL_PWR_EnterSTANDBYMode:0000000000000028 $d
+     /tmp/ccbM82fg.s:21     .text.HAL_PWR_DeInit:0000000000000000 $t
+     /tmp/ccbM82fg.s:26     .text.HAL_PWR_DeInit:0000000000000000 HAL_PWR_DeInit
+     /tmp/ccbM82fg.s:67     .text.HAL_PWR_DeInit:0000000000000028 $d
+     /tmp/ccbM82fg.s:72     .text.HAL_PWR_EnableBkUpAccess:0000000000000000 $t
+     /tmp/ccbM82fg.s:77     .text.HAL_PWR_EnableBkUpAccess:0000000000000000 HAL_PWR_EnableBkUpAccess
+     /tmp/ccbM82fg.s:154    .text.HAL_PWR_DisableBkUpAccess:0000000000000000 $t
+     /tmp/ccbM82fg.s:159    .text.HAL_PWR_DisableBkUpAccess:0000000000000000 HAL_PWR_DisableBkUpAccess
+     /tmp/ccbM82fg.s:235    .text.HAL_PWR_EnableWakeUpPin:0000000000000000 $t
+     /tmp/ccbM82fg.s:240    .text.HAL_PWR_EnableWakeUpPin:0000000000000000 HAL_PWR_EnableWakeUpPin
+     /tmp/ccbM82fg.s:326    .text.HAL_PWR_EnableWakeUpPin:0000000000000050 $d
+     /tmp/ccbM82fg.s:331    .text.HAL_PWR_DisableWakeUpPin:0000000000000000 $t
+     /tmp/ccbM82fg.s:336    .text.HAL_PWR_DisableWakeUpPin:0000000000000000 HAL_PWR_DisableWakeUpPin
+     /tmp/ccbM82fg.s:422    .text.HAL_PWR_DisableWakeUpPin:0000000000000050 $d
+     /tmp/ccbM82fg.s:427    .text.HAL_PWR_EnterSLEEPMode:0000000000000000 $t
+     /tmp/ccbM82fg.s:432    .text.HAL_PWR_EnterSLEEPMode:0000000000000000 HAL_PWR_EnterSLEEPMode
+     /tmp/ccbM82fg.s:546    .text.HAL_PWR_EnterSLEEPMode:0000000000000054 $d
+     /tmp/ccbM82fg.s:552    .text.HAL_PWR_EnterSTOPMode:0000000000000000 $t
+     /tmp/ccbM82fg.s:557    .text.HAL_PWR_EnterSTOPMode:0000000000000000 HAL_PWR_EnterSTOPMode
+     /tmp/ccbM82fg.s:676    .text.HAL_PWR_EnterSTOPMode:0000000000000060 $d
+     /tmp/ccbM82fg.s:682    .text.HAL_PWR_EnterSTANDBYMode:0000000000000000 $t
+     /tmp/ccbM82fg.s:687    .text.HAL_PWR_EnterSTANDBYMode:0000000000000000 HAL_PWR_EnterSTANDBYMode
+     /tmp/ccbM82fg.s:738    .text.HAL_PWR_EnterSTANDBYMode:0000000000000028 $d
                      .debug_frame:0000000000000010 $d
 
 NO UNDEFINED SYMBOLS

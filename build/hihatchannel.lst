@@ -1,4 +1,4 @@
-ARM GAS  /tmp/ccM3arSw.s 			page 1
+ARM GAS  /tmp/ccJMlBW2.s 			page 1
 
 
    1              		.syntax unified
@@ -58,7 +58,7 @@ ARM GAS  /tmp/ccM3arSw.s 			page 1
   40              	.LCFI1:
   41              		.cfi_def_cfa_offset 24
   42 0004 00AF     		add	r7, sp, #0
-ARM GAS  /tmp/ccM3arSw.s 			page 2
+ARM GAS  /tmp/ccJMlBW2.s 			page 2
 
 
   43              	.LCFI2:
@@ -118,7 +118,7 @@ ARM GAS  /tmp/ccM3arSw.s 			page 1
   85 0046 FB68     		ldr	r3, [r7, #12]
   86 0048 4FF49662 		mov	r2, #1200
   87 004c 5A62     		str	r2, [r3, #36]
-ARM GAS  /tmp/ccM3arSw.s 			page 3
+ARM GAS  /tmp/ccJMlBW2.s 			page 3
 
 
   29:Src/hihatchannel.c **** 	chan->velocityFactor = 1;
@@ -177,392 +177,357 @@ ARM GAS  /tmp/ccM3arSw.s 			page 1
  130              		.cfi_endproc
  131              	.LFE112:
  133              		.comm	buffer,80,4
- 134              		.section	.rodata
-ARM GAS  /tmp/ccM3arSw.s 			page 4
+ 134              		.section	.text.hihatchannel_process,"ax",%progbits
+ARM GAS  /tmp/ccJMlBW2.s 			page 4
 
 
  135              		.align	2
- 136              	.LC0:
- 137 0000 2569202F 		.ascii	"%i / %i \012\015\000"
- 137      20256920 
- 137      0A0D00
- 138 000b 00       		.section	.text.hihatchannel_process,"ax",%progbits
- 139              		.align	2
- 140              		.global	hihatchannel_process
- 141              		.thumb
- 142              		.thumb_func
- 144              	hihatchannel_process:
- 145              	.LFB113:
+ 136              		.global	hihatchannel_process
+ 137              		.thumb
+ 138              		.thumb_func
+ 140              	hihatchannel_process:
+ 141              	.LFB113:
   40:Src/hihatchannel.c **** 
   41:Src/hihatchannel.c **** 
   42:Src/hihatchannel.c **** int buffer[20];
   43:Src/hihatchannel.c **** void hihatchannel_process(HiHatChannel *chan){
- 146              		.loc 1 43 0
- 147              		.cfi_startproc
- 148              		@ args = 0, pretend = 0, frame = 16
- 149              		@ frame_needed = 1, uses_anonymous_args = 0
- 150 0000 80B5     		push	{r7, lr}
- 151              	.LCFI6:
- 152              		.cfi_def_cfa_offset 8
- 153              		.cfi_offset 7, -8
- 154              		.cfi_offset 14, -4
- 155 0002 84B0     		sub	sp, sp, #16
- 156              	.LCFI7:
- 157              		.cfi_def_cfa_offset 24
- 158 0004 00AF     		add	r7, sp, #0
- 159              	.LCFI8:
- 160              		.cfi_def_cfa_register 7
- 161 0006 7860     		str	r0, [r7, #4]
+ 142              		.loc 1 43 0
+ 143              		.cfi_startproc
+ 144              		@ args = 0, pretend = 0, frame = 16
+ 145              		@ frame_needed = 1, uses_anonymous_args = 0
+ 146 0000 80B5     		push	{r7, lr}
+ 147              	.LCFI6:
+ 148              		.cfi_def_cfa_offset 8
+ 149              		.cfi_offset 7, -8
+ 150              		.cfi_offset 14, -4
+ 151 0002 84B0     		sub	sp, sp, #16
+ 152              	.LCFI7:
+ 153              		.cfi_def_cfa_offset 24
+ 154 0004 00AF     		add	r7, sp, #0
+ 155              	.LCFI8:
+ 156              		.cfi_def_cfa_register 7
+ 157 0006 7860     		str	r0, [r7, #4]
   44:Src/hihatchannel.c **** 	uint32_t value = *chan->dma_value_ptr;
- 162              		.loc 1 44 0
- 163 0008 7B68     		ldr	r3, [r7, #4]
- 164 000a 5B69     		ldr	r3, [r3, #20]
- 165 000c 1B68     		ldr	r3, [r3]
- 166 000e FB60     		str	r3, [r7, #12]
+ 158              		.loc 1 44 0
+ 159 0008 7B68     		ldr	r3, [r7, #4]
+ 160 000a 5B69     		ldr	r3, [r3, #20]
+ 161 000c 1B68     		ldr	r3, [r3]
+ 162 000e FB60     		str	r3, [r7, #12]
   45:Src/hihatchannel.c **** 
   46:Src/hihatchannel.c **** 	//check maximum value;
   47:Src/hihatchannel.c **** 	if(value > chan->max_value) chan->max_value = value;
- 167              		.loc 1 47 0
- 168 0010 7B68     		ldr	r3, [r7, #4]
- 169 0012 1A68     		ldr	r2, [r3]
- 170 0014 FB68     		ldr	r3, [r7, #12]
- 171 0016 9A42     		cmp	r2, r3
- 172 0018 02D2     		bcs	.L3
- 173              		.loc 1 47 0 is_stmt 0 discriminator 1
- 174 001a 7B68     		ldr	r3, [r7, #4]
- 175 001c FA68     		ldr	r2, [r7, #12]
- 176 001e 1A60     		str	r2, [r3]
- 177              	.L3:
+ 163              		.loc 1 47 0
+ 164 0010 7B68     		ldr	r3, [r7, #4]
+ 165 0012 1A68     		ldr	r2, [r3]
+ 166 0014 FB68     		ldr	r3, [r7, #12]
+ 167 0016 9A42     		cmp	r2, r3
+ 168 0018 02D2     		bcs	.L3
+ 169              		.loc 1 47 0 is_stmt 0 discriminator 1
+ 170 001a 7B68     		ldr	r3, [r7, #4]
+ 171 001c FA68     		ldr	r2, [r7, #12]
+ 172 001e 1A60     		str	r2, [r3]
+ 173              	.L3:
   48:Src/hihatchannel.c **** 
   49:Src/hihatchannel.c **** 
   50:Src/hihatchannel.c **** 
   51:Src/hihatchannel.c **** 
   52:Src/hihatchannel.c **** 	//check sending
-ARM GAS  /tmp/ccM3arSw.s 			page 5
-
-
   53:Src/hihatchannel.c **** 	if(chan->last_send_value > value + chan->offset_to_send ||
- 178              		.loc 1 53 0 is_stmt 1
- 179 0020 7B68     		ldr	r3, [r7, #4]
- 180 0022 5A68     		ldr	r2, [r3, #4]
- 181 0024 7B68     		ldr	r3, [r7, #4]
- 182 0026 9969     		ldr	r1, [r3, #24]
- 183 0028 FB68     		ldr	r3, [r7, #12]
- 184 002a 0B44     		add	r3, r3, r1
- 185 002c 9A42     		cmp	r2, r3
- 186 002e 07D8     		bhi	.L4
+ 174              		.loc 1 53 0 is_stmt 1
+ 175 0020 7B68     		ldr	r3, [r7, #4]
+ 176 0022 5A68     		ldr	r2, [r3, #4]
+ 177 0024 7B68     		ldr	r3, [r7, #4]
+ 178 0026 9969     		ldr	r1, [r3, #24]
+ARM GAS  /tmp/ccJMlBW2.s 			page 5
+
+
+ 179 0028 FB68     		ldr	r3, [r7, #12]
+ 180 002a 0B44     		add	r3, r3, r1
+ 181 002c 9A42     		cmp	r2, r3
+ 182 002e 07D8     		bhi	.L4
   54:Src/hihatchannel.c **** 			chan->last_send_value + chan->offset_to_send < value ){
- 187              		.loc 1 54 0 discriminator 1
- 188 0030 7B68     		ldr	r3, [r7, #4]
- 189 0032 5A68     		ldr	r2, [r3, #4]
- 190 0034 7B68     		ldr	r3, [r7, #4]
- 191 0036 9B69     		ldr	r3, [r3, #24]
- 192 0038 1A44     		add	r2, r2, r3
+ 183              		.loc 1 54 0 discriminator 1
+ 184 0030 7B68     		ldr	r3, [r7, #4]
+ 185 0032 5A68     		ldr	r2, [r3, #4]
+ 186 0034 7B68     		ldr	r3, [r7, #4]
+ 187 0036 9B69     		ldr	r3, [r3, #24]
+ 188 0038 1A44     		add	r2, r2, r3
   53:Src/hihatchannel.c **** 			chan->last_send_value + chan->offset_to_send < value ){
- 193              		.loc 1 53 0 discriminator 1
- 194 003a FB68     		ldr	r3, [r7, #12]
- 195 003c 9A42     		cmp	r2, r3
- 196 003e 06D2     		bcs	.L5
- 197              	.L4:
+ 189              		.loc 1 53 0 discriminator 1
+ 190 003a FB68     		ldr	r3, [r7, #12]
+ 191 003c 9A42     		cmp	r2, r3
+ 192 003e 06D2     		bcs	.L5
+ 193              	.L4:
   55:Src/hihatchannel.c **** 			hihatchannel_onChange(chan, value);
- 198              		.loc 1 55 0
- 199 0040 F968     		ldr	r1, [r7, #12]
- 200 0042 7868     		ldr	r0, [r7, #4]
- 201 0044 FFF7FEFF 		bl	hihatchannel_onChange
+ 194              		.loc 1 55 0
+ 195 0040 F968     		ldr	r1, [r7, #12]
+ 196 0042 7868     		ldr	r0, [r7, #4]
+ 197 0044 FFF7FEFF 		bl	hihatchannel_onChange
   56:Src/hihatchannel.c **** 
   57:Src/hihatchannel.c **** 			chan->intervalls_since_last_change = 0;
- 202              		.loc 1 57 0
- 203 0048 7B68     		ldr	r3, [r7, #4]
- 204 004a 0022     		movs	r2, #0
- 205 004c 9A60     		str	r2, [r3, #8]
- 206              	.L5:
+ 198              		.loc 1 57 0
+ 199 0048 7B68     		ldr	r3, [r7, #4]
+ 200 004a 0022     		movs	r2, #0
+ 201 004c 9A60     		str	r2, [r3, #8]
+ 202              	.L5:
   58:Src/hihatchannel.c **** 	}
   59:Src/hihatchannel.c **** 	chan->intervalls_since_last_change++;
- 207              		.loc 1 59 0
- 208 004e 7B68     		ldr	r3, [r7, #4]
- 209 0050 9B68     		ldr	r3, [r3, #8]
- 210 0052 5A1C     		adds	r2, r3, #1
- 211 0054 7B68     		ldr	r3, [r7, #4]
- 212 0056 9A60     		str	r2, [r3, #8]
+ 203              		.loc 1 59 0
+ 204 004e 7B68     		ldr	r3, [r7, #4]
+ 205 0050 9B68     		ldr	r3, [r3, #8]
+ 206 0052 5A1C     		adds	r2, r3, #1
+ 207 0054 7B68     		ldr	r3, [r7, #4]
+ 208 0056 9A60     		str	r2, [r3, #8]
   60:Src/hihatchannel.c **** 	chan->intervalls_since_last_controlChange++;
- 213              		.loc 1 60 0
- 214 0058 7B68     		ldr	r3, [r7, #4]
- 215 005a DB68     		ldr	r3, [r3, #12]
- 216 005c 5A1C     		adds	r2, r3, #1
- 217 005e 7B68     		ldr	r3, [r7, #4]
- 218 0060 DA60     		str	r2, [r3, #12]
+ 209              		.loc 1 60 0
+ 210 0058 7B68     		ldr	r3, [r7, #4]
+ 211 005a DB68     		ldr	r3, [r3, #12]
+ 212 005c 5A1C     		adds	r2, r3, #1
+ 213 005e 7B68     		ldr	r3, [r7, #4]
+ 214 0060 DA60     		str	r2, [r3, #12]
   61:Src/hihatchannel.c **** 
   62:Src/hihatchannel.c **** 
-  63:Src/hihatchannel.c **** 	sprintf(buffer, "%i / %i \n\r", value, chan->max_value);
- 219              		.loc 1 63 0
- 220 0062 7B68     		ldr	r3, [r7, #4]
- 221 0064 1B68     		ldr	r3, [r3]
- 222 0066 FA68     		ldr	r2, [r7, #12]
-ARM GAS  /tmp/ccM3arSw.s 			page 6
+  63:Src/hihatchannel.c **** }
+ 215              		.loc 1 63 0
+ 216 0062 00BF     		nop
+ 217 0064 1037     		adds	r7, r7, #16
+ 218              	.LCFI9:
+ 219              		.cfi_def_cfa_offset 8
+ 220 0066 BD46     		mov	sp, r7
+ 221              	.LCFI10:
+ 222              		.cfi_def_cfa_register 13
+ 223              		@ sp needed
+ 224 0068 80BD     		pop	{r7, pc}
+ARM GAS  /tmp/ccJMlBW2.s 			page 6
 
 
- 223 0068 0649     		ldr	r1, .L6
- 224 006a 0748     		ldr	r0, .L6+4
- 225 006c FFF7FEFF 		bl	sprintf
-  64:Src/hihatchannel.c **** 	HAL_UART_Transmit_IT(&huart1, buffer, 20);
- 226              		.loc 1 64 0
- 227 0070 1422     		movs	r2, #20
- 228 0072 0549     		ldr	r1, .L6+4
- 229 0074 0548     		ldr	r0, .L6+8
- 230 0076 FFF7FEFF 		bl	HAL_UART_Transmit_IT
-  65:Src/hihatchannel.c **** }
- 231              		.loc 1 65 0
- 232 007a 00BF     		nop
- 233 007c 1037     		adds	r7, r7, #16
- 234              	.LCFI9:
- 235              		.cfi_def_cfa_offset 8
- 236 007e BD46     		mov	sp, r7
- 237              	.LCFI10:
- 238              		.cfi_def_cfa_register 13
- 239              		@ sp needed
- 240 0080 80BD     		pop	{r7, pc}
- 241              	.L7:
- 242 0082 00BF     		.align	2
- 243              	.L6:
- 244 0084 00000000 		.word	.LC0
- 245 0088 00000000 		.word	buffer
- 246 008c 00000000 		.word	huart1
- 247              		.cfi_endproc
- 248              	.LFE113:
- 250              		.section	.text.hihatchannel_onChange,"ax",%progbits
- 251              		.align	2
- 252              		.global	hihatchannel_onChange
- 253              		.thumb
- 254              		.thumb_func
- 256              	hihatchannel_onChange:
- 257              	.LFB114:
+ 225              		.cfi_endproc
+ 226              	.LFE113:
+ 228 006a 00BF     		.section	.text.hihatchannel_onChange,"ax",%progbits
+ 229              		.align	2
+ 230              		.global	hihatchannel_onChange
+ 231              		.thumb
+ 232              		.thumb_func
+ 234              	hihatchannel_onChange:
+ 235              	.LFB114:
+  64:Src/hihatchannel.c **** 
+  65:Src/hihatchannel.c **** void hihatchannel_onChange(HiHatChannel *chan, uint32_t value){
+ 236              		.loc 1 65 0
+ 237              		.cfi_startproc
+ 238              		@ args = 0, pretend = 0, frame = 24
+ 239              		@ frame_needed = 1, uses_anonymous_args = 0
+ 240 0000 80B5     		push	{r7, lr}
+ 241              	.LCFI11:
+ 242              		.cfi_def_cfa_offset 8
+ 243              		.cfi_offset 7, -8
+ 244              		.cfi_offset 14, -4
+ 245 0002 86B0     		sub	sp, sp, #24
+ 246              	.LCFI12:
+ 247              		.cfi_def_cfa_offset 32
+ 248 0004 00AF     		add	r7, sp, #0
+ 249              	.LCFI13:
+ 250              		.cfi_def_cfa_register 7
+ 251 0006 F860     		str	r0, [r7, #12]
+ 252 0008 B960     		str	r1, [r7, #8]
   66:Src/hihatchannel.c **** 
-  67:Src/hihatchannel.c **** void hihatchannel_onChange(HiHatChannel *chan, uint32_t value){
- 258              		.loc 1 67 0
- 259              		.cfi_startproc
- 260              		@ args = 0, pretend = 0, frame = 24
- 261              		@ frame_needed = 1, uses_anonymous_args = 0
- 262 0000 80B5     		push	{r7, lr}
- 263              	.LCFI11:
- 264              		.cfi_def_cfa_offset 8
- 265              		.cfi_offset 7, -8
- 266              		.cfi_offset 14, -4
- 267 0002 86B0     		sub	sp, sp, #24
- 268              	.LCFI12:
- 269              		.cfi_def_cfa_offset 32
- 270 0004 00AF     		add	r7, sp, #0
- 271              	.LCFI13:
- 272              		.cfi_def_cfa_register 7
- 273 0006 F860     		str	r0, [r7, #12]
- 274 0008 B960     		str	r1, [r7, #8]
+  67:Src/hihatchannel.c **** 
   68:Src/hihatchannel.c **** 
-  69:Src/hihatchannel.c **** 
-  70:Src/hihatchannel.c **** 
-ARM GAS  /tmp/ccM3arSw.s 			page 7
+  69:Src/hihatchannel.c **** 	//process hihat pedal midinote
+  70:Src/hihatchannel.c **** 	if( value < chan->closedValue && !chan->closed){
+ 253              		.loc 1 70 0
+ 254 000a FB68     		ldr	r3, [r7, #12]
+ 255 000c 1A6A     		ldr	r2, [r3, #32]
+ 256 000e BB68     		ldr	r3, [r7, #8]
+ 257 0010 9A42     		cmp	r2, r3
+ 258 0012 2ED9     		bls	.L7
+ 259              		.loc 1 70 0 is_stmt 0 discriminator 1
+ 260 0014 FB68     		ldr	r3, [r7, #12]
+ 261 0016 1B69     		ldr	r3, [r3, #16]
+ 262 0018 002B     		cmp	r3, #0
+ 263 001a 2AD1     		bne	.L7
+ 264              	.LBB2:
+  71:Src/hihatchannel.c **** 		chan->closed = 1;
+ 265              		.loc 1 71 0 is_stmt 1
+ 266 001c FB68     		ldr	r3, [r7, #12]
+ 267 001e 0122     		movs	r2, #1
+ 268 0020 1A61     		str	r2, [r3, #16]
+  72:Src/hihatchannel.c **** 		uint8_t velocity =  (128 * chan->velocityFactor) /chan->intervalls_since_last_change;
+ 269              		.loc 1 72 0
+ 270 0022 FB68     		ldr	r3, [r7, #12]
+ 271 0024 D3ED0A7A 		vldr.32	s15, [r3, #40]
+ 272 0028 9FED2D7A 		vldr.32	s14, .L11
+ 273 002c 67EE876A 		vmul.f32	s13, s15, s14
+ 274 0030 FB68     		ldr	r3, [r7, #12]
+ARM GAS  /tmp/ccJMlBW2.s 			page 7
 
 
-  71:Src/hihatchannel.c **** 	//process hihat pedal midinote
-  72:Src/hihatchannel.c **** 	if( value < chan->closedValue && !chan->closed){
- 275              		.loc 1 72 0
- 276 000a FB68     		ldr	r3, [r7, #12]
- 277 000c 1A6A     		ldr	r2, [r3, #32]
- 278 000e BB68     		ldr	r3, [r7, #8]
- 279 0010 9A42     		cmp	r2, r3
- 280 0012 2ED9     		bls	.L9
- 281              		.loc 1 72 0 is_stmt 0 discriminator 1
- 282 0014 FB68     		ldr	r3, [r7, #12]
- 283 0016 1B69     		ldr	r3, [r3, #16]
- 284 0018 002B     		cmp	r3, #0
- 285 001a 2AD1     		bne	.L9
- 286              	.LBB2:
-  73:Src/hihatchannel.c **** 		chan->closed = 1;
- 287              		.loc 1 73 0 is_stmt 1
- 288 001c FB68     		ldr	r3, [r7, #12]
- 289 001e 0122     		movs	r2, #1
- 290 0020 1A61     		str	r2, [r3, #16]
-  74:Src/hihatchannel.c **** 		uint8_t velocity =  (128 * chan->velocityFactor) /chan->intervalls_since_last_change;
- 291              		.loc 1 74 0
- 292 0022 FB68     		ldr	r3, [r7, #12]
- 293 0024 D3ED0A7A 		vldr.32	s15, [r3, #40]
- 294 0028 9FED2D7A 		vldr.32	s14, .L13
- 295 002c 67EE876A 		vmul.f32	s13, s15, s14
- 296 0030 FB68     		ldr	r3, [r7, #12]
- 297 0032 9B68     		ldr	r3, [r3, #8]
- 298 0034 07EE903A 		vmov	s15, r3	@ int
- 299 0038 B8EE677A 		vcvt.f32.u32	s14, s15
- 300 003c C6EE877A 		vdiv.f32	s15, s13, s14
- 301 0040 FCEEE77A 		vcvt.u32.f32	s15, s15
- 302 0044 C7ED017A 		vstr.32	s15, [r7, #4]	@ int
- 303 0048 3B79     		ldrb	r3, [r7, #4]
- 304 004a FB75     		strb	r3, [r7, #23]
-  75:Src/hihatchannel.c **** 		if(velocity > 127) velocity = 127;
- 305              		.loc 1 75 0
- 306 004c FB7D     		ldrb	r3, [r7, #23]	@ zero_extendqisi2
- 307 004e 5BB2     		sxtb	r3, r3
- 308 0050 002B     		cmp	r3, #0
- 309 0052 01DA     		bge	.L10
- 310              		.loc 1 75 0 is_stmt 0 discriminator 1
- 311 0054 7F23     		movs	r3, #127
- 312 0056 FB75     		strb	r3, [r7, #23]
- 313              	.L10:
-  76:Src/hihatchannel.c **** 		midi_sendNote(10, chan->midi_pedal_note, velocity);
- 314              		.loc 1 76 0 is_stmt 1
- 315 0058 FB68     		ldr	r3, [r7, #12]
- 316 005a 1B6B     		ldr	r3, [r3, #48]
- 317 005c DBB2     		uxtb	r3, r3
- 318 005e FA7D     		ldrb	r2, [r7, #23]	@ zero_extendqisi2
- 319 0060 1946     		mov	r1, r3
- 320 0062 0A20     		movs	r0, #10
- 321 0064 FFF7FEFF 		bl	midi_sendNote
-  77:Src/hihatchannel.c **** 
-  78:Src/hihatchannel.c **** 		//set midi note of the related trigger
-  79:Src/hihatchannel.c **** 		chan->relatedTriggerpad->midinote = chan->midi_note_closed;
- 322              		.loc 1 79 0
-ARM GAS  /tmp/ccM3arSw.s 			page 8
-
-
- 323 0068 FB68     		ldr	r3, [r7, #12]
- 324 006a 5B6B     		ldr	r3, [r3, #52]
- 325 006c FA68     		ldr	r2, [r7, #12]
- 326 006e D26B     		ldr	r2, [r2, #60]
- 327 0070 1A64     		str	r2, [r3, #64]
- 328              	.L9:
- 329              	.LBE2:
+ 275 0032 9B68     		ldr	r3, [r3, #8]
+ 276 0034 07EE903A 		vmov	s15, r3	@ int
+ 277 0038 B8EE677A 		vcvt.f32.u32	s14, s15
+ 278 003c C6EE877A 		vdiv.f32	s15, s13, s14
+ 279 0040 FCEEE77A 		vcvt.u32.f32	s15, s15
+ 280 0044 C7ED017A 		vstr.32	s15, [r7, #4]	@ int
+ 281 0048 3B79     		ldrb	r3, [r7, #4]
+ 282 004a FB75     		strb	r3, [r7, #23]
+  73:Src/hihatchannel.c **** 		if(velocity > 127) velocity = 127;
+ 283              		.loc 1 73 0
+ 284 004c FB7D     		ldrb	r3, [r7, #23]	@ zero_extendqisi2
+ 285 004e 5BB2     		sxtb	r3, r3
+ 286 0050 002B     		cmp	r3, #0
+ 287 0052 01DA     		bge	.L8
+ 288              		.loc 1 73 0 is_stmt 0 discriminator 1
+ 289 0054 7F23     		movs	r3, #127
+ 290 0056 FB75     		strb	r3, [r7, #23]
+ 291              	.L8:
+  74:Src/hihatchannel.c **** 		midi_sendNote(10, chan->midi_pedal_note, velocity);
+ 292              		.loc 1 74 0 is_stmt 1
+ 293 0058 FB68     		ldr	r3, [r7, #12]
+ 294 005a 1B6B     		ldr	r3, [r3, #48]
+ 295 005c DBB2     		uxtb	r3, r3
+ 296 005e FA7D     		ldrb	r2, [r7, #23]	@ zero_extendqisi2
+ 297 0060 1946     		mov	r1, r3
+ 298 0062 0A20     		movs	r0, #10
+ 299 0064 FFF7FEFF 		bl	midi_sendNote
+  75:Src/hihatchannel.c **** 
+  76:Src/hihatchannel.c **** 		//set midi note of the related trigger
+  77:Src/hihatchannel.c **** 		chan->relatedTriggerpad->midinote = chan->midi_note_closed;
+ 300              		.loc 1 77 0
+ 301 0068 FB68     		ldr	r3, [r7, #12]
+ 302 006a 5B6B     		ldr	r3, [r3, #52]
+ 303 006c FA68     		ldr	r2, [r7, #12]
+ 304 006e D26B     		ldr	r2, [r2, #60]
+ 305 0070 1A64     		str	r2, [r3, #64]
+ 306              	.L7:
+ 307              	.LBE2:
+  78:Src/hihatchannel.c **** 
+  79:Src/hihatchannel.c **** 	}
   80:Src/hihatchannel.c **** 
-  81:Src/hihatchannel.c **** 	}
-  82:Src/hihatchannel.c **** 
-  83:Src/hihatchannel.c **** 	if(value > chan->openedValue){
- 330              		.loc 1 83 0
- 331 0072 FB68     		ldr	r3, [r7, #12]
- 332 0074 5A6A     		ldr	r2, [r3, #36]
- 333 0076 BB68     		ldr	r3, [r7, #8]
- 334 0078 9A42     		cmp	r2, r3
- 335 007a 07D2     		bcs	.L11
-  84:Src/hihatchannel.c **** 		chan->closed = 0;
- 336              		.loc 1 84 0
- 337 007c FB68     		ldr	r3, [r7, #12]
- 338 007e 0022     		movs	r2, #0
- 339 0080 1A61     		str	r2, [r3, #16]
-  85:Src/hihatchannel.c **** 		chan->relatedTriggerpad->midinote = chan->midi_note_open;
- 340              		.loc 1 85 0
- 341 0082 FB68     		ldr	r3, [r7, #12]
- 342 0084 5B6B     		ldr	r3, [r3, #52]
- 343 0086 FA68     		ldr	r2, [r7, #12]
- 344 0088 926B     		ldr	r2, [r2, #56]
- 345 008a 1A64     		str	r2, [r3, #64]
- 346              	.L11:
-  86:Src/hihatchannel.c **** 	}
-  87:Src/hihatchannel.c **** 
-  88:Src/hihatchannel.c **** 	//process control change
-  89:Src/hihatchannel.c **** 	if(chan->sendControlChange && chan->intervalls_since_last_controlChange >= chan->send_controlChang
- 347              		.loc 1 89 0
- 348 008c FB68     		ldr	r3, [r7, #12]
- 349 008e 93F84030 		ldrb	r3, [r3, #64]	@ zero_extendqisi2
- 350 0092 002B     		cmp	r3, #0
- 351 0094 1CD0     		beq	.L12
- 352              		.loc 1 89 0 is_stmt 0 discriminator 1
- 353 0096 FB68     		ldr	r3, [r7, #12]
- 354 0098 DA68     		ldr	r2, [r3, #12]
- 355 009a FB68     		ldr	r3, [r7, #12]
- 356 009c DB69     		ldr	r3, [r3, #28]
- 357 009e 9A42     		cmp	r2, r3
- 358 00a0 16D3     		bcc	.L12
- 359              	.LBB3:
-  90:Src/hihatchannel.c **** 		uint8_t velocity = 127 - ((value * 127) /chan->max_value) ;
- 360              		.loc 1 90 0 is_stmt 1
- 361 00a2 BA68     		ldr	r2, [r7, #8]
- 362 00a4 1346     		mov	r3, r2
- 363 00a6 DB01     		lsls	r3, r3, #7
- 364 00a8 9A1A     		subs	r2, r3, r2
- 365 00aa FB68     		ldr	r3, [r7, #12]
- 366 00ac 1B68     		ldr	r3, [r3]
- 367 00ae B2FBF3F3 		udiv	r3, r2, r3
- 368 00b2 DBB2     		uxtb	r3, r3
-ARM GAS  /tmp/ccM3arSw.s 			page 9
+  81:Src/hihatchannel.c **** 	if(value > chan->openedValue){
+ 308              		.loc 1 81 0
+ 309 0072 FB68     		ldr	r3, [r7, #12]
+ 310 0074 5A6A     		ldr	r2, [r3, #36]
+ 311 0076 BB68     		ldr	r3, [r7, #8]
+ 312 0078 9A42     		cmp	r2, r3
+ 313 007a 07D2     		bcs	.L9
+  82:Src/hihatchannel.c **** 		chan->closed = 0;
+ 314              		.loc 1 82 0
+ 315 007c FB68     		ldr	r3, [r7, #12]
+ 316 007e 0022     		movs	r2, #0
+ 317 0080 1A61     		str	r2, [r3, #16]
+  83:Src/hihatchannel.c **** 		chan->relatedTriggerpad->midinote = chan->midi_note_open;
+ 318              		.loc 1 83 0
+ 319 0082 FB68     		ldr	r3, [r7, #12]
+ 320 0084 5B6B     		ldr	r3, [r3, #52]
+ARM GAS  /tmp/ccJMlBW2.s 			page 8
 
 
- 369 00b4 C3F17F03 		rsb	r3, r3, #127
- 370 00b8 BB75     		strb	r3, [r7, #22]
-  91:Src/hihatchannel.c **** 		midi_sendControlChange(10, chan->midi_control, velocity);
- 371              		.loc 1 91 0
- 372 00ba FB68     		ldr	r3, [r7, #12]
- 373 00bc DB6A     		ldr	r3, [r3, #44]
- 374 00be DBB2     		uxtb	r3, r3
- 375 00c0 BA7D     		ldrb	r2, [r7, #22]	@ zero_extendqisi2
- 376 00c2 1946     		mov	r1, r3
- 377 00c4 0A20     		movs	r0, #10
- 378 00c6 FFF7FEFF 		bl	midi_sendControlChange
-  92:Src/hihatchannel.c **** 		chan->intervalls_since_last_controlChange = 0;
- 379              		.loc 1 92 0
- 380 00ca FB68     		ldr	r3, [r7, #12]
- 381 00cc 0022     		movs	r2, #0
- 382 00ce DA60     		str	r2, [r3, #12]
- 383              	.L12:
- 384              	.LBE3:
-  93:Src/hihatchannel.c **** 	}
-  94:Src/hihatchannel.c **** 
-  95:Src/hihatchannel.c **** 	//update last send value
-  96:Src/hihatchannel.c **** 	chan->last_send_value = value;
- 385              		.loc 1 96 0
- 386 00d0 FB68     		ldr	r3, [r7, #12]
- 387 00d2 BA68     		ldr	r2, [r7, #8]
- 388 00d4 5A60     		str	r2, [r3, #4]
-  97:Src/hihatchannel.c **** 
-  98:Src/hihatchannel.c **** }
- 389              		.loc 1 98 0
- 390 00d6 00BF     		nop
- 391 00d8 1837     		adds	r7, r7, #24
- 392              	.LCFI14:
- 393              		.cfi_def_cfa_offset 8
- 394 00da BD46     		mov	sp, r7
- 395              	.LCFI15:
- 396              		.cfi_def_cfa_register 13
- 397              		@ sp needed
- 398 00dc 80BD     		pop	{r7, pc}
- 399              	.L14:
- 400 00de 00BF     		.align	2
- 401              	.L13:
- 402 00e0 00000043 		.word	1124073472
- 403              		.cfi_endproc
- 404              	.LFE114:
- 406              		.text
- 407              	.Letext0:
- 408              		.file 2 "/usr/arm-none-eabi/include/machine/_default_types.h"
- 409              		.file 3 "/usr/arm-none-eabi/include/sys/_stdint.h"
- 410              		.file 4 "Drivers/CMSIS/Device/ST/STM32F3xx/Include/stm32f303xc.h"
- 411              		.file 5 "Drivers/STM32F3xx_HAL_Driver/Inc/stm32f3xx_hal_def.h"
- 412              		.file 6 "Drivers/STM32F3xx_HAL_Driver/Inc/stm32f3xx_hal_dma.h"
- 413              		.file 7 "Drivers/STM32F3xx_HAL_Driver/Inc/stm32f3xx_hal_uart.h"
- 414              		.file 8 "Src/../Inc/triggerchannel.h"
- 415              		.file 9 "Src/../Inc/hihatchannel.h"
- 416              		.file 10 "Inc/uartmessagebuffer.h"
- 417              		.file 11 "Drivers/CMSIS/Include/core_cm4.h"
- 418              		.file 12 "Inc/midi.h"
-ARM GAS  /tmp/ccM3arSw.s 			page 10
+ 321 0086 FA68     		ldr	r2, [r7, #12]
+ 322 0088 926B     		ldr	r2, [r2, #56]
+ 323 008a 1A64     		str	r2, [r3, #64]
+ 324              	.L9:
+  84:Src/hihatchannel.c **** 	}
+  85:Src/hihatchannel.c **** 
+  86:Src/hihatchannel.c **** 	//process control change
+  87:Src/hihatchannel.c **** 	if(chan->sendControlChange && chan->intervalls_since_last_controlChange >= chan->send_controlChang
+ 325              		.loc 1 87 0
+ 326 008c FB68     		ldr	r3, [r7, #12]
+ 327 008e 93F84030 		ldrb	r3, [r3, #64]	@ zero_extendqisi2
+ 328 0092 002B     		cmp	r3, #0
+ 329 0094 1CD0     		beq	.L10
+ 330              		.loc 1 87 0 is_stmt 0 discriminator 1
+ 331 0096 FB68     		ldr	r3, [r7, #12]
+ 332 0098 DA68     		ldr	r2, [r3, #12]
+ 333 009a FB68     		ldr	r3, [r7, #12]
+ 334 009c DB69     		ldr	r3, [r3, #28]
+ 335 009e 9A42     		cmp	r2, r3
+ 336 00a0 16D3     		bcc	.L10
+ 337              	.LBB3:
+  88:Src/hihatchannel.c **** 		uint8_t velocity = 127 - ((value * 127) /chan->max_value) ;
+ 338              		.loc 1 88 0 is_stmt 1
+ 339 00a2 BA68     		ldr	r2, [r7, #8]
+ 340 00a4 1346     		mov	r3, r2
+ 341 00a6 DB01     		lsls	r3, r3, #7
+ 342 00a8 9A1A     		subs	r2, r3, r2
+ 343 00aa FB68     		ldr	r3, [r7, #12]
+ 344 00ac 1B68     		ldr	r3, [r3]
+ 345 00ae B2FBF3F3 		udiv	r3, r2, r3
+ 346 00b2 DBB2     		uxtb	r3, r3
+ 347 00b4 C3F17F03 		rsb	r3, r3, #127
+ 348 00b8 BB75     		strb	r3, [r7, #22]
+  89:Src/hihatchannel.c **** 		midi_sendControlChange(10, chan->midi_control, velocity);
+ 349              		.loc 1 89 0
+ 350 00ba FB68     		ldr	r3, [r7, #12]
+ 351 00bc DB6A     		ldr	r3, [r3, #44]
+ 352 00be DBB2     		uxtb	r3, r3
+ 353 00c0 BA7D     		ldrb	r2, [r7, #22]	@ zero_extendqisi2
+ 354 00c2 1946     		mov	r1, r3
+ 355 00c4 0A20     		movs	r0, #10
+ 356 00c6 FFF7FEFF 		bl	midi_sendControlChange
+  90:Src/hihatchannel.c **** 		chan->intervalls_since_last_controlChange = 0;
+ 357              		.loc 1 90 0
+ 358 00ca FB68     		ldr	r3, [r7, #12]
+ 359 00cc 0022     		movs	r2, #0
+ 360 00ce DA60     		str	r2, [r3, #12]
+ 361              	.L10:
+ 362              	.LBE3:
+  91:Src/hihatchannel.c **** 	}
+  92:Src/hihatchannel.c **** 
+  93:Src/hihatchannel.c **** 	//update last send value
+  94:Src/hihatchannel.c **** 	chan->last_send_value = value;
+ 363              		.loc 1 94 0
+ 364 00d0 FB68     		ldr	r3, [r7, #12]
+ 365 00d2 BA68     		ldr	r2, [r7, #8]
+ 366 00d4 5A60     		str	r2, [r3, #4]
+ARM GAS  /tmp/ccJMlBW2.s 			page 9
 
 
- 419              		.file 13 "<built-in>"
-ARM GAS  /tmp/ccM3arSw.s 			page 11
+  95:Src/hihatchannel.c **** 
+  96:Src/hihatchannel.c **** }
+ 367              		.loc 1 96 0
+ 368 00d6 00BF     		nop
+ 369 00d8 1837     		adds	r7, r7, #24
+ 370              	.LCFI14:
+ 371              		.cfi_def_cfa_offset 8
+ 372 00da BD46     		mov	sp, r7
+ 373              	.LCFI15:
+ 374              		.cfi_def_cfa_register 13
+ 375              		@ sp needed
+ 376 00dc 80BD     		pop	{r7, pc}
+ 377              	.L12:
+ 378 00de 00BF     		.align	2
+ 379              	.L11:
+ 380 00e0 00000043 		.word	1124073472
+ 381              		.cfi_endproc
+ 382              	.LFE114:
+ 384              		.text
+ 385              	.Letext0:
+ 386              		.file 2 "/usr/arm-none-eabi/include/machine/_default_types.h"
+ 387              		.file 3 "/usr/arm-none-eabi/include/sys/_stdint.h"
+ 388              		.file 4 "Drivers/CMSIS/Device/ST/STM32F3xx/Include/stm32f303xc.h"
+ 389              		.file 5 "Drivers/STM32F3xx_HAL_Driver/Inc/stm32f3xx_hal_def.h"
+ 390              		.file 6 "Drivers/STM32F3xx_HAL_Driver/Inc/stm32f3xx_hal_dma.h"
+ 391              		.file 7 "Drivers/STM32F3xx_HAL_Driver/Inc/stm32f3xx_hal_uart.h"
+ 392              		.file 8 "Src/../Inc/triggerchannel.h"
+ 393              		.file 9 "Src/../Inc/hihatchannel.h"
+ 394              		.file 10 "Inc/uartmessagebuffer.h"
+ 395              		.file 11 "Drivers/CMSIS/Include/core_cm4.h"
+ 396              		.file 12 "Inc/midi.h"
+ARM GAS  /tmp/ccJMlBW2.s 			page 10
 
 
 DEFINED SYMBOLS
                             *ABS*:0000000000000000 hihatchannel.c
                             *COM*:0000000000000004 midiMessagebuffer
-     /tmp/ccM3arSw.s:22     .text.hihatchannel_init:0000000000000000 $t
-     /tmp/ccM3arSw.s:27     .text.hihatchannel_init:0000000000000000 hihatchannel_init
+     /tmp/ccJMlBW2.s:22     .text.hihatchannel_init:0000000000000000 $t
+     /tmp/ccJMlBW2.s:27     .text.hihatchannel_init:0000000000000000 hihatchannel_init
                             *COM*:0000000000000050 buffer
-     /tmp/ccM3arSw.s:135    .rodata:0000000000000000 $d
-     /tmp/ccM3arSw.s:139    .text.hihatchannel_process:0000000000000000 $t
-     /tmp/ccM3arSw.s:144    .text.hihatchannel_process:0000000000000000 hihatchannel_process
-     /tmp/ccM3arSw.s:256    .text.hihatchannel_onChange:0000000000000000 hihatchannel_onChange
-     /tmp/ccM3arSw.s:244    .text.hihatchannel_process:0000000000000084 $d
-     /tmp/ccM3arSw.s:251    .text.hihatchannel_onChange:0000000000000000 $t
-     /tmp/ccM3arSw.s:402    .text.hihatchannel_onChange:00000000000000e0 $d
+     /tmp/ccJMlBW2.s:135    .text.hihatchannel_process:0000000000000000 $t
+     /tmp/ccJMlBW2.s:140    .text.hihatchannel_process:0000000000000000 hihatchannel_process
+     /tmp/ccJMlBW2.s:234    .text.hihatchannel_onChange:0000000000000000 hihatchannel_onChange
+     /tmp/ccJMlBW2.s:229    .text.hihatchannel_onChange:0000000000000000 $t
+     /tmp/ccJMlBW2.s:380    .text.hihatchannel_onChange:00000000000000e0 $d
                      .debug_frame:0000000000000010 $d
 
 UNDEFINED SYMBOLS
-sprintf
-HAL_UART_Transmit_IT
-huart1
 midi_sendNote
 midi_sendControlChange

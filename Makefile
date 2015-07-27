@@ -68,6 +68,7 @@ C_SOURCES = \
   Src/hihatchannel.c  \
   Src/performance.c  \
   Src/uartmessagebuffer.c  \
+  Src/voltdrum_interface.c  \
   Src/midi.c 
 ASM_SOURCES = \
   Drivers/CMSIS/Device/ST/STM32F3xx/Source/Templates/gcc/startup_stm32f303xc.s

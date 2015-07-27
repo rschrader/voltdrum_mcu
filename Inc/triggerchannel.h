@@ -37,6 +37,8 @@ typedef struct{
 	uint32_t samples_to_take;
 	uint32_t time_offset;
 	uint32_t midinote;
+	uint32_t voltdrumChannel;
+
 
 	// variables for amplifier control
 	GPIO_TypeDef* potiCsPort;

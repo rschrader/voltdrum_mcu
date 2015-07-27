@@ -1,0 +1,260 @@
+ARM GAS  /tmp/ccAkRRDd.s 			page 1
+
+
+   1              		.syntax unified
+   2              		.cpu cortex-m4
+   3              		.eabi_attribute 27, 1
+   4              		.fpu fpv4-sp-d16
+   5              		.eabi_attribute 20, 1
+   6              		.eabi_attribute 21, 1
+   7              		.eabi_attribute 23, 3
+   8              		.eabi_attribute 24, 1
+   9              		.eabi_attribute 25, 1
+  10              		.eabi_attribute 26, 1
+  11              		.eabi_attribute 30, 6
+  12              		.eabi_attribute 34, 1
+  13              		.eabi_attribute 18, 4
+  14              		.thumb
+  15              		.syntax unified
+  16              		.file	"voltdrum_interface.c"
+  17              		.text
+  18              	.Ltext0:
+  19              		.cfi_sections	.debug_frame
+  20              		.comm	voltdrumMessagebuffer,4,4
+  21              		.section	.text.voltdrum_init,"ax",%progbits
+  22              		.align	2
+  23              		.global	voltdrum_init
+  24              		.thumb
+  25              		.thumb_func
+  27              	voltdrum_init:
+  28              	.LFB112:
+  29              		.file 1 "Src/voltdrum_interface.c"
+   1:Src/voltdrum_interface.c **** /*
+   2:Src/voltdrum_interface.c ****  * midi.c
+   3:Src/voltdrum_interface.c ****  *
+   4:Src/voltdrum_interface.c ****  *  Created on: 19.05.2015
+   5:Src/voltdrum_interface.c ****  *      Author: raphael
+   6:Src/voltdrum_interface.c ****  */
+   7:Src/voltdrum_interface.c **** 
+   8:Src/voltdrum_interface.c **** #include "voltdrum_interface.h"
+   9:Src/voltdrum_interface.c **** #include "stdlib.h"
+  10:Src/voltdrum_interface.c **** 
+  11:Src/voltdrum_interface.c **** extern UART_HandleTypeDef huart1;
+  12:Src/voltdrum_interface.c **** 
+  13:Src/voltdrum_interface.c **** 
+  14:Src/voltdrum_interface.c **** void voltdrum_init(){
+  30              		.loc 1 14 0
+  31              		.cfi_startproc
+  32              		@ args = 0, pretend = 0, frame = 0
+  33              		@ frame_needed = 1, uses_anonymous_args = 0
+  34 0000 80B5     		push	{r7, lr}
+  35              	.LCFI0:
+  36              		.cfi_def_cfa_offset 8
+  37              		.cfi_offset 7, -8
+  38              		.cfi_offset 14, -4
+  39 0002 00AF     		add	r7, sp, #0
+  40              	.LCFI1:
+  41              		.cfi_def_cfa_register 7
+  15:Src/voltdrum_interface.c **** 	voltdrumMessagebuffer = uartmessagebuffer_create(VOLTDRUM_TXMESSAGEBUFFERSIZE,VOLTDRUM_TXBUFFERSIZ
+  42              		.loc 1 15 0
+  43 0004 044A     		ldr	r2, .L2
+ARM GAS  /tmp/ccAkRRDd.s 			page 2
+
+
+  44 0006 0A21     		movs	r1, #10
+  45 0008 0A20     		movs	r0, #10
+  46 000a FFF7FEFF 		bl	uartmessagebuffer_create
+  47 000e 0246     		mov	r2, r0
+  48 0010 024B     		ldr	r3, .L2+4
+  49 0012 1A60     		str	r2, [r3]
+  16:Src/voltdrum_interface.c **** }
+  50              		.loc 1 16 0
+  51 0014 00BF     		nop
+  52 0016 80BD     		pop	{r7, pc}
+  53              	.L3:
+  54              		.align	2
+  55              	.L2:
+  56 0018 00000000 		.word	huart1
+  57 001c 00000000 		.word	voltdrumMessagebuffer
+  58              		.cfi_endproc
+  59              	.LFE112:
+  61              		.section	.text.voltdrum_sendDrumtriggerEvent,"ax",%progbits
+  62              		.align	2
+  63              		.global	voltdrum_sendDrumtriggerEvent
+  64              		.thumb
+  65              		.thumb_func
+  67              	voltdrum_sendDrumtriggerEvent:
+  68              	.LFB113:
+  17:Src/voltdrum_interface.c **** 
+  18:Src/voltdrum_interface.c **** 
+  19:Src/voltdrum_interface.c **** void voltdrum_sendDrumtriggerEvent(TriggerChannel *triggerChannel, uint8_t velocity){
+  69              		.loc 1 19 0
+  70              		.cfi_startproc
+  71              		@ args = 0, pretend = 0, frame = 16
+  72              		@ frame_needed = 1, uses_anonymous_args = 0
+  73 0000 80B5     		push	{r7, lr}
+  74              	.LCFI2:
+  75              		.cfi_def_cfa_offset 8
+  76              		.cfi_offset 7, -8
+  77              		.cfi_offset 14, -4
+  78 0002 84B0     		sub	sp, sp, #16
+  79              	.LCFI3:
+  80              		.cfi_def_cfa_offset 24
+  81 0004 00AF     		add	r7, sp, #0
+  82              	.LCFI4:
+  83              		.cfi_def_cfa_register 7
+  84 0006 7860     		str	r0, [r7, #4]
+  85 0008 0B46     		mov	r3, r1
+  86 000a FB70     		strb	r3, [r7, #3]
+  20:Src/voltdrum_interface.c **** 	//note on
+  21:Src/voltdrum_interface.c **** 	uint8_t bfrsize = 2;
+  87              		.loc 1 21 0
+  88 000c 0223     		movs	r3, #2
+  89 000e FB73     		strb	r3, [r7, #15]
+  22:Src/voltdrum_interface.c **** 	uint8_t* bfr = malloc(sizeof(uint8_t)*bfrsize);
+  90              		.loc 1 22 0
+  91 0010 FB7B     		ldrb	r3, [r7, #15]	@ zero_extendqisi2
+  92 0012 1846     		mov	r0, r3
+  93 0014 FFF7FEFF 		bl	malloc
+  94 0018 0346     		mov	r3, r0
+  95 001a BB60     		str	r3, [r7, #8]
+ARM GAS  /tmp/ccAkRRDd.s 			page 3
+
+
+  23:Src/voltdrum_interface.c **** 
+  24:Src/voltdrum_interface.c **** 	bfr[0] = 0x10000000;
+  96              		.loc 1 24 0
+  97 001c BB68     		ldr	r3, [r7, #8]
+  98 001e 0022     		movs	r2, #0
+  99 0020 1A70     		strb	r2, [r3]
+  25:Src/voltdrum_interface.c **** 	bfr[1] = velocity & 0x7F;
+ 100              		.loc 1 25 0
+ 101 0022 BB68     		ldr	r3, [r7, #8]
+ 102 0024 0133     		adds	r3, r3, #1
+ 103 0026 FA78     		ldrb	r2, [r7, #3]
+ 104 0028 02F07F02 		and	r2, r2, #127
+ 105 002c D2B2     		uxtb	r2, r2
+ 106 002e 1A70     		strb	r2, [r3]
+  26:Src/voltdrum_interface.c **** 
+  27:Src/voltdrum_interface.c **** 	uartmessagebuffer_createmessage(voltdrumMessagebuffer, bfrsize, bfr);
+ 107              		.loc 1 27 0
+ 108 0030 054B     		ldr	r3, .L5
+ 109 0032 1B68     		ldr	r3, [r3]
+ 110 0034 F97B     		ldrb	r1, [r7, #15]	@ zero_extendqisi2
+ 111 0036 BA68     		ldr	r2, [r7, #8]
+ 112 0038 1846     		mov	r0, r3
+ 113 003a FFF7FEFF 		bl	uartmessagebuffer_createmessage
+  28:Src/voltdrum_interface.c **** 
+  29:Src/voltdrum_interface.c **** }
+ 114              		.loc 1 29 0
+ 115 003e 00BF     		nop
+ 116 0040 1037     		adds	r7, r7, #16
+ 117              	.LCFI5:
+ 118              		.cfi_def_cfa_offset 8
+ 119 0042 BD46     		mov	sp, r7
+ 120              	.LCFI6:
+ 121              		.cfi_def_cfa_register 13
+ 122              		@ sp needed
+ 123 0044 80BD     		pop	{r7, pc}
+ 124              	.L6:
+ 125 0046 00BF     		.align	2
+ 126              	.L5:
+ 127 0048 00000000 		.word	voltdrumMessagebuffer
+ 128              		.cfi_endproc
+ 129              	.LFE113:
+ 131              		.section	.text.voltdrum_sendHiHatChange,"ax",%progbits
+ 132              		.align	2
+ 133              		.global	voltdrum_sendHiHatChange
+ 134              		.thumb
+ 135              		.thumb_func
+ 137              	voltdrum_sendHiHatChange:
+ 138              	.LFB114:
+  30:Src/voltdrum_interface.c **** 
+  31:Src/voltdrum_interface.c **** void voltdrum_sendHiHatChange(HiHatChannel * hihatChannel, uint8_t value){
+ 139              		.loc 1 31 0
+ 140              		.cfi_startproc
+ 141              		@ args = 0, pretend = 0, frame = 16
+ 142              		@ frame_needed = 1, uses_anonymous_args = 0
+ 143 0000 80B5     		push	{r7, lr}
+ 144              	.LCFI7:
+ 145              		.cfi_def_cfa_offset 8
+ARM GAS  /tmp/ccAkRRDd.s 			page 4
+
+
+ 146              		.cfi_offset 7, -8
+ 147              		.cfi_offset 14, -4
+ 148 0002 84B0     		sub	sp, sp, #16
+ 149              	.LCFI8:
+ 150              		.cfi_def_cfa_offset 24
+ 151 0004 00AF     		add	r7, sp, #0
+ 152              	.LCFI9:
+ 153              		.cfi_def_cfa_register 7
+ 154 0006 7860     		str	r0, [r7, #4]
+ 155 0008 0B46     		mov	r3, r1
+ 156 000a FB70     		strb	r3, [r7, #3]
+  32:Src/voltdrum_interface.c **** 
+  33:Src/voltdrum_interface.c **** 	uint8_t bfrsize = 3;
+ 157              		.loc 1 33 0
+ 158 000c 0323     		movs	r3, #3
+ 159 000e FB73     		strb	r3, [r7, #15]
+  34:Src/voltdrum_interface.c **** 	uint8_t* bfr = malloc(sizeof(uint8_t)*bfrsize);
+ 160              		.loc 1 34 0
+ 161 0010 FB7B     		ldrb	r3, [r7, #15]	@ zero_extendqisi2
+ 162 0012 1846     		mov	r0, r3
+ 163 0014 FFF7FEFF 		bl	malloc
+ 164 0018 0346     		mov	r3, r0
+ 165 001a BB60     		str	r3, [r7, #8]
+  35:Src/voltdrum_interface.c **** 
+  36:Src/voltdrum_interface.c **** //	bfr[0] = 0xFF & ( 0b10110000 | channel & 0xF);
+  37:Src/voltdrum_interface.c **** //	bfr[1] = control & 0x7F;
+  38:Src/voltdrum_interface.c **** //	bfr[2] = value & 0x7F;
+  39:Src/voltdrum_interface.c **** 
+  40:Src/voltdrum_interface.c **** 	//voltdrum_createmessage(bfrsize, bfr);
+  41:Src/voltdrum_interface.c **** 
+  42:Src/voltdrum_interface.c **** }
+ 166              		.loc 1 42 0
+ 167 001c 00BF     		nop
+ 168 001e 1037     		adds	r7, r7, #16
+ 169              	.LCFI10:
+ 170              		.cfi_def_cfa_offset 8
+ 171 0020 BD46     		mov	sp, r7
+ 172              	.LCFI11:
+ 173              		.cfi_def_cfa_register 13
+ 174              		@ sp needed
+ 175 0022 80BD     		pop	{r7, pc}
+ 176              		.cfi_endproc
+ 177              	.LFE114:
+ 179              		.text
+ 180              	.Letext0:
+ 181              		.file 2 "/usr/arm-none-eabi/include/machine/_default_types.h"
+ 182              		.file 3 "/usr/arm-none-eabi/include/sys/_stdint.h"
+ 183              		.file 4 "Drivers/CMSIS/Device/ST/STM32F3xx/Include/stm32f303xc.h"
+ 184              		.file 5 "Drivers/STM32F3xx_HAL_Driver/Inc/stm32f3xx_hal_def.h"
+ 185              		.file 6 "Drivers/STM32F3xx_HAL_Driver/Inc/stm32f3xx_hal_dma.h"
+ 186              		.file 7 "Drivers/STM32F3xx_HAL_Driver/Inc/stm32f3xx_hal_uart.h"
+ 187              		.file 8 "Inc/triggerchannel.h"
+ 188              		.file 9 "Inc/hihatchannel.h"
+ 189              		.file 10 "Inc/uartmessagebuffer.h"
+ 190              		.file 11 "Drivers/CMSIS/Include/core_cm4.h"
+ 191              		.file 12 "Inc/voltdrum_interface.h"
+ARM GAS  /tmp/ccAkRRDd.s 			page 5
+
+
+DEFINED SYMBOLS
+                            *ABS*:0000000000000000 voltdrum_interface.c
+                            *COM*:0000000000000004 voltdrumMessagebuffer
+     /tmp/ccAkRRDd.s:22     .text.voltdrum_init:0000000000000000 $t
+     /tmp/ccAkRRDd.s:27     .text.voltdrum_init:0000000000000000 voltdrum_init
+     /tmp/ccAkRRDd.s:56     .text.voltdrum_init:0000000000000018 $d
+     /tmp/ccAkRRDd.s:62     .text.voltdrum_sendDrumtriggerEvent:0000000000000000 $t
+     /tmp/ccAkRRDd.s:67     .text.voltdrum_sendDrumtriggerEvent:0000000000000000 voltdrum_sendDrumtriggerEvent
+     /tmp/ccAkRRDd.s:127    .text.voltdrum_sendDrumtriggerEvent:0000000000000048 $d
+     /tmp/ccAkRRDd.s:132    .text.voltdrum_sendHiHatChange:0000000000000000 $t
+     /tmp/ccAkRRDd.s:137    .text.voltdrum_sendHiHatChange:0000000000000000 voltdrum_sendHiHatChange
+                     .debug_frame:0000000000000010 $d
+
+UNDEFINED SYMBOLS
+uartmessagebuffer_create
+huart1
+malloc
+uartmessagebuffer_createmessage
