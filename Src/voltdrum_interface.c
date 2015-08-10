@@ -21,8 +21,8 @@ void voltdrum_sendDrumtriggerEvent(TriggerChannel *triggerChannel, uint8_t veloc
 	uint8_t bfrsize = 2;
 	uint8_t* bfr = malloc(sizeof(uint8_t)*bfrsize);
 
-	bfr[0] = 0x10000000;
-	bfr[1] = velocity & 0x7F;
+	bfr[1] = 0b10000000;
+	bfr[0] = velocity & 0x7F;
 
 	uartmessagebuffer_createmessage(voltdrumMessagebuffer, bfrsize, bfr);
 

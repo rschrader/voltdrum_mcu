@@ -17,9 +17,9 @@ void triggerchannel_init (TriggerChannel *sm, uint32_t* dma_adress0, uint32_t* d
 	sm->midinote = 38;
 	sm->threshhold_static = 10;
 	sm->threshhold_dynamic = 0.8;
-	sm->samples_to_take = 5;							//15
-	sm->time_offset = 100;									//400us
-	sm->lastProcessedSamples_size = 15;							//400us
+	sm->samples_to_take = 5;
+	sm->time_offset = 100;
+	sm->lastProcessedSamples_size = 15;
 	sm->voltdrumChannel = 0;
 
 

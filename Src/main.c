@@ -141,7 +141,7 @@ void initHeadChannels(){
 	HAL_Delay(10);
 
 	//set initial wiper positions
-	triggerchannel_setWiper(&triggerChannelsHead[0], 16);
+	triggerchannel_setWiper(&triggerChannelsHead[0], 30);
 	triggerchannel_setWiper(&triggerChannelsHead[1], 30);
 	triggerchannel_setWiper(&triggerChannelsHead[2], 30);
 	triggerchannel_setWiper(&triggerChannelsHead[3], 30);
@@ -226,7 +226,7 @@ void initRimChannels(){
 }
 
 void initHiHatChannels(){
-		hihatchannel_init(&hiHatChannels[0], &adc4Samples[0], &triggerChannelsHead [0]);
+		hihatchannel_init(&hiHatChannels[0], &adc4Samples[0], &triggerChannelsHead [2]);
 		hihatchannel_init(&hiHatChannels[1], &adc4Samples[1], &triggerChannelsRim [9]);
 
 }
@@ -373,7 +373,6 @@ int main(void)
   initRimChannels();
   initHiHatChannels();
 
-  HAL_UART_Transmit_IT(&huart1, "init...",7);
   HAL_TIM_Base_Start_IT(&htim1);
   HAL_TIM_Base_Start_IT(&htim2);
   HAL_TIM_Base_Start_IT(&htim3);
