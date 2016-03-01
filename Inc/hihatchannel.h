@@ -34,6 +34,8 @@ typedef struct{
 	uint32_t midi_note_open;
 	uint32_t midi_note_closed;
 	uint8_t sendControlChange;
+	uint32_t voltdrumChannel;
+
 }HiHatChannel;
 
 

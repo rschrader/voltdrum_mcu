@@ -97,42 +97,52 @@ void initHeadChannels(){
 	triggerChannelsHead[0].potiCsPort = GPIOC;
 	triggerChannelsHead[0].potiCsPin = GPIO_PIN_11;
 	triggerChannelsHead[0].midinote = 36;
+	triggerChannelsHead[0].voltdrumChannel = 0;
 
 	triggerChannelsHead[1].potiCsPort = GPIOC;
 	triggerChannelsHead[1].potiCsPin = GPIO_PIN_12;
 	triggerChannelsHead[1].midinote = 38;
+	triggerChannelsHead[1].voltdrumChannel = 2;
 
 	triggerChannelsHead[2].potiCsPort = GPIOD;
 	triggerChannelsHead[2].potiCsPin = GPIO_PIN_0;
 	triggerChannelsHead[2].midinote = 38;
+	triggerChannelsHead[2].voltdrumChannel = 4;
 
 	triggerChannelsHead[3].potiCsPort = GPIOD;
 	triggerChannelsHead[3].potiCsPin = GPIO_PIN_1;
 	triggerChannelsHead[3].midinote = 38;
+	triggerChannelsHead[3].voltdrumChannel = 6;
 
 	triggerChannelsHead[4].potiCsPort = GPIOD;
 	triggerChannelsHead[4].potiCsPin = GPIO_PIN_2;
 	triggerChannelsHead[4].midinote = 38;
+	triggerChannelsHead[4].voltdrumChannel = 8;
 
 	triggerChannelsHead[5].potiCsPort = GPIOD;
 	triggerChannelsHead[5].potiCsPin = GPIO_PIN_3;
 	triggerChannelsHead[5].midinote = 38;
+	triggerChannelsHead[5].voltdrumChannel = 10;
 
 	triggerChannelsHead[6].potiCsPort = GPIOD;
 	triggerChannelsHead[6].potiCsPin = GPIO_PIN_4;
 	triggerChannelsHead[6].midinote = 38;
+	triggerChannelsHead[6].voltdrumChannel = 12;
 
 	triggerChannelsHead[7].potiCsPort = GPIOD;
 	triggerChannelsHead[7].potiCsPin = GPIO_PIN_5;
 	triggerChannelsHead[7].midinote = 38;
+	triggerChannelsHead[7].voltdrumChannel = 14;
 
 	triggerChannelsHead[8].potiCsPort = GPIOD;
 	triggerChannelsHead[8].potiCsPin = GPIO_PIN_6;
 	triggerChannelsHead[8].midinote = 38;
+	triggerChannelsHead[8].voltdrumChannel = 16;
 
 	triggerChannelsHead[9].potiCsPort = GPIOD;
 	triggerChannelsHead[9].potiCsPin = GPIO_PIN_7;
 	triggerChannelsHead[9].midinote = 38;
+	triggerChannelsHead[9].voltdrumChannel = 18;
 
 	for(i = 0; i < headChannelCount; i++){
 		HAL_GPIO_WritePin(triggerChannelsHead[i].potiCsPort,triggerChannelsHead[i].potiCsPin,GPIO_PIN_SET);
@@ -166,42 +176,52 @@ void initRimChannels(){
 	triggerChannelsRim[0].potiCsPort = GPIOC;
 	triggerChannelsRim[0].potiCsPin = GPIO_PIN_11;
 	triggerChannelsRim[0].midinote = 36;
+	triggerChannelsRim[0].voltdrumChannel = 1;
 
 	triggerChannelsRim[1].potiCsPort = GPIOC;
 	triggerChannelsRim[1].potiCsPin = GPIO_PIN_12;
 	triggerChannelsRim[1].midinote = 38;
+	triggerChannelsRim[1].voltdrumChannel = 3;
 
 	triggerChannelsRim[2].potiCsPort = GPIOD;
 	triggerChannelsRim[2].potiCsPin = GPIO_PIN_0;
 	triggerChannelsRim[2].midinote = 38;
+	triggerChannelsRim[2].voltdrumChannel = 5;
 
 	triggerChannelsRim[3].potiCsPort = GPIOD;
 	triggerChannelsRim[3].potiCsPin = GPIO_PIN_1;
 	triggerChannelsRim[3].midinote = 38;
+	triggerChannelsRim[3].voltdrumChannel = 7;
 
 	triggerChannelsRim[4].potiCsPort = GPIOD;
 	triggerChannelsRim[4].potiCsPin = GPIO_PIN_2;
 	triggerChannelsRim[4].midinote = 38;
+	triggerChannelsRim[4].voltdrumChannel = 9;
 
 	triggerChannelsRim[5].potiCsPort = GPIOD;
 	triggerChannelsRim[5].potiCsPin = GPIO_PIN_3;
 	triggerChannelsRim[5].midinote = 38;
+	triggerChannelsRim[5].voltdrumChannel = 11;
 
 	triggerChannelsRim[6].potiCsPort = GPIOD;
 	triggerChannelsRim[6].potiCsPin = GPIO_PIN_4;
 	triggerChannelsRim[6].midinote = 38;
+	triggerChannelsRim[6].voltdrumChannel = 13;
 
 	triggerChannelsRim[7].potiCsPort = GPIOD;
 	triggerChannelsRim[7].potiCsPin = GPIO_PIN_5;
 	triggerChannelsRim[7].midinote = 38;
+	triggerChannelsRim[7].voltdrumChannel = 15;
 
 	triggerChannelsRim[8].potiCsPort = GPIOD;
 	triggerChannelsRim[8].potiCsPin = GPIO_PIN_6;
 	triggerChannelsRim[8].midinote = 38;
+	triggerChannelsRim[8].voltdrumChannel = 17;
 
 	triggerChannelsRim[9].potiCsPort = GPIOD;
 	triggerChannelsRim[9].potiCsPin = GPIO_PIN_7;
 	triggerChannelsRim[9].midinote = 38;
+	triggerChannelsRim[9].voltdrumChannel = 19;
 
 
 	for(i = 0; i < rimChannelCount; i++){
@@ -227,7 +247,10 @@ void initRimChannels(){
 
 void initHiHatChannels(){
 		hihatchannel_init(&hiHatChannels[0], &adc4Samples[0], &triggerChannelsHead [2]);
+		hiHatChannels[0].voltdrumChannel = 0;
+
 		hihatchannel_init(&hiHatChannels[1], &adc4Samples[1], &triggerChannelsRim [9]);
+		hiHatChannels[1].voltdrumChannel = 1;
 
 }
 
@@ -265,10 +288,11 @@ void HAL_GPIO_EXTI_Callback (uint16_t GPIO_Pin){
 
 void HAL_UART_TxCpltCallback (UART_HandleTypeDef *huart){
 	if(midiMessagebuffer != 0 && midiMessagebuffer->uarthandle == huart) uartmessagebuffer_onTxComplete(midiMessagebuffer);
+	else if(voltdrumMessagebuffer != 0 && voltdrumMessagebuffer->uarthandle == huart) uartmessagebuffer_onTxComplete(voltdrumMessagebuffer);
 }
 void HAL_UART_ErrorCallback (UART_HandleTypeDef *huart){
 	if(midiMessagebuffer != 0 && midiMessagebuffer->uarthandle == huart) uartmessagebuffer_onTxComplete(midiMessagebuffer);
-
+	else if(voltdrumMessagebuffer != 0 && voltdrumMessagebuffer->uarthandle == huart) uartmessagebuffer_onTxComplete(voltdrumMessagebuffer);
 }
 
 

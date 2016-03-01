@@ -7,6 +7,7 @@
 
 #include "voltdrum_interface.h"
 #include "stdlib.h"
+#include "voltdrum_protocoll.h"
 
 extern UART_HandleTypeDef huart1;
 
@@ -18,11 +19,12 @@ void voltdrum_init(){
 
 void voltdrum_sendDrumtriggerEvent(TriggerChannel *triggerChannel, uint8_t velocity){
 	//note on
-	uint8_t bfrsize = 2;
+	uint8_t bfrsize = 3;
 	uint8_t* bfr = malloc(sizeof(uint8_t)*bfrsize);
 
-	bfr[1] = 0b10000000;
-	bfr[0] = velocity & 0x7F;
+	bfr[2] = MASK_TYPE | (MASK_CONTENT & CMD_TYPE_DRUMTRIGGER);
+	bfr[1] = MASK_CONTENT & triggerChannel->voltdrumChannel;
+	bfr[0] = MASK_CONTENT & velocity;
 
 	uartmessagebuffer_createmessage(voltdrumMessagebuffer, bfrsize, bfr);
 
@@ -30,14 +32,15 @@ void voltdrum_sendDrumtriggerEvent(TriggerChannel *triggerChannel, uint8_t veloc
 
 void voltdrum_sendHiHatChange(HiHatChannel * hihatChannel, uint8_t value){
 
+	//note on
 	uint8_t bfrsize = 3;
 	uint8_t* bfr = malloc(sizeof(uint8_t)*bfrsize);
 
-//	bfr[0] = 0xFF & ( 0b10110000 | channel & 0xF);
-//	bfr[1] = control & 0x7F;
-//	bfr[2] = value & 0x7F;
+	bfr[2] = MASK_TYPE | (MASK_CONTENT & CMD_TYPE_HIHAT);
+	bfr[1] = MASK_CONTENT & hihatChannel->voltdrumChannel;
+	bfr[0] = MASK_CONTENT & value;
 
-	//voltdrum_createmessage(bfrsize, bfr);
+	uartmessagebuffer_createmessage(voltdrumMessagebuffer, bfrsize, bfr);
 
 }
 
