@@ -94,30 +94,40 @@ void initHeadChannels(){
 
 	}
 
+	//Base drum
 	triggerChannelsHead[0].potiCsPort = GPIOC;
 	triggerChannelsHead[0].potiCsPin = GPIO_PIN_11;
 	triggerChannelsHead[0].midinote = 36;
 	triggerChannelsHead[0].voltdrumChannel = 0;
+	triggerchannel_setWiper(&triggerChannelsHead[0], 10);
 
+	//Snare
 	triggerChannelsHead[1].potiCsPort = GPIOC;
 	triggerChannelsHead[1].potiCsPin = GPIO_PIN_12;
 	triggerChannelsHead[1].midinote = 38;
 	triggerChannelsHead[1].voltdrumChannel = 2;
+	triggerchannel_setWiper(&triggerChannelsHead[1], 10);
 
+	//tom 1
 	triggerChannelsHead[2].potiCsPort = GPIOD;
 	triggerChannelsHead[2].potiCsPin = GPIO_PIN_0;
-	triggerChannelsHead[2].midinote = 38;
+	triggerChannelsHead[2].midinote = 43;
 	triggerChannelsHead[2].voltdrumChannel = 4;
+	triggerchannel_setWiper(&triggerChannelsHead[2], 30);
 
+	//tom2
 	triggerChannelsHead[3].potiCsPort = GPIOD;
 	triggerChannelsHead[3].potiCsPin = GPIO_PIN_1;
-	triggerChannelsHead[3].midinote = 38;
+	triggerChannelsHead[3].midinote = 47;
 	triggerChannelsHead[3].voltdrumChannel = 6;
+	triggerchannel_setWiper(&triggerChannelsHead[3], 30);
 
+	//hihat
 	triggerChannelsHead[4].potiCsPort = GPIOD;
 	triggerChannelsHead[4].potiCsPin = GPIO_PIN_2;
-	triggerChannelsHead[4].midinote = 38;
+	triggerChannelsHead[4].midinote = 46;
 	triggerChannelsHead[4].voltdrumChannel = 8;
+	triggerchannel_setWiper(&triggerChannelsHead[4], 30);
 
 	triggerChannelsHead[5].potiCsPort = GPIOD;
 	triggerChannelsHead[5].potiCsPin = GPIO_PIN_3;
@@ -151,11 +161,6 @@ void initHeadChannels(){
 	HAL_Delay(10);
 
 	//set initial wiper positions
-	triggerchannel_setWiper(&triggerChannelsHead[0], 30);
-	triggerchannel_setWiper(&triggerChannelsHead[1], 30);
-	triggerchannel_setWiper(&triggerChannelsHead[2], 30);
-	triggerchannel_setWiper(&triggerChannelsHead[3], 30);
-	triggerchannel_setWiper(&triggerChannelsHead[4], 30);
 	triggerchannel_setWiper(&triggerChannelsHead[5], 30);
 	triggerchannel_setWiper(&triggerChannelsHead[6], 30);
 	triggerchannel_setWiper(&triggerChannelsHead[7], 30);
@@ -248,6 +253,12 @@ void initRimChannels(){
 void initHiHatChannels(){
 		hihatchannel_init(&hiHatChannels[0], &adc4Samples[0], &triggerChannelsHead [2]);
 		hiHatChannels[0].voltdrumChannel = 0;
+		hiHatChannels[0].midi_note_open = 46;
+		hiHatChannels[0].midi_note_closed = 42;
+		hiHatChannels[0].midi_pedal_note = 44;
+		hiHatChannels[0].midi_control = 0x04;
+		hiHatChannels[0].relatedTriggerpad = &triggerChannelsHead[4];
+
 
 		hihatchannel_init(&hiHatChannels[1], &adc4Samples[1], &triggerChannelsRim [9]);
 		hiHatChannels[1].voltdrumChannel = 1;

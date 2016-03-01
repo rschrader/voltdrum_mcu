@@ -15,7 +15,7 @@ void triggerchannel_init (TriggerChannel *sm, uint32_t* dma_adress0, uint32_t* d
 
 	//editable values
 	sm->midinote = 38;
-	sm->threshhold_static = 10;
+	sm->threshhold_static = 6;
 	sm->threshhold_dynamic = 0.8;
 	sm->samples_to_take = 5;
 	sm->time_offset = 100;
@@ -111,8 +111,8 @@ void triggerchannel_transition_triggerevent_monitor (TriggerChannel *sm){
 
 
 	//note detected
-	midi_sendNote(10,sm->midinote, sm->max_velocity >> 5);
-	voltdrum_sendDrumtriggerEvent(sm, sm->max_velocity >> 5);
+	midi_sendNote(10,sm->midinote, (sm->max_velocity >> 5) +27);
+	voltdrum_sendDrumtriggerEvent(sm, (sm->max_velocity >> 5) +27);
 
 
 }
