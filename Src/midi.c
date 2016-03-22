@@ -47,7 +47,7 @@ void midi_sendControlChange(uint8_t channel, uint8_t control, uint8_t value){
 	bfr[1] = control & 0x7F;
 	bfr[2] = value & 0x7F;
 
-	//uartmessagebuffer_createmessage(midiMessagebuffer, bfrsize, bfr);
+	uartmessagebuffer_createmessage(midiMessagebuffer, bfrsize, bfr);
 
 }
 

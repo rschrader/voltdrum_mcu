@@ -99,35 +99,55 @@ void initHeadChannels(){
 	triggerChannelsHead[0].potiCsPin = GPIO_PIN_11;
 	triggerChannelsHead[0].midinote = 36;
 	triggerChannelsHead[0].voltdrumChannel = 0;
-	triggerchannel_setWiper(&triggerChannelsHead[0], 10);
+	triggerchannel_setWiper(&triggerChannelsHead[0], 45);
+	triggerChannelsHead[0].threshhold_static = 130;
+	triggerChannelsHead[0].threshhold_dynamic = 0.9;
+	triggerChannelsHead[0].samples_to_take = 5;
+	triggerChannelsHead[0].time_offset = 150;
 
 	//Snare
 	triggerChannelsHead[1].potiCsPort = GPIOC;
 	triggerChannelsHead[1].potiCsPin = GPIO_PIN_12;
 	triggerChannelsHead[1].midinote = 38;
 	triggerChannelsHead[1].voltdrumChannel = 2;
-	triggerchannel_setWiper(&triggerChannelsHead[1], 10);
+	triggerchannel_setWiper(&triggerChannelsHead[1], 45);
+	triggerChannelsHead[1].threshhold_static = 120;
+	triggerChannelsHead[1].threshhold_dynamic = 0.8;
+	triggerChannelsHead[1].samples_to_take = 5;
+	triggerChannelsHead[1].time_offset = 100;
 
 	//tom 1
 	triggerChannelsHead[2].potiCsPort = GPIOD;
 	triggerChannelsHead[2].potiCsPin = GPIO_PIN_0;
 	triggerChannelsHead[2].midinote = 43;
 	triggerChannelsHead[2].voltdrumChannel = 4;
-	triggerchannel_setWiper(&triggerChannelsHead[2], 30);
+	triggerchannel_setWiper(&triggerChannelsHead[2], 3);
+	triggerChannelsHead[2].threshhold_static = 120;
+	triggerChannelsHead[2].threshhold_dynamic = 0.8;
+	triggerChannelsHead[2].samples_to_take = 5;
+	triggerChannelsHead[2].time_offset = 100;
 
 	//tom2
 	triggerChannelsHead[3].potiCsPort = GPIOD;
 	triggerChannelsHead[3].potiCsPin = GPIO_PIN_1;
 	triggerChannelsHead[3].midinote = 47;
 	triggerChannelsHead[3].voltdrumChannel = 6;
-	triggerchannel_setWiper(&triggerChannelsHead[3], 30);
+	triggerchannel_setWiper(&triggerChannelsHead[3], 3);
+	triggerChannelsHead[3].threshhold_static = 120;
+	triggerChannelsHead[3].threshhold_dynamic = 0.8;
+	triggerChannelsHead[3].samples_to_take = 5;
+	triggerChannelsHead[3].time_offset = 100;
 
 	//hihat
 	triggerChannelsHead[4].potiCsPort = GPIOD;
 	triggerChannelsHead[4].potiCsPin = GPIO_PIN_2;
 	triggerChannelsHead[4].midinote = 46;
 	triggerChannelsHead[4].voltdrumChannel = 8;
-	triggerchannel_setWiper(&triggerChannelsHead[4], 30);
+	triggerchannel_setWiper(&triggerChannelsHead[4], 7);
+	triggerChannelsHead[4].threshhold_static = 120;
+	triggerChannelsHead[4].threshhold_dynamic = 0.8;
+	triggerChannelsHead[4].samples_to_take = 5;
+	triggerChannelsHead[4].time_offset = 100;
 
 	triggerChannelsHead[5].potiCsPort = GPIOD;
 	triggerChannelsHead[5].potiCsPin = GPIO_PIN_3;
@@ -251,7 +271,8 @@ void initRimChannels(){
 }
 
 void initHiHatChannels(){
-		hihatchannel_init(&hiHatChannels[0], &adc4Samples[0], &triggerChannelsHead [2]);
+
+		hihatchannel_init(&hiHatChannels[0], &adc4Samples[0], &triggerChannelsHead[4]);
 		hiHatChannels[0].voltdrumChannel = 0;
 		hiHatChannels[0].midi_note_open = 46;
 		hiHatChannels[0].midi_note_closed = 42;

@@ -47,8 +47,6 @@ void hihatchannel_process(HiHatChannel *chan){
 	if(value > chan->max_value) chan->max_value = value;
 
 
-
-
 	//check sending
 	if(chan->last_send_value > value + chan->offset_to_send ||
 			chan->last_send_value + chan->offset_to_send < value ){
@@ -87,6 +85,7 @@ void hihatchannel_onChange(HiHatChannel *chan, uint32_t value){
 	if(chan->sendControlChange && chan->intervalls_since_last_controlChange >= chan->send_controlChange_delay){
 		uint8_t velocity = 127 - ((value * 127) /chan->max_value) ;
 		midi_sendControlChange(10, chan->midi_control, velocity);
+		voltdrum_sendHiHatChange(chan,velocity);
 		chan->intervalls_since_last_controlChange = 0;
 	}
 

@@ -111,8 +111,9 @@ void triggerchannel_transition_triggerevent_monitor (TriggerChannel *sm){
 
 
 	//note detected
-	midi_sendNote(10,sm->midinote, (sm->max_velocity >> 5) +27);
-	voltdrum_sendDrumtriggerEvent(sm, (sm->max_velocity >> 5) +27);
+	uint8_t velocity =  (128 * sm->max_velocity * 128) / 4048;
+	midi_sendNote(10,sm->midinote, (sm->max_velocity >> 5) +26);
+	voltdrum_sendDrumtriggerEvent(sm, (sm->max_velocity >> 5) +26);
 
 
 }
