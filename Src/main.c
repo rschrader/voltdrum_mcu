@@ -99,7 +99,7 @@ void initHeadChannels(){
 	triggerChannelsHead[0].potiCsPin = GPIO_PIN_11;
 	triggerChannelsHead[0].midinote = 36;
 	triggerChannelsHead[0].voltdrumChannel = 0;
-	triggerchannel_setWiper(&triggerChannelsHead[0], 45);
+	triggerchannel_setWiper(&triggerChannelsHead[0], 20);
 	triggerChannelsHead[0].threshhold_static = 130;
 	triggerChannelsHead[0].threshhold_dynamic = 0.9;
 	triggerChannelsHead[0].samples_to_take = 5;
@@ -122,8 +122,8 @@ void initHeadChannels(){
 	triggerChannelsHead[2].midinote = 43;
 	triggerChannelsHead[2].voltdrumChannel = 4;
 	triggerchannel_setWiper(&triggerChannelsHead[2], 3);
-	triggerChannelsHead[2].threshhold_static = 10;
-	triggerChannelsHead[2].threshhold_dynamic = 0.5;
+	triggerChannelsHead[2].threshhold_static = 80;
+	triggerChannelsHead[2].threshhold_dynamic = 0.8;
 	triggerChannelsHead[2].samples_to_take = 5;
 	triggerChannelsHead[2].time_offset = 100;
 
