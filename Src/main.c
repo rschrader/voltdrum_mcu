@@ -110,24 +110,24 @@ void initHeadChannels(){
 	triggerChannelsHead[1].potiCsPin = GPIO_PIN_12;
 	triggerChannelsHead[1].midinote = 38;
 	triggerChannelsHead[1].voltdrumChannel = 2;
-	triggerchannel_setWiper(&triggerChannelsHead[1], 45);
-	triggerChannelsHead[1].threshhold_static = 120;
-	triggerChannelsHead[1].threshhold_dynamic = 0.8;
+	triggerchannel_setWiper(&triggerChannelsHead[1], 20);
+	triggerChannelsHead[1].threshhold_static = 50;
+	triggerChannelsHead[1].threshhold_dynamic = 0.9;
 	triggerChannelsHead[1].samples_to_take = 5;
 	triggerChannelsHead[1].time_offset = 100;
 
-	//tom 1
+	//tom 1 - UNTEN
 	triggerChannelsHead[2].potiCsPort = GPIOD;
 	triggerChannelsHead[2].potiCsPin = GPIO_PIN_0;
 	triggerChannelsHead[2].midinote = 43;
 	triggerChannelsHead[2].voltdrumChannel = 4;
 	triggerchannel_setWiper(&triggerChannelsHead[2], 3);
-	triggerChannelsHead[2].threshhold_static = 120;
-	triggerChannelsHead[2].threshhold_dynamic = 0.8;
+	triggerChannelsHead[2].threshhold_static = 10;
+	triggerChannelsHead[2].threshhold_dynamic = 0.5;
 	triggerChannelsHead[2].samples_to_take = 5;
 	triggerChannelsHead[2].time_offset = 100;
 
-	//tom2
+	//tom2 - OBEN
 	triggerChannelsHead[3].potiCsPort = GPIOD;
 	triggerChannelsHead[3].potiCsPin = GPIO_PIN_1;
 	triggerChannelsHead[3].midinote = 47;
@@ -144,8 +144,8 @@ void initHeadChannels(){
 	triggerChannelsHead[4].midinote = 46;
 	triggerChannelsHead[4].voltdrumChannel = 8;
 	triggerchannel_setWiper(&triggerChannelsHead[4], 7);
-	triggerChannelsHead[4].threshhold_static = 120;
-	triggerChannelsHead[4].threshhold_dynamic = 0.8;
+	triggerChannelsHead[4].threshhold_static = 100;
+	triggerChannelsHead[4].threshhold_dynamic = 1;
 	triggerChannelsHead[4].samples_to_take = 5;
 	triggerChannelsHead[4].time_offset = 100;
 
@@ -286,32 +286,8 @@ void initHiHatChannels(){
 
 }
 
-
-//
-//int getHiHatResistance(HiHatChannel *chan){
-//	int16_t adcValue = -1; // -1 is Errorvalue
-//
-//	// setup adc for channel
-//	HAL_ADC_ConfigChannel(chan->adcHandle, &chan->adcSConfig);
-//
-//
-//	HAL_ADC_Start(chan->adcHandle);									//start sampling
-//	HAL_ADC_PollForConversion(chan->adcHandle, 100);					//wait for conversion
-//
-//	if(HAL_ADC_GetState(chan->adcHandle) == HAL_ADC_STATE_EOC_REG){ 	//check ADC error state
-//		adcValue = HAL_ADC_GetValue(chan->adcHandle);
-//
-//		HAL_ADC_Stop(chan->adcHandle);
-//	}
-//
-//	int resistance = 10000/( (3.3 * 4096) / (adcValue * 3.3) -1 );
-//
-//	return resistance;
-//}
-
-
-
 volatile int btnDebounceIRQTimer[3] = {0,0,0};
+
 void HAL_GPIO_EXTI_Callback (uint16_t GPIO_Pin){
 	if(GPIO_Pin == GPIO_PIN_10) btnDebounceIRQTimer[0] = 1;	// Btn 0 clicked
 	if(GPIO_Pin == GPIO_PIN_11) btnDebounceIRQTimer[1] = 1;	// Btn 1 clicked
@@ -338,11 +314,11 @@ void onTimer1Triggered(){
 	int i;
 	//triggerchannel_process(&triggerChannelsHead[0]);
 
-	for(i = 0; i < headChannelCount; i++){
+	for(i = 0; i < headChannelCount; ++i){
 		triggerchannel_process(&triggerChannelsHead[i]);
 	}
 
-	for(i = 0; i < rimChannelCount; i++){
+	for(i = 0; i < rimChannelCount; ++i){
 		triggerchannel_process(&triggerChannelsRim[i]);
 	}
 
@@ -355,7 +331,7 @@ void onTimer1Triggered(){
 void onTimer2Triggered(){
 	int i;
 
-	for(i = 0; i < hihatChannelCount; i++){
+	for(i = 0; i < hihatChannelCount; ++i){
 		hihatchannel_process(&hiHatChannels[i]);
 	}
 
